@@ -19,7 +19,7 @@
     <EntitySet Name="ProductoPedidoes" EntityType="ModeloDeDatos.Store.ProductoPedidoes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Ivas" EntityType="ModeloDeDatos.Store.Ivas" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Cuentas" EntityType="ModeloDeDatos.Store.Cuentas" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="IngredienteIngredientes" EntityType="ModeloDeDatos.Store.IngredienteIngredientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IngredienteIngredientes" EntityType="ModeloDeDatos.Store.IngredienteIngredientes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Pedidoes_PedidoADomicilio" EntityType="ModeloDeDatos.Store.Pedidoes_PedidoADomicilio" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Pedidoes_PedidoLocal" EntityType="ModeloDeDatos.Store.Pedidoes_PedidoLocal" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="AlimentoIngredienteIngrediente" Association="ModeloDeDatos.Store.AlimentoIngredienteIngrediente">
@@ -75,12 +75,12 @@
       <End Role="PedidoLocal" EntitySet="Pedidoes_PedidoLocal" />
     </AssociationSet>
     <AssociationSet Name="IngredienteIngredienteIngrediente" Association="ModeloDeDatos.Store.IngredienteIngredienteIngrediente">
-      <End EntitySet="Ingredientes" Role="Ingrediente" />
-      <End EntitySet="IngredienteIngredientes" Role="IngredienteIngrediente" />
+      <End Role="Ingrediente" EntitySet="Ingredientes" />
+      <End Role="IngredienteIngrediente" EntitySet="IngredienteIngredientes" />
     </AssociationSet>
     <AssociationSet Name="IngredienteIngredienteIngrediente1" Association="ModeloDeDatos.Store.IngredienteIngredienteIngrediente1">
-      <End EntitySet="Ingredientes" Role="Ingrediente" />
-      <End EntitySet="IngredienteIngredientes" Role="IngredienteIngrediente" />
+      <End Role="Ingrediente" EntitySet="Ingredientes" />
+      <End Role="IngredienteIngrediente" EntitySet="IngredienteIngredientes" />
     </AssociationSet>
     <AssociationSet Name="FK_PedidoADomicilio_inherits_Pedido" Association="ModeloDeDatos.Store.FK_PedidoADomicilio_inherits_Pedido">
       <End Role="Pedido" EntitySet="Pedidoes" />
@@ -98,13 +98,13 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UnidadDeMedida" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="CantidadEnInventario" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CantidadEnInventario" Type="float" Nullable="false" />
     <Property Name="CodigoDeBarras" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Costo" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="FechaDeCreacion" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="FechaDeModiciacion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Costo" Type="float" Nullable="false" />
+    <Property Name="FechaDeCreacion" Type="datetime" Nullable="false" />
+    <Property Name="FechaDeModiciacion" Type="datetime" Nullable="false" />
     <Property Name="Creador" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Activo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Activo" Type="varbinary(max)" Nullable="false" />
     <Property Name="Producto_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Mesas">
@@ -230,10 +230,10 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-    <Property Name="Cantidad" Nullable="false" Type="float" />
-    <Property Name="Ingrediente_Id" Nullable="false" Type="int" />
-    <Property Name="Ingrediente1_Id" Nullable="false" Type="int" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cantidad" Type="float" Nullable="false" />
+    <Property Name="IngredienteCompuesto_Id" Type="int" Nullable="false" />
+    <Property Name="IngredienteComponente_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Pedidoes_PedidoADomicilio">
     <Key>
@@ -407,26 +407,26 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="IngredienteIngredienteIngrediente">
-    <End Type="ModeloDeDatos.Store.Ingredientes" Multiplicity="1" Role="Ingrediente" />
-    <End Type="ModeloDeDatos.Store.IngredienteIngredientes" Multiplicity="*" Role="IngredienteIngrediente" />
+    <End Role="Ingrediente" Type="ModeloDeDatos.Store.Ingredientes" Multiplicity="1" />
+    <End Role="IngredienteIngrediente" Type="ModeloDeDatos.Store.IngredienteIngredientes" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Ingrediente">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="IngredienteIngrediente">
-        <PropertyRef Name="Ingrediente_Id" />
+        <PropertyRef Name="IngredienteCompuesto_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="IngredienteIngredienteIngrediente1">
-    <End Type="ModeloDeDatos.Store.Ingredientes" Multiplicity="1" Role="Ingrediente" />
-    <End Type="ModeloDeDatos.Store.IngredienteIngredientes" Multiplicity="*" Role="IngredienteIngrediente" />
+    <End Role="Ingrediente" Type="ModeloDeDatos.Store.Ingredientes" Multiplicity="1" />
+    <End Role="IngredienteIngrediente" Type="ModeloDeDatos.Store.IngredienteIngredientes" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Ingrediente">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="IngredienteIngrediente">
-        <PropertyRef Name="Ingrediente1_Id" />
+        <PropertyRef Name="IngredienteComponente_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1033,7 +1033,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="IngredienteIngredienteIngrediente" TypeName="ModeloDeDatos.IngredienteIngredienteIngrediente" StoreEntitySet="IngredienteIngredientes">
       <EndProperty Name="Ingrediente">
-        <ScalarProperty Name="Id" ColumnName="Ingrediente_Id" />
+        <ScalarProperty Name="Id" ColumnName="IngredienteCompuesto_Id" />
       </EndProperty>
       <EndProperty Name="IngredienteIngrediente">
         <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1041,7 +1041,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="IngredienteIngredienteIngrediente1" TypeName="ModeloDeDatos.IngredienteIngredienteIngrediente1" StoreEntitySet="IngredienteIngredientes">
       <EndProperty Name="Ingrediente">
-        <ScalarProperty Name="Id" ColumnName="Ingrediente1_Id" />
+        <ScalarProperty Name="Id" ColumnName="IngredienteComponente_Id" />
       </EndProperty>
       <EndProperty Name="IngredienteIngrediente">
         <ScalarProperty Name="Id" ColumnName="Id" />
