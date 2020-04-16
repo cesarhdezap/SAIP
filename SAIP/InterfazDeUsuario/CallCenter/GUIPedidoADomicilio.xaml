@@ -1,0 +1,36 @@
+﻿<Window x:Name="GUIPedidoADomicilio1" x:Class="InterfazDeUsuario.CallCenter.GUIPedidoADomicilio"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InterfazDeUsuario.CallCenter"
+        mc:Ignorable="d"
+        Title="SAIP" Height="520.5" Width="1013">
+	<Grid>
+		<Rectangle HorizontalAlignment="Left" Height="59" VerticalAlignment="Top" Width="1005" Fill="#FF008050"/>
+		<Button x:Name="RegresarButton" Content="&lt; Regresar" HorizontalAlignment="Left" Margin="78,18,0,0" VerticalAlignment="Top" Width="74" Background="{x:Null}" BorderBrush="{x:Null}"/>
+		<Label x:Name="NombreDeUsuarioLabel" Content="NombreDeUsuario" HorizontalAlignment="Left" Margin="359,4,0,0" VerticalAlignment="Top" FontSize="18" Width="162"/>
+		<Button x:Name="CambiarUsuarioButton" Content="Cambiar usuario" HorizontalAlignment="Left" Margin="362,29,0,0" VerticalAlignment="Top" Width="96" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FFCF2A27" FontWeight="Bold"/>
+		<Label x:Name="HoraLabel" Content="Reloj" HorizontalAlignment="Right" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="18" Width="271" HorizontalContentAlignment="Right"/>
+		<DataGrid x:Name="PlatillosDataGrid" HorizontalAlignment="Left" Height="116" Margin="10,80,0,0" VerticalAlignment="Top" Width="327"/>
+		<Label x:Name="IvaLabel" Content="IVA(*)" HorizontalAlignment="Left" Margin="10,201,0,0" VerticalAlignment="Top"/>
+		<Label x:Name="TotalLabel" Content="TOTAL" HorizontalAlignment="Left" Margin="10,232,0,0" VerticalAlignment="Top"/>
+		<Label x:Name="ComentariosOrdenLabel" Content="Comentarios extra" HorizontalAlignment="Left" Margin="10,274,0,0" VerticalAlignment="Top"/>
+		<TextBox x:Name="ComentariosOrdenTextBlock" HorizontalAlignment="Left" Height="130" Margin="10,305,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="327" BorderBrush="Black"/>
+		<Button x:Name="CancelarButton" Content="Cancelar Orden" HorizontalAlignment="Left" Margin="10,440,0,0" VerticalAlignment="Top" Width="109"/>
+		<Button x:Name="FinalizarButton" Content=" Finalizar Orden" HorizontalAlignment="Left" Margin="228,440,0,0" VerticalAlignment="Top" Width="109"/>
+		<Label x:Name="IvaValorLabel" Content="0.00" HorizontalAlignment="Left" Margin="294,201,0,0" VerticalAlignment="Top"/>
+		<Label x:Name="TotalValorLabel" Content="0.00" HorizontalAlignment="Left" Margin="294,232,0,0" VerticalAlignment="Top"/>
+		<DataGrid x:Name="BusquedaDataGrid" HorizontalAlignment="Left" Height="327" Margin="359,108,0,0" VerticalAlignment="Top" Width="327"/>
+		<TextBox x:Name="BusquedaTextBox" HorizontalAlignment="Left" Height="23" Margin="362,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="324"/>
+		<Label x:Name="NumeroTelefonicoLabel" Content="Número teléfonico" HorizontalAlignment="Left" Margin="715,108,0,0" VerticalAlignment="Top"/>
+		<Label x:Name="NombreDeClienteTextBox" Content="Nombre del cliente" HorizontalAlignment="Left" Margin="715,162,0,0" VerticalAlignment="Top"/>
+		<Label x:Name="DireccionLabel" Content="Dirección" HorizontalAlignment="Left" Margin="715,216,0,0" VerticalAlignment="Top"/>
+		<Label x:Name="ComentariosClienteLabel" Content="Comentarios extra" HorizontalAlignment="Left" Margin="715,305,0,0" VerticalAlignment="Top"/>
+		<TextBox x:Name="DireccionClienteTextBlock" HorizontalAlignment="Left" Height="58" Margin="715,242,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" BorderBrush="Black"/>
+		<TextBox x:Name="ComentariosClienteTextBlock" HorizontalAlignment="Left" Height="104" Margin="715,331,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" BorderBrush="Black"/>
+		<TextBox x:Name="NumeroTelefonicoTextBox" HorizontalAlignment="Left" Height="23" Margin="715,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="204"/>
+		<TextBox x:Name="NombreDeClienteTextBox1" HorizontalAlignment="Left" Height="23" Margin="715,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="204"/>
+
+	</Grid>
+</Window>
