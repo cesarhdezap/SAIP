@@ -31,7 +31,8 @@ namespace AccesoADatos
         public System.DateTime FechaDeCreacion { get; set; }
         public System.DateTime FechaDeModiciacion { get; set; }
         public string Creador { get; set; }
-        public byte[] Activo { get; set; }
+        public bool Activo { get; set; }
+        public string Codigo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AlimentoIngrediente> AlimentoIngrediente { get; set; }

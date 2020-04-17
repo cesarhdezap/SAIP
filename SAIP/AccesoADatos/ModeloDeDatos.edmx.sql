@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/16/2020 12:20:47
+-- Date Created: 04/17/2020 01:46:05
 -- Generated from EDMX file: C:\Users\marcu\Documents\SAIP\COD\SAIP\AccesoADatos\ModeloDeDatos.edmx
 -- --------------------------------------------------
 
@@ -137,7 +137,8 @@ CREATE TABLE [dbo].[Ingredientes] (
     [FechaDeCreacion] datetime  NOT NULL,
     [FechaDeModiciacion] datetime  NOT NULL,
     [Creador] nvarchar(max)  NOT NULL,
-    [Activo] varbinary(max)  NOT NULL,
+    [Activo] bit  NOT NULL,
+    [Codigo] nvarchar(max)  NOT NULL,
     [Producto_Id] int  NULL
 );
 GO
@@ -189,7 +190,8 @@ CREATE TABLE [dbo].[Alimentoes] (
     [CostoDeIngredientes] float  NOT NULL,
     [FechaDeCreacion] datetime  NOT NULL,
     [FechaDeModificacion] datetime  NOT NULL,
-    [Activo] bit  NOT NULL
+    [Activo] bit  NOT NULL,
+    [Codigo] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -205,7 +207,7 @@ GO
 -- Creating table 'AlimentoIngredientes'
 CREATE TABLE [dbo].[AlimentoIngredientes] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Cantidad] nvarchar(max)  NOT NULL,
+    [Cantidad] int  NOT NULL,
     [Ingredientes_Id] int  NOT NULL,
     [Alimento_Id] int  NOT NULL
 );

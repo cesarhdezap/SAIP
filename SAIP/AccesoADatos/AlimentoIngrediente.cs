@@ -15,7 +15,7 @@ namespace AccesoADatos
     public partial class AlimentoIngrediente
     {
         public int Id { get; set; }
-        public string Cantidad { get; set; }
+        public int Cantidad { get; set; }
     
         public virtual Ingrediente Ingredientes { get; set; }
         public virtual Alimento Alimento { get; set; }

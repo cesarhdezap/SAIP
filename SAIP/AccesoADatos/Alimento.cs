@@ -28,6 +28,7 @@ namespace AccesoADatos
         public System.DateTime FechaDeCreacion { get; set; }
         public System.DateTime FechaDeModificacion { get; set; }
         public bool Activo { get; set; }
+        public string Codigo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AlimentoPedido> AlimentoPedidoes { get; set; }

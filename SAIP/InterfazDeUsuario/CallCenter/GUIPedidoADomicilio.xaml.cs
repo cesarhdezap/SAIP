@@ -25,6 +25,8 @@ namespace InterfazDeUsuario.CallCenter
 
 		public Empleado EmpleadoDeCallCenter { get; set; } = new Empleado();
 		public Iva Iva { get; set; } = new Iva();
+		public List<Alimento> TodosLostAlimentos { get; set; } = new List<Alimento>();
+		public List<Alimento> AlimentosVisibles { get; set; } = new List<Alimento>();
 		public GUIPedidoADomicilio(Empleado EmpleadoDeCallCenter)
 		{
 			InitializeComponent();
@@ -32,12 +34,39 @@ namespace InterfazDeUsuario.CallCenter
 			NombreDeUsuarioLabel.Content = EmpleadoDeCallCenter.Nombre;
 			IvaDAO ivaDAO = new IvaDAO();
 			Iva = ivaDAO.CargarIvaActual();
+			IvaLabel.Content = "IVA(" + Iva.Valor + "%)";
+			AlimentoDAO alimentoDAO = new AlimentoDAO();
+			TodosLostAlimentos = alimentoDAO.CargarTodos();
+			AlimentosVisibles = TodosLostAlimentos;
+			BusquedaDataGrid.ItemsSource = AlimentosVisibles;
+			TodosLostAlimentos.ElementAt(0).CalcularCostoDeIngredientes();
+			NombreDeClienteTextBox.Content = TodosLostAlimentos.ElementAt(0).CostoDeIngredientes;
 			
 			DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0,0,1), DispatcherPriority.Normal, delegate
 			{
 				HoraLabel.Content = DateTime.Now.ToString("MM/dd/yyyy hh:mm tt");
 			}, this.Dispatcher);
 			HoraLabel.Content = DateTime.Now.ToString("MM/dd/yyyy hh:mm tt");
+		}
+
+		private void BusquedaTextBox_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			string busqueda = BusquedaTextBox.Text;
+			if (busqueda != string.Empty)
+			{
+				AlimentosVisibles = TodosLostAlimentos.TakeWhile(alimento => alimento.Nombre.ToLower().Contains(busqueda.ToLower())).ToList();
+			}
+			else
+			{
+				AlimentosVisibles = TodosLostAlimentos;
+			}
+			ActualizarPantalla();
+		}
+
+		private void ActualizarPantalla()
+		{
+			BusquedaDataGrid.ItemsSource = null;
+			BusquedaDataGrid.ItemsSource = AlimentosVisibles;
 		}
 	}
 }

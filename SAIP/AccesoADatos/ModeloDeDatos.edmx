@@ -104,7 +104,8 @@
     <Property Name="FechaDeCreacion" Type="datetime" Nullable="false" />
     <Property Name="FechaDeModiciacion" Type="datetime" Nullable="false" />
     <Property Name="Creador" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Activo" Type="varbinary(max)" Nullable="false" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
+    <Property Name="Codigo" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Producto_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Mesas">
@@ -157,6 +158,7 @@
     <Property Name="FechaDeCreacion" Type="datetime" Nullable="false" />
     <Property Name="FechaDeModificacion" Type="datetime" Nullable="false" />
     <Property Name="Activo" Type="bit" Nullable="false" />
+    <Property Name="Codigo" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="AlimentoPedidoes">
     <Key>
@@ -172,7 +174,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Cantidad" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
     <Property Name="Ingredientes_Id" Type="int" Nullable="false" />
     <Property Name="Alimento_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -552,10 +554,11 @@
           <Property Name="FechaDeModiciacion" Type="DateTime" Nullable="false" />
           <Property Name="Creador" Type="String" Nullable="false" />
           <NavigationProperty Name="AlimentoIngrediente" Relationship="ModeloDeDatos.AlimentoIngredienteIngrediente" FromRole="Ingrediente" ToRole="AlimentoIngrediente" />
-          <Property Name="Activo" Type="Binary" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Producto" Relationship="ModeloDeDatos.ProductoIngrediente" FromRole="Ingrediente" ToRole="Producto" />
           <NavigationProperty Name="IngredienteIngredientes" Relationship="ModeloDeDatos.IngredienteIngredienteIngrediente" FromRole="Ingrediente" ToRole="IngredienteIngrediente" />
           <NavigationProperty Name="IngredienteIngredientes1" Relationship="ModeloDeDatos.IngredienteIngredienteIngrediente1" FromRole="Ingrediente" ToRole="IngredienteIngrediente" />
+          <Property Name="Codigo" Type="String" Nullable="false" />
           </EntityType>
         <EntityType Name="Mesa">
           <Key>
@@ -620,6 +623,7 @@
           <NavigationProperty Name="AlimentoPedidoes" Relationship="ModeloDeDatos.AlimentoAlimentoPedido" FromRole="Alimento" ToRole="AlimentoPedido" />
           <NavigationProperty Name="AlimentoIngredientes" Relationship="ModeloDeDatos.AlimentoAlimentoIngrediente" FromRole="Alimento" ToRole="AlimentoIngrediente" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="Codigo" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="AlimentoPedido">
           <Key>
@@ -645,7 +649,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-          <Property Name="Cantidad" Type="String" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Ingredientes" Relationship="ModeloDeDatos.AlimentoIngredienteIngrediente" FromRole="AlimentoIngrediente" ToRole="Ingrediente" />
           <NavigationProperty Name="Alimento" Relationship="ModeloDeDatos.AlimentoAlimentoIngrediente" FromRole="AlimentoIngrediente" ToRole="Alimento" />
         </EntityType>
@@ -783,6 +787,7 @@
           <ScalarProperty Name="FechaDeModiciacion" ColumnName="FechaDeModiciacion" />
           <ScalarProperty Name="Creador" ColumnName="Creador" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -847,6 +852,7 @@
           <ScalarProperty Name="FechaDeCreacion" ColumnName="FechaDeCreacion" />
           <ScalarProperty Name="FechaDeModificacion" ColumnName="FechaDeModificacion" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -22,7 +22,7 @@
 		<Label x:Name="IvaValorLabel" Content="0.00" HorizontalAlignment="Left" Margin="294,201,0,0" VerticalAlignment="Top"/>
 		<Label x:Name="TotalValorLabel" Content="0.00" HorizontalAlignment="Left" Margin="294,232,0,0" VerticalAlignment="Top"/>
 		<DataGrid x:Name="BusquedaDataGrid" HorizontalAlignment="Left" Height="327" Margin="359,108,0,0" VerticalAlignment="Top" Width="327"/>
-		<TextBox x:Name="BusquedaTextBox" HorizontalAlignment="Left" Height="23" Margin="362,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="324"/>
+		<TextBox x:Name="BusquedaTextBox" HorizontalAlignment="Left" Height="23" Margin="362,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="324" TextChanged="BusquedaTextBox_TextChanged"/>
 		<Label x:Name="NumeroTelefonicoLabel" Content="Número teléfonico" HorizontalAlignment="Left" Margin="715,108,0,0" VerticalAlignment="Top"/>
 		<Label x:Name="NombreDeClienteTextBox" Content="Nombre del cliente" HorizontalAlignment="Left" Margin="715,162,0,0" VerticalAlignment="Top"/>
 		<Label x:Name="DireccionLabel" Content="Dirección" HorizontalAlignment="Left" Margin="715,216,0,0" VerticalAlignment="Top"/>
