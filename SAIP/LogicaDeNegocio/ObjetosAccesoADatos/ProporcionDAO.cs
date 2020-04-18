@@ -12,13 +12,13 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 		public List<Clases.Proporcion> CargarProporcionesPorIdAlimento(int AlimentoId)
 		{
 			List<Clases.Proporcion> proporciones = new List<Clases.Proporcion>();
-			List<AlimentoIngrediente> proporcionDb = new List<AlimentoIngrediente>();
+			List<PlatilloIngrediente> proporcionDb = new List<PlatilloIngrediente>();
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
-			AlimentoDAO alimentoDAO = new AlimentoDAO();
+			PlatilloDAO alimentoDAO = new PlatilloDAO();
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				proporcionDb = context.AlimentoIngredientes.ToList().TakeWhile(alimento => alimento.Alimento.Id == AlimentoId).ToList();
-				foreach (AlimentoIngrediente proporcion in proporcionDb)
+				proporcionDb = context.PlatilloIngrediente.ToList().TakeWhile(alimento => alimento.Alimento.Id == AlimentoId).ToList();
+				foreach (PlatilloIngrediente proporcion in proporcionDb)
 				{
 
 					proporciones.Add(
@@ -26,7 +26,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 						{
 							Ingrediente = new Clases.Ingrediente{
 								Id = proporcion.Ingredientes.Id},
-							Alimento = new Clases.Alimento
+							Alimento = new Clases.Platillo
 							{
 								Id = proporcion.Alimento.Id
 							},

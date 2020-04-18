@@ -18,16 +18,21 @@ namespace AccesoADatos
         public Producto()
         {
             this.ProductoPedido = new HashSet<ProductoPedido>();
-            this.Ingredientes = new HashSet<Ingrediente>();
         }
     
         public string CodigoDeBarras { get; set; }
         public double Precio { get; set; }
         public int Id { get; set; }
+        public string Nombre { get; set; }
+        public int CantidadEnInventario { get; set; }
+        public string Codigo { get; set; }
+        public double Costo { get; set; }
+        public System.DateTime FechaDeCreacion { get; set; }
+        public System.DateTime FechaDeModificacion { get; set; }
+        public string Creador { get; set; }
+        public bool Activo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductoPedido> ProductoPedido { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ingrediente> Ingredientes { get; set; }
     }
 }

@@ -17,6 +17,6 @@ namespace AccesoADatos
         public int Id { get; set; }
         public string Estado { get; set; }
     
-        public virtual Cuenta Cuentas { get; set; }
+        public virtual Cuenta Cuenta { get; set; }
     }
 }

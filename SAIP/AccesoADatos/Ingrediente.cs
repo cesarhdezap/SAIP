@@ -17,9 +17,9 @@ namespace AccesoADatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Ingrediente()
         {
-            this.AlimentoIngrediente = new HashSet<AlimentoIngrediente>();
-            this.IngredienteIngredientes = new HashSet<IngredienteIngrediente>();
-            this.IngredienteIngredientes1 = new HashSet<IngredienteIngrediente>();
+            this.AlimentoIngrediente = new HashSet<PlatilloIngrediente>();
+            this.IngredienteIngrediente = new HashSet<IngredienteIngrediente>();
+            this.IngredienteIngrediente1 = new HashSet<IngredienteIngrediente>();
         }
     
         public int Id { get; set; }
@@ -35,11 +35,10 @@ namespace AccesoADatos
         public string Codigo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AlimentoIngrediente> AlimentoIngrediente { get; set; }
-        public virtual Producto Producto { get; set; }
+        public virtual ICollection<PlatilloIngrediente> AlimentoIngrediente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<IngredienteIngrediente> IngredienteIngredientes { get; set; }
+        public virtual ICollection<IngredienteIngrediente> IngredienteIngrediente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<IngredienteIngrediente> IngredienteIngredientes1 { get; set; }
+        public virtual ICollection<IngredienteIngrediente> IngredienteIngrediente1 { get; set; }
     }
 }

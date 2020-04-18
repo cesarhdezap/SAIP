@@ -12,7 +12,7 @@ namespace AccesoADatos
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using SqlProviderServices = System.Data.Entity.SqlServer.SqlProviderServices;
+    
     public partial class ModeloDeDatosContainer : DbContext
     {
         public ModeloDeDatosContainer()
@@ -27,17 +27,17 @@ namespace AccesoADatos
     
         public virtual DbSet<Ingrediente> Ingredientes { get; set; }
         public virtual DbSet<Mesa> Mesas { get; set; }
-        public virtual DbSet<Pedido> Pedidoes { get; set; }
+        public virtual DbSet<Pedido> Pedidos { get; set; }
         public virtual DbSet<Cliente> Clientes { get; set; }
         public virtual DbSet<Direcciones> Direcciones { get; set; }
-        public virtual DbSet<Alimento> Alimentoes { get; set; }
-        public virtual DbSet<AlimentoPedido> AlimentoPedidoes { get; set; }
-        public virtual DbSet<AlimentoIngrediente> AlimentoIngredientes { get; set; }
-        public virtual DbSet<Empleado> Empleadoes { get; set; }
-        public virtual DbSet<Producto> Productoes { get; set; }
-        public virtual DbSet<ProductoPedido> ProductoPedidoes { get; set; }
+        public virtual DbSet<Platillo> Platillos { get; set; }
+        public virtual DbSet<PlatilloPedido> PlatilloPedido { get; set; }
+        public virtual DbSet<PlatilloIngrediente> PlatilloIngrediente { get; set; }
+        public virtual DbSet<Empleado> Empleados { get; set; }
+        public virtual DbSet<Producto> Productos { get; set; }
+        public virtual DbSet<ProductoPedido> ProductoPedido { get; set; }
         public virtual DbSet<Iva> Ivas { get; set; }
         public virtual DbSet<Cuenta> Cuentas { get; set; }
-        public virtual DbSet<IngredienteIngrediente> IngredienteIngredientes { get; set; }
+        public virtual DbSet<IngredienteIngrediente> IngredienteIngrediente { get; set; }
     }
 }

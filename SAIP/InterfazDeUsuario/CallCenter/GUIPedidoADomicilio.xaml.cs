@@ -25,8 +25,8 @@ namespace InterfazDeUsuario.CallCenter
 
 		public Empleado EmpleadoDeCallCenter { get; set; } = new Empleado();
 		public Iva Iva { get; set; } = new Iva();
-		public List<Alimento> TodosLostAlimentos { get; set; } = new List<Alimento>();
-		public List<Alimento> AlimentosVisibles { get; set; } = new List<Alimento>();
+		public List<Platillo> TodosLostAlimentos { get; set; } = new List<Platillo>();
+		public List<Platillo> AlimentosVisibles { get; set; } = new List<Platillo>();
 		public GUIPedidoADomicilio(Empleado EmpleadoDeCallCenter)
 		{
 			InitializeComponent();
@@ -35,7 +35,7 @@ namespace InterfazDeUsuario.CallCenter
 			IvaDAO ivaDAO = new IvaDAO();
 			Iva = ivaDAO.CargarIvaActual();
 			IvaLabel.Content = "IVA(" + Iva.Valor + "%)";
-			AlimentoDAO alimentoDAO = new AlimentoDAO();
+			PlatilloDAO alimentoDAO = new PlatilloDAO();
 			TodosLostAlimentos = alimentoDAO.CargarTodos();
 			AlimentosVisibles = TodosLostAlimentos;
 			BusquedaDataGrid.ItemsSource = AlimentosVisibles;

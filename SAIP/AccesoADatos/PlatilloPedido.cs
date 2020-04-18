@@ -12,12 +12,12 @@ namespace AccesoADatos
     using System;
     using System.Collections.Generic;
     
-    public partial class AlimentoPedido
+    public partial class PlatilloPedido
     {
         public int Id { get; set; }
         public int Cantidad { get; set; }
     
         public virtual Pedido Pedido { get; set; }
-        public virtual Alimento Alimento { get; set; }
+        public virtual Platillo Alimento { get; set; }
     }
 }

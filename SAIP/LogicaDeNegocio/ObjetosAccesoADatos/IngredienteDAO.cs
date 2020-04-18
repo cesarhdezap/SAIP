@@ -73,7 +73,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			List<Clases.Ingrediente> ingredientesResultado = new List<Clases.Ingrediente>();
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				componentes = context.IngredienteIngredientes.ToList().TakeWhile(objeto => objeto.IngredienteCompuesto.Id == Id).ToList();
+				componentes = context.IngredienteIngrediente.ToList().TakeWhile(objeto => objeto.IngredienteCompuesto.Id == Id).ToList();
 				
 				foreach (IngredienteIngrediente ingrediente in componentes)
 				{
@@ -90,7 +90,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			List<Clases.Ingrediente> ingredientesResultado = new List<Clases.Ingrediente>();
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				componentes = context.IngredienteIngredientes.ToList().TakeWhile(ingrediente => ingrediente.IngredienteCompuesto.Id == Id).ToList();
+				componentes = context.IngredienteIngrediente.ToList().TakeWhile(ingrediente => ingrediente.IngredienteCompuesto.Id == Id).ToList();
 
 				foreach (IngredienteIngrediente ingrediente in componentes)
 				{

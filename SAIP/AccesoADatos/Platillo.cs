@@ -12,27 +12,26 @@ namespace AccesoADatos
     using System;
     using System.Collections.Generic;
     
-    public partial class Alimento
+    public partial class Platillo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Alimento()
+        public Platillo()
         {
-            this.AlimentoPedidoes = new HashSet<AlimentoPedido>();
-            this.AlimentoIngredientes = new HashSet<AlimentoIngrediente>();
+            this.AlimentoPedido = new HashSet<PlatilloPedido>();
+            this.AlimentoIngrediente = new HashSet<PlatilloIngrediente>();
         }
     
         public int Id { get; set; }
         public string Nombre { get; set; }
         public double Precio { get; set; }
-        public double CostoDeIngredientes { get; set; }
         public System.DateTime FechaDeCreacion { get; set; }
         public System.DateTime FechaDeModificacion { get; set; }
         public bool Activo { get; set; }
         public string Codigo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AlimentoPedido> AlimentoPedidoes { get; set; }
+        public virtual ICollection<PlatilloPedido> AlimentoPedido { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AlimentoIngrediente> AlimentoIngredientes { get; set; }
+        public virtual ICollection<PlatilloIngrediente> AlimentoIngrediente { get; set; }
     }
 }

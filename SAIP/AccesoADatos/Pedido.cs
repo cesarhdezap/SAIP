@@ -17,8 +17,9 @@ namespace AccesoADatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Pedido()
         {
-            this.AlimentoPedidoes = new HashSet<AlimentoPedido>();
-            this.ProductoPedidoes = new HashSet<ProductoPedido>();
+            this.Empleado = new HashSet<Empleado>();
+            this.AlimentoPedido = new HashSet<PlatilloPedido>();
+            this.ProductoPedido = new HashSet<ProductoPedido>();
         }
     
         public int Id { get; set; }
@@ -26,11 +27,14 @@ namespace AccesoADatos
         public string Creador { get; set; }
         public double PrecioTotal { get; set; }
         public double Iva { get; set; }
+        public string Estado { get; set; }
     
-        public virtual Empleado Empleado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AlimentoPedido> AlimentoPedidoes { get; set; }
+        public virtual ICollection<Empleado> Empleado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductoPedido> ProductoPedidoes { get; set; }
+        public virtual ICollection<PlatilloPedido> AlimentoPedido { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductoPedido> ProductoPedido { get; set; }
+        public virtual Cuenta Cuenta { get; set; }
     }
 }

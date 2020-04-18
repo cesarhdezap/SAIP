@@ -46,12 +46,24 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			return empleadoConvertido;
 		}
 
+		private List<Clases.Empleado> ConvertirListaDeEmpleadosDeAccesoADatosAListaDeEmpleadosDeLogica(List<AccesoADatos.Empleado> EmpleadosDb)
+		{
+			List<Clases.Empleado> empleadosResultado = new List<Clases.Empleado>();
+			foreach(AccesoADatos.Empleado empleadoDb in EmpleadosDb)
+			{
+				Clases.Empleado empleadoLogico = ConvertireEmpleadoDeAccesoADatosAEmpleadoDeLogica(empleadoDb);
+				empleadosResultado.Add(empleadoLogico);
+			}
+
+			return empleadosResultado;
+		}
+
 		public Clases.Empleado CargarEmpleadoPorId(int Id)
 		{
 			AccesoADatos.Empleado empleadoDb;
 			using(ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				empleadoDb = context.Empleadoes.Find(Id);
+				empleadoDb = context.Empleados.Find(Id);
 			}
 
 			Clases.Empleado empleado;
@@ -71,11 +83,25 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			List<AccesoADatos.Empleado> empleadosContext;
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				empleadosContext = context.Empleadoes.ToList();
+				empleadosContext = context.Empleados.ToList();
 			}
 			bool resultadoDeExistencia = empleadosContext.Exists(usuario => usuario.NombreDeUsuario == NombreDeUsuario);
 
 			return resultadoDeExistencia;
+		}
+
+		public List<Clases.Empleado> CargarTodos()
+		{
+			List<AccesoADatos.Empleado> empleadosDb = new List<AccesoADatos.Empleado>();
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				empleadosDb = context.Empleados.ToList();
+			}
+
+			List<Clases.Empleado> empleadosResultado = new List<Clases.Empleado>();
+			empleadosResultado = ConvertirListaDeEmpleadosDeAccesoADatosAListaDeEmpleadosDeLogica(empleadosDb);
+			return empleadosResultado;
+
 		}
 
 		public Clases.Empleado CargarEmpleadoPorNombreDeUsuario(string NombreDeUsuario)
@@ -87,7 +113,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
 				using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 				{
-					EmpleadoDb = context.Empleadoes.FirstOrDefault(usuarioBusqueda => usuarioBusqueda.NombreDeUsuario == NombreDeUsuario);
+					EmpleadoDb = context.Empleados.FirstOrDefault(usuarioBusqueda => usuarioBusqueda.NombreDeUsuario == NombreDeUsuario);
 				}
 
 				if (EmpleadoDb != null)
@@ -108,7 +134,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			AccesoADatos.Empleado empleadoLocalizado;
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				empleadoLocalizado = context.Empleadoes.FirstOrDefault(empleado => empleado.NombreDeUsuario == NombreDeUsuario && empleado.Contraseña == Contraseña);
+				empleadoLocalizado = context.Empleados.FirstOrDefault(empleado => empleado.NombreDeUsuario == NombreDeUsuario && empleado.Contraseña == Contraseña);
 			}
 			if (empleadoLocalizado != null)
 			{

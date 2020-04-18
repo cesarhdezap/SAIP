@@ -17,7 +17,8 @@ namespace AccesoADatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cliente()
         {
-            this.PedidaADomicilio = new HashSet<PedidoADomicilio>();
+            this.Direcciones = new HashSet<Direcciones>();
+            this.Cuenta = new HashSet<Cuenta>();
         }
     
         public int Id { get; set; }
@@ -30,7 +31,8 @@ namespace AccesoADatos
         public bool Activo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PedidoADomicilio> PedidaADomicilio { get; set; }
-        public virtual Direcciones Direccione { get; set; }
+        public virtual ICollection<Direcciones> Direcciones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cuenta> Cuenta { get; set; }
     }
 }

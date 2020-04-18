@@ -18,16 +18,18 @@ namespace AccesoADatos
         public Cuenta()
         {
             this.Mesa = new HashSet<Mesa>();
-            this.PedidoLocals = new HashSet<PedidoLocal>();
+            this.Pedidos = new HashSet<Pedido>();
+            this.Clientes = new HashSet<Cliente>();
         }
     
         public int Id { get; set; }
         public double PrecioTotal { get; set; }
     
-        public virtual Empleado Empleado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mesa> Mesa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PedidoLocal> PedidoLocals { get; set; }
+        public virtual ICollection<Pedido> Pedidos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cliente> Clientes { get; set; }
     }
 }

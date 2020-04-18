@@ -14,15 +14,9 @@ namespace AccesoADatos
     
     public partial class Direcciones
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Direcciones()
-        {
-            this.Clientes = new HashSet<Cliente>();
-        }
-    
         public int Id { get; set; }
+        public string Direccion { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cliente> Clientes { get; set; }
+        public virtual Cliente Clientes { get; set; }
     }
 }
