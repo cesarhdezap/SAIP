@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="CallCenter\GUIPedidoADomicilio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUIInicioDeSesion.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -62,6 +66,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CallCenter\GUIPedidoADomicilio.xaml.cs">
+      <DependentUpon>GUIPedidoADomicilio.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUIInicioDeSesion.xaml.cs">
       <DependentUpon>GUIInicioDeSesion.xaml</DependentUpon>
@@ -93,6 +100,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LogicaDeNegocio\LogicaDeNegocio.csproj">
+      <Project>{b9dd1f4d-d3ff-474f-a28d-4fcee9430f54}</Project>
+      <Name>LogicaDeNegocio</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

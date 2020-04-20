@@ -43,6 +43,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,11 +53,91 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cliente.cs">
+      <DependentUpon>ModeloDeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cuenta.cs">
+      <DependentUpon>ModeloDeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Direcciones.cs">
+      <DependentUpon>ModeloDeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Empleado.cs">
+      <DependentUpon>ModeloDeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ingrediente.cs">
+      <DependentUpon>ModeloDeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IngredienteIngrediente.cs">
+      <DependentUpon>ModeloDeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Iva.cs">
+      <DependentUpon>ModeloDeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mesa.cs">
+      <DependentUpon>ModeloDeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloDeDatos.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloDeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloDeDatos.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Pedido.cs">
+      <DependentUpon>ModeloDeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Platillo.cs">
+      <DependentUpon>ModeloDeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PlatilloIngrediente.cs">
+      <DependentUpon>ModeloDeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PlatilloPedido.cs">
+      <DependentUpon>ModeloDeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Producto.cs">
+      <DependentUpon>ModeloDeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductoPedido.cs">
+      <DependentUpon>ModeloDeDatos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="ModeloDeDatos.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModeloDeDatos.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ModeloDeDatos.edmx.diagram">
+      <DependentUpon>ModeloDeDatos.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModeloDeDatos.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModeloDeDatos.Context.cs</LastGenOutput>
+      <DependentUpon>ModeloDeDatos.edmx</DependentUpon>
+    </Content>
+    <Content Include="ModeloDeDatos.edmx.sql" />
+    <Content Include="ModeloDeDatos.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModeloDeDatos.cs</LastGenOutput>
+      <DependentUpon>ModeloDeDatos.edmx</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
