@@ -17,16 +17,15 @@ namespace AccesoADatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cuenta()
         {
-            this.Mesa = new HashSet<Mesa>();
             this.Pedidos = new HashSet<Pedido>();
             this.Clientes = new HashSet<Cliente>();
         }
     
         public int Id { get; set; }
         public double PrecioTotal { get; set; }
+        public short Estado { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Mesa> Mesa { get; set; }
+        public virtual Mesa Mesa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pedido> Pedidos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

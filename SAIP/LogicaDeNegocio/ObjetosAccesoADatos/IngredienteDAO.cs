@@ -9,24 +9,49 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 {
 	public class IngredienteDAO
 	{
-		private Clases.Ingrediente ConvertireIngredienteDeAccesoADatosAIngredienteDeLogica(AccesoADatos.Ingrediente IngredienteDb)
+		public Clases.Ingrediente ConvertirIngredienteDeAccesoADatosAIngredienteDeLogica(AccesoADatos.Ingrediente IngredienteDb)
 		{
 			Clases.Ingrediente ingredienteConvertido = new Clases.Ingrediente()
 			{
 				Id = IngredienteDb.Id,
-				UnidadDeMedida = IngredienteDb.UnidadDeMedida,
+				UnidadDeMedida = IngredienteDb.UnidadDeMedida.ToString(),
 				CantidadEnInventario = IngredienteDb.CantidadEnInventario,
 				Nombre = IngredienteDb.Nombre,
 				FechaDeCreacion = IngredienteDb.FechaDeCreacion,
 				FechaDeModificacion = IngredienteDb.FechaDeModiciacion,
 				Codigo = IngredienteDb.Codigo,
 				CodigoDeBarras = IngredienteDb.CodigoDeBarras,
-				Creador = IngredienteDb.Creador,
+				Creador = IngredienteDb.NombreCreador,
 				Activo = IngredienteDb.Activo,
-				Costo = IngredienteDb.Costo,
-				Componentes = ObtenerComponentesPorIdDeIngredienteCompuesto(IngredienteDb.Id)
+				Costo = IngredienteDb.Costo
 			};
+			ComponenteDAO componenteDAO = new ComponenteDAO();
+			ingredienteConvertido.Componentes = componenteDAO.ObtenerComponentesPorIdDeIngredienteCompuesto(IngredienteDb.Id);
+			return ingredienteConvertido;
+		}
 
+		public AccesoADatos.Ingrediente ConvertirIngredienteDeLogicaAIngredienteDeAccesoADatos(Clases.Ingrediente Ingrediente)
+		{
+			AccesoADatos.Ingrediente ingredienteConvertido = new AccesoADatos.Ingrediente()
+			{
+				Id = Ingrediente.Id,
+				UnidadDeMedida = short.Parse(Ingrediente.UnidadDeMedida),
+				CantidadEnInventario = Ingrediente.CantidadEnInventario,
+				Nombre = Ingrediente.Nombre,
+				FechaDeCreacion = Ingrediente.FechaDeCreacion,
+				FechaDeModiciacion = Ingrediente.FechaDeModificacion,
+				Codigo = Ingrediente.Codigo,
+				CodigoDeBarras = Ingrediente.CodigoDeBarras,
+				NombreCreador = Ingrediente.Creador,
+				Activo = Ingrediente.Activo,
+				Costo = Ingrediente.Costo
+				
+			};
+			ComponenteDAO componenteDAO = new ComponenteDAO();
+			if (Ingrediente.Componentes.Count > 0)
+			{
+				ingredienteConvertido.IngredienteIngrediente = componenteDAO.ConvertirListaDeComponentesDeLogicaAListaDeComponentesDeAccesoADatos(Ingrediente.Componentes);
+			}
 			return ingredienteConvertido;
 		}
 
@@ -36,7 +61,19 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
 			foreach (Ingrediente ingrediente in IngredientesDeDb)
 			{
-				ingredientesResultado.Add(ConvertireIngredienteDeAccesoADatosAIngredienteDeLogica(ingrediente));
+				ingredientesResultado.Add(ConvertirIngredienteDeAccesoADatosAIngredienteDeLogica(ingrediente));
+			}
+
+			return ingredientesResultado;
+		}
+
+		public List<Ingrediente> ConvertirListaDeIngredientesDeLogicaAListaDeIngredientesDeAccesoADatos(List<Clases.Ingrediente> Ingredientes)
+		{
+			List<Ingrediente> ingredientesResultado = new List<Ingrediente>();
+
+			foreach (Clases.Ingrediente ingrediente in Ingredientes)
+			{
+				ingredientesResultado.Add(ConvertirIngredienteDeLogicaAIngredienteDeAccesoADatos(ingrediente));
 			}
 
 			return ingredientesResultado;
@@ -55,6 +92,19 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			return ingredientesResultado;
 		}
 
+		public List<Clases.Ingrediente> CargarIngredientesActivos()
+		{
+			List<Ingrediente> ingredientesDb = new List<Ingrediente>();
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				ingredientesDb = context.Ingredientes.ToList().TakeWhile(ingredienteCargado => ingredienteCargado.Activo == true).ToList();
+			}
+
+			List<Clases.Ingrediente> ingredientesResultado = new List<Clases.Ingrediente>();
+			ingredientesResultado = ConvertirListaDeIngredientesDeAccesoADatosAListaDeIngredientesDeLogica(ingredientesDb);
+			return ingredientesResultado;
+		}
+
 		public Clases.Ingrediente CargarIngredientePorId(int Id)
 		{
 			Ingrediente ingredienteDb = new Ingrediente();
@@ -62,29 +112,14 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			{
 				ingredienteDb = context.Ingredientes.Find(Id);
 			}
-			Clases.Ingrediente ingredienteResultado = ConvertireIngredienteDeAccesoADatosAIngredienteDeLogica(ingredienteDb);
+			Clases.Ingrediente ingredienteResultado = ConvertirIngredienteDeAccesoADatosAIngredienteDeLogica(ingredienteDb);
 
 			return ingredienteResultado;
 		}
 
-		private List<Clases.Ingrediente> ObtenerComponentesPorIdDeIngredienteCompuesto(int Id)
-		{
-			List<IngredienteIngrediente> componentes = new List<IngredienteIngrediente>();
-			List<Clases.Ingrediente> ingredientesResultado = new List<Clases.Ingrediente>();
-			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
-			{
-				componentes = context.IngredienteIngrediente.ToList().TakeWhile(objeto => objeto.IngredienteCompuesto.Id == Id).ToList();
-				
-				foreach (IngredienteIngrediente ingrediente in componentes)
-				{
-					ingredientesResultado.Add(CargarIngredientePorId(ingrediente.IngredienteComponente.Id));
-				}
-			}
-			
-			return ingredientesResultado;
-		}
+		
 
-		public List<Clases.Ingrediente> ObtenerListaDeIngredientesPorIdDeAlimento(int Id)
+		public List<Clases.Ingrediente> ObtenerListaDeIngredientesPorIdDePlatillo(int Id)
 		{
 			List<IngredienteIngrediente> componentes = new List<IngredienteIngrediente>();
 			List<Clases.Ingrediente> ingredientesResultado = new List<Clases.Ingrediente>();

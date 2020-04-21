@@ -29,7 +29,7 @@ namespace AccesoADatos
         public double Costo { get; set; }
         public System.DateTime FechaDeCreacion { get; set; }
         public System.DateTime FechaDeModificacion { get; set; }
-        public string Creador { get; set; }
+        public string NombreCreador { get; set; }
         public bool Activo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

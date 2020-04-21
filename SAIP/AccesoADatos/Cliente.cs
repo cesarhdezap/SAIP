@@ -26,8 +26,8 @@ namespace AccesoADatos
         public string Nombre { get; set; }
         public System.DateTime FechaDeCreacion { get; set; }
         public System.DateTime FechaDeModicacion { get; set; }
-        public string Creador { get; set; }
-        public string Notas { get; set; }
+        public string NombreCreador { get; set; }
+        public string Comentarios { get; set; }
         public bool Activo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

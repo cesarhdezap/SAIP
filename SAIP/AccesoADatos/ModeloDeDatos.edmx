@@ -83,14 +83,14 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UnidadDeMedida" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UnidadDeMedida" Type="smallint" Nullable="false" />
     <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CantidadEnInventario" Type="float" Nullable="false" />
     <Property Name="CodigoDeBarras" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Costo" Type="float" Nullable="false" />
     <Property Name="FechaDeCreacion" Type="datetime" Nullable="false" />
     <Property Name="FechaDeModiciacion" Type="datetime" Nullable="false" />
-    <Property Name="Creador" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NombreCreador" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Activo" Type="bit" Nullable="false" />
     <Property Name="Codigo" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
@@ -99,8 +99,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Estado" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Cuenta_Id" Type="int" Nullable="false" />
+    <Property Name="Estado" Type="smallint" Nullable="false" />
   </EntityType>
   <EntityType Name="Pedidos">
     <Key>
@@ -108,10 +107,10 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FechaDeCreacion" Type="datetime" Nullable="false" />
-    <Property Name="Creador" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PrecioTotal" Type="float" Nullable="false" />
     <Property Name="Iva" Type="float" Nullable="false" />
-    <Property Name="Estado" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Estado" Type="smallint" Nullable="false" />
+    <Property Name="Empleado_Id" Type="int" Nullable="false" />
     <Property Name="Cuenta_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Clientes">
@@ -123,8 +122,8 @@
     <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
     <Property Name="FechaDeCreacion" Type="datetime" Nullable="false" />
     <Property Name="FechaDeModicacion" Type="datetime" Nullable="false" />
-    <Property Name="Creador" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Notas" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NombreCreador" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Comentarios" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Direcciones">
@@ -146,6 +145,8 @@
     <Property Name="FechaDeModificacion" Type="datetime" Nullable="false" />
     <Property Name="Activo" Type="bit" Nullable="false" />
     <Property Name="Codigo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Notas" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="PlatilloPedido">
     <Key>
@@ -161,7 +162,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Cantidad" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="float" Nullable="false" />
     <Property Name="Ingredientes_Id" Type="int" Nullable="false" />
     <Property Name="Alimento_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -175,10 +176,9 @@
     <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
     <Property Name="FechaDeCreacion" Type="datetime" Nullable="false" />
     <Property Name="FechaDeModicacion" Type="datetime" Nullable="false" />
-    <Property Name="Creador" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NombreCreador" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Activo" Type="bit" Nullable="false" />
-    <Property Name="TipoDeEmpleado" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pedidos_Id" Type="int" Nullable="false" />
+    <Property Name="TipoDeEmpleado" Type="smallint" Nullable="false" />
   </EntityType>
   <EntityType Name="Productos">
     <Key>
@@ -193,7 +193,7 @@
     <Property Name="Costo" Type="float" Nullable="false" />
     <Property Name="FechaDeCreacion" Type="datetime" Nullable="false" />
     <Property Name="FechaDeModificacion" Type="datetime" Nullable="false" />
-    <Property Name="Creador" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NombreCreador" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ProductoPedido">
@@ -222,6 +222,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PrecioTotal" Type="float" Nullable="false" />
+    <Property Name="Estado" Type="smallint" Nullable="false" />
+    <Property Name="Mesa_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="IngredienteIngrediente">
     <Key>
@@ -253,14 +255,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="EmpleadoPedido">
-    <End Role="Empleado" Type="ModeloDeDatos.Store.Empleados" Multiplicity="*" />
-    <End Role="Pedido" Type="ModeloDeDatos.Store.Pedidos" Multiplicity="1" />
+    <End Role="Empleado" Type="ModeloDeDatos.Store.Empleados" Multiplicity="1" />
+    <End Role="Pedido" Type="ModeloDeDatos.Store.Pedidos" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Pedido">
+      <Principal Role="Empleado">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Empleado">
-        <PropertyRef Name="Pedidos_Id" />
+      <Dependent Role="Pedido">
+        <PropertyRef Name="Empleado_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -337,14 +339,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="MesaCuenta">
-    <End Role="Mesa" Type="ModeloDeDatos.Store.Mesas" Multiplicity="*" />
-    <End Role="Cuenta" Type="ModeloDeDatos.Store.Cuentas" Multiplicity="1" />
+    <End Role="Mesa" Type="ModeloDeDatos.Store.Mesas" Multiplicity="1" />
+    <End Role="Cuenta" Type="ModeloDeDatos.Store.Cuentas" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Cuenta">
+      <Principal Role="Mesa">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Mesa">
-        <PropertyRef Name="Cuenta_Id" />
+      <Dependent Role="Cuenta">
+        <PropertyRef Name="Mesa_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -485,14 +487,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UnidadDeMedida" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="UnidadDeMedida" Type="Int16" Nullable="false" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="CantidadEnInventario" Type="Double" Nullable="false" />
           <Property Name="CodigoDeBarras" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Costo" Type="Double" Nullable="false" />
           <Property Name="FechaDeCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FechaDeModiciacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Creador" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="NombreCreador" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="AlimentoIngrediente" Relationship="ModeloDeDatos.AlimentoIngredienteIngrediente" FromRole="Ingrediente" ToRole="AlimentoIngrediente" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="IngredienteIngrediente" Relationship="ModeloDeDatos.IngredienteIngredienteIngrediente" FromRole="Ingrediente" ToRole="IngredienteIngrediente" />
@@ -504,7 +506,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Estado" Type="Int16" Nullable="false" />
           <NavigationProperty Name="Cuenta" Relationship="ModeloDeDatos.MesaCuenta" FromRole="Mesa" ToRole="Cuenta" />
         </EntityType>
         <EntityType Name="Pedido">
@@ -513,13 +515,12 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FechaDeCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Creador" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="PrecioTotal" Type="Double" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <NavigationProperty Name="Empleado" Relationship="ModeloDeDatos.EmpleadoPedido" FromRole="Pedido" ToRole="Empleado" />
           <NavigationProperty Name="AlimentoPedido" Relationship="ModeloDeDatos.PedidoAlimentoPedido" FromRole="Pedido" ToRole="AlimentoPedido" />
           <NavigationProperty Name="ProductoPedido" Relationship="ModeloDeDatos.PedidoProductoPedido" FromRole="Pedido" ToRole="ProductoPedido" />
           <Property Name="Iva" Type="Double" Nullable="false" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Estado" Type="Int16" Nullable="false" />
           <NavigationProperty Name="Cuenta" Relationship="ModeloDeDatos.CuentaPedido" FromRole="Pedido" ToRole="Cuenta" />
         </EntityType>
         <EntityType Name="Cliente">
@@ -531,8 +532,8 @@
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="FechaDeCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FechaDeModicacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Creador" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Notas" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="NombreCreador" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Comentarios" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Direcciones" Relationship="ModeloDeDatos.DireccionesCliente" FromRole="Cliente" ToRole="Direcciones" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Cuenta" Relationship="ModeloDeDatos.CuentaCliente" FromRole="Cliente" ToRole="Cuenta" />
@@ -558,6 +559,8 @@
           <NavigationProperty Name="AlimentoIngrediente" Relationship="ModeloDeDatos.AlimentoAlimentoIngrediente" FromRole="Alimento" ToRole="AlimentoIngrediente" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <Property Name="Codigo" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Notas" Type="String" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="PlatilloPedido">
           <Key>
@@ -582,7 +585,7 @@
           <Property Name="Costo" Type="Double" Nullable="false" />
           <Property Name="FechaDeCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FechaDeModificacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Creador" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="NombreCreador" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="PlatilloIngrediente">
@@ -590,7 +593,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Double" Nullable="false" />
           <NavigationProperty Name="Ingredientes" Relationship="ModeloDeDatos.AlimentoIngredienteIngrediente" FromRole="AlimentoIngrediente" ToRole="Ingrediente" />
           <NavigationProperty Name="Alimento" Relationship="ModeloDeDatos.AlimentoAlimentoIngrediente" FromRole="AlimentoIngrediente" ToRole="Alimento" />
         </EntityType>
@@ -604,18 +607,18 @@
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="FechaDeCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FechaDeModicacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Creador" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="NombreCreador" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Pedidos" Relationship="ModeloDeDatos.EmpleadoPedido" FromRole="Empleado" ToRole="Pedido" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
-          <Property Name="TipoDeEmpleado" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="TipoDeEmpleado" Type="Int16" Nullable="false" />
         </EntityType>
         <Association Name="AlimentoIngredienteIngrediente">
           <End Type="ModeloDeDatos.PlatilloIngrediente" Role="AlimentoIngrediente" Multiplicity="*" />
           <End Type="ModeloDeDatos.Ingrediente" Role="Ingrediente" Multiplicity="1" />
         </Association>
         <Association Name="EmpleadoPedido">
-          <End Type="ModeloDeDatos.Empleado" Role="Empleado" Multiplicity="*" />
-          <End Type="ModeloDeDatos.Pedido" Role="Pedido" Multiplicity="1" />
+          <End Type="ModeloDeDatos.Empleado" Role="Empleado" Multiplicity="1" />
+          <End Type="ModeloDeDatos.Pedido" Role="Pedido" Multiplicity="*" />
         </Association>
         <Association Name="PedidoAlimentoPedido">
           <End Type="ModeloDeDatos.Pedido" Role="Pedido" Multiplicity="1" />
@@ -670,10 +673,11 @@
           <NavigationProperty Name="Mesa" Relationship="ModeloDeDatos.MesaCuenta" FromRole="Cuenta" ToRole="Mesa" />
           <NavigationProperty Name="Pedidos" Relationship="ModeloDeDatos.CuentaPedido" FromRole="Cuenta" ToRole="Pedido" />
           <NavigationProperty Name="Clientes" Relationship="ModeloDeDatos.CuentaCliente" FromRole="Cuenta" ToRole="Cliente" />
+          <Property Name="Estado" Type="Int16" Nullable="false" />
         </EntityType>
         <Association Name="MesaCuenta">
-          <End Type="ModeloDeDatos.Mesa" Role="Mesa" Multiplicity="*" />
-          <End Type="ModeloDeDatos.Cuenta" Role="Cuenta" Multiplicity="1" />
+          <End Type="ModeloDeDatos.Mesa" Role="Mesa" Multiplicity="1" />
+          <End Type="ModeloDeDatos.Cuenta" Role="Cuenta" Multiplicity="*" />
         </Association>
         <EntityType Name="IngredienteIngrediente">
           <Key>
@@ -717,7 +721,7 @@
           <ScalarProperty Name="Costo" ColumnName="Costo" />
           <ScalarProperty Name="FechaDeCreacion" ColumnName="FechaDeCreacion" />
           <ScalarProperty Name="FechaDeModiciacion" ColumnName="FechaDeModiciacion" />
-          <ScalarProperty Name="Creador" ColumnName="Creador" />
+          <ScalarProperty Name="NombreCreador" ColumnName="NombreCreador" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
         </MappingFragment>
@@ -736,7 +740,6 @@
         <MappingFragment StoreEntitySet="Pedidos">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FechaDeCreacion" ColumnName="FechaDeCreacion" />
-          <ScalarProperty Name="Creador" ColumnName="Creador" />
           <ScalarProperty Name="PrecioTotal" ColumnName="PrecioTotal" />
           <ScalarProperty Name="Iva" ColumnName="Iva" />
           <ScalarProperty Name="Estado" ColumnName="Estado" />
@@ -751,8 +754,8 @@
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="FechaDeCreacion" ColumnName="FechaDeCreacion" />
           <ScalarProperty Name="FechaDeModicacion" ColumnName="FechaDeModicacion" />
-          <ScalarProperty Name="Creador" ColumnName="Creador" />
-          <ScalarProperty Name="Notas" ColumnName="Notas" />
+          <ScalarProperty Name="NombreCreador" ColumnName="NombreCreador" />
+          <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -775,6 +778,8 @@
           <ScalarProperty Name="FechaDeModificacion" ColumnName="FechaDeModificacion" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Notas" ColumnName="Notas" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -803,7 +808,7 @@
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="FechaDeCreacion" ColumnName="FechaDeCreacion" />
           <ScalarProperty Name="FechaDeModicacion" ColumnName="FechaDeModicacion" />
-          <ScalarProperty Name="Creador" ColumnName="Creador" />
+          <ScalarProperty Name="NombreCreador" ColumnName="NombreCreador" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="TipoDeEmpleado" ColumnName="TipoDeEmpleado" />
         </MappingFragment>
@@ -821,7 +826,7 @@
           <ScalarProperty Name="Costo" ColumnName="Costo" />
           <ScalarProperty Name="FechaDeCreacion" ColumnName="FechaDeCreacion" />
           <ScalarProperty Name="FechaDeModificacion" ColumnName="FechaDeModificacion" />
-          <ScalarProperty Name="Creador" ColumnName="Creador" />
+          <ScalarProperty Name="NombreCreador" ColumnName="NombreCreador" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -851,6 +856,7 @@
         <MappingFragment StoreEntitySet="Cuentas">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="PrecioTotal" ColumnName="PrecioTotal" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -870,11 +876,11 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="EmpleadoPedido" TypeName="ModeloDeDatos.EmpleadoPedido" StoreEntitySet="Empleados">
-      <EndProperty Name="Pedido">
-        <ScalarProperty Name="Id" ColumnName="Pedidos_Id" />
-      </EndProperty>
+    <AssociationSetMapping Name="EmpleadoPedido" TypeName="ModeloDeDatos.EmpleadoPedido" StoreEntitySet="Pedidos">
       <EndProperty Name="Empleado">
+        <ScalarProperty Name="Id" ColumnName="Empleado_Id" />
+      </EndProperty>
+      <EndProperty Name="Pedido">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
@@ -926,11 +932,11 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="MesaCuenta" TypeName="ModeloDeDatos.MesaCuenta" StoreEntitySet="Mesas">
-      <EndProperty Name="Cuenta">
-        <ScalarProperty Name="Id" ColumnName="Cuenta_Id" />
-      </EndProperty>
+    <AssociationSetMapping Name="MesaCuenta" TypeName="ModeloDeDatos.MesaCuenta" StoreEntitySet="Cuentas">
       <EndProperty Name="Mesa">
+        <ScalarProperty Name="Id" ColumnName="Mesa_Id" />
+      </EndProperty>
+      <EndProperty Name="Cuenta">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
