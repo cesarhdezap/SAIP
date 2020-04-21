@@ -66,6 +66,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CallCenter\GUIEditarPedido.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Gerente\GUIGerente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -84,6 +88,9 @@
     </Compile>
     <Compile Include="CallCenter\GUIPedidoADomicilio.xaml.cs">
       <DependentUpon>GUIPedidoADomicilio.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CallCenter\GUIEditarPedido.xaml.cs">
+      <DependentUpon>GUIEditarPedido.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gerente\GUIGerente.xaml.cs">
       <DependentUpon>GUIGerente.xaml</DependentUpon>
