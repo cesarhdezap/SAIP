@@ -14,9 +14,16 @@ namespace AccesoADatos
     
     public partial class Mesa
     {
-        public int Id { get; set; }
-        public string Estado { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Mesa()
+        {
+            this.Cuenta = new HashSet<Cuenta>();
+        }
     
-        public virtual Cuenta Cuenta { get; set; }
+        public int Id { get; set; }
+        public short Estado { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cuenta> Cuenta { get; set; }
     }
 }

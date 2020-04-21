@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/18/2020 04:19:22
--- Generated from EDMX file: C:\Users\marcu\Documents\SAIP\COD\SAIP\AccesoADatos\ModeloDeDatos.edmx
+-- Date Created: 04/21/2020 17:02:25
+-- Generated from EDMX file: C:\Users\CETDT\Desktop\repos\SAIP\SAIP\AccesoADatos\ModeloDeDatos.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -18,37 +18,37 @@ GO
 -- --------------------------------------------------
 
 IF OBJECT_ID(N'[dbo].[FK_AlimentoIngredienteIngrediente]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PlatilloIngredientes] DROP CONSTRAINT [FK_AlimentoIngredienteIngrediente];
+    ALTER TABLE [dbo].[PlatilloIngrediente] DROP CONSTRAINT [FK_AlimentoIngredienteIngrediente];
 GO
 IF OBJECT_ID(N'[dbo].[FK_EmpleadoPedido]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Empleados] DROP CONSTRAINT [FK_EmpleadoPedido];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PedidoAlimentoPedido]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AlimentoPedidos] DROP CONSTRAINT [FK_PedidoAlimentoPedido];
+    ALTER TABLE [dbo].[PlatilloPedido] DROP CONSTRAINT [FK_PedidoAlimentoPedido];
 GO
 IF OBJECT_ID(N'[dbo].[FK_DireccionesCliente]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Direcciones] DROP CONSTRAINT [FK_DireccionesCliente];
 GO
 IF OBJECT_ID(N'[dbo].[FK_AlimentoAlimentoPedido]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AlimentoPedidos] DROP CONSTRAINT [FK_AlimentoAlimentoPedido];
+    ALTER TABLE [dbo].[PlatilloPedido] DROP CONSTRAINT [FK_AlimentoAlimentoPedido];
 GO
 IF OBJECT_ID(N'[dbo].[FK_AlimentoAlimentoIngrediente]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PlatilloIngredientes] DROP CONSTRAINT [FK_AlimentoAlimentoIngrediente];
+    ALTER TABLE [dbo].[PlatilloIngrediente] DROP CONSTRAINT [FK_AlimentoAlimentoIngrediente];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PedidoProductoPedido]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ProductoPedidoes] DROP CONSTRAINT [FK_PedidoProductoPedido];
+    ALTER TABLE [dbo].[ProductoPedido] DROP CONSTRAINT [FK_PedidoProductoPedido];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ProductoPedidoProducto]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ProductoPedidoes] DROP CONSTRAINT [FK_ProductoPedidoProducto];
+    ALTER TABLE [dbo].[ProductoPedido] DROP CONSTRAINT [FK_ProductoPedidoProducto];
 GO
 IF OBJECT_ID(N'[dbo].[FK_MesaCuenta]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Mesas] DROP CONSTRAINT [FK_MesaCuenta];
 GO
 IF OBJECT_ID(N'[dbo].[FK_IngredienteIngredienteIngrediente]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[IngredienteIngredientes] DROP CONSTRAINT [FK_IngredienteIngredienteIngrediente];
+    ALTER TABLE [dbo].[IngredienteIngrediente] DROP CONSTRAINT [FK_IngredienteIngredienteIngrediente];
 GO
 IF OBJECT_ID(N'[dbo].[FK_IngredienteIngredienteIngrediente1]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[IngredienteIngredientes] DROP CONSTRAINT [FK_IngredienteIngredienteIngrediente1];
+    ALTER TABLE [dbo].[IngredienteIngrediente] DROP CONSTRAINT [FK_IngredienteIngredienteIngrediente1];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CuentaPedido]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Pedidos] DROP CONSTRAINT [FK_CuentaPedido];
@@ -82,11 +82,11 @@ GO
 IF OBJECT_ID(N'[dbo].[Platillos]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Platillos];
 GO
-IF OBJECT_ID(N'[dbo].[AlimentoPedidos]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AlimentoPedidos];
+IF OBJECT_ID(N'[dbo].[PlatilloPedido]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PlatilloPedido];
 GO
-IF OBJECT_ID(N'[dbo].[PlatilloIngredientes]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PlatilloIngredientes];
+IF OBJECT_ID(N'[dbo].[PlatilloIngrediente]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PlatilloIngrediente];
 GO
 IF OBJECT_ID(N'[dbo].[Empleados]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Empleados];
@@ -94,8 +94,8 @@ GO
 IF OBJECT_ID(N'[dbo].[Productos]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Productos];
 GO
-IF OBJECT_ID(N'[dbo].[ProductoPedidoes]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ProductoPedidoes];
+IF OBJECT_ID(N'[dbo].[ProductoPedido]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ProductoPedido];
 GO
 IF OBJECT_ID(N'[dbo].[Ivas]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Ivas];
@@ -103,8 +103,8 @@ GO
 IF OBJECT_ID(N'[dbo].[Cuentas]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Cuentas];
 GO
-IF OBJECT_ID(N'[dbo].[IngredienteIngredientes]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[IngredienteIngredientes];
+IF OBJECT_ID(N'[dbo].[IngredienteIngrediente]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[IngredienteIngrediente];
 GO
 IF OBJECT_ID(N'[dbo].[CuentaCliente]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CuentaCliente];
@@ -117,14 +117,14 @@ GO
 -- Creating table 'Ingredientes'
 CREATE TABLE [dbo].[Ingredientes] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [UnidadDeMedida] nvarchar(max)  NOT NULL,
+    [UnidadDeMedida] smallint  NOT NULL,
     [Nombre] nvarchar(max)  NOT NULL,
     [CantidadEnInventario] float  NOT NULL,
     [CodigoDeBarras] nvarchar(max)  NOT NULL,
     [Costo] float  NOT NULL,
     [FechaDeCreacion] datetime  NOT NULL,
     [FechaDeModiciacion] datetime  NOT NULL,
-    [Creador] nvarchar(max)  NOT NULL,
+    [NombreCreador] nvarchar(max)  NOT NULL,
     [Activo] bit  NOT NULL,
     [Codigo] nvarchar(max)  NOT NULL
 );
@@ -133,8 +133,7 @@ GO
 -- Creating table 'Mesas'
 CREATE TABLE [dbo].[Mesas] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Estado] nvarchar(max)  NOT NULL,
-    [Cuenta_Id] int  NOT NULL
+    [Estado] smallint  NOT NULL
 );
 GO
 
@@ -142,10 +141,10 @@ GO
 CREATE TABLE [dbo].[Pedidos] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [FechaDeCreacion] datetime  NOT NULL,
-    [Creador] nvarchar(max)  NOT NULL,
     [PrecioTotal] float  NOT NULL,
     [Iva] float  NOT NULL,
-    [Estado] nvarchar(max)  NOT NULL,
+    [Estado] smallint  NOT NULL,
+    [Empleado_Id] int  NOT NULL,
     [Cuenta_Id] int  NOT NULL
 );
 GO
@@ -157,8 +156,8 @@ CREATE TABLE [dbo].[Clientes] (
     [Nombre] nvarchar(max)  NOT NULL,
     [FechaDeCreacion] datetime  NOT NULL,
     [FechaDeModicacion] datetime  NOT NULL,
-    [Creador] nvarchar(max)  NOT NULL,
-    [Notas] nvarchar(max)  NOT NULL,
+    [NombreCreador] nvarchar(max)  NOT NULL,
+    [Comentarios] nvarchar(max)  NOT NULL,
     [Activo] bit  NOT NULL
 );
 GO
@@ -209,10 +208,9 @@ CREATE TABLE [dbo].[Empleados] (
     [Nombre] nvarchar(max)  NOT NULL,
     [FechaDeCreacion] datetime  NOT NULL,
     [FechaDeModicacion] datetime  NOT NULL,
-    [Creador] nvarchar(max)  NOT NULL,
+    [NombreCreador] nvarchar(max)  NOT NULL,
     [Activo] bit  NOT NULL,
-    [TipoDeEmpleado] nvarchar(max)  NOT NULL,
-    [Pedidos_Id] int  NOT NULL
+    [TipoDeEmpleado] smallint  NOT NULL
 );
 GO
 
@@ -227,7 +225,7 @@ CREATE TABLE [dbo].[Productos] (
     [Costo] float  NOT NULL,
     [FechaDeCreacion] datetime  NOT NULL,
     [FechaDeModificacion] datetime  NOT NULL,
-    [Creador] nvarchar(max)  NOT NULL,
+    [NombreCreador] nvarchar(max)  NOT NULL,
     [Activo] bit  NOT NULL
 );
 GO
@@ -255,7 +253,9 @@ GO
 -- Creating table 'Cuentas'
 CREATE TABLE [dbo].[Cuentas] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [PrecioTotal] float  NOT NULL
+    [PrecioTotal] float  NOT NULL,
+    [Estado] smallint  NOT NULL,
+    [Mesa_Id] int  NOT NULL
 );
 GO
 
@@ -388,19 +388,19 @@ ON [dbo].[PlatilloIngrediente]
     ([Ingredientes_Id]);
 GO
 
--- Creating foreign key on [Pedidos_Id] in table 'Empleados'
-ALTER TABLE [dbo].[Empleados]
+-- Creating foreign key on [Empleado_Id] in table 'Pedidos'
+ALTER TABLE [dbo].[Pedidos]
 ADD CONSTRAINT [FK_EmpleadoPedido]
-    FOREIGN KEY ([Pedidos_Id])
-    REFERENCES [dbo].[Pedidos]
+    FOREIGN KEY ([Empleado_Id])
+    REFERENCES [dbo].[Empleados]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_EmpleadoPedido'
 CREATE INDEX [IX_FK_EmpleadoPedido]
-ON [dbo].[Empleados]
-    ([Pedidos_Id]);
+ON [dbo].[Pedidos]
+    ([Empleado_Id]);
 GO
 
 -- Creating foreign key on [Pedido_Id] in table 'PlatilloPedido'
@@ -493,19 +493,19 @@ ON [dbo].[ProductoPedido]
     ([Productos_Id]);
 GO
 
--- Creating foreign key on [Cuenta_Id] in table 'Mesas'
-ALTER TABLE [dbo].[Mesas]
+-- Creating foreign key on [Mesa_Id] in table 'Cuentas'
+ALTER TABLE [dbo].[Cuentas]
 ADD CONSTRAINT [FK_MesaCuenta]
-    FOREIGN KEY ([Cuenta_Id])
-    REFERENCES [dbo].[Cuentas]
+    FOREIGN KEY ([Mesa_Id])
+    REFERENCES [dbo].[Mesas]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_MesaCuenta'
 CREATE INDEX [IX_FK_MesaCuenta]
-ON [dbo].[Mesas]
-    ([Cuenta_Id]);
+ON [dbo].[Cuentas]
+    ([Mesa_Id]);
 GO
 
 -- Creating foreign key on [IngredienteCompuesto_Id] in table 'IngredienteIngrediente'

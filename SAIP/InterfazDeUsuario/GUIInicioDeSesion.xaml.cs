@@ -48,6 +48,11 @@ namespace InterfazDeUsuario
 						GUIPedidoADomicilio pedidoADomicilio = new GUIPedidoADomicilio(empleadoCargado);
 						pedidoADomicilio.ShowDialog();
 					}
+					else if (empleadoCargado.TipoDeEmpleado == TiposDeEmpleados.Mesero.ToString())
+					{
+						GUIVerMisMesas verMisMesas = new GUIVerMisMesas(empleadoCargado);
+						verMisMesas.ShowDialog();
+					}
 				}
 			}
 			else

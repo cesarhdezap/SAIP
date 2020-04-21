@@ -55,9 +55,11 @@
     <Compile Include="Clases\Empleado.cs" />
     <Compile Include="Clases\Ingrediente.cs" />
     <Compile Include="Clases\Iva.cs" />
+    <Compile Include="Clases\Mesa.cs" />
     <Compile Include="Clases\Pedido.cs" />
     <Compile Include="Clases\Proporcion.cs" />
     <Compile Include="Enumeradores\TiposDeEmpleados.cs" />
+    <Compile Include="ObjetosAccesoADatos\PedidoDAO.cs" />
     <Compile Include="ObjetosAccesoADatos\PlatilloDAO.cs" />
     <Compile Include="ObjetosAccesoADatos\EmpleadoDAO.cs" />
     <Compile Include="ObjetosAccesoADatos\IngredienteDAO.cs" />
@@ -74,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Compile Include="ObjetosAccesoADatos\MesaDAO.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

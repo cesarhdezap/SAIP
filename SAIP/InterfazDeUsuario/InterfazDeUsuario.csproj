@@ -116,23 +116,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-
     <Resource Include="img\italiapizza.jpeg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\restaurant-table.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Mesero\italiapizza.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Mesero\restaurant-table.png" />
-
     <ProjectReference Include="..\LogicaDeNegocio\LogicaDeNegocio.csproj">
       <Project>{b9dd1f4d-d3ff-474f-a28d-4fcee9430f54}</Project>
       <Name>LogicaDeNegocio</Name>
     </ProjectReference>
-
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

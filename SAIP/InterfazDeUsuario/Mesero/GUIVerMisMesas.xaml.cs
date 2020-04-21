@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogicaDeNegocio.Clases;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace InterfazDeUsuario.Mesero
 
         public ObservableCollection<Button> ListaDeBotonesDeMesas { get; set; }
 
-        public GUIVerMisMesas()
+        public GUIVerMisMesas(Empleado empleado)
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
