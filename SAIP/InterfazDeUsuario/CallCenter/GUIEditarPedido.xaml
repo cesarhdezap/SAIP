@@ -1,0 +1,20 @@
+﻿<Window x:Class="InterfazDeUsuario.GUIEditarPedido"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InterfazDeUsuario"
+        mc:Ignorable="d"
+        Title="GUIEditarPedido" Height="538.5" Width="810.5">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="347*"/>
+        </Grid.ColumnDefinitions>
+        <Rectangle Fill="#FF008050" Height="79" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Button x:Name="RegrsarButton" Content="Regresar" HorizontalAlignment="Left" Margin="80,28,0,0" VerticalAlignment="Top" Width="76" Height="20"/>
+        <Rectangle x:Name="ClienteRectangle" Margin="10,84,562,10" Stroke="Black"/>
+        <Rectangle x:Name="MenuRectangle" Margin="0,84,10,10" Stroke="Black" Grid.Column="1" HorizontalAlignment="Right" Width="230"/>
+        <Rectangle x:Name="ClienteRectangle_Copy" Margin="0,84,267,10" Stroke="Black" HorizontalAlignment="Right" Width="271"/>
+
+    </Grid>
+</Window>
