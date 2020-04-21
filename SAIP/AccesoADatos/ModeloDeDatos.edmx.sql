@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/21/2020 15:15:56
--- Generated from EDMX file: C:\Users\marcu\Documents\SAIP\COD\SAIP\AccesoADatos\ModeloDeDatos.edmx
+-- Date Created: 04/21/2020 17:02:25
+-- Generated from EDMX file: C:\Users\CETDT\Desktop\repos\SAIP\SAIP\AccesoADatos\ModeloDeDatos.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -117,14 +117,14 @@ GO
 -- Creating table 'Ingredientes'
 CREATE TABLE [dbo].[Ingredientes] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [UnidadDeMedida] nvarchar(max)  NOT NULL,
+    [UnidadDeMedida] smallint  NOT NULL,
     [Nombre] nvarchar(max)  NOT NULL,
     [CantidadEnInventario] float  NOT NULL,
     [CodigoDeBarras] nvarchar(max)  NOT NULL,
     [Costo] float  NOT NULL,
     [FechaDeCreacion] datetime  NOT NULL,
     [FechaDeModiciacion] datetime  NOT NULL,
-    [Creador] nvarchar(max)  NOT NULL,
+    [NombreCreador] nvarchar(max)  NOT NULL,
     [Activo] bit  NOT NULL,
     [Codigo] nvarchar(max)  NOT NULL
 );
@@ -133,8 +133,7 @@ GO
 -- Creating table 'Mesas'
 CREATE TABLE [dbo].[Mesas] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Estado] nvarchar(max)  NOT NULL,
-    [Cuenta_Id] int  NOT NULL
+    [Estado] smallint  NOT NULL
 );
 GO
 
@@ -142,10 +141,9 @@ GO
 CREATE TABLE [dbo].[Pedidos] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [FechaDeCreacion] datetime  NOT NULL,
-    [Creador] nvarchar(max)  NOT NULL,
     [PrecioTotal] float  NOT NULL,
     [Iva] float  NOT NULL,
-    [Estado] nvarchar(max)  NOT NULL,
+    [Estado] smallint  NOT NULL,
     [Empleado_Id] int  NOT NULL,
     [Cuenta_Id] int  NOT NULL
 );
@@ -158,8 +156,8 @@ CREATE TABLE [dbo].[Clientes] (
     [Nombre] nvarchar(max)  NOT NULL,
     [FechaDeCreacion] datetime  NOT NULL,
     [FechaDeModicacion] datetime  NOT NULL,
-    [Creador] nvarchar(max)  NOT NULL,
-    [Notas] nvarchar(max)  NOT NULL,
+    [NombreCreador] nvarchar(max)  NOT NULL,
+    [Comentarios] nvarchar(max)  NOT NULL,
     [Activo] bit  NOT NULL
 );
 GO
@@ -212,9 +210,9 @@ CREATE TABLE [dbo].[Empleados] (
     [Nombre] nvarchar(max)  NOT NULL,
     [FechaDeCreacion] datetime  NOT NULL,
     [FechaDeModicacion] datetime  NOT NULL,
-    [Creador] nvarchar(max)  NOT NULL,
+    [NombreCreador] nvarchar(max)  NOT NULL,
     [Activo] bit  NOT NULL,
-    [TipoDeEmpleado] nvarchar(max)  NOT NULL
+    [TipoDeEmpleado] smallint  NOT NULL
 );
 GO
 
@@ -229,7 +227,7 @@ CREATE TABLE [dbo].[Productos] (
     [Costo] float  NOT NULL,
     [FechaDeCreacion] datetime  NOT NULL,
     [FechaDeModificacion] datetime  NOT NULL,
-    [Creador] nvarchar(max)  NOT NULL,
+    [NombreCreador] nvarchar(max)  NOT NULL,
     [Activo] bit  NOT NULL
 );
 GO
@@ -257,7 +255,9 @@ GO
 -- Creating table 'Cuentas'
 CREATE TABLE [dbo].[Cuentas] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [PrecioTotal] float  NOT NULL
+    [PrecioTotal] float  NOT NULL,
+    [Estado] smallint  NOT NULL,
+    [Mesa_Id] int  NOT NULL
 );
 GO
 
@@ -495,19 +495,19 @@ ON [dbo].[ProductoPedido]
     ([Productos_Id]);
 GO
 
--- Creating foreign key on [Cuenta_Id] in table 'Mesas'
-ALTER TABLE [dbo].[Mesas]
+-- Creating foreign key on [Mesa_Id] in table 'Cuentas'
+ALTER TABLE [dbo].[Cuentas]
 ADD CONSTRAINT [FK_MesaCuenta]
-    FOREIGN KEY ([Cuenta_Id])
-    REFERENCES [dbo].[Cuentas]
+    FOREIGN KEY ([Mesa_Id])
+    REFERENCES [dbo].[Mesas]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_MesaCuenta'
 CREATE INDEX [IX_FK_MesaCuenta]
-ON [dbo].[Mesas]
-    ([Cuenta_Id]);
+ON [dbo].[Cuentas]
+    ([Mesa_Id]);
 GO
 
 -- Creating foreign key on [IngredienteCompuesto_Id] in table 'IngredienteIngrediente'

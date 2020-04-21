@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InterfazDeUsuario.Mesero;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,6 +65,11 @@ namespace InterfazDeUsuario
 					else if (empleadoCargado.TipoDeEmpleado == TiposDeEmpleados.Mesero.ToString())
 					{
 
+					}
+					else if (empleadoCargado.TipoDeEmpleado == TiposDeEmpleados.Mesero.ToString())
+					{
+						GUIVerMisMesas verMisMesas = new GUIVerMisMesas(empleadoCargado);
+						verMisMesas.ShowDialog();
 					}
 				}
 				else

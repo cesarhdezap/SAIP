@@ -26,9 +26,9 @@ namespace AccesoADatos
         public string Nombre { get; set; }
         public System.DateTime FechaDeCreacion { get; set; }
         public System.DateTime FechaDeModicacion { get; set; }
-        public string Creador { get; set; }
+        public string NombreCreador { get; set; }
         public bool Activo { get; set; }
-        public string TipoDeEmpleado { get; set; }
+        public short TipoDeEmpleado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pedido> Pedidos { get; set; }

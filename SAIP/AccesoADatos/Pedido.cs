@@ -23,10 +23,9 @@ namespace AccesoADatos
     
         public int Id { get; set; }
         public System.DateTime FechaDeCreacion { get; set; }
-        public string Creador { get; set; }
         public double PrecioTotal { get; set; }
         public double Iva { get; set; }
-        public string Estado { get; set; }
+        public short Estado { get; set; }
     
         public virtual Empleado Empleado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

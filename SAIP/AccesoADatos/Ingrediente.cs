@@ -23,14 +23,14 @@ namespace AccesoADatos
         }
     
         public int Id { get; set; }
-        public string UnidadDeMedida { get; set; }
+        public short UnidadDeMedida { get; set; }
         public string Nombre { get; set; }
         public double CantidadEnInventario { get; set; }
         public string CodigoDeBarras { get; set; }
         public double Costo { get; set; }
         public System.DateTime FechaDeCreacion { get; set; }
         public System.DateTime FechaDeModiciacion { get; set; }
-        public string Creador { get; set; }
+        public string NombreCreador { get; set; }
         public bool Activo { get; set; }
         public string Codigo { get; set; }
     
