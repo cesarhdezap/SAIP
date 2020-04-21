@@ -14,14 +14,14 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			Clases.Ingrediente ingredienteConvertido = new Clases.Ingrediente()
 			{
 				Id = IngredienteDb.Id,
-				UnidadDeMedida = IngredienteDb.UnidadDeMedida,
+				UnidadDeMedida = IngredienteDb.UnidadDeMedida.ToString(),
 				CantidadEnInventario = IngredienteDb.CantidadEnInventario,
 				Nombre = IngredienteDb.Nombre,
 				FechaDeCreacion = IngredienteDb.FechaDeCreacion,
 				FechaDeModificacion = IngredienteDb.FechaDeModiciacion,
 				Codigo = IngredienteDb.Codigo,
 				CodigoDeBarras = IngredienteDb.CodigoDeBarras,
-				Creador = IngredienteDb.Creador,
+				Creador = IngredienteDb.NombreCreador,
 				Activo = IngredienteDb.Activo,
 				Costo = IngredienteDb.Costo
 			};
@@ -35,14 +35,14 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			AccesoADatos.Ingrediente ingredienteConvertido = new AccesoADatos.Ingrediente()
 			{
 				Id = Ingrediente.Id,
-				UnidadDeMedida = Ingrediente.UnidadDeMedida,
+				UnidadDeMedida = short.Parse(Ingrediente.UnidadDeMedida),
 				CantidadEnInventario = Ingrediente.CantidadEnInventario,
 				Nombre = Ingrediente.Nombre,
 				FechaDeCreacion = Ingrediente.FechaDeCreacion,
 				FechaDeModiciacion = Ingrediente.FechaDeModificacion,
 				Codigo = Ingrediente.Codigo,
 				CodigoDeBarras = Ingrediente.CodigoDeBarras,
-				Creador = Ingrediente.Creador,
+				NombreCreador = Ingrediente.Creador,
 				Activo = Ingrediente.Activo,
 				Costo = Ingrediente.Costo
 				
