@@ -112,6 +112,7 @@
     <Property Name="PrecioTotal" Type="float" Nullable="false" />
     <Property Name="Iva" Type="float" Nullable="false" />
     <Property Name="Estado" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Empleado_Id" Type="int" Nullable="false" />
     <Property Name="Cuenta_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Clientes">
@@ -146,6 +147,8 @@
     <Property Name="FechaDeModificacion" Type="datetime" Nullable="false" />
     <Property Name="Activo" Type="bit" Nullable="false" />
     <Property Name="Codigo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Notas" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="PlatilloPedido">
     <Key>
@@ -161,7 +164,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Cantidad" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="float" Nullable="false" />
     <Property Name="Ingredientes_Id" Type="int" Nullable="false" />
     <Property Name="Alimento_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -178,7 +181,6 @@
     <Property Name="Creador" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Activo" Type="bit" Nullable="false" />
     <Property Name="TipoDeEmpleado" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pedidos_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Productos">
     <Key>
@@ -253,14 +255,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="EmpleadoPedido">
-    <End Role="Empleado" Type="ModeloDeDatos.Store.Empleados" Multiplicity="*" />
-    <End Role="Pedido" Type="ModeloDeDatos.Store.Pedidos" Multiplicity="1" />
+    <End Role="Empleado" Type="ModeloDeDatos.Store.Empleados" Multiplicity="1" />
+    <End Role="Pedido" Type="ModeloDeDatos.Store.Pedidos" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Pedido">
+      <Principal Role="Empleado">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Empleado">
-        <PropertyRef Name="Pedidos_Id" />
+      <Dependent Role="Pedido">
+        <PropertyRef Name="Empleado_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -558,6 +560,8 @@
           <NavigationProperty Name="AlimentoIngrediente" Relationship="ModeloDeDatos.AlimentoAlimentoIngrediente" FromRole="Alimento" ToRole="AlimentoIngrediente" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <Property Name="Codigo" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Notas" Type="String" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="PlatilloPedido">
           <Key>
@@ -590,7 +594,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Double" Nullable="false" />
           <NavigationProperty Name="Ingredientes" Relationship="ModeloDeDatos.AlimentoIngredienteIngrediente" FromRole="AlimentoIngrediente" ToRole="Ingrediente" />
           <NavigationProperty Name="Alimento" Relationship="ModeloDeDatos.AlimentoAlimentoIngrediente" FromRole="AlimentoIngrediente" ToRole="Alimento" />
         </EntityType>
@@ -614,8 +618,8 @@
           <End Type="ModeloDeDatos.Ingrediente" Role="Ingrediente" Multiplicity="1" />
         </Association>
         <Association Name="EmpleadoPedido">
-          <End Type="ModeloDeDatos.Empleado" Role="Empleado" Multiplicity="*" />
-          <End Type="ModeloDeDatos.Pedido" Role="Pedido" Multiplicity="1" />
+          <End Type="ModeloDeDatos.Empleado" Role="Empleado" Multiplicity="1" />
+          <End Type="ModeloDeDatos.Pedido" Role="Pedido" Multiplicity="*" />
         </Association>
         <Association Name="PedidoAlimentoPedido">
           <End Type="ModeloDeDatos.Pedido" Role="Pedido" Multiplicity="1" />
@@ -775,6 +779,8 @@
           <ScalarProperty Name="FechaDeModificacion" ColumnName="FechaDeModificacion" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Notas" ColumnName="Notas" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -870,11 +876,11 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="EmpleadoPedido" TypeName="ModeloDeDatos.EmpleadoPedido" StoreEntitySet="Empleados">
-      <EndProperty Name="Pedido">
-        <ScalarProperty Name="Id" ColumnName="Pedidos_Id" />
-      </EndProperty>
+    <AssociationSetMapping Name="EmpleadoPedido" TypeName="ModeloDeDatos.EmpleadoPedido" StoreEntitySet="Pedidos">
       <EndProperty Name="Empleado">
+        <ScalarProperty Name="Id" ColumnName="Empleado_Id" />
+      </EndProperty>
+      <EndProperty Name="Pedido">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>

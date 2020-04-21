@@ -14,10 +14,12 @@ namespace LogicaDeNegocio.Clases
         public double Precio { get; set; }
         public double CostoDeIngredientes { get; set; }
         public string Codigo { get; set; }
+        public string Notas { get; set; }
+        public string Descripcion { get; set; }
         public DateTime FechaDeCreacion { get; set; }
         public DateTime FechaDeModificacion { get; set; }
         public bool Activo { get; set; }
-        public List<Proporcion> Proporciones { get; set; }
+        public List<Proporcion> Proporciones { get; set; } = new List<Proporcion>();
         
         public void CalcularCostoDeIngredientes()
         {
@@ -39,6 +41,56 @@ namespace LogicaDeNegocio.Clases
                 CostoDeIngredientes += proporcion.Ingrediente.Costo * proporcion.Ingrediente.Costo;
             }
 
+        }
+        public void AñadirIngredientePorId(int Id)
+        {
+            Ingrediente ingrediente = new Ingrediente();
+            IngredienteDAO ingredienteDAO = new IngredienteDAO();
+            if (!IngredienteYaAñadido(Id))
+            {
+                ingrediente = ingredienteDAO.CargarIngredientePorId(Id);
+                Proporciones.Add(new Proporcion
+                {
+                    Ingrediente = ingrediente,
+                    Cantidad = 1
+                });
+            }
+        }
+
+        public void EliminarIngredientePorId(int Id)
+        {
+            for (int i = 0;  i < Proporciones.Count; i++)
+            {
+                if (Proporciones.ElementAt(i).Ingrediente.Id == Id)
+                {
+                    Proporciones.RemoveAt(i);
+                }
+            }
+        }
+
+        private bool IngredienteYaAñadido(int Id)
+        {
+            bool resultado = false;
+            foreach (Proporcion proporcion in Proporciones)
+            {
+                if (proporcion.Ingrediente.Id == Id)
+                {
+                    resultado = true;
+                }
+            }
+            return resultado;
+        }
+
+        public bool Validar()
+        {
+            bool resultado = false;
+
+            if (Proporciones.Count > 0)
+            {
+                resultado = true;
+            }
+
+            return resultado;
         }
     }
 }

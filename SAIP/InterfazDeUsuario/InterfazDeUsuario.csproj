@@ -55,7 +55,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Gerente\GUIRegistrarPlatillo.xaml.cs">
+      <DependentUpon>GUIRegistrarPlatillo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\BarraDeEstado.xaml.cs">
+      <DependentUpon>BarraDeEstado.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UtileriasGráficas.cs" />
     <Page Include="CallCenter\GUIPedidoADomicilio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gerente\GUIGerente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gerente\GUIRegistrarPlatillo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -70,10 +85,17 @@
     <Compile Include="CallCenter\GUIPedidoADomicilio.xaml.cs">
       <DependentUpon>GUIPedidoADomicilio.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Gerente\GUIGerente.xaml.cs">
+      <DependentUpon>GUIGerente.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUIInicioDeSesion.xaml.cs">
       <DependentUpon>GUIInicioDeSesion.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\BarraDeEstado.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -106,6 +128,13 @@
       <Project>{b9dd1f4d-d3ff-474f-a28d-4fcee9430f54}</Project>
       <Name>LogicaDeNegocio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Recursos\logo.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logo.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

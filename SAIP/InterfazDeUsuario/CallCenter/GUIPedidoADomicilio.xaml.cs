@@ -31,7 +31,6 @@ namespace InterfazDeUsuario.CallCenter
 		{
 			InitializeComponent();
 			this.EmpleadoDeCallCenter = EmpleadoDeCallCenter;
-			NombreDeUsuarioLabel.Content = EmpleadoDeCallCenter.Nombre;
 			IvaDAO ivaDAO = new IvaDAO();
 			Iva = ivaDAO.CargarIvaActual();
 			IvaLabel.Content = "IVA(" + Iva.Valor + "%)";
@@ -42,11 +41,7 @@ namespace InterfazDeUsuario.CallCenter
 			TodosLostAlimentos.ElementAt(0).CalcularCostoDeIngredientes();
 			NombreDeClienteTextBox.Content = TodosLostAlimentos.ElementAt(0).CostoDeIngredientes;
 			
-			DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0,0,1), DispatcherPriority.Normal, delegate
-			{
-				HoraLabel.Content = DateTime.Now.ToString("MM/dd/yyyy hh:mm tt");
-			}, this.Dispatcher);
-			HoraLabel.Content = DateTime.Now.ToString("MM/dd/yyyy hh:mm tt");
+			
 		}
 
 		private void BusquedaTextBox_TextChanged(object sender, TextChangedEventArgs e)
