@@ -21,7 +21,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				Nombre = EmpleadoLogica.Nombre,
 				FechaDeCreacion = EmpleadoLogica.FechaDeCreacion,
 				FechaDeModicacion = EmpleadoLogica.FechaDeModicacion,
-				Creador = EmpleadoLogica.Creador,
+				NombreCreador = EmpleadoLogica.Creador,
 				Activo = EmpleadoLogica.Activo
 			};
 
@@ -38,9 +38,9 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				Nombre = EmpleadoDb.Nombre,
 				FechaDeCreacion = EmpleadoDb.FechaDeCreacion,
 				FechaDeModicacion = EmpleadoDb.FechaDeModicacion,
-				Creador = EmpleadoDb.Creador,
+				Creador = EmpleadoDb.NombreCreador,
 				Activo = EmpleadoDb.Activo,
-				TipoDeEmpleado = EmpleadoDb.TipoDeEmpleado
+				TipoDeEmpleado = EmpleadoDb.TipoDeEmpleado.ToString()
 			};
 
 			return empleadoConvertido;

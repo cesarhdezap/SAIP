@@ -96,7 +96,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Mesero\GUIVerMisMesas.xaml">
+    <Page Include="Mesero\GUIVerMisMesas.xaml"/>
     <Page Include="UserControls\BarraDeEstado.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
