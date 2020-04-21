@@ -1,6 +1,6 @@
-﻿using InterfazDeUsuario.Mesero;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,22 +11,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InterfazDeUsuario
+namespace InterfazDeUsuario.Mesero
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for GUIVerMisMesas.xaml
     /// </summary>
-    public partial class GUIInicioDeSesion : Window
+    public partial class GUIVerMisMesas : Window
     {
-        public GUIInicioDeSesion()
+
+        public ObservableCollection<Button> ListaDeBotonesDeMesas { get; set; }
+
+        public GUIVerMisMesas()
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
-            GUIVerMisMesas guiVerMisMesas = new GUIVerMisMesas();
-            guiVerMisMesas.ShowDialog();
+            ItemsControlMesas.ItemsSource = ListaDeBotonesDeMesas = new ObservableCollection<Button>();
+
+
         }
     }
 }
+ 

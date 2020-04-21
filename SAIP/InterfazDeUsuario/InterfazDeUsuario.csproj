@@ -67,8 +67,22 @@
       <DependentUpon>GUIInicioDeSesion.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Mesero\GUIRegistrarPedidoLocal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Mesero\GUIVerMisMesas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mesero\GUIRegistrarPedidoLocal.xaml.cs">
+      <DependentUpon>GUIRegistrarPedidoLocal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mesero\GUIVerMisMesas.xaml.cs">
+      <DependentUpon>GUIVerMisMesas.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -93,6 +107,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\italiapizza.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\restaurant-table.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Mesero\italiapizza.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Mesero\restaurant-table.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
