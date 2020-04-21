@@ -19,7 +19,9 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				FechaDeModificacion = PlatilloDb.FechaDeModificacion,
 				Activo = PlatilloDb.Activo,
 				Precio = PlatilloDb.Precio,
-				Codigo = PlatilloDb.Codigo
+				Codigo = PlatilloDb.Codigo,
+				Notas = PlatilloDb.Notas,
+				Descripcion = PlatilloDb.Descripcion
 			};
 
 			ProporcionDAO proporcionDAO = new ProporcionDAO();
@@ -28,7 +30,25 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			return alimentoConvertido;
 		}
 
+		private AccesoADatos.Platillo ConvertirPlatilloDeLogicaAPlatilloDeAccesoADatos(Clases.Platillo Platillo)
+		{
+			AccesoADatos.Platillo platilloDb = new AccesoADatos.Platillo()
+			{
+				Id = Platillo.Id,
+				Nombre = Platillo.Nombre,
+				Precio = Platillo.Precio,
+				FechaDeCreacion = Platillo.FechaDeCreacion,
+				FechaDeModificacion = Platillo.FechaDeModificacion,
+				Activo = Platillo.Activo,
+				Codigo = Platillo.Codigo,
+				Notas = Platillo.Notas,
+				Descripcion = Platillo.Descripcion
+			};
+			ProporcionDAO proporcionDAO = new ProporcionDAO();
+			platilloDb.AlimentoIngrediente = (proporcionDAO.ConvertirListaDeProporcionesDeLogicaAListaDeProporcionesDeAccesoADatos(Platillo.Proporciones));
 
+			return platilloDb;
+		}
 
 		private List<Clases.Platillo> ConvertirListaDePlatillosDeAccesoADatosAListaDePLatillosDeLogica(List<Platillo> AlimentosDb)
 		{
@@ -40,6 +60,26 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			}
 
 			return alimentosResultado;
+		}
+
+		public void GuardarPlatillo(Clases.Platillo Platillo)
+		{
+			Platillo.Activo = true;
+			Platillo.FechaDeCreacion = DateTime.Now;
+			Platillo.FechaDeModificacion = DateTime.Now;
+			AccesoADatos.Platillo platilloAGuardar = ConvertirPlatilloDeLogicaAPlatilloDeAccesoADatos(Platillo);
+
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				foreach (PlatilloIngrediente proporcion in platilloAGuardar.AlimentoIngrediente)
+				{
+					proporcion.Alimento = platilloAGuardar;
+					proporcion.Ingredientes = context.Ingredientes.Find(proporcion.Ingredientes.Id);
+				}
+				
+				context.Platillos.Add(platilloAGuardar);
+				context.SaveChanges();
+			}
 		}
 
 		public List<Clases.Platillo> CargarTodos()

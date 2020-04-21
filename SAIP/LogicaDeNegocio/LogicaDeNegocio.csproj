@@ -52,12 +52,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\Alimento.cs" />
+    <Compile Include="Clases\Componente.cs" />
     <Compile Include="Clases\Empleado.cs" />
     <Compile Include="Clases\Ingrediente.cs" />
     <Compile Include="Clases\Iva.cs" />
     <Compile Include="Clases\Pedido.cs" />
     <Compile Include="Clases\Proporcion.cs" />
     <Compile Include="Enumeradores\TiposDeEmpleados.cs" />
+    <Compile Include="ObjetosAccesoADatos\ComponenteDAO.cs" />
     <Compile Include="ObjetosAccesoADatos\PlatilloDAO.cs" />
     <Compile Include="ObjetosAccesoADatos\EmpleadoDAO.cs" />
     <Compile Include="ObjetosAccesoADatos\IngredienteDAO.cs" />
@@ -65,6 +67,7 @@
     <Compile Include="ObjetosAccesoADatos\ProporcionDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\ServiciosDeEncriptacion.cs" />
+    <Compile Include="Servicios\ServiciosDeValidacion.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AccesoADatos\AccesoADatos.csproj">

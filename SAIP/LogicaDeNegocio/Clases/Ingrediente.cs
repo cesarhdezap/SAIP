@@ -19,19 +19,22 @@ namespace LogicaDeNegocio.Clases
         public string Creador { get; set; }
         public string Codigo { get; set; }
         public bool Activo { get; set; }
-        public List<Ingrediente> Componentes { get; set; }
+        public List<Componente> Componentes { get; set; }
 
-        public void CalcularCosto()
+        public double CalcularCosto()
         {
+            double resultado;
             if (Componentes.Count > 0)
             {
                 Costo = 0;
-                foreach(Ingrediente componente in Componentes)
+                foreach(Componente componente in Componentes)
                 {
-                    componente.CalcularCosto();
-                    Costo += componente.Costo;
+                    Costo += componente.Ingrediente.CalcularCosto();
                 }
             }
+
+            resultado = Costo;
+            return resultado;
         }
     }
 }

@@ -14,6 +14,12 @@ namespace AccesoADatos
     
     public partial class Empleado
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Empleado()
+        {
+            this.Pedidos = new HashSet<Pedido>();
+        }
+    
         public int Id { get; set; }
         public string Contraseña { get; set; }
         public string NombreDeUsuario { get; set; }
@@ -24,6 +30,7 @@ namespace AccesoADatos
         public bool Activo { get; set; }
         public string TipoDeEmpleado { get; set; }
     
-        public virtual Pedido Pedidos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pedido> Pedidos { get; set; }
     }
 }
