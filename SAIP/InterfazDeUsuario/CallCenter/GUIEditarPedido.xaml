@@ -44,7 +44,7 @@
             <TextBlock x:Name="IVATextBlock" Margin="0,265,34,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Right" Width="55"/>
             <TextBlock x:Name="TotalTextBox" Margin="0,286,34,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" HorizontalAlignment="Right" Width="73"/>
         </Grid>
-        <Label Content="Editar Orden" HorizontalAlignment="Left" Margin="533,10,0,0" VerticalAlignment="Top" FontSize="36" Foreground="White" FontWeight="Bold"/>
+        <Label Content="Editar Orden" HorizontalAlignment="Left" Margin="524,15,0,0" VerticalAlignment="Top" FontSize="36" Foreground="White" FontWeight="Bold"/>
         <Label x:Name="NombreUsuarioLabel" Content="Jonh Connor" HorizontalAlignment="Left" Margin="982,5,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="22"/>
         <Button x:Name="CambiarUsuarioButton" Content="Cambiar Usuario" HorizontalAlignment="Left" Margin="1002,44,0,0" VerticalAlignment="Top" Width="103" Foreground="#FFA20000" Background="{x:Null}" FontWeight="Bold" BorderBrush="{x:Null}"/>
         <Label x:Name="FechaLabel" Content="Domingo, 29 Marzo, 2020" Margin="0,5,10,0" FontWeight="Bold" Foreground="White" Width="160" FontStyle="Italic" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft"/>
