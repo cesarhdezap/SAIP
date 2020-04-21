@@ -16,8 +16,12 @@ using System.Windows.Shapes;
 using LogicaDeNegocio.Clases;
 using LogicaDeNegocio.ObjetosAccesoADatos;
 using LogicaDeNegocio.Servicios;
+using InterfazDeUsuario.Gerente;
 using LogicaDeNegocio.Enumeradores;
 using InterfazDeUsuario.CallCenter;
+using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
+using static LogicaDeNegocio.Servicios.ServiciosDeEncriptacion;
+using static InterfazDeUsuario.UtileriasGráficas;
 
 namespace InterfazDeUsuario
 {
@@ -29,24 +33,38 @@ namespace InterfazDeUsuario
 		public GUIInicioDeSesion()
 		{
 			InitializeComponent();
+			BarraDeEstado.OcultarNombreDeUsuarioYBotones();
 		}
 
 		private void IniciarSesionButton_Click(object sender, RoutedEventArgs e)
-		{
-			String nombreDeUsuario = NombreDeUsuarioTextBox.Text;
-			String contraseña = ServiciosDeEncriptacion.EncriptarCadena(ContraseñaTextBox.Text);
-			EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-			bool resultadoDeValidacion = empleadoDAO.ValidarExistenciaDeNombreDeUsuarioYContraseña(nombreDeUsuario, contraseña);
-			if (resultadoDeValidacion)
+		{ 
+			string nombreDeUsuario = NombreDeUsuarioTextBox.Text;
+			string contraseña = ContraseñaPasswordbox.Password;
+			if (ValidarCadena(nombreDeUsuario) && ValidarContraseña(contraseña))
 			{
-				Empleado empleadoCargado = empleadoDAO.CargarEmpleadoPorNombreDeUsuario(nombreDeUsuario);
-				
-				if (empleadoCargado.Activo)
+				contraseña = EncriptarCadena(contraseña);
+				EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+				bool resultadoDeValidacion = empleadoDAO.ValidarExistenciaDeNombreDeUsuarioYContraseña(nombreDeUsuario, contraseña);
+				if (resultadoDeValidacion)
 				{
+					Empleado empleadoCargado = empleadoDAO.CargarEmpleadoPorNombreDeUsuario(nombreDeUsuario);
 					if (empleadoCargado.TipoDeEmpleado == TiposDeEmpleados.CallCenter.ToString())
 					{
 						GUIPedidoADomicilio pedidoADomicilio = new GUIPedidoADomicilio(empleadoCargado);
+						Hide();
 						pedidoADomicilio.ShowDialog();
+						Show();
+					}
+					else if (empleadoCargado.TipoDeEmpleado == TiposDeEmpleados.Gerente.ToString())
+					{
+						GUIGerente gerente = new GUIGerente(empleadoCargado);
+						Hide();
+						gerente.ShowDialog();
+						Show();
+					}
+					else if (empleadoCargado.TipoDeEmpleado == TiposDeEmpleados.Mesero.ToString())
+					{
+
 					}
 					else if (empleadoCargado.TipoDeEmpleado == TiposDeEmpleados.Mesero.ToString())
 					{
@@ -54,11 +72,21 @@ namespace InterfazDeUsuario
 						verMisMesas.ShowDialog();
 					}
 				}
+				else
+				{
+					MessageBox.Show("Contraseña o nombre de usuario invalido", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				}
 			}
-			else
-			{
-				NombreDeUsuarioTextBox.Text = "Nope :(";
-			}
+		}
+
+		private void NombreDeUsuarioTextBox_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			MostrarEstadoDeValidacionCadena((TextBox)sender);
+		}
+
+		private void ContraseñaPasswordbox_PasswordChanged(object sender, RoutedEventArgs e)
+		{
+			MostrarEstadoDeValidacionContraseña((PasswordBox)sender);
 		}
 	}
 }

@@ -18,6 +18,7 @@ namespace AccesoADatos
         public ModeloDeDatosContainer()
             : base("name=ModeloDeDatosContainer")
         {
+            var patch_only = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

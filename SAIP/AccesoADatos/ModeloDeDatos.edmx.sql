@@ -21,7 +21,7 @@ IF OBJECT_ID(N'[dbo].[FK_AlimentoIngredienteIngrediente]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PlatilloIngrediente] DROP CONSTRAINT [FK_AlimentoIngredienteIngrediente];
 GO
 IF OBJECT_ID(N'[dbo].[FK_EmpleadoPedido]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Empleados] DROP CONSTRAINT [FK_EmpleadoPedido];
+    ALTER TABLE [dbo].[Pedidos] DROP CONSTRAINT [FK_EmpleadoPedido];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PedidoAlimentoPedido]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PlatilloPedido] DROP CONSTRAINT [FK_PedidoAlimentoPedido];
@@ -178,7 +178,9 @@ CREATE TABLE [dbo].[Platillos] (
     [FechaDeCreacion] datetime  NOT NULL,
     [FechaDeModificacion] datetime  NOT NULL,
     [Activo] bit  NOT NULL,
-    [Codigo] nvarchar(max)  NOT NULL
+    [Codigo] nvarchar(max)  NOT NULL,
+    [Notas] nvarchar(max)  NOT NULL,
+    [Descripcion] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -194,7 +196,7 @@ GO
 -- Creating table 'PlatilloIngrediente'
 CREATE TABLE [dbo].[PlatilloIngrediente] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Cantidad] int  NOT NULL,
+    [Cantidad] float  NOT NULL,
     [Ingredientes_Id] int  NOT NULL,
     [Alimento_Id] int  NOT NULL
 );

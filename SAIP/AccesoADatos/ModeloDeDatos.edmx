@@ -145,6 +145,8 @@
     <Property Name="FechaDeModificacion" Type="datetime" Nullable="false" />
     <Property Name="Activo" Type="bit" Nullable="false" />
     <Property Name="Codigo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Notas" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="PlatilloPedido">
     <Key>
@@ -160,7 +162,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Cantidad" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="float" Nullable="false" />
     <Property Name="Ingredientes_Id" Type="int" Nullable="false" />
     <Property Name="Alimento_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -557,6 +559,8 @@
           <NavigationProperty Name="AlimentoIngrediente" Relationship="ModeloDeDatos.AlimentoAlimentoIngrediente" FromRole="Alimento" ToRole="AlimentoIngrediente" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <Property Name="Codigo" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Notas" Type="String" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="PlatilloPedido">
           <Key>
@@ -589,7 +593,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Double" Nullable="false" />
           <NavigationProperty Name="Ingredientes" Relationship="ModeloDeDatos.AlimentoIngredienteIngrediente" FromRole="AlimentoIngrediente" ToRole="Ingrediente" />
           <NavigationProperty Name="Alimento" Relationship="ModeloDeDatos.AlimentoAlimentoIngrediente" FromRole="AlimentoIngrediente" ToRole="Alimento" />
         </EntityType>
@@ -774,6 +778,8 @@
           <ScalarProperty Name="FechaDeModificacion" ColumnName="FechaDeModificacion" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Notas" ColumnName="Notas" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

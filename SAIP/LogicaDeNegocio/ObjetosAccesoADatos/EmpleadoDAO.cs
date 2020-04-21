@@ -113,7 +113,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
 				using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 				{
-					EmpleadoDb = context.Empleados.FirstOrDefault(usuarioBusqueda => usuarioBusqueda.NombreDeUsuario == NombreDeUsuario);
+					EmpleadoDb = context.Empleados.FirstOrDefault(usuarioBusqueda => usuarioBusqueda.NombreDeUsuario == NombreDeUsuario && usuarioBusqueda.Activo == true);
 				}
 
 				if (EmpleadoDb != null)
