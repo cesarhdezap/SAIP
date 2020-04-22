@@ -8,6 +8,8 @@ namespace LogicaDeNegocio.Clases
 {
 	public class Proporcion
 	{
+
+		public int Id { get; set; }
 		public Platillo Alimento { get; set; }
 		public Ingrediente Ingrediente { get; set; }
 		public double Cantidad { get; set; }

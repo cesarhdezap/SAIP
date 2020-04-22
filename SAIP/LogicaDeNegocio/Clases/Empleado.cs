@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogicaDeNegocio.Enumeradores;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace LogicaDeNegocio.Clases
 		public DateTime FechaDeModicacion { get; set; }
 		public string Creador { get; set; }
 		public bool Activo { get; set; }
-		public string TipoDeEmpleado { get; set; }
+		public TipoDeEmpleado TipoDeEmpleado { get; set; }
 
 
 

@@ -1,4 +1,5 @@
 ﻿using LogicaDeNegocio.Clases;
+using LogicaDeNegocio.ObjetosAccesoADatos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,15 @@ namespace InterfazDeUsuario.Gerente
 			GUIRegistrarPlatillo registrarPlatillo = new GUIRegistrarPlatillo(Gerente);
 			Hide();
 			registrarPlatillo.ShowDialog();
+			Show();
+		}
+
+		private void Button_Click(object sender, RoutedEventArgs e)
+		{
+			PlatilloDAO platilloDAO = new PlatilloDAO();
+			GUIEditarPlatillo editarPlatillo = new GUIEditarPlatillo(Gerente, platilloDAO.CargarPlatilloPorId(1));
+			Hide();
+			editarPlatillo.ShowDialog();
 			Show();
 		}
 	}

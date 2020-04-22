@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogicaDeNegocio.Enumeradores;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace LogicaDeNegocio.Clases
 	public class Ingrediente
 	{
         public int Id { get; set; }
-        public string UnidadDeMedida { get; set; }
+        public UnidadDeMedida UnidadDeMedida { get; set; }
         public string Nombre { get; set; }
         public double CantidadEnInventario { get; set; }
         public string CodigoDeBarras { get; set; }
@@ -19,7 +20,7 @@ namespace LogicaDeNegocio.Clases
         public string Creador { get; set; }
         public string Codigo { get; set; }
         public bool Activo { get; set; }
-        public List<Componente> Componentes { get; set; }
+        public List<Componente> Componentes { get; set; } = new List<Componente>();
 
         public double CalcularCosto()
         {
