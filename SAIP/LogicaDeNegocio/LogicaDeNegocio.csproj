@@ -65,6 +65,8 @@
     <Compile Include="Clases\ClasesAsociativas\Proporcion.cs" />
     <Compile Include="Clases\Producto.cs" />
     <Compile Include="Enumeradores\TiposDeEmpleados.cs" />
+    <Compile Include="ObjetosAccesoADatos\ClienteDAO.cs" />
+    <Compile Include="ObjetosAccesoADatos\CuentaDAO.cs" />
     <Compile Include="ObjetosAccesoADatos\PedidoDAO.cs" />
     <Compile Include="ObjetosAccesoADatos\ComponenteDAO.cs" />
     <Compile Include="ObjetosAccesoADatos\PlatilloDAO.cs" />
