@@ -33,6 +33,7 @@ namespace InterfazDeUsuario
 		public GUIInicioDeSesion()
 		{
 			InitializeComponent();
+			WindowStartupLocation = WindowStartupLocation.CenterScreen;
 			BarraDeEstado.OcultarNombreDeUsuarioYBotones();
 		}
 
