@@ -58,6 +58,9 @@
     <Compile Include="Gerente\GUIRegistrarPlatillo.xaml.cs">
       <DependentUpon>GUIRegistrarPlatillo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUICancelarPedido.xaml.cs">
+      <DependentUpon>GUICancelarPedido.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\BarraDeEstado.xaml.cs">
       <DependentUpon>BarraDeEstado.xaml</DependentUpon>
     </Compile>
@@ -75,6 +78,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Gerente\GUIRegistrarPlatillo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUICancelarPedido.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -103,7 +110,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Mesero\GUIVerMisMesas.xaml"/>
+    <Page Include="Mesero\GUIVerMisMesas.xaml" />
     <Page Include="UserControls\BarraDeEstado.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -153,7 +160,6 @@
       <Name>LogicaDeNegocio</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Recursos\logo.jpeg" />
   </ItemGroup>
