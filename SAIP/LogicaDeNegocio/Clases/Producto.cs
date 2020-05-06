@@ -18,10 +18,7 @@ namespace LogicaDeNegocio.Clases
 
         public bool DescontarIngredientesDeInventario(int CantidadADescontar)
         {
-            bool IngredienteDescontado = true;
-            //TODO
             throw new NotImplementedException();
-            return IngredienteDescontado;
         }
     }
 }
