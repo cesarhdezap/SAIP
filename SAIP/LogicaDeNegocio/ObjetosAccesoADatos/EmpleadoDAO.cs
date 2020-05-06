@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AccesoADatos;
 using LogicaDeNegocio.Clases;
-
+using LogicaDeNegocio.Enumeradores;
 
 namespace LogicaDeNegocio.ObjetosAccesoADatos
 {
@@ -22,7 +22,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				FechaDeCreacion = EmpleadoLogica.FechaDeCreacion,
 				FechaDeModicacion = EmpleadoLogica.FechaDeModicacion,
 				NombreCreador = EmpleadoLogica.Creador,
-				Activo = EmpleadoLogica.Activo
+				Activo = EmpleadoLogica.Activo,
+				TipoDeEmpleado = (short)EmpleadoLogica.TipoDeEmpleado
 			};
 
 			return empleadoConvertido;
@@ -40,7 +41,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				FechaDeModicacion = EmpleadoDb.FechaDeModicacion,
 				Creador = EmpleadoDb.NombreCreador,
 				Activo = EmpleadoDb.Activo,
-				TipoDeEmpleado = EmpleadoDb.TipoDeEmpleado.ToString()
+				TipoDeEmpleado = (TipoDeEmpleado)EmpleadoDb.TipoDeEmpleado
 			};
 
 			return empleadoConvertido;

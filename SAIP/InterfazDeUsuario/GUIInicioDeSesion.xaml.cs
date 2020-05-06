@@ -49,25 +49,21 @@ namespace InterfazDeUsuario
 				if (resultadoDeValidacion)
 				{
 					Empleado empleadoCargado = empleadoDAO.CargarEmpleadoPorNombreDeUsuario(nombreDeUsuario);
-					if (empleadoCargado.TipoDeEmpleado == TiposDeEmpleados.CallCenter.ToString())
+					if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.CallCenter)
 					{
 						GUIPedidoADomicilio pedidoADomicilio = new GUIPedidoADomicilio(empleadoCargado);
 						Hide();
 						pedidoADomicilio.ShowDialog();
 						Show();
 					}
-					else if (empleadoCargado.TipoDeEmpleado == TiposDeEmpleados.Gerente.ToString())
+					else if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.Gerente)
 					{
 						GUIGerente gerente = new GUIGerente(empleadoCargado);
 						Hide();
 						gerente.ShowDialog();
 						Show();
 					}
-					else if (empleadoCargado.TipoDeEmpleado == TiposDeEmpleados.Mesero.ToString())
-					{
-
-					}
-					else if (empleadoCargado.TipoDeEmpleado == TiposDeEmpleados.Mesero.ToString())
+					else if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.Mesero)
 					{
 						GUIVerMisMesas verMisMesas = new GUIVerMisMesas(empleadoCargado);
 						verMisMesas.ShowDialog();

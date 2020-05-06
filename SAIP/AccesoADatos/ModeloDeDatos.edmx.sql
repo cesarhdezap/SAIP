@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/21/2020 17:02:25
--- Generated from EDMX file: C:\Users\CETDT\Desktop\repos\SAIP\SAIP\AccesoADatos\ModeloDeDatos.edmx
+-- Date Created: 04/21/2020 22:59:55
+-- Generated from EDMX file: C:\Users\marcu\Documents\SAIP\COD\SAIP\AccesoADatos\ModeloDeDatos.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -42,7 +42,7 @@ IF OBJECT_ID(N'[dbo].[FK_ProductoPedidoProducto]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ProductoPedido] DROP CONSTRAINT [FK_ProductoPedidoProducto];
 GO
 IF OBJECT_ID(N'[dbo].[FK_MesaCuenta]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Mesas] DROP CONSTRAINT [FK_MesaCuenta];
+    ALTER TABLE [dbo].[Cuentas] DROP CONSTRAINT [FK_MesaCuenta];
 GO
 IF OBJECT_ID(N'[dbo].[FK_IngredienteIngredienteIngrediente]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[IngredienteIngrediente] DROP CONSTRAINT [FK_IngredienteIngredienteIngrediente];

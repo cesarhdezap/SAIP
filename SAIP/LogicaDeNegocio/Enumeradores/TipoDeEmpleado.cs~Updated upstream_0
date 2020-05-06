@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace LogicaDeNegocio.Enumeradores
 {
-    public enum TipoDeEmpleado
-    {
-        CallCenter,
-        Mesero,
-        Gerente
-    }
+	public enum TipoDeEmpleado
+	{
+		CallCenter,
+		Mesero, 
+		Gerente
+	}
 }

@@ -19,26 +19,33 @@ using static InterfazDeUsuario.UtileriasGráficas;
 namespace InterfazDeUsuario.Gerente
 {
 	/// <summary>
-	/// Interaction logic for GUIRegistrarPlatillo.xaml
+	/// Interaction logic for GUIEditarPlatillo.xaml
 	/// </summary>
-	public partial class GUIRegistrarPlatillo : Window
+	public partial class GUIEditarPlatillo : Window
 	{
 		public Empleado Gerente { get; set; }
 		public List<Ingrediente> IngredientesCargados { get; set; }
 		public List<Ingrediente> IngredientesVisibles { get; set; }
+		public List<Proporcion> proporcionesOriginales { get; set; }
 		public Platillo Platillo { get; set; } = new Platillo();
 		public double Ganancia { get; set; }
 		private bool CandadoDeRefrescadoDeCajasDeTexto = true;
-		public GUIRegistrarPlatillo(Empleado EmpleadoCargado)
+		public GUIEditarPlatillo(Empleado EmpleadoCargado, Platillo platillo)
 		{
 			InitializeComponent();
 			Gerente = EmpleadoCargado;
+			Platillo = platillo;
+			proporcionesOriginales = new List<Proporcion>();
+			foreach(Proporcion proporcion in Platillo.Proporciones)
+			{
+				proporcionesOriginales.Add(proporcion);
+			}
 			BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
 			IngredientesCargados = ingredienteDAO.CargarIngredientesActivos();
 			IngredientesVisibles = IngredientesCargados;
 			BusquedaDataGrid.ItemsSource = IngredientesVisibles;
-			ActualizarGanancia();
+			AsignarPlatilloAInterfaz(Platillo);
 		}
 
 		private void BusquedaTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -52,6 +59,17 @@ namespace InterfazDeUsuario.Gerente
 			{
 				IngredientesVisibles = IngredientesCargados;
 			}
+			ActualizarPantalla();
+		}
+		
+		private void AsignarPlatilloAInterfaz(Platillo platillo)
+		{
+			NombreTextBox.Text = platillo.Nombre;
+			CodigoTextBox.Text = platillo.Codigo;
+			NotasTextBox.Text = platillo.Notas;
+			DescripcionTextBox.Text = platillo.Descripcion;
+			PrecioAlPublicoTextBox.Text = platillo.Precio.ToString();
+			ActualizarGanancia();
 			ActualizarPantalla();
 		}
 
@@ -79,6 +97,7 @@ namespace InterfazDeUsuario.Gerente
 			Ingrediente ingredienteAAñadir = (Ingrediente)BusquedaDataGrid.SelectedItem;
 			Platillo.AñadirIngredientePorId(ingredienteAAñadir.Id);
 			CalcularCostoTotal();
+			ActualizarGanancia();
 			ActualizarPantalla();
 		}
 
@@ -87,9 +106,9 @@ namespace InterfazDeUsuario.Gerente
 			Proporcion ingredienteAEliminar = ((FrameworkElement)sender).DataContext as Proporcion;
 			Platillo.EliminarIngredientePorId(ingredienteAEliminar.Ingrediente.Id);
 			CalcularCostoTotal();
+			ActualizarGanancia();
 			ActualizarPantalla();
 		}
-
 		private void CantidadDeIngrediente_TextChanged(object sender, RoutedEventArgs e)
 		{
 			if (CandadoDeRefrescadoDeCajasDeTexto)
@@ -133,6 +152,60 @@ namespace InterfazDeUsuario.Gerente
 			}
 			MostrarEstadoDeValidacionNumero((TextBox)sender);
 		}
+		private void EditarPlatillo()
+		{
+			ObtenerProporcionesARemover();
+			Platillo.Nombre = NombreTextBox.Text;
+			Platillo.Codigo = CodigoTextBox.Text;
+			Platillo.Descripcion = DescripcionTextBox.Text;
+			Platillo.Notas = NotasTextBox.Text;
+			Platillo.Codigo = CodigoTextBox.Text;
+			foreach(Proporcion proporcion in Platillo.Proporciones)
+			{
+				proporcion.Alimento = Platillo;
+			}
+			PlatilloDAO platilloDAO = new PlatilloDAO();
+			platilloDAO.EditarPlatillo(Platillo);
+			MessageBox.Show("¡El platillo fue editado exitosamente!", "¡Exito!", MessageBoxButton.OK, MessageBoxImage.Information);
+		}
+
+		private void ObtenerProporcionesARemover()
+		{
+			foreach (Proporcion proporcion in Platillo.Proporciones)
+			{
+				proporcionesOriginales.Remove(proporcion);
+			}
+		}
+
+		private void GuardarButton_Click(object sender, RoutedEventArgs e)
+		{
+			if (ValidarCampos())
+			{
+				if (Platillo.Validar())
+				{
+					if (ValidarGanancia())
+					{
+						EditarPlatillo();
+					}
+					else
+					{
+						MessageBoxResult resultadoDeMesageBox = MessageBox.Show("Esta a punto de guardar un platillo con GANANCIA NEGATIVA por lo que se venderia este platillo con PERDIDA. ¿Esta seguro que desea continuar?", "ADVERTENCIA", MessageBoxButton.YesNo, MessageBoxImage.Error);
+						if (resultadoDeMesageBox == MessageBoxResult.Yes)
+						{
+							EditarPlatillo();
+						}
+					}
+				}
+				else
+				{
+					MessageBox.Show("El platillo debe tener por lo menos un ingrediente para ser registrado", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Error);
+				}
+			}
+			else
+			{
+				MessageBox.Show("Verifique los campos remarcados en rojo", "Campos invalidos", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+		}
 
 		private void ActualizarGanancia()
 		{
@@ -148,52 +221,10 @@ namespace InterfazDeUsuario.Gerente
 			GananciaLabel.Content = Ganancia;
 		}
 
-		private void GuardarButton_Click(object sender, RoutedEventArgs e)
-		{
-			if (ValidarCampos())
-			{
-				if (Platillo.Validar())
-				{
-					if (ValidarGanancia())
-					{
-						GuardarPlatillo();
-					}
-					else
-					{
-						MessageBoxResult resultadoDeMesageBox = MessageBox.Show("Esta a punto de guardar un platillo con GANANCIA NEGATIVA por lo que se venderia este platillo con PERDIDA. ¿Esta seguro que desea continuar?", "ADVERTENCIA", MessageBoxButton.YesNo, MessageBoxImage.Error);
-						if (resultadoDeMesageBox == MessageBoxResult.Yes)
-						{
-							GuardarPlatillo();
-						}
-					}
-				}
-				else
-				{
-					MessageBox.Show("El platillo debe tener por lo menos un ingrediente para ser registrado", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Error);
-				}
-			}
-			else
-			{
-				MessageBox.Show("Verifique los campos remarcados en rojo", "Campos invalidos", MessageBoxButton.OK, MessageBoxImage.Error);
-			}
-		}
-
-		private void GuardarPlatillo()
-		{
-			Platillo.Nombre = NombreTextBox.Text;
-			Platillo.Codigo = CodigoTextBox.Text;
-			Platillo.Descripcion = DescripcionTextBox.Text;
-			Platillo.Notas = NotasTextBox.Text;
-			Platillo.Codigo = CodigoTextBox.Text;
-			PlatilloDAO platilloDAO = new PlatilloDAO();
-			platilloDAO.GuardarPlatillo(Platillo);
-			MessageBox.Show("¡El platillo fue registrado exitosamente!", "¡Exito!", MessageBoxButton.OK, MessageBoxImage.Information);
-		}
-
 		private bool ValidarCampos()
 		{
 			bool resultado = false;
-			if( ValidarCadena(NombreTextBox.Text) &&
+			if (ValidarCadena(NombreTextBox.Text) &&
 				ValidarCadena(CodigoTextBox.Text) &&
 				ValidarCadena(DescripcionTextBox.Text) &&
 				ValidarCadena(NotasTextBox.Text))
@@ -245,7 +276,7 @@ namespace InterfazDeUsuario.Gerente
 		private void CancelarButton_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBoxResult resultadoDeMessageBox = MessageBox.Show("¿Esta seguro que desea cancelar el registro? Se perderan los cambios sin guardar", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
-			if(resultadoDeMessageBox == MessageBoxResult.Yes)
+			if (resultadoDeMessageBox == MessageBoxResult.Yes)
 			{
 				Close();
 			}

@@ -1,4 +1,5 @@
 ﻿using AccesoADatos;
+using LogicaDeNegocio.Enumeradores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			Clases.Ingrediente ingredienteConvertido = new Clases.Ingrediente()
 			{
 				Id = IngredienteDb.Id,
-				UnidadDeMedida = IngredienteDb.UnidadDeMedida.ToString(),
+				UnidadDeMedida = (UnidadDeMedida)IngredienteDb.UnidadDeMedida,
 				CantidadEnInventario = IngredienteDb.CantidadEnInventario,
 				Nombre = IngredienteDb.Nombre,
 				FechaDeCreacion = IngredienteDb.FechaDeCreacion,
@@ -35,7 +36,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			AccesoADatos.Ingrediente ingredienteConvertido = new AccesoADatos.Ingrediente()
 			{
 				Id = Ingrediente.Id,
-				UnidadDeMedida = short.Parse(Ingrediente.UnidadDeMedida),
+				UnidadDeMedida = (short)Ingrediente.UnidadDeMedida,
 				CantidadEnInventario = Ingrediente.CantidadEnInventario,
 				Nombre = Ingrediente.Nombre,
 				FechaDeCreacion = Ingrediente.FechaDeCreacion,
