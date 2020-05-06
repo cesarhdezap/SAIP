@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ControladorDeCambioDePantalla.cs" />
     <Compile Include="Gerente\GUIEditarPlatillo.xaml.cs">
       <DependentUpon>GUIEditarPlatillo.xaml</DependentUpon>
     </Compile>
@@ -63,6 +64,15 @@
     </Compile>
     <Compile Include="GUICancelarPedido.xaml.cs">
       <DependentUpon>GUICancelarPedido.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mesero\GUIRegistrarPedidoLocal.xaml.cs">
+      <DependentUpon>GUIRegistrarPedidoLocal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageInicioDeSesion.xaml.cs">
+      <DependentUpon>PageInicioDeSesion.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\BarraDeEstado.xaml.cs">
       <DependentUpon>BarraDeEstado.xaml</DependentUpon>
@@ -92,10 +102,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUIInicioDeSesion.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -109,24 +115,25 @@
     <Compile Include="Gerente\GUIGerente.xaml.cs">
       <DependentUpon>GUIGerente.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUIInicioDeSesion.xaml.cs">
-      <DependentUpon>GUIInicioDeSesion.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Mesero\GUIRegistrarPedidoLocal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Mesero\GUIVerMisMesas.xaml" />
+    <Page Include="PageInicioDeSesion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\BarraDeEstado.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mesero\GUIRegistrarPedidoLocal.xaml.cs">
-      <DependentUpon>GUIRegistrarPedidoLocal.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Mesero\GUIVerMisMesas.xaml.cs">
       <DependentUpon>GUIVerMisMesas.xaml</DependentUpon>
     </Compile>
@@ -169,9 +176,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\logo.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="logo.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

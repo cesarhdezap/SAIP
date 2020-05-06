@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace InterfazDeUsuario.Mesero
@@ -18,14 +18,12 @@ namespace InterfazDeUsuario.Mesero
     /// <summary>
     /// Interaction logic for GUIRegistrarPedidoLocal.xaml
     /// </summary>
-    public partial class GUIRegistrarPedidoLocal : Window
+    public partial class GUIRegistrarPedidoLocal : Page
     {
-        public ObservableCollection<Button> BotonesDeMesas { get; set; }
-
-        public GUIRegistrarPedidoLocal()
+        ControladorDeCambioDePantalla ControladorDeCambioDePantalla;
+        public GUIRegistrarPedidoLocal(ControladorDeCambioDePantalla controlador)
         {
-            
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            ControladorDeCambioDePantalla = controlador;
             InitializeComponent();
         }
     }
