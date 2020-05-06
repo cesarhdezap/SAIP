@@ -1,5 +1,4 @@
-﻿using InterfazDeUsuario.Mesero;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,60 +12,61 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using LogicaDeNegocio.Clases;
-using LogicaDeNegocio.ObjetosAccesoADatos;
-using LogicaDeNegocio.Servicios;
-using InterfazDeUsuario.Gerente;
-using LogicaDeNegocio.Enumeradores;
-using InterfazDeUsuario.CallCenter;
 using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
 using static LogicaDeNegocio.Servicios.ServiciosDeEncriptacion;
+using LogicaDeNegocio.Enumeradores;
+using InterfazDeUsuario.CallCenter;
+using LogicaDeNegocio.ObjetosAccesoADatos;
+using LogicaDeNegocio.Clases;
 using static InterfazDeUsuario.UtileriasGráficas;
+using InterfazDeUsuario.Gerente;
+using InterfazDeUsuario.Mesero;
 
 namespace InterfazDeUsuario
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	public partial class GUIInicioDeSesion : Window
-	{
-		public GUIInicioDeSesion()
-		{
-			InitializeComponent();
-			WindowStartupLocation = WindowStartupLocation.CenterScreen;
-			BarraDeEstado.OcultarNombreDeUsuarioYBotones();
-		}
+    /// <summary>
+    /// Interaction logic for PageInicioDeSesion.xaml
+    /// </summary>
+    public partial class PageInicioDeSesion : Page
+    {
+        ControladorDeCambioDePantalla Controlador;
+        public PageInicioDeSesion(ControladorDeCambioDePantalla controlador)
+        {
+            Controlador = controlador;
+            InitializeComponent();
+            BarraDeEstado.OcultarNombreDeUsuarioYBotones();
+        }
 
-		private void IniciarSesionButton_Click(object sender, RoutedEventArgs e)
-		{ 
+        private void IniciarSesionButton_Click(object sender, RoutedEventArgs e)
+        {
 			string nombreDeUsuario = NombreDeUsuarioTextBox.Text;
 			string contraseña = ContraseñaPasswordbox.Password;
+
 			if (ValidarCadena(nombreDeUsuario) && ValidarContraseña(contraseña))
 			{
 				contraseña = EncriptarCadena(contraseña);
 				EmpleadoDAO empleadoDAO = new EmpleadoDAO();
 				bool resultadoDeValidacion = empleadoDAO.ValidarExistenciaDeNombreDeUsuarioYContraseña(nombreDeUsuario, contraseña);
+
 				if (resultadoDeValidacion)
 				{
 					Empleado empleadoCargado = empleadoDAO.CargarEmpleadoPorNombreDeUsuario(nombreDeUsuario);
 					if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.CallCenter)
 					{
 						GUIPedidoADomicilio pedidoADomicilio = new GUIPedidoADomicilio(empleadoCargado);
-						Hide();
-						pedidoADomicilio.ShowDialog();
-						Show();
+						//Controlador.CambiarANuevaPage(pedidoADomicilio);
+						throw new NotImplementedException("GUIPedidoADomicilio debe ser page");
 					}
 					else if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.Gerente)
 					{
 						GUIGerente gerente = new GUIGerente(empleadoCargado);
-						Hide();
-						gerente.ShowDialog();
-						Show();
+						//Controlador.CambiarANuevaPage(gerente);
+						throw new NotImplementedException("GUIGerente debe ser page");
 					}
 					else if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.Mesero)
 					{
 						GUIVerMisMesas verMisMesas = new GUIVerMisMesas(empleadoCargado);
-						verMisMesas.ShowDialog();
+						//Controlador.CambiarANuevaPage(verMisMesas);
 					}
 				}
 				else

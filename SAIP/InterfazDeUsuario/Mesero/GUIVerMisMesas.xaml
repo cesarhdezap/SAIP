@@ -9,7 +9,7 @@
     <Grid>
         <Label x:Name="LabelMisMesas" Content="MIS MESAS" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" FontSize="24" Background="White"/>
         <Rectangle x:Name="RectangleBanderinVerde" HorizontalAlignment="Left" Height="76" VerticalAlignment="Top" Width="1252" Fill="#FF009E0F"/>
-        <Image x:Name="ImagenItaliaPizza" Margin="10,0,1166,586" Source="italiapizza.jpeg" Stretch="Fill" Width="76" Height="76"/>
+        <Image x:Name="ImagenItaliaPizza" Margin="10,0,1166,586" Source="/img/italiapizza.jpeg" Stretch="Fill" Width="76" Height="76"/>
         <Label x:Name="LabelNombreDeUsuario" Content="NombreDeUsuario" HorizontalAlignment="Left" Margin="787,0,0,0" VerticalAlignment="Top" FontSize="36"/>
         <Label x:Name="LabelReloj" Content="5:30PM" HorizontalAlignment="Left" Margin="1113,10,0,0" VerticalAlignment="Top" FontSize="36"/>
         <Button x:Name="ButtonCambiarUsuario" Content="Cambiar usuario" HorizontalAlignment="Left" Margin="877,48,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#FFCF2A27" FontWeight="Bold" BorderBrush="#00707070" Background="#00DDDDDD"/>
@@ -20,7 +20,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button>
-                            <Image Source="restaurant-table.png" Stretch="Fill" Height="128" Width="128"/>
+                            <Image Source="/img/restaurant-table.png" Stretch="Fill" Height="128" Width="128"/>
                         </Button>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
