@@ -55,8 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CallCenter\EditarPedido.xaml.cs">
-      <DependentUpon>EditarPedido.xaml</DependentUpon>
+    <Compile Include="CallCenter\GUIEditarPedido.xaml.cs">
+      <DependentUpon>GUIEditarPedido.xaml</DependentUpon>
     </Compile>
     <Compile Include="ControladorDeCambioDePantalla.cs" />
     <Compile Include="Gerente\GUIEditarPlatillo.xaml.cs">
@@ -81,15 +81,11 @@
       <DependentUpon>BarraDeEstado.xaml</DependentUpon>
     </Compile>
     <Compile Include="UtileriasGráficas.cs" />
-    <Page Include="CallCenter\EditarPedido.xaml">
+    <Page Include="CallCenter\GUIEditarPedido.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CallCenter\GUIPedidoADomicilio.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CallCenter\GUIEditarPedido.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -115,9 +111,6 @@
     </Compile>
     <Compile Include="CallCenter\GUIPedidoADomicilio.xaml.cs">
       <DependentUpon>GUIPedidoADomicilio.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CallCenter\GUIEditarPedido.xaml.cs">
-      <DependentUpon>GUIEditarPedido.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gerente\GUIGerente.xaml.cs">
       <DependentUpon>GUIGerente.xaml</DependentUpon>

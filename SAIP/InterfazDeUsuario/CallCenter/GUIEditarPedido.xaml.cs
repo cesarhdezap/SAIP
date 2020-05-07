@@ -10,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InterfazDeUsuario
+namespace InterfazDeUsuario.CallCenter
 {
     /// <summary>
-    /// Lógica de interacción para GUIEditarPedido.xaml
+    /// Lógica de interacción para EditarPedido.xaml
     /// </summary>
-    public partial class GUIEditarPedido : Window
+    public partial class EditarPedido : Page
     {
-        public GUIEditarPedido()
+        public EditarPedido()
         {
             InitializeComponent();
         }
-
     }
 }
