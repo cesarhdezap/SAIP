@@ -1,4 +1,5 @@
-﻿using LogicaDeNegocio.ObjetosAccesoADatos;
+﻿using LogicaDeNegocio.Enumeradores;
+using LogicaDeNegocio.ObjetosAccesoADatos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,5 @@ namespace LogicaDeNegocio.Clases
 
     
 
-    public enum EstadoMesa
-    {
-        Disponible,
-        Ocupada
-    }
+    
 }

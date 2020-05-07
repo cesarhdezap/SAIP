@@ -19,18 +19,22 @@ namespace InterfazDeUsuario.Mesero
     /// <summary>
     /// Interaction logic for GUIVerMisMesas.xaml
     /// </summary>
-    public partial class GUIVerMisMesas : Window
+    public partial class GUIVerMisMesas : Page
     {
-
         public ObservableCollection<Button> ListaDeBotonesDeMesas { get; set; }
+        ControladorDeCambioDePantalla Controlador;
 
-        public GUIVerMisMesas(Empleado empleado)
+        public GUIVerMisMesas(ControladorDeCambioDePantalla controlador, Empleado empleado)
         {
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            Controlador = controlador;
             InitializeComponent();
             ItemsControlMesas.ItemsSource = ListaDeBotonesDeMesas = new ObservableCollection<Button>();
 
+        }
 
+        private void ButtonVolverAMenu_Click(object sender, RoutedEventArgs e)
+        {
+            Controlador.Regresar();
         }
     }
 }

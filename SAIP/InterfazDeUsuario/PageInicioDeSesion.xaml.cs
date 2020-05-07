@@ -34,6 +34,7 @@ namespace InterfazDeUsuario
         {
             Controlador = controlador;
             InitializeComponent();
+			NombreDeUsuarioTextBox.Focus();
             BarraDeEstado.OcultarNombreDeUsuarioYBotones();
         }
 
@@ -65,8 +66,8 @@ namespace InterfazDeUsuario
 					}
 					else if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.Mesero)
 					{
-						GUIVerMisMesas verMisMesas = new GUIVerMisMesas(empleadoCargado);
-						//Controlador.CambiarANuevaPage(verMisMesas);
+						GUIVerMisMesas verMisMesas = new GUIVerMisMesas(Controlador, empleadoCargado);
+						Controlador.CambiarANuevaPage(verMisMesas);
 					}
 				}
 				else

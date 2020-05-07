@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -64,6 +65,7 @@
     <Compile Include="Clases\Pedido.cs" />
     <Compile Include="Clases\ClasesAsociativas\Proporcion.cs" />
     <Compile Include="Clases\Producto.cs" />
+    <Compile Include="Enumeradores\EstadoMesa.cs" />
     <Compile Include="ObjetosAccesoADatos\CuentaDAO.cs" />
     <Compile Include="ObjetosAccesoADatos\ClienteDAO.cs" />
     <Compile Include="Enumeradores\UnidadesDeMedida.cs" />
@@ -90,7 +92,9 @@
     <Compile Include="ObjetosAccesoADatos\MesaDAO.cs" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
