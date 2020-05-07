@@ -36,10 +36,18 @@ namespace InterfazDeUsuario
 
         public void Regresar()
         {
-            if (Pantallas.Count > 0)
+            if (!Pantallas.Any())
             {
                 Pantallas.Pop();
+            }
+            
+            if (!Pantallas.Any())
+            {
                 Content = Pantallas.Peek();
+            }
+            else
+            {
+                RegresarAInicioDeSesion();
             }
         }
 
