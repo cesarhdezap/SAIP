@@ -58,15 +58,15 @@
     <Compile Include="CallCenter\GUIEditarPedido.xaml.cs">
       <DependentUpon>GUIEditarPedido.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUICancelarPedido.xaml.cs">
+      <DependentUpon>GUICancelarPedido.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ControladorDeCambioDePantalla.cs" />
     <Compile Include="Gerente\GUIEditarPlatillo.xaml.cs">
       <DependentUpon>GUIEditarPlatillo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gerente\GUIRegistrarPlatillo.xaml.cs">
       <DependentUpon>GUIRegistrarPlatillo.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GUICancelarPedido.xaml.cs">
-      <DependentUpon>GUICancelarPedido.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -89,6 +89,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GUICancelarPedido.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Gerente\GUIEditarPlatillo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -98,10 +102,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Gerente\GUIRegistrarPlatillo.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GUICancelarPedido.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

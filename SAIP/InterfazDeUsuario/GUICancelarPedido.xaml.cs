@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace InterfazDeUsuario
 {
     /// <summary>
-    /// Lógica de interacción para GUICancelarPedido.xaml
+    /// Lógica de interacción para CancelarPedido.xaml
     /// </summary>
-    public partial class GUICancelarPedido : Window
+    public partial class CancelarPedido : Page
     {
-        public GUICancelarPedido()
+        public CancelarPedido()
         {
             InitializeComponent();
         }
