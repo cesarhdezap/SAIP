@@ -1,4 +1,7 @@
-﻿using LogicaDeNegocio.Clases;
+﻿using InterfazDeUsuario.Paginas;
+using InterfazDeUsuario.UserControls;
+using LogicaDeNegocio.Clases;
+using LogicaDeNegocio.ObjetosAccesoADatos;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,15 +24,31 @@ namespace InterfazDeUsuario.Mesero
     /// </summary>
     public partial class GUIVerMisMesas : Page
     {
-        public ObservableCollection<Button> ListaDeBotonesDeMesas { get; set; }
+        private ObservableCollection<Button> ListaDeBotonesDeMesas { get; set; }
+        private List<Mesa> Mesas = new List<Mesa>();
         ControladorDeCambioDePantalla Controlador;
+        
 
         public GUIVerMisMesas(ControladorDeCambioDePantalla controlador, Empleado empleado)
         {
             Controlador = controlador;
             InitializeComponent();
+            BarraDeEstado.Controlador = controlador;
             ItemsControlMesas.ItemsSource = ListaDeBotonesDeMesas = new ObservableCollection<Button>();
+            
+        }
 
+        private void MostrarMesas()
+        {
+            MesaDAO mesaDAO = new MesaDAO();
+            Mesas = mesaDAO.RecuperarTodos();
+            foreach(Mesa mesa in Mesas)
+            {
+                Button button = new Button();
+                button.Content = "";
+                //ListaDeBotonesDeMesas.Add();
+            }
+            
         }
 
         private void ButtonVolverAMenu_Click(object sender, RoutedEventArgs e)

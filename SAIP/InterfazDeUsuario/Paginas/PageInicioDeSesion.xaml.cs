@@ -22,7 +22,7 @@ using static InterfazDeUsuario.UtileriasGráficas;
 using InterfazDeUsuario.Gerente;
 using InterfazDeUsuario.Mesero;
 
-namespace InterfazDeUsuario
+namespace InterfazDeUsuario.Paginas
 {
     /// <summary>
     /// Interaction logic for PageInicioDeSesion.xaml
