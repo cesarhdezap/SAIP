@@ -17,7 +17,7 @@ namespace AccesoADatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Empleado()
         {
-            this.Pedidos = new HashSet<Pedido>();
+            this.Cuenta = new HashSet<Cuenta>();
         }
     
         public int Id { get; set; }
@@ -31,6 +31,6 @@ namespace AccesoADatos
         public short TipoDeEmpleado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pedido> Pedidos { get; set; }
+        public virtual ICollection<Cuenta> Cuenta { get; set; }
     }
 }
