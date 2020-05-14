@@ -10,8 +10,9 @@ namespace LogicaDeNegocio
     public class Pedido
     {
         public int Id { get; set; }
-        public DateTime Fecha { get; set; }
-        public int PrecioTotal { get; set; }
+        public DateTime FechaDeCreacion { get; set; }
+        public double PrecioTotal { get; set; }
+        public double Iva { get; set; }
         public List<string> Comentarios { get; set; }
         public EstadoPedido Estado { get; set; }
         public int EmpleadoId { get; set; }
@@ -21,6 +22,11 @@ namespace LogicaDeNegocio
         public void AñadirProducto(Producto producto)
         {
             throw new NotImplementedException();
+        }
+
+        public string EstadoToString()
+        {
+            return Estado.ToString();
         }
     }
 
@@ -33,5 +39,4 @@ namespace LogicaDeNegocio
         Completado = 5,
         Cancelar = 6
     }
-
 }

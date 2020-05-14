@@ -135,6 +135,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			AccesoADatos.Empleado empleadoLocalizado;
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
+				//System.IO.FileNotFoundException Unable to resolve assembly NodeloDeDatos.csdl
+				//System.Data.Entity.Core.EntityException
 				empleadoLocalizado = context.Empleados.FirstOrDefault(empleado => empleado.NombreDeUsuario == NombreDeUsuario && empleado.Contraseña == Contraseña);
 			}
 			if (empleadoLocalizado != null)
