@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogicaDeNegocio.Clases;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace InterfazDeUsuario.UserControls
 	public partial class BarraDeEstado : UserControl
 	{
 		public ControladorDeCambioDePantalla Controlador;
+		Cuenta Cuenta;
 
 		public BarraDeEstado()
 		{
