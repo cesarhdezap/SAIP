@@ -66,8 +66,8 @@ namespace InterfazDeUsuario
 					}
 					else if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.Mesero)
 					{
-						GUIVerMisMesas verMisMesas = new GUIVerMisMesas(Controlador, empleadoCargado);
-						Controlador.CambiarANuevaPage(verMisMesas);
+						GUIEditarPedido editarPedido = new GUIEditarPedido(Controlador, empleadoCargado);
+						Controlador.CambiarANuevaPage(editarPedido);
 					}
 				}
 				else
