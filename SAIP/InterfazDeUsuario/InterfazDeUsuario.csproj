@@ -74,7 +74,7 @@
     <Compile Include="Mesero\GUIRegistrarPedidoLocal.xaml.cs">
       <DependentUpon>GUIRegistrarPedidoLocal.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageInicioDeSesion.xaml.cs">
+    <Compile Include="Paginas\PageInicioDeSesion.xaml.cs">
       <DependentUpon>PageInicioDeSesion.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\BarraDeEstado.xaml.cs">
@@ -124,7 +124,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Mesero\GUIVerMisMesas.xaml" />
-    <Page Include="PageInicioDeSesion.xaml">
+    <Page Include="Paginas\PageInicioDeSesion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

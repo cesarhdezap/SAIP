@@ -21,15 +21,18 @@ namespace InterfazDeUsuario.UserControls
 	/// </summary>
 	public partial class BarraDeEstado : UserControl
 	{
+		public ControladorDeCambioDePantalla Controlador;
+
 		public BarraDeEstado()
 		{
 			InitializeComponent();
 			DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
 			{
 				HoraLabel.Content = DateTime.Now.ToString("MM/dd/yyyy hh:mm tt");
-			}, this.Dispatcher);
+			}, Dispatcher);
 			HoraLabel.Content = DateTime.Now.ToString("MM/dd/yyyy hh:mm tt");
 		}
+		
 
 		public void ActualizarNombreDeUsuario(String NombreDeUsuario)
 		{
@@ -45,5 +48,14 @@ namespace InterfazDeUsuario.UserControls
 			RegresarButton.Visibility = Visibility.Hidden;
 		}
 
+		private void RegresarButton_Click(object sender, RoutedEventArgs e)
+		{
+			Controlador.Regresar();
+		}
+
+		private void CambiarUsuarioButton_Click(object sender, RoutedEventArgs e)
+		{
+			Controlador.RegresarAInicioDeSesion();
+		}
 	}
 }

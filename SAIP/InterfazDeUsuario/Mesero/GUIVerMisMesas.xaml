@@ -1,20 +1,18 @@
 ﻿<Page x:Class="InterfazDeUsuario.Mesero.GUIVerMisMesas"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:InterfazDeUsuario.UserControls"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InterfazDeUsuario.Mesero"
         mc:Ignorable="d"
+        
         Title="Italia Pizza" Height="691" Width="1258">
+    
     <Grid>
-        <Label x:Name="LabelMisMesas" Content="MIS MESAS" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" FontSize="24" Background="White"/>
-        <Rectangle x:Name="RectangleBanderinVerde" HorizontalAlignment="Left" Height="76" VerticalAlignment="Top" Width="1252" Fill="#FF009E0F"/>
-        <Image x:Name="ImagenItaliaPizza" Margin="10,0,1166,586" Source="/img/italiapizza.jpeg" Stretch="Fill" Width="76" Height="76"/>
-        <Label x:Name="LabelNombreDeUsuario" Content="NombreDeUsuario" HorizontalAlignment="Left" Margin="787,0,0,0" VerticalAlignment="Top" FontSize="36"/>
-        <Label x:Name="LabelReloj" Content="5:30PM" HorizontalAlignment="Left" Margin="1113,10,0,0" VerticalAlignment="Top" FontSize="36"/>
-        <Button x:Name="ButtonCambiarUsuario" Content="Cambiar usuario" HorizontalAlignment="Left" Margin="877,48,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#FFCF2A27" FontWeight="Bold" BorderBrush="#00707070" Background="#00DDDDDD"/>
-        <Button x:Name="ButtonVolverAMenu" Content="Volver a menú" HorizontalAlignment="Left" Margin="121,27,0,0" VerticalAlignment="Top" FontSize="18" BorderBrush="Black" Background="White" Click="ButtonVolverAMenu_Click"/>
-
+        <Label x:Name="LabelMisMesas" Content="MIS MESAS" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <controls:BarraDeEstado x:Name="BarraDeEstado" Margin="0,0,0,617" Width="Auto"/>
+        
         <ScrollViewer HorizontalAlignment="Left" Height="530" VerticalAlignment="Top" Width="1252" Margin="0,132,0,0">
             <ItemsControl x:Name="ItemsControlMesas">
                 <ItemsControl.ItemTemplate>
