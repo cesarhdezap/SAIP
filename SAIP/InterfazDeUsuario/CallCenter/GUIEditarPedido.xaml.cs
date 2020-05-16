@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogicaDeNegocio.Clases;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +17,18 @@ using System.Windows.Shapes;
 namespace InterfazDeUsuario.CallCenter
 {
     /// <summary>
-    /// Lógica de interacción para EditarPedido.xaml
+    /// Lógica de interacción para GUIEditarPedido.xaml
     /// </summary>
-    public partial class EditarPedido : Page
+    public partial class GUIEditarPedido : Page
     {
-        public EditarPedido()
+        public GUIEditarPedido(ControladorDeCambioDePantalla control, Empleado empleado)
         {
             InitializeComponent();
+            control.Regresar();
+            barraEstado.ActualizarNombreDeUsuario(empleado.NombreDeUsuario);
+
         }
+
+
     }
 }

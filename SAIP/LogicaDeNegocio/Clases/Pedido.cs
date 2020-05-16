@@ -30,7 +30,7 @@ namespace LogicaDeNegocio
         }
     }
 
-     public enum EstadoPedido
+    public enum EstadoPedido
     {
         Registrado = 1,
         EnEspera = 2,
