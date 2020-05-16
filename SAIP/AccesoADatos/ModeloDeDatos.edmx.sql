@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/21/2020 22:59:55
--- Generated from EDMX file: C:\Users\marcu\Documents\SAIP\COD\SAIP\AccesoADatos\ModeloDeDatos.edmx
+-- Date Created: 05/12/2020 17:05:30
+-- Generated from EDMX file: C:\Users\CETDT\Desktop\repos\cesarhdezap\SAIP\SAIP\AccesoADatos\ModeloDeDatos.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -19,9 +19,6 @@ GO
 
 IF OBJECT_ID(N'[dbo].[FK_AlimentoIngredienteIngrediente]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PlatilloIngrediente] DROP CONSTRAINT [FK_AlimentoIngredienteIngrediente];
-GO
-IF OBJECT_ID(N'[dbo].[FK_EmpleadoPedido]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Pedidos] DROP CONSTRAINT [FK_EmpleadoPedido];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PedidoAlimentoPedido]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PlatilloPedido] DROP CONSTRAINT [FK_PedidoAlimentoPedido];
@@ -58,6 +55,9 @@ IF OBJECT_ID(N'[dbo].[FK_CuentaCliente_Cuenta]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_CuentaCliente_Cliente]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CuentaCliente] DROP CONSTRAINT [FK_CuentaCliente_Cliente];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CuentaEmpleado]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Cuentas] DROP CONSTRAINT [FK_CuentaEmpleado];
 GO
 
 -- --------------------------------------------------
@@ -144,7 +144,6 @@ CREATE TABLE [dbo].[Pedidos] (
     [PrecioTotal] float  NOT NULL,
     [Iva] float  NOT NULL,
     [Estado] smallint  NOT NULL,
-    [Empleado_Id] int  NOT NULL,
     [Cuenta_Id] int  NOT NULL
 );
 GO
@@ -257,7 +256,8 @@ CREATE TABLE [dbo].[Cuentas] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [PrecioTotal] float  NOT NULL,
     [Estado] smallint  NOT NULL,
-    [Mesa_Id] int  NOT NULL
+    [Mesa_Id] int  NOT NULL,
+    [Empleado_Id] int  NOT NULL
 );
 GO
 
@@ -388,21 +388,6 @@ GO
 CREATE INDEX [IX_FK_AlimentoIngredienteIngrediente]
 ON [dbo].[PlatilloIngrediente]
     ([Ingredientes_Id]);
-GO
-
--- Creating foreign key on [Empleado_Id] in table 'Pedidos'
-ALTER TABLE [dbo].[Pedidos]
-ADD CONSTRAINT [FK_EmpleadoPedido]
-    FOREIGN KEY ([Empleado_Id])
-    REFERENCES [dbo].[Empleados]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_EmpleadoPedido'
-CREATE INDEX [IX_FK_EmpleadoPedido]
-ON [dbo].[Pedidos]
-    ([Empleado_Id]);
 GO
 
 -- Creating foreign key on [Pedido_Id] in table 'PlatilloPedido'
@@ -577,6 +562,21 @@ GO
 CREATE INDEX [IX_FK_CuentaCliente_Cliente]
 ON [dbo].[CuentaCliente]
     ([Clientes_Id]);
+GO
+
+-- Creating foreign key on [Empleado_Id] in table 'Cuentas'
+ALTER TABLE [dbo].[Cuentas]
+ADD CONSTRAINT [FK_CuentaEmpleado]
+    FOREIGN KEY ([Empleado_Id])
+    REFERENCES [dbo].[Empleados]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CuentaEmpleado'
+CREATE INDEX [IX_FK_CuentaEmpleado]
+ON [dbo].[Cuentas]
+    ([Empleado_Id]);
 GO
 
 -- --------------------------------------------------

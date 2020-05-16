@@ -1,6 +1,8 @@
 ﻿using InterfazDeUsuario.Paginas;
 using InterfazDeUsuario.UserControls;
+using LogicaDeNegocio;
 using LogicaDeNegocio.Clases;
+using LogicaDeNegocio.Enumeradores;
 using LogicaDeNegocio.ObjetosAccesoADatos;
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace InterfazDeUsuario.Mesero
 {
     /// <summary>
@@ -24,36 +27,45 @@ namespace InterfazDeUsuario.Mesero
     /// </summary>
     public partial class GUIVerMisMesas : Page
     {
-        private ObservableCollection<Button> ListaDeBotonesDeMesas { get; set; }
-        private List<Mesa> Mesas = new List<Mesa>();
+        private List<Cuenta> CuentasDelEmpleado = new List<Cuenta>();
         ControladorDeCambioDePantalla Controlador;
+        Empleado Empleado;
         
 
         public GUIVerMisMesas(ControladorDeCambioDePantalla controlador, Empleado empleado)
         {
             Controlador = controlador;
+            Empleado = empleado;
             InitializeComponent();
             BarraDeEstado.Controlador = controlador;
-            ItemsControlMesas.ItemsSource = ListaDeBotonesDeMesas = new ObservableCollection<Button>();
-            
+            BarraDeEstado.ActualizarNombreDeUsuario(empleado.Nombre);
+            MostrarMisMesas();
         }
 
-        private void MostrarMesas()
+        public void MostrarMisMesas()
         {
-            MesaDAO mesaDAO = new MesaDAO();
-            Mesas = mesaDAO.RecuperarTodos();
-            foreach(Mesa mesa in Mesas)
-            {
-                Button button = new Button();
-                button.Content = "";
-                //ListaDeBotonesDeMesas.Add();
-            }
-            
+            CuentaDAO cuentaDAO = new CuentaDAO();
+            CuentasDelEmpleado = cuentaDAO.RecuperarCuentasAbiertasPorEmpleado(Empleado);
+            ListBoxMesas.ItemsSource = CuentasDelEmpleado;
         }
 
-        private void ButtonVolverAMenu_Click(object sender, RoutedEventArgs e)
+        void ButtonMesa_Click(object sender, RoutedEventArgs e)
         {
-            Controlador.Regresar();
+            Cuenta cuenta = ((FrameworkElement)sender).DataContext as Cuenta;
+            StackPanelCuenta.Visibility = Visibility.Visible;
+            UserControlInformacionDeCuenta.ActualizarCuenta(cuenta);
+        }
+
+        private void VerMesasDiponiblesButton_Click(object sender, RoutedEventArgs e)
+        {
+            GUIVerMisMesasDisponibles page = new GUIVerMisMesasDisponibles(Controlador, Empleado);
+            Controlador.CambiarANuevaPage(page);
+            MostrarMisMesas();
+        }
+
+        private void ButtonOcultarCuenta_Click(object sender, RoutedEventArgs e)
+        {
+            StackPanelCuenta.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -20,10 +20,14 @@ namespace LogicaDeNegocio.Clases
                 MesaDAO mesaDAO = new MesaDAO();
                 mesaDAO.CambiarEstadoPorID(NumeroDeMesa, estado);
             }
+
+        }
+
+        public override string ToString()
+        {
+
+            return NumeroDeMesa.ToString() + " Estado: " + Estado.ToString();
         }
     }
-
-    
-
     
 }

@@ -30,5 +30,6 @@ namespace AccesoADatos
         public virtual ICollection<Pedido> Pedidos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cliente> Clientes { get; set; }
+        public virtual Empleado Empleado { get; set; }
     }
 }

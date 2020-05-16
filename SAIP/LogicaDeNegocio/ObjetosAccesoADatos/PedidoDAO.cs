@@ -24,5 +24,17 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
         {
             throw new NotImplementedException();
         }
+
+        public Pedido ConvertirPedidoDeDatosALogica(AccesoADatos.Pedido pedido)
+        {
+            return new Pedido
+            {
+                Id = pedido.Id,
+                FechaDeCreacion = pedido.FechaDeCreacion,
+                PrecioTotal = pedido.PrecioTotal,
+                Iva = pedido.Iva,
+                Estado = (EstadoPedido)pedido.Estado,
+            };
+        }
     }
 }

@@ -42,6 +42,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
         {
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
+                
                 AccesoADatos.Mesa mesa = context.Mesas.Find(idMesa);
                 if (mesa != null)
                 {
@@ -49,6 +50,17 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 }
                 context.SaveChanges();
             }
+        }
+
+        public List<Clases.Mesa> ObtenerMesasPorEstado(EstadoMesa estado)
+        {
+            List<AccesoADatos.Mesa> mesas;
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                mesas = context.Mesas.Where(m => m.Estado == (short)estado).ToList();
+            }
+
+            return ConvertirListaDeMesasDatosALogica(mesas);
         }
 
         public List<Clases.Mesa> RecuperarTodos()
@@ -62,6 +74,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             return ConvertirListaDeMesasDatosALogica(mesas);
         }
 
+
         private AccesoADatos.Mesa ConvertirMesaLogicaADatos(Clases.Mesa mesa)
         {
             AccesoADatos.Mesa mesaDatos = new AccesoADatos.Mesa
@@ -73,7 +86,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             return mesaDatos;
         }
 
-        private Clases.Mesa ConvertirMesaDatosALogica(AccesoADatos.Mesa mesa)
+        public Clases.Mesa ConvertirMesaDatosALogica(AccesoADatos.Mesa mesa)
         {
             Clases.Mesa mesaLogica = new Clases.Mesa()
             {

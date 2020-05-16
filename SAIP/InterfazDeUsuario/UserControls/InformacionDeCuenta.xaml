@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="InterfazDeUsuario.UserControls.InformacionDeCuenta"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InterfazDeUsuario.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="131.25">
+
+    <StackPanel Orientation="Vertical">
+        <Label x:Name="LabelMesa" Content="Placeholder Mesa"/>
+        <DataGrid x:Name="DataGridCuenta" Background="Transparent" AutoGenerateColumns="False" IsReadOnly="True" CanUserReorderColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="PrecioTotal" Binding="{Binding PrecioTotal}" />
+                <DataGridTextColumn Header="Estado" Binding="{Binding EstadoToString}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</UserControl>

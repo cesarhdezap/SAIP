@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaDeNegocio.ObjetosAccesoADatos
+namespace LogicaDeNegocio.Enumeradores
 {
-    public class ClienteDAO
+    public enum EstadoCuenta
     {
-
+        Abierta,
+        Terminada
     }
 }
