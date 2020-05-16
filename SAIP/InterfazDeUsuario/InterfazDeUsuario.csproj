@@ -55,15 +55,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CallCenter\GUIEditarPedido.xaml.cs">
+      <DependentUpon>GUIEditarPedido.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUICancelarPedido.xaml.cs">
+      <DependentUpon>GUICancelarPedido.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ControladorDeCambioDePantalla.cs" />
     <Compile Include="Gerente\GUIEditarPlatillo.xaml.cs">
       <DependentUpon>GUIEditarPlatillo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gerente\GUIRegistrarPlatillo.xaml.cs">
       <DependentUpon>GUIRegistrarPlatillo.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GUICancelarPedido.xaml.cs">
-      <DependentUpon>GUICancelarPedido.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -84,11 +87,15 @@
       <DependentUpon>InformacionDeCuenta.xaml</DependentUpon>
     </Compile>
     <Compile Include="UtileriasGráficas.cs" />
+    <Page Include="CallCenter\GUIEditarPedido.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CallCenter\GUIPedidoADomicilio.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CallCenter\GUIEditarPedido.xaml">
+    <Page Include="GUICancelarPedido.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -104,19 +111,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUICancelarPedido.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CallCenter\GUIPedidoADomicilio.xaml.cs">
       <DependentUpon>GUIPedidoADomicilio.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CallCenter\GUIEditarPedido.xaml.cs">
-      <DependentUpon>GUIEditarPedido.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gerente\GUIGerente.xaml.cs">
       <DependentUpon>GUIGerente.xaml</DependentUpon>

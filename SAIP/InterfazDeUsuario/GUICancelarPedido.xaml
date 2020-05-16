@@ -1,13 +1,14 @@
-﻿<Window x:Class="InterfazDeUsuario.GUICancelarPedido"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InterfazDeUsuario"
-        mc:Ignorable="d"
-        Title="GUICancelarPedido" Height="450" Width="800">
+﻿<Page x:Class="InterfazDeUsuario.CancelarPedido"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InterfazDeUsuario"
+      mc:Ignorable="d"
+      Title="CancelarPedido" Height="425" Width="790">
+
     <Grid Background="#FF008050">
-        <Grid HorizontalAlignment="Left" Height="363" Margin="27,28,0,0" VerticalAlignment="Top" Width="738" Background="#FFAE3030">
+        <Grid HorizontalAlignment="Left" Height="363" VerticalAlignment="Top" Width="738" Background="#FFAE3030" Margin="30,32,0,0">
             <Grid HorizontalAlignment="Left" Height="312" Margin="24,24,0,0" VerticalAlignment="Top" Width="688" Background="White">
                 <Image x:Name="LogoIPImage" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Source="img/italiapizza.jpeg"/>
                 <Rectangle HorizontalAlignment="Left" Height="272" Margin="115,30,0,0" VerticalAlignment="Top" Width="568" Stroke="Black"/>
@@ -19,4 +20,4 @@
         </Grid>
 
     </Grid>
-</Window>
+</Page>

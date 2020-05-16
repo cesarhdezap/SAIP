@@ -1,16 +1,18 @@
-﻿<Window x:Class="InterfazDeUsuario.GUIEditarPedido"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InterfazDeUsuario"
-        mc:Ignorable="d"
-        Title="GUIEditarPedido" Height="525.5" Width="1315" ResizeMode="NoResize">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="347*"/>
-        </Grid.ColumnDefinitions>
-        <Grid HorizontalAlignment="Left" Height="408" Margin="883,89,0,0" VerticalAlignment="Top" Width="416">
+﻿<Page x:Class="InterfazDeUsuario.CallCenter.EditarPedido"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InterfazDeUsuario.CallCenter"
+      mc:Ignorable="d"
+      Title="EditarPedido" Height="615" Width="1315">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="85*"/>
+            <RowDefinition Height="38*"/>
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Left" Height="408" Margin="888,178,0,0" VerticalAlignment="Top" Width="416" Grid.RowSpan="2">
             <Rectangle HorizontalAlignment="Left" Height="386                        " Margin="0,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="416"/>
             <Label Content="Menú" Margin="0,0,0,369" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="77" FontSize="22"/>
             <DataGrid x:Name="MenuDataGrid" HorizontalAlignment="Left" Height="302" Margin="19,72,0,0" VerticalAlignment="Top" Width="378"/>
@@ -18,7 +20,7 @@
             <Button x:Name="BuscarButtom" Content="Buscar" HorizontalAlignment="Left" Margin="281,39,0,0" VerticalAlignment="Top" Width="75"/>
         </Grid>
 
-        <Grid HorizontalAlignment="Left" Height="408" Margin="5,89,0,0" VerticalAlignment="Top" Width="278">
+        <Grid HorizontalAlignment="Left" Height="408" Margin="10,178,0,0" VerticalAlignment="Top" Width="278" Grid.RowSpan="2">
             <Rectangle x:Name="ClienteRectangle" Margin="0,0,0,0" Stroke="Black" Height="387" VerticalAlignment="Top" HorizontalAlignment="Left" Width="278                                                "/>
             <Button x:Name="GuardarCambiosButton" Content="Guardar Cambios" HorizontalAlignment="Left" Margin="93,319,0,0" VerticalAlignment="Top" Width="101"/>
             <Button x:Name="CancelarButton" Content="Cancelar" HorizontalAlignment="Left" Margin="102,359,0,0" VerticalAlignment="Top" Width="75"/>
@@ -32,10 +34,7 @@
             <Label Content="Comentarios: " HorizontalAlignment="Left" Margin="18,177,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <TextBlock x:Name="ComentarioClienteTextBlock" HorizontalAlignment="Left" Margin="18,203,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="92" Width="250" OpacityMask="Red"/>
         </Grid>
-
-        <Rectangle Fill="#FF008050" Height="79" VerticalAlignment="Top" Margin="5,5,10,0"/>
-        <Button x:Name="RegrsarButton" Content="Regresar" HorizontalAlignment="Left" Margin="164,30,0,0" VerticalAlignment="Top" Width="76" Height="20"/>
-        <Grid HorizontalAlignment="Left" Height="408" Margin="288,84,0,0" VerticalAlignment="Top" Width="590" Background="White">
+        <Grid HorizontalAlignment="Left" Height="387" Margin="293,178,0,0" VerticalAlignment="Top" Width="590" Background="White" Grid.RowSpan="2">
             <Label Content="Orden" Margin="4,2,0,0" VerticalAlignment="Top" FontSize="22" HorizontalAlignment="Left" Width="443"/>
             <DataGrid x:Name="PedidoDataGrid" Height="210" Margin="0,46,0,0" VerticalAlignment="Top" BorderBrush="Black" Background="White"/>
             <Rectangle Height="64" Margin="0,256,0,0" Stroke="Black" VerticalAlignment="Top" Fill="White"/>
@@ -44,11 +43,6 @@
             <TextBlock x:Name="IVATextBlock" Margin="0,265,34,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Right" Width="55"/>
             <TextBlock x:Name="TotalTextBox" Margin="0,286,34,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" HorizontalAlignment="Right" Width="73"/>
         </Grid>
-        <Label Content="Editar Orden" HorizontalAlignment="Left" Margin="524,15,0,0" VerticalAlignment="Top" FontSize="36" Foreground="White" FontWeight="Bold"/>
-        <Label x:Name="NombreUsuarioLabel" Content="Jonh Connor" HorizontalAlignment="Left" Margin="982,5,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="22"/>
-        <Button x:Name="CambiarUsuarioButton" Content="Cambiar Usuario" HorizontalAlignment="Left" Margin="1002,44,0,0" VerticalAlignment="Top" Width="103" Foreground="#FFA20000" Background="{x:Null}" FontWeight="Bold" BorderBrush="{x:Null}"/>
-        <Label x:Name="FechaLabel" Content="Domingo, 29 Marzo, 2020" Margin="0,5,10,0" FontWeight="Bold" Foreground="White" Width="160" FontStyle="Italic" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft"/>
-        <Label x:Name="HoraLabel" Content="13:57 PM" HorizontalAlignment="Right" Margin="0,30,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Right" Width="69" Foreground="White" FontStyle="Italic" FontWeight="Bold"/>
 
     </Grid>
-</Window>
+</Page>
