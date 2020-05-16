@@ -191,8 +191,5 @@
   <ItemGroup>
     <Resource Include="UserControls\italiapizza.jpeg" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Paginas\italiapizza.jpeg" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
