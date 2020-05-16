@@ -1,4 +1,5 @@
 ﻿using InterfazDeUsuario.Mesero;
+using InterfazDeUsuario.Paginas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,7 @@ namespace InterfazDeUsuario
         {
             Pantallas.Push(page);
             Content = page;
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         public void Regresar()

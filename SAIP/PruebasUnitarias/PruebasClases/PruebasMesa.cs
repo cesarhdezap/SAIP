@@ -1,5 +1,6 @@
 ﻿using System;
 using LogicaDeNegocio.Clases;
+using LogicaDeNegocio.Enumeradores;
 using LogicaDeNegocio.ObjetosAccesoADatos;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -14,18 +14,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InterfazDeUsuario.Mesero
+namespace InterfazDeUsuario.UserControls
 {
     /// <summary>
-    /// Interaction logic for GUIRegistrarPedidoLocal.xaml
+    /// Interaction logic for InformacionDeCuenta.xaml
     /// </summary>
-    public partial class GUIRegistrarPedidoLocal : Page
+    public partial class InformacionDeCuenta : UserControl
     {
-        ControladorDeCambioDePantalla ControladorDeCambioDePantalla;
-        public GUIRegistrarPedidoLocal(ControladorDeCambioDePantalla controlador, Empleado empleado)
+        public InformacionDeCuenta()
         {
-            ControladorDeCambioDePantalla = controlador;
             InitializeComponent();
+
+        }
+
+        public void ActualizarCuenta(Cuenta cuenta)
+        {
+            LabelMesa.Content = cuenta.Mesa.ToString();
+            DataGridCuenta.ItemsSource = cuenta.Pedidos;
         }
     }
 }

@@ -39,5 +39,4 @@ namespace LogicaDeNegocio
         Completado = 5,
         Cancelar = 6
     }
-
 }

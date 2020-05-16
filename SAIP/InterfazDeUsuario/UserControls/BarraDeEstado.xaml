@@ -4,14 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InterfazDeUsuario.UserControls"
+             
              mc:Ignorable="d" Width="829" Height="73.667">
-	<Grid>
+    <Grid>
 		<Rectangle Height="74" VerticalAlignment="Top" Fill="#FF008050"/>
-		<Button x:Name="RegresarButton" Content="&lt; Regresar" HorizontalAlignment="Left" Margin="86,21,0,0" VerticalAlignment="Top" Width="98" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18"/>
+		<Button x:Name="RegresarButton" Content="&lt; Regresar" HorizontalAlignment="Left" Margin="86,21,0,0" VerticalAlignment="Top" Width="98" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18" Click="RegresarButton_Click"/>
 		<Label x:Name="NombreDeUsuarioLabel" Content="NombreDeUsuario" HorizontalAlignment="Center" Margin="355,5,312,0" VerticalAlignment="Top" FontSize="18" Width="162"/>
-		<Button x:Name="CambiarUsuarioButton" Content="Cambiar usuario" HorizontalAlignment="Center" Margin="361,34,372,0" VerticalAlignment="Top" Width="96" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FFB60000" FontWeight="Bold"/>
+		<Button x:Name="CambiarUsuarioButton" Content="Cambiar usuario" HorizontalAlignment="Center" Margin="361,34,372,0" VerticalAlignment="Top" Width="96" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FFB60000" FontWeight="Bold" Click="CambiarUsuarioButton_Click"/>
 		<Label x:Name="HoraLabel" Content="Reloj" HorizontalAlignment="Right" Margin="0,5,10,0" VerticalAlignment="Top" FontSize="24" Width="271" HorizontalContentAlignment="Right"/>
-		<Image x:Name="LogoImage" HorizontalAlignment="Left" Height="74" VerticalAlignment="Top" Width="70" Source="italiapizza.jpeg" Margin="10,0,0,0"/>
+		<Image x:Name="LogoImage" HorizontalAlignment="Left" Height="74" VerticalAlignment="Top" Width="87" Source="/img/italiapizza.jpeg" Margin="10,0,0,0"/>
 
 	</Grid>
 </UserControl>
