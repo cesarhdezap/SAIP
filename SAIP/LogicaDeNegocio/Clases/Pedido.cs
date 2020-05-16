@@ -10,8 +10,9 @@ namespace LogicaDeNegocio
     public class Pedido
     {
         public int Id { get; set; }
-        public DateTime Fecha { get; set; }
-        public int PrecioTotal { get; set; }
+        public DateTime FechaDeCreacion { get; set; }
+        public double PrecioTotal { get; set; }
+        public double Iva { get; set; }
         public List<string> Comentarios { get; set; }
         public EstadoPedido Estado { get; set; }
         public int EmpleadoId { get; set; }
@@ -22,9 +23,14 @@ namespace LogicaDeNegocio
         {
             throw new NotImplementedException();
         }
+
+        public string EstadoToString()
+        {
+            return Estado.ToString();
+        }
     }
 
-     public enum EstadoPedido
+    public enum EstadoPedido
     {
         Registrado = 1,
         EnEspera = 2,
