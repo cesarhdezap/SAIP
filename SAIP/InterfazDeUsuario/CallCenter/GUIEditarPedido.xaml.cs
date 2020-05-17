@@ -1,4 +1,6 @@
-﻿using LogicaDeNegocio.Clases;
+﻿using LogicaDeNegocio;
+using LogicaDeNegocio.Clases;
+using LogicaDeNegocio.ObjetosAccesoADatos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,14 +23,24 @@ namespace InterfazDeUsuario.CallCenter
     /// </summary>
     public partial class GUIEditarPedido : Page
     {
-        public GUIEditarPedido(ControladorDeCambioDePantalla control, Empleado empleado)
+        private List<Pedido> ListaDePedidos = new List<Pedido>();
+        ControladorDeCambioDePantalla Controlador;
+        Empleado Empleado;
+        Pedido pedido;
+        public GUIEditarPedido(ControladorDeCambioDePantalla control, Empleado empleado, Pedido pedido)
         {
+            Controlador = control;
+            Empleado = empleado;
             InitializeComponent();
-            control.Regresar();
             barraEstado.ActualizarNombreDeUsuario(empleado.NombreDeUsuario);
-
+            MostrarPedido(pedido.Id);
         }
 
+        public void MostrarPedido(int idPedido)
+        {
+            PedidoDAO pedidoDAO = new PedidoDAO();
+            ListaDePedidos = pedidoDAO.RecuperarPedidoPorId(idPedido);
+        }
 
     }
 }

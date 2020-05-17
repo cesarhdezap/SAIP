@@ -1,4 +1,5 @@
 ﻿using AccesoADatos;
+using LogicaDeNegocio.Clases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,34 +21,49 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             }
         }
 
-        public void RecuperarListaDePedidos(Pedido pedido) 
+        public List<Pedido> RecuperarPedidoPorId(int idPedido) 
         {
-            throw new NotImplementedException();
+            List<Pedido> pedidos = new List<Pedido>();
+            AccesoADatos.Pedido pedido;
+            using(ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+               pedido = context.Pedidos.Find(idPedido);
+            }
+            Pedido pedidoLogico = new Pedido();
+            if(pedido != null)
+            {
+                pedidoLogico = ConvertirPedidoDeDatosALogica(pedido);
+                pedidos.Add(pedidoLogico);
+            }
+
+            return pedidos;
         }
 
-        private AccesoADatos.Pedido ConvertirPedidoLogicaADatos(Pedido pedido)
+        private AccesoADatos.Pedido ConvertirPedidoLogicaADatos(Pedido pedidoLogica)
         {
             AccesoADatos.Pedido pedidoDatos = new AccesoADatos.Pedido
             {
-                Id = pedido.Id,
-                FechaDeCreacion = pedido.FechaDeCreacion,
-                PrecioTotal = pedido.PrecioTotal,
-                Iva = pedido.Iva,
-                Estado = (short)pedido.Estado
+                Id = pedidoLogica.Id,
+                FechaDeCreacion = pedidoLogica.FechaDeCreacion,
+                PrecioTotal = pedidoLogica.PrecioTotal,
+                Iva = pedidoLogica.Iva,
+                Estado = (short)pedidoLogica.Estado
             };
             return pedidoDatos;
         }
 
-        public Pedido ConvertirPedidoDeDatosALogica(AccesoADatos.Pedido pedido)
+        public Pedido ConvertirPedidoDeDatosALogica(AccesoADatos.Pedido pedidoDatos)
         {
-            return new Pedido
+            Pedido pedidoLogica = new Pedido()
             {
-                Id = pedido.Id,
-                FechaDeCreacion = pedido.FechaDeCreacion,
-                PrecioTotal = pedido.PrecioTotal,
-                Iva = pedido.Iva,
-                Estado = (EstadoPedido)pedido.Estado,
+                Id = pedidoDatos.Id,
+                FechaDeCreacion = pedidoDatos.FechaDeCreacion,
+                PrecioTotal = pedidoDatos.PrecioTotal,
+                Iva = pedidoDatos.Iva,
+                Estado = (EstadoPedido)pedidoDatos.Estado,
             };
+
+            return pedidoLogica;
         }
     }
 }

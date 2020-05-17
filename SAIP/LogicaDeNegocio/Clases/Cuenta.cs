@@ -15,11 +15,13 @@ namespace LogicaDeNegocio.Clases
         public Cliente Cliente { get; set;}
         public EstadoCuenta Estado { get; set; }
         public Mesa Mesa { get; set; }
+
         public List<Pedido> Pedidos = new List<Pedido>();
 
-        public void AñadirPedido()
+        public void AñadirPedido(Pedido pedido)
         {
-            throw new NotImplementedException();
+            Pedidos.Add(pedido);
+
         }
     }
 

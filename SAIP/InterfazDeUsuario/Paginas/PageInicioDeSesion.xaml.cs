@@ -21,6 +21,7 @@ using LogicaDeNegocio.Clases;
 using static InterfazDeUsuario.UtileriasGráficas;
 using InterfazDeUsuario.Gerente;
 using InterfazDeUsuario.Mesero;
+using LogicaDeNegocio;
 
 namespace InterfazDeUsuario.Paginas
 {
@@ -66,7 +67,8 @@ namespace InterfazDeUsuario.Paginas
 					}
 					else if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.Mesero)
 					{
-						GUIEditarPedido editarPedido = new GUIEditarPedido(Controlador, empleadoCargado);
+						Pedido pedido = new Pedido();
+						GUIEditarPedido editarPedido = new GUIEditarPedido(Controlador, empleadoCargado, pedido);
 						Controlador.CambiarANuevaPage(editarPedido);
 					}
 				}
