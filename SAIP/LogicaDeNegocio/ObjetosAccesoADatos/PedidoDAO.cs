@@ -20,9 +20,22 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             }
         }
 
-        private AccesoADatos.Pedido ConvertirPedidoLogicaADatos(Pedido pedido)
+        public void RecuperarListaDePedidos(Pedido pedido) 
         {
             throw new NotImplementedException();
+        }
+
+        private AccesoADatos.Pedido ConvertirPedidoLogicaADatos(Pedido pedido)
+        {
+            AccesoADatos.Pedido pedidoDatos = new AccesoADatos.Pedido
+            {
+                Id = pedido.Id,
+                FechaDeCreacion = pedido.FechaDeCreacion,
+                PrecioTotal = pedido.PrecioTotal,
+                Iva = pedido.Iva,
+                Estado = (short)pedido.Estado
+            };
+            return pedidoDatos;
         }
 
         public Pedido ConvertirPedidoDeDatosALogica(AccesoADatos.Pedido pedido)
