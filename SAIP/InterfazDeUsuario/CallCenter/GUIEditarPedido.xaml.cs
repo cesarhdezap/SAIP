@@ -39,7 +39,7 @@ namespace InterfazDeUsuario.CallCenter
         public void MostrarPedido(int idPedido)
         {
             PedidoDAO pedidoDAO = new PedidoDAO();
-            ListaDePedidos = pedidoDAO.RecuperarPedidoPorId(idPedido);
+            ListaDePedidos.Add(pedidoDAO.RecuperarPedidoPorId(idPedido));
         }
 
     }

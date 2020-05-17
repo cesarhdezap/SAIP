@@ -21,9 +21,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             }
         }
 
-        public List<Pedido> RecuperarPedidoPorId(int idPedido) 
+        public Pedido RecuperarPedidoPorId(int idPedido) 
         {
-            List<Pedido> pedidos = new List<Pedido>();
             AccesoADatos.Pedido pedido;
             using(ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
@@ -33,10 +32,9 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             if(pedido != null)
             {
                 pedidoLogico = ConvertirPedidoDeDatosALogica(pedido);
-                pedidos.Add(pedidoLogico);
             }
 
-            return pedidos;
+            return pedidoLogico;
         }
 
         private AccesoADatos.Pedido ConvertirPedidoLogicaADatos(Pedido pedidoLogica)
