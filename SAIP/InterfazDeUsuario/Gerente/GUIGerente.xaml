@@ -1,4 +1,4 @@
-﻿<Window x:Class="InterfazDeUsuario.Gerente.GUIGerente"
+﻿<Page x:Class="InterfazDeUsuario.Gerente.GUIGerente"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -14,4 +14,4 @@
         <Button Content="Empleados" HorizontalAlignment="Center" VerticalAlignment="Stretch" Click="Button_Click_Lista" Margin="481,212,217.6,190" Width="95"/>
 
     </Grid>
-</Window>
+</Page>

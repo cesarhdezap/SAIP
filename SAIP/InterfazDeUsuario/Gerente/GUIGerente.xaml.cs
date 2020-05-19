@@ -19,7 +19,7 @@ namespace InterfazDeUsuario.Gerente
 	/// <summary>
 	/// Interaction logic for GUIGerente.xaml
 	/// </summary>
-	public partial class GUIGerente : Window
+	public partial class GUIGerente : Page
 	{
 		public Empleado Gerente { get; set; }
 		public GUIGerente(Empleado empleadoCargado)
@@ -32,26 +32,26 @@ namespace InterfazDeUsuario.Gerente
 		private void RegistrarPlatilloButton_Click(object sender, RoutedEventArgs e)
 		{
 			GUIRegistrarPlatillo registrarPlatillo = new GUIRegistrarPlatillo(Gerente);
-			Hide();
+			
 			registrarPlatillo.ShowDialog();
-			Show();
+			
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
 			PlatilloDAO platilloDAO = new PlatilloDAO();
 			GUIEditarPlatillo editarPlatillo = new GUIEditarPlatillo(Gerente, platilloDAO.CargarPlatilloPorId(1));
-			Hide();
+			
 			editarPlatillo.ShowDialog();
-			Show();
+			
 		}
 
 		private void Button_Click_Lista(object sender, RoutedEventArgs e)
 		{
 			GUIVerEmpleados verEmpleados = new GUIVerEmpleados(Gerente);
-			Hide();
+
 			verEmpleados.ShowDialog();
-			Show();
+			
 		}
 	}
 }

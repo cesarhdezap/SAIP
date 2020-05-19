@@ -1,4 +1,4 @@
-﻿<Page x:Class="InterfazDeUsuario.Gerente.GUIVerEmpleados"
+﻿<Window x:Class="InterfazDeUsuario.Gerente.GUIVerEmpleados"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,7 +8,7 @@
       mc:Ignorable="d" 
       Title="GUIVerEmpleados" Height="691" Width="1258">
 
-    <Page.Resources>
+    <Window.Resources>
         <Color x:Key="SelectedBackgroundColor">#00000000</Color>
         <Color x:Key="SelectedUnfocusedColor">#00000000</Color>
 
@@ -49,7 +49,7 @@
 
 
         </Style>
-    </Page.Resources>
+    </Window.Resources>
 
     <DockPanel>
         <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top" Width="Auto"/>
@@ -59,4 +59,4 @@
 
 
 
-</Page>
+</Window>

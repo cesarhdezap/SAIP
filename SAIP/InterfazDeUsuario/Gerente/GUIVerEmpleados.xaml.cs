@@ -22,9 +22,9 @@ namespace InterfazDeUsuario.Gerente
     /// <summary>
     /// Lógica de interacción para GUIVerEmpleados.xaml
     /// </summary>
-    public partial class GUIVerEmpleados : Page
+    public partial class GUIVerEmpleados : Window
     {
-        private List<Empleado> Trabajadores { get; set; }
+        private List<Empleado> Trabajadores = new List<Empleado>();
         private List<Empleado> Visibles { get; set; }
 
         
@@ -53,10 +53,7 @@ namespace InterfazDeUsuario.Gerente
             ListBoxEmpleados.ItemsSource = Visibles;
         }
 
-        internal void ShowDialog()
-        {
-            throw new NotImplementedException();
-        }
+       
 
         private void Busqueda_TextChanged(object sender, TextChangedEventArgs e)
         {
