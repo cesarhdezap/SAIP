@@ -24,7 +24,7 @@ namespace InterfazDeUsuario.Gerente
     /// </summary>
     public partial class GUIVerEmpleados : Window
     {
-        private List<Empleado> Trabajadores = new List<Empleado>();
+        private List<Empleado> Trabajadores { get; set; }
         private List<Empleado> Visibles { get; set; }
 
         
@@ -44,13 +44,13 @@ namespace InterfazDeUsuario.Gerente
         public void MostrarEmpleados() {
             EmpleadoDAO empleadoDAO = new EmpleadoDAO();
             Trabajadores = empleadoDAO.CargarTodos();
-            ListBoxEmpleados.ItemsSource = Trabajadores;
+            ListaE.ItemsSource = Trabajadores;
         }
 
         public void ActualizarPantalla()
         {
-            ListBoxEmpleados.ItemsSource = null;
-            ListBoxEmpleados.ItemsSource = Visibles;
+            ListaE.ItemsSource = null;
+            ListaE.ItemsSource = Visibles;
         }
 
        
@@ -68,5 +68,15 @@ namespace InterfazDeUsuario.Gerente
             }
             ActualizarPantalla();
         }
+
+        private void registro_Click(object sender, RoutedEventArgs e)
+        {
+            GUIRegistrarEmpleado registrarEmpleado = new GUIRegistrarEmpleado(Gerente);
+            Hide();
+            registrarEmpleado.ShowDialog();
+            Show();
+        }
+
+        
     }
 }
