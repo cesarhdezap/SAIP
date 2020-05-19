@@ -137,6 +137,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			{
 				//System.IO.FileNotFoundException Unable to resolve assembly NodeloDeDatos.csdl
 				//System.Data.Entity.Core.EntityException
+				//System.Data.Entity.Core.EntityException: 'The underlying provider failed on Open.'
 				empleadoLocalizado = context.Empleados.FirstOrDefault(empleado => empleado.NombreDeUsuario == NombreDeUsuario && empleado.Contraseña == Contraseña);
 			}
 			if (empleadoLocalizado != null)

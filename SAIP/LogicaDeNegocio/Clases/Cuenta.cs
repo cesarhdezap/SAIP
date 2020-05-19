@@ -22,5 +22,4 @@ namespace LogicaDeNegocio.Clases
             throw new NotImplementedException();
         }
     }
-
 }
