@@ -33,6 +33,7 @@
         <AssociationConnector Association="ModeloDeDatos.CuentaPedido" />
         <AssociationConnector Association="ModeloDeDatos.CuentaCliente" />
         <AssociationConnector Association="ModeloDeDatos.CuentaEmpleado" />
+        <EntityTypeShape EntityType="ModeloDeDatos.Discrepancia" Width="1.5" PointX="15.5" PointY="9.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
