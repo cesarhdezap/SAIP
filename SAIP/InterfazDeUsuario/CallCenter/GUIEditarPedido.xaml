@@ -8,11 +8,11 @@
       x:Class="InterfazDeUsuario.CallCenter.GUIEditarPedido"
       mc:Ignorable="d"
       Title="EditarPedido" Height="615" Width="1315">
-    
+
     <Grid Background="White" HorizontalAlignment="Left" Width="1315" Height="615" VerticalAlignment="Top">
         <UserControls:BarraDeEstado x:Name="barraEstado" Width="Auto" VerticalAlignment="Top"></UserControls:BarraDeEstado>
-        
-        <Grid HorizontalAlignment="Left" Height="408" Margin="890,155,0,0" VerticalAlignment="Top" Width="416">
+
+        <Grid HorizontalAlignment="Left" Height="408" Margin="891,102,0,0" VerticalAlignment="Top" Width="416">
             <Rectangle HorizontalAlignment="Left" Height="386" Margin="0,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="416"/>
             <Label Content="Menú" Margin="0,0,0,369" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="77" FontSize="22"/>
             <DataGrid x:Name="MenuDataGrid" HorizontalAlignment="Left" Height="302" Margin="19,72,0,0" VerticalAlignment="Top" Width="378"/>
@@ -20,7 +20,7 @@
             <Button x:Name="BuscarButtom" Content="Buscar" HorizontalAlignment="Left" Margin="281,39,0,0" VerticalAlignment="Top" Width="75"/>
         </Grid>
 
-        <Grid HorizontalAlignment="Left" Height="408" Margin="12,155,0,0" VerticalAlignment="Top" Width="278">
+        <Grid HorizontalAlignment="Left" Height="408" Margin="13,102,0,0" VerticalAlignment="Top" Width="278">
             <Rectangle x:Name="ClienteRectangle" Margin="0,0,0,0" Stroke="Black" Height="387" VerticalAlignment="Top" HorizontalAlignment="Left" Width="278                                                "/>
             <Button x:Name="GuardarCambiosButton" Content="Guardar Cambios" HorizontalAlignment="Left" Margin="93,319,0,0" VerticalAlignment="Top" Width="101"/>
             <Button x:Name="CancelarButton" Content="Cancelar" HorizontalAlignment="Left" Margin="102,359,0,0" VerticalAlignment="Top" Width="75"/>
@@ -34,14 +34,24 @@
             <Label Content="Comentarios: " HorizontalAlignment="Left" Margin="18,177,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <TextBlock x:Name="ComentarioClienteTextBlock" HorizontalAlignment="Left" Margin="18,203,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="92" Width="250" OpacityMask="Red"/>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="387" Margin="295,155,0,0" VerticalAlignment="Top" Width="590" Background="White">
+        <Grid HorizontalAlignment="Left" Height="387" Margin="296,102,0,0" VerticalAlignment="Top" Width="590" Background="White">
             <Label Content="Orden" Margin="4,2,0,0" VerticalAlignment="Top" FontSize="22" HorizontalAlignment="Left" Width="443"/>
-            <DataGrid x:Name="PedidoDataGrid" Height="210" Margin="0,46,0,0" VerticalAlignment="Top" BorderBrush="Black" Background="White"/>
-            <Rectangle Height="64" Margin="0,256,0,0" Stroke="Black" VerticalAlignment="Top" Fill="White"/>
-            <Label x:Name="IVALabel" Content="IVA (16%) " HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <DataGrid x:Name="PedidoDataGrid" Height="210" Margin="0,46,0,0" VerticalAlignment="Top" BorderBrush="Black" Background="White">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Pedido" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Header="Producto o Platillo" Binding="{Binding Producto}"/>
+                    <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}"/>
+                    <DataGridTextColumn Header="Estado" Binding="{Binding Estado}"/>
+                    
+                </DataGrid.Columns>
+            </DataGrid>
+
+                <Rectangle Height="64" Margin="0,256,0,0" Stroke="Black" VerticalAlignment="Top" Fill="White"/>
+            <Label x:Name="IVALabel" Content="IVA :" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <Label x:Name="TotalLabel" Content="TOTAL" HorizontalAlignment="Left" Margin="10,281,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
             <TextBlock x:Name="IVATextBlock" Margin="0,265,34,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Right" Width="55"/>
             <TextBlock x:Name="TotalTextBox" Margin="0,286,34,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" HorizontalAlignment="Right" Width="73"/>
+            <TextBlock x:Name="IvaPorcentTextBlock" Margin="46,265,461,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontWeight="Bold"/>
         </Grid>
 
     </Grid>

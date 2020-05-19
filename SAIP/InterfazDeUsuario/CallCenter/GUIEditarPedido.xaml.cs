@@ -40,6 +40,12 @@ namespace InterfazDeUsuario.CallCenter
         {
             PedidoDAO pedidoDAO = new PedidoDAO();
             ListaDePedidos.Add(pedidoDAO.RecuperarPedidoPorId(idPedido));
+            PedidoDataGrid.ItemsSource = ListaDePedidos;
+        }
+
+        public void MostrarCliente(int idCuenta)
+        {
+            ClienteDAO clienteDAO = new ClienteDAO();
         }
 
     }

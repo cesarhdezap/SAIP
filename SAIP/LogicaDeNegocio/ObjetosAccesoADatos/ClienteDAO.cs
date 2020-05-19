@@ -59,5 +59,16 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
             return resultado;
         }
+
+        public Cliente RecuperarClientePorIdCuenta(int idCuenta)
+        {
+            Cliente cliente = new Cliente();
+            using(ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+
+            }
+
+            return cliente;
+        }
     }
 }
