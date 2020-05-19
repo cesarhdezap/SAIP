@@ -22,10 +22,28 @@ namespace InterfazDeUsuario.Mesero
     public partial class GUIRegistrarPedidoLocal : Page
     {
         ControladorDeCambioDePantalla ControladorDeCambioDePantalla;
-        public GUIRegistrarPedidoLocal(ControladorDeCambioDePantalla controlador, Empleado empleado)
+        public GUIRegistrarPedidoLocal(ControladorDeCambioDePantalla controlador, Empleado empleado, Cuenta cuenta)
         {
             ControladorDeCambioDePantalla = controlador;
             InitializeComponent();
+            BarraDeEstado.Controlador = controlador;
+            BarraDeEstado.ActualizarNombreDeUsuario(empleado.NombreDeUsuario);
+            MostrarAlimentos();
+        }
+
+        private void MostrarAlimentos()
+        {
+            //Cargar alimentos y productos y mostrarlos en la listbox
+        }
+
+        private void ButtonRealizar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonCancelar_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

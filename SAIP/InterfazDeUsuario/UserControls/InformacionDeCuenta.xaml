@@ -3,18 +3,75 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:l ="clr-namespace:LogicaDeNegocio.Convertidores;assembly=LogicaDeNegocio"
+             xmlns:logica="clr-namespace:LogicaDeNegocio.Enumeradores;assembly=LogicaDeNegocio"
              xmlns:local="clr-namespace:InterfazDeUsuario.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="131.25">
 
+    <UserControl.Resources>
+        <l:ConversorDeEnumeradores x:Key="ConversorDeEnumeradores" />
+    </UserControl.Resources>
+
     <StackPanel Orientation="Vertical">
         <Label x:Name="LabelMesa" Content="Placeholder Mesa"/>
-        <DataGrid x:Name="DataGridCuenta" Background="Transparent" AutoGenerateColumns="False" IsReadOnly="True" CanUserReorderColumns="False">
+        
+        <DataGrid x:Name="DataGridPedidos" Background="Transparent" AutoGenerateColumns="False" IsReadOnly="True" CanUserReorderColumns="False">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </DataGrid.CellStyle>
+            
+            <DataGrid.RowHeaderTemplate>
+                <DataTemplate>
+                    <Expander Expanded="Expander_Expanded" Collapsed="Expander_Collapsed">
+                        
+                    </Expander>
+                </DataTemplate>
+            </DataGrid.RowHeaderTemplate>
+
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate x:Name="DataTemplateAlimento">
+                    <StackPanel Orientation="Vertical">
+                        <DataGrid x:Name="DataGridCantidadPlatillos" ItemsSource="{Binding CantidadPlatillos}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Cantidad}"/>
+                                <DataGridTextColumn Binding="{Binding Platillo.Nombre}"/>
+                                <DataGridTextColumn Binding="{Binding Platillo.Precio}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <DataGrid ItemsSource="{Binding CantidadProducto}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Cantidad}"/>
+                                <DataGridTextColumn Binding="{Binding Producto.Nombre}"/>
+                                <DataGridTextColumn Binding="{Binding Producto.PrecioDeVenta}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+            
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="#Pedido" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="PrecioTotal" Binding="{Binding PrecioTotal}" />
-                <DataGridTextColumn Header="Estado" Binding="{Binding EstadoToString}"/>
+                <DataGridTextColumn Header="Estado" Binding="{Binding Estado, Converter={StaticResource ResourceKey=ConversorDeEnumeradores} }"/>
+                
+                
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Editar pedido" Click="ButtonEditarPedido_Click" Margin="2"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
+
+            
         </DataGrid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Name="ButtonNuevoPedido" Content="Nuevo pedido" Margin="2" Click="ButtonNuevoPedido_Click"/>
+            <Button x:Name="ButtonTerminarCuenta" Content="Terminar cuenta" Margin="2"/>
+        </StackPanel>
     </StackPanel>
 </UserControl>
