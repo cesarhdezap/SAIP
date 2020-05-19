@@ -54,7 +54,6 @@
     <DockPanel>
         <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top" Width="Auto"/>
         <ListBox HorizontalAlignment="Left"  x:Name="ListBoxEmpleados"  Height="513" Margin="0,104.4,0,0" VerticalAlignment="Top" Width="938" />
-        <Button x:Name="Buscar" Content="Buscar" RenderTransformOrigin="0.484,0.481" Width="122" Margin="0,0,0,293.2" Height="37" VerticalAlignment="Bottom" Click="Buscar"/>
         <TextBox x:Name="Busqueda" DockPanel.Dock="Top" Height="40" Margin="-208.2,0,-0.4,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="407" TextChanged="Busqueda_TextChanged"/>
     </DockPanel>
 
