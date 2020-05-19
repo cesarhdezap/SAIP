@@ -67,6 +67,8 @@ namespace InterfazDeUsuario.Mesero
         {
             StackPanelCuenta.Visibility = Visibility.Collapsed;
         }
+
+        
     }
 }
  

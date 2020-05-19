@@ -1,0 +1,63 @@
+﻿<Page x:Class="InterfazDeUsuario.Gerente.GUIVerEmpleados"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InterfazDeUsuario.Gerente" 
+      xmlns:controls="clr-namespace:InterfazDeUsuario.UserControls"
+      mc:Ignorable="d" 
+      Title="GUIVerEmpleados" Height="691" Width="1258">
+
+    <Page.Resources>
+        <Color x:Key="SelectedBackgroundColor">#00000000</Color>
+        <Color x:Key="SelectedUnfocusedColor">#00000000</Color>
+
+        <Style x:Key="myListBoxStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Border" Padding="2" SnapsToDevicePixels="true">
+                            <Border.Background>
+                                <SolidColorBrush Color="Transparent" />
+                            </Border.Background>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected" />
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="{StaticResource SelectedBackgroundColor}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SelectedUnfocused">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="{StaticResource SelectedUnfocusedColor}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+
+        </Style>
+    </Page.Resources>
+
+    <DockPanel>
+        <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top" Width="Auto"/>
+        <ListBox HorizontalAlignment="Left"  x:Name="ListBoxEmpleados"  Height="513" Margin="0,104.4,0,0" VerticalAlignment="Top" Width="938" />
+        <Button x:Name="Buscar" Content="Buscar" RenderTransformOrigin="0.484,0.481" Width="122" Margin="0,0,0,293.2" Height="37" VerticalAlignment="Bottom" Click="Buscar"/>
+        <TextBox x:Name="Busqueda" DockPanel.Dock="Top" Height="40" Margin="-208.2,0,-0.4,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="407" TextChanged="Busqueda_TextChanged"/>
+    </DockPanel>
+
+
+
+</Page>

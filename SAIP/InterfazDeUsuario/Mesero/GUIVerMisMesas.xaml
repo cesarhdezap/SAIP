@@ -78,7 +78,7 @@
                      ScrollViewer.VerticalScrollBarVisibility="Auto"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      DockPanel.Dock="Bottom"
-                     ItemContainerStyle="{StaticResource myListBoxStyle}">
+                     ItemContainerStyle="{StaticResource myListBoxStyle}" SelectionChanged="ListBoxMesas_SelectionChanged">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="4"/>
