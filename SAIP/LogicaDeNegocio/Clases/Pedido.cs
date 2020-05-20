@@ -24,7 +24,12 @@ namespace LogicaDeNegocio
         public string Creador { get; set; }
 
 
-        public void AñadirProducto(Producto producto)
+        public void AñadirProducto()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AñadirPlatillo()
         {
             throw new NotImplementedException();
         }
@@ -32,6 +37,11 @@ namespace LogicaDeNegocio
         public string EstadoToString()
         {
             return Estado.ToString();
+        }
+
+        public double CalcularPrecioTotal()
+        {
+            throw new NotImplementedException();
         }
     }
 

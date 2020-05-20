@@ -98,8 +98,8 @@ namespace InterfazDeUsuario.UserControls
         {
             CantidadPlatilloDAO cantidadPlatilloDAO = new CantidadPlatilloDAO();
             CantidadProductoDAO cantidadProductoDAO = new CantidadProductoDAO();
-            //DataGridCantidadPlatillo.ItemSource = cantidadPlatilloDAO.RecuperarCantidadPlatilloPorIDPedido(pedido.Id);
-            //DataGridCantidadProducto.ItemSource = cantidadProductoDAO.RecuperarCantidadPlatilloPorIDPedido(pedido.Id);
+            //DataGridCantidadPlatillo.ItemSource = cantidadPlatilloDAO.RecuperarCantidadProductoPorIDPedido(pedido.Id);
+            //DataGridCantidadProducto.ItemSource = cantidadProductoDAO.RecuperarCantidadProductoPorIDPedido(pedido.Id);
         }
 
         private void Expander_Collapsed(object sender, RoutedEventArgs e)
