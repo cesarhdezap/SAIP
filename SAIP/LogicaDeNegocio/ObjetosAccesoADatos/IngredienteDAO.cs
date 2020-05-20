@@ -10,7 +10,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 {
 	public class IngredienteDAO
 	{
-		public Clases.Ingrediente ConvertirIngredienteDeAccesoADatosAIngredienteDeLogica(AccesoADatos.Ingrediente IngredienteDb)
+		public Clases.Ingrediente ConvertirDeDbALogica(AccesoADatos.Ingrediente IngredienteDb)
 		{
 			Clases.Ingrediente ingredienteConvertido = new Clases.Ingrediente()
 			{
@@ -31,7 +31,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			return ingredienteConvertido;
 		}
 
-		public AccesoADatos.Ingrediente ConvertirIngredienteDeLogicaAIngredienteDeAccesoADatos(Clases.Ingrediente Ingrediente)
+		public AccesoADatos.Ingrediente ConvertirDeLogicaADb(Clases.Ingrediente Ingrediente)
 		{
 			AccesoADatos.Ingrediente ingredienteConvertido = new AccesoADatos.Ingrediente()
 			{
@@ -56,13 +56,14 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			return ingredienteConvertido;
 		}
 
-		private List<Clases.Ingrediente> ConvertirListaDeIngredientesDeAccesoADatosAListaDeIngredientesDeLogica(List<Ingrediente> IngredientesDeDb)
+
+		private List<Clases.Ingrediente> ConvertirListaDeDbAListaDeLogica(List<Ingrediente> IngredientesDeDb)
 		{
 			List<Clases.Ingrediente> ingredientesResultado = new List<Clases.Ingrediente>();
 
 			foreach (Ingrediente ingrediente in IngredientesDeDb)
 			{
-				ingredientesResultado.Add(ConvertirIngredienteDeAccesoADatosAIngredienteDeLogica(ingrediente));
+				ingredientesResultado.Add(ConvertirDeDbALogica(ingrediente));
 			}
 
 			return ingredientesResultado;
@@ -74,7 +75,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
 			foreach (Clases.Ingrediente ingrediente in Ingredientes)
 			{
-				ingredientesResultado.Add(ConvertirIngredienteDeLogicaAIngredienteDeAccesoADatos(ingrediente));
+				ingredientesResultado.Add(ConvertirDeLogicaADb(ingrediente));
 			}
 
 			return ingredientesResultado;
@@ -89,7 +90,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			}
 
 			List<Clases.Ingrediente> ingredientesResultado = new List<Clases.Ingrediente>();
-			ingredientesResultado = ConvertirListaDeIngredientesDeAccesoADatosAListaDeIngredientesDeLogica(ingredientesDb);
+			ingredientesResultado = ConvertirListaDeDbAListaDeLogica(ingredientesDb);
 			return ingredientesResultado;
 		}
 
@@ -102,7 +103,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			}
 
 			List<Clases.Ingrediente> ingredientesResultado = new List<Clases.Ingrediente>();
-			ingredientesResultado = ConvertirListaDeIngredientesDeAccesoADatosAListaDeIngredientesDeLogica(ingredientesDb);
+			ingredientesResultado = ConvertirListaDeDbAListaDeLogica(ingredientesDb);
 			return ingredientesResultado;
 		}
 
@@ -112,8 +113,9 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
 				ingredienteDb = context.Ingredientes.Find(Id);
+			
 			}
-			Clases.Ingrediente ingredienteResultado = ConvertirIngredienteDeAccesoADatosAIngredienteDeLogica(ingredienteDb);
+			Clases.Ingrediente ingredienteResultado = ConvertirDeDbALogica(ingredienteDb);
 
 			return ingredienteResultado;
 		}

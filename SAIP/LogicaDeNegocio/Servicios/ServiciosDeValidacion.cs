@@ -27,7 +27,8 @@ namespace LogicaDeNegocio.Servicios
         /// Expresión regular que valida que la cadena no tenga espacios en blanco y sea de 6 a 255 de longitud.
         /// </summary>
         private static readonly Regex RegexContraseña = new Regex(@"^\S{6,255}$");
-        private static readonly Regex RegexNuevaEntradaACamposDeSoloNumeros = new Regex(@"^[0-9]$|^\.$");
+        private static readonly Regex RegexNuevaEntradaACamposDeSoloNumerosDecimales = new Regex(@"^[0-9]$|^\.$");
+        private static readonly Regex RegexNuevaEntradaACampoDeSoloNumeros = new Regex(@"^[0-9]$");
         private static readonly Regex RegexNumeroDecimal = new Regex(@"^([0-9]*\.)?[0-9]+$");
 
         public const int TAMAÑO_MAXIMO_VARCHAR = 255;
@@ -87,7 +88,19 @@ namespace LogicaDeNegocio.Servicios
         {
             bool resultadoDeValidacion = false;
 
-            if (RegexNuevaEntradaACamposDeSoloNumeros.IsMatch(cadenaNumerica))
+            if (RegexNuevaEntradaACamposDeSoloNumerosDecimales.IsMatch(cadenaNumerica))
+            {
+                resultadoDeValidacion = true;
+            }
+
+            return resultadoDeValidacion;
+        }
+
+        public static bool ValidarEntradaDeDatosSoloEntero(string cadenaNumerica)
+        {
+            bool resultadoDeValidacion = false;
+
+            if (RegexNuevaEntradaACampoDeSoloNumeros.IsMatch(cadenaNumerica))
             {
                 resultadoDeValidacion = true;
             }

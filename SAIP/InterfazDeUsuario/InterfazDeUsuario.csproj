@@ -58,6 +58,12 @@
     <Compile Include="CallCenter\GUIEditarPedido.xaml.cs">
       <DependentUpon>GUIEditarPedido.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Gerente\GUIPasarInventario.xaml.cs">
+      <DependentUpon>GUIPasarInventario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gerente\GUIReporteDeInventario.xaml.cs">
+      <DependentUpon>GUIReporteDeInventario.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUICancelarPedido.xaml.cs">
       <DependentUpon>GUICancelarPedido.xaml</DependentUpon>
     </Compile>
@@ -92,6 +98,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CallCenter\GUIPedidoADomicilio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gerente\GUIPasarInventario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gerente\GUIReporteDeInventario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
