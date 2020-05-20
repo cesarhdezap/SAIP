@@ -40,6 +40,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -53,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\Alimento.cs" />
+    <Compile Include="Clases\Platillo.cs" />
     <Compile Include="Clases\ClasesAsociativas\CantidadPlatillo.cs" />
     <Compile Include="Clases\ClasesAsociativas\CantidadProducto.cs" />
     <Compile Include="Clases\Cliente.cs" />
@@ -65,8 +67,12 @@
     <Compile Include="Clases\Pedido.cs" />
     <Compile Include="Clases\ClasesAsociativas\Proporcion.cs" />
     <Compile Include="Clases\Producto.cs" />
+    <Compile Include="Convertidores\ConversorDeEnumeradores.cs" />
     <Compile Include="Enumeradores\EstadoCuenta.cs" />
     <Compile Include="Enumeradores\EstadoMesa.cs" />
+    <Compile Include="Enumeradores\EstadoPedido.cs" />
+    <Compile Include="ObjetosAccesoADatos\CantidadPlatilloDAO.cs" />
+    <Compile Include="ObjetosAccesoADatos\CantidadProductoDAO.cs" />
     <Compile Include="ObjetosAccesoADatos\CuentaDAO.cs" />
     <Compile Include="ObjetosAccesoADatos\ClienteDAO.cs" />
     <Compile Include="Enumeradores\UnidadesDeMedida.cs" />
@@ -77,6 +83,7 @@
     <Compile Include="ObjetosAccesoADatos\EmpleadoDAO.cs" />
     <Compile Include="ObjetosAccesoADatos\IngredienteDAO.cs" />
     <Compile Include="ObjetosAccesoADatos\IvaDAO.cs" />
+    <Compile Include="ObjetosAccesoADatos\ProductoDAO.cs" />
     <Compile Include="ObjetosAccesoADatos\ProporcionDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\ServiciosDeEncriptacion.cs" />

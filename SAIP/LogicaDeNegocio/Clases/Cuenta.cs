@@ -24,5 +24,4 @@ namespace LogicaDeNegocio.Clases
 
         }
     }
-
 }

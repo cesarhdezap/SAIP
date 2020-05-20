@@ -20,6 +20,7 @@
     <EntitySet Name="Ivas" EntityType="ModeloDeDatos.Store.Ivas" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Cuentas" EntityType="ModeloDeDatos.Store.Cuentas" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="IngredienteIngrediente" EntityType="ModeloDeDatos.Store.IngredienteIngrediente" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Discrepancias" EntityType="ModeloDeDatos.Store.Discrepancias" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CuentaCliente" EntityType="ModeloDeDatos.Store.CuentaCliente" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="AlimentoIngredienteIngrediente" Association="ModeloDeDatos.Store.AlimentoIngredienteIngrediente">
       <End Role="AlimentoIngrediente" EntitySet="PlatilloIngrediente" />
@@ -233,6 +234,15 @@
     <Property Name="Cantidad" Type="float" Nullable="false" />
     <Property Name="IngredienteCompuesto_Id" Type="int" Nullable="false" />
     <Property Name="IngredienteComponente_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Discrepancias">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Comentario" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Tipo" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CuentaCliente">
     <Key>
@@ -481,6 +491,7 @@
             <End Role="Cuenta" EntitySet="Cuentas" />
             <End Role="Empleado" EntitySet="Empleados" />
           </AssociationSet>
+          <EntitySet Name="Discrepancias" EntityType="ModeloDeDatos.Discrepancia" />
           </EntityContainer>
         <EntityType Name="Ingrediente">
           <Key>
@@ -704,6 +715,15 @@
           <End Type="ModeloDeDatos.Cuenta" Role="Cuenta" Multiplicity="*" />
           <End Type="ModeloDeDatos.Empleado" Role="Empleado" Multiplicity="1" />
         </Association>
+        <EntityType Name="Discrepancia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Comentario" Type="String" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" />
+          <Property Name="Tipo" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -865,6 +885,16 @@
         <MappingFragment StoreEntitySet="IngredienteIngrediente">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Discrepancias">
+      <EntityTypeMapping TypeName="IsTypeOf(ModeloDeDatos.Discrepancia)">
+        <MappingFragment StoreEntitySet="Discrepancias">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

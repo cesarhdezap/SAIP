@@ -27,6 +27,7 @@ namespace InterfazDeUsuario.CallCenter
         ControladorDeCambioDePantalla Controlador;
         Empleado Empleado;
         Pedido pedido;
+
         public GUIEditarPedido(ControladorDeCambioDePantalla control, Empleado empleado, Pedido pedido)
         {
             Controlador = control;

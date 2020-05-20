@@ -67,8 +67,7 @@ namespace InterfazDeUsuario.Paginas
 					}
 					else if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.Mesero)
 					{
-						Pedido pedido = new Pedido();
-						GUIEditarPedido editarPedido = new GUIEditarPedido(Controlador, empleadoCargado, pedido);
+						GUIVerMisMesas editarPedido = new GUIVerMisMesas(Controlador, empleadoCargado);
 						Controlador.CambiarANuevaPage(editarPedido);
 					}
 				}

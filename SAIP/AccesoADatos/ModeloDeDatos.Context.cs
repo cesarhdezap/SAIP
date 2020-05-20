@@ -18,7 +18,8 @@ namespace AccesoADatos
         public ModeloDeDatosContainer()
             : base("name=ModeloDeDatosContainer")
         {
-            var ensureDllIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
+            var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
+
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -40,5 +41,6 @@ namespace AccesoADatos
         public virtual DbSet<Iva> Ivas { get; set; }
         public virtual DbSet<Cuenta> Cuentas { get; set; }
         public virtual DbSet<IngredienteIngrediente> IngredienteIngrediente { get; set; }
+        public virtual DbSet<Discrepancia> Discrepancias { get; set; }
     }
 }

@@ -56,7 +56,7 @@
         <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top" Width="Auto"/>
         <Label x:Name="LabelMisMesas" Margin="10" Content="MIS MESAS" FontSize="30" FontFamily="Script MT Bold" DockPanel.Dock="Top"/>
 
-        <StackPanel x:Name="StackPanelVerMesas" Orientation="Vertical" DockPanel.Dock="Right" VerticalAlignment="Bottom" Margin="0,0,20,0">
+        <StackPanel x:Name="StackPanelVerMesas" Orientation="Vertical" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0,0,20,0">
             <Button x:Name="ButtonVerMesasDiponibles" Click="VerMesasDiponiblesButton_Click">
                     <Image Source="/img/restaurant-table.png" Stretch="Fill" Height="120" Width="128"/>
             </Button>
@@ -79,6 +79,7 @@
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      DockPanel.Dock="Bottom"
                      ItemContainerStyle="{StaticResource myListBoxStyle}">
+                
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="4"/>
@@ -88,14 +89,11 @@
 
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Margin="20">
-                            <StackPanel Orientation="Vertical">
-                                <Button Click="ButtonMesa_Click" Height="200" Width="200">
-                                    <Image Source="/img/restaurant-table.png"/>
-                                </Button>
-                                <Label Content="{Binding Mesa}" FontSize="20"/>
-                            </StackPanel>
-
+                        <StackPanel Orientation="Vertical" Margin="20">
+                            <Button Click="ButtonMesa_Click" Height="200" Width="200">
+                                <Image Source="/img/restaurant-table.png"/>
+                            </Button>
+                            <Label Content="{Binding Mesa}" FontSize="20"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
