@@ -57,9 +57,12 @@
     <Compile Include="Clases\Platillo.cs" />
     <Compile Include="Clases\ClasesAsociativas\CantidadPlatillo.cs" />
     <Compile Include="Clases\ClasesAsociativas\CantidadProducto.cs" />
+    <Compile Include="Clases\ClasesCompuestas\IngredienteOProducto.cs" />
+    <Compile Include="Clases\ClasesCompuestas\TipoDeProducto.cs" />
     <Compile Include="Clases\Cliente.cs" />
     <Compile Include="Clases\Componente.cs" />
     <Compile Include="Clases\Cuenta.cs" />
+    <Compile Include="Clases\Discrepancia.cs" />
     <Compile Include="Clases\Empleado.cs" />
     <Compile Include="Clases\Ingrediente.cs" />
     <Compile Include="Clases\Iva.cs" />
@@ -103,6 +106,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -21,6 +21,7 @@ using LogicaDeNegocio.Clases;
 using static InterfazDeUsuario.UtileriasGráficas;
 using InterfazDeUsuario.Gerente;
 using InterfazDeUsuario.Mesero;
+using LogicaDeNegocio;
 
 namespace InterfazDeUsuario.Paginas
 {
@@ -60,9 +61,8 @@ namespace InterfazDeUsuario.Paginas
 					}
 					else if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.Gerente)
 					{
-						GUIGerente gerente = new GUIGerente(empleadoCargado);
-						//Controlador.CambiarANuevaPage(gerente);
-						throw new NotImplementedException("GUIGerente debe ser page");
+						GUIGerente gerente = new GUIGerente(Controlador, empleadoCargado);
+						Controlador.CambiarANuevaPage(gerente);
 					}
 					else if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.Mesero)
 					{

@@ -23,6 +23,7 @@ namespace LogicaDeNegocio
         public int CuentaId { get; set; }
         public string Creador { get; set; }
 
+
         public void AñadirProducto(Producto producto)
         {
             throw new NotImplementedException();
