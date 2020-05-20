@@ -21,17 +21,20 @@ namespace InterfazDeUsuario.Gerente
 	/// <summary>
 	/// Interaction logic for GUIRegistrarPlatillo.xaml
 	/// </summary>
-	public partial class GUIRegistrarPlatillo : Window
+	public partial class GUIRegistrarPlatillo : Page
 	{
+		private ControladorDeCambioDePantalla Controlador { get; set; }
 		public Empleado Gerente { get; set; }
 		public List<Ingrediente> IngredientesCargados { get; set; }
 		public List<Ingrediente> IngredientesVisibles { get; set; }
 		public Platillo Platillo { get; set; } = new Platillo();
 		public double Ganancia { get; set; }
 		private bool CandadoDeRefrescadoDeCajasDeTexto = true;
-		public GUIRegistrarPlatillo(Empleado EmpleadoCargado)
+		public GUIRegistrarPlatillo(ControladorDeCambioDePantalla controlador, Empleado EmpleadoCargado)
 		{
 			InitializeComponent();
+			Controlador = controlador;
+			BarraDeEstado.Controlador = controlador;
 			Gerente = EmpleadoCargado;
 			BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
@@ -247,7 +250,7 @@ namespace InterfazDeUsuario.Gerente
 			MessageBoxResult resultadoDeMessageBox = MessageBox.Show("¿Esta seguro que desea cancelar el registro? Se perderan los cambios sin guardar", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
 			if(resultadoDeMessageBox == MessageBoxResult.Yes)
 			{
-				Close();
+				Controlador.Regresar();
 			}
 		}
 	}

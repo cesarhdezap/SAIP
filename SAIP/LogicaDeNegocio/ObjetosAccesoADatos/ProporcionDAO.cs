@@ -23,13 +23,25 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
 			return proporciones;
 		}
-		public List<AccesoADatos.PlatilloIngrediente> ConvertirListaDeProporcionesDeLogicaAListaDeProporcionesDeAccesoADatos(List<Clases.Proporcion> Proporciones)
+		public List<AccesoADatos.PlatilloIngrediente> ConvertirListaLogicaAListaDeDB(List<Clases.Proporcion> Proporciones)
 		{
 			List<AccesoADatos.PlatilloIngrediente> proporcionesConvertidas = new List<PlatilloIngrediente>();
 
 			foreach (Clases.Proporcion proporcion in Proporciones)
 			{
-				proporcionesConvertidas.Add(ConvertirProporcionDeLogicaAProporcionDeAccesoADatos(proporcion));
+				proporcionesConvertidas.Add(ConvertirLogicaADb(proporcion));
+			}
+
+			return proporcionesConvertidas;
+		}
+		
+		public List<AccesoADatos.PlatilloIngrediente> ConvertirListaDeProporcionesDeLogicaAListaDeProporcionesDeAccesoADatosParaEdicion(List<Clases.Proporcion> Proporciones)
+		{
+			List<AccesoADatos.PlatilloIngrediente> proporcionesConvertidas = new List<PlatilloIngrediente>();
+
+			foreach (Clases.Proporcion proporcion in Proporciones)
+			{
+				proporcionesConvertidas.Add(ConvertirProporcionDeLogicaAProporcionDeAccesoADatosParaEdicion(proporcion));
 			}
 
 			return proporcionesConvertidas;
@@ -52,23 +64,15 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			Clases.Proporcion proporcionConvertida = new Clases.Proporcion
 			{
 				Id = ProporcionDb.Id,
-				//Ingrediente = new Clases.Ingrediente
-				//{
-				//	Id = ProporcionDb.Ingredientes.Id,
-				//},
-				//Alimento = new Clases.Platillo
-				//{
-				//	Id = ProporcionDb.Alimento.Id
-				//},
 				Cantidad = ProporcionDb.Cantidad
 			};
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
 			PlatilloDAO platilloDAO = new PlatilloDAO();
-			proporcionConvertida.Ingrediente = ingredienteDAO.ConvertirIngredienteDeAccesoADatosAIngredienteDeLogica(ProporcionDb.Ingredientes);
+			proporcionConvertida.Ingrediente = ingredienteDAO.ConvertirDeDbALogica(ProporcionDb.Ingredientes);
 			return proporcionConvertida;
 		}
 
-		private AccesoADatos.PlatilloIngrediente ConvertirProporcionDeLogicaAProporcionDeAccesoADatos(Clases.Proporcion Proporcion)
+		public AccesoADatos.PlatilloIngrediente ConvertirLogicaADb(Clases.Proporcion Proporcion)
 		{
 			AccesoADatos.PlatilloIngrediente proporcionConvertida = new PlatilloIngrediente()
 			{
@@ -76,9 +80,26 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				Cantidad = Proporcion.Cantidad,
 			};
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
-			proporcionConvertida.Ingredientes = ingredienteDAO.ConvertirIngredienteDeLogicaAIngredienteDeAccesoADatos(Proporcion.Ingrediente);
+			proporcionConvertida.Ingredientes = ingredienteDAO.ConvertirDeLogicaADb(Proporcion.Ingrediente);
 			proporcionConvertida.Ingredientes.AlimentoIngrediente = new List<PlatilloIngrediente>() { proporcionConvertida };
 			
+			return proporcionConvertida;
+		}
+
+		private AccesoADatos.PlatilloIngrediente ConvertirProporcionDeLogicaAProporcionDeAccesoADatosParaEdicion(Clases.Proporcion Proporcion)
+		{
+			PlatilloIngrediente proporcionConvertida = new PlatilloIngrediente();
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				proporcionConvertida = context.PlatilloIngrediente.Find(Proporcion.Id);
+			}
+
+			proporcionConvertida.Cantidad = Proporcion.Cantidad;
+
+			IngredienteDAO ingredienteDAO = new IngredienteDAO();
+			proporcionConvertida.Ingredientes = ingredienteDAO.ConvertirDeLogicaADb(Proporcion.Ingrediente);
+			proporcionConvertida.Ingredientes.AlimentoIngrediente = new List<PlatilloIngrediente>() { proporcionConvertida };
+
 			return proporcionConvertida;
 		}
 

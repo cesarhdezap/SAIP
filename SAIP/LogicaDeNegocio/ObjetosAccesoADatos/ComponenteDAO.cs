@@ -26,7 +26,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				Cantidad = ComponenteDb.Cantidad
 			};
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
-			componenteConvertido.Ingrediente = ingredienteDAO.ConvertirIngredienteDeAccesoADatosAIngredienteDeLogica(ComponenteDb.IngredienteComponente);
+			componenteConvertido.Ingrediente = ingredienteDAO.ConvertirDeDbALogica(ComponenteDb.IngredienteComponente);
 			return componenteConvertido;
 		}
 
@@ -34,9 +34,9 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 		{
 			IngredienteIngrediente componenteDb = new IngredienteIngrediente();
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
-			componenteDb.IngredienteComponente = ingredienteDAO.ConvertirIngredienteDeLogicaAIngredienteDeAccesoADatos(Componente.Ingrediente);
+			componenteDb.IngredienteComponente = ingredienteDAO.ConvertirDeLogicaADb(Componente.Ingrediente);
 			componenteDb.Cantidad = Componente.Cantidad;
-			componenteDb.IngredienteCompuesto = ingredienteDAO.ConvertirIngredienteDeLogicaAIngredienteDeAccesoADatos(Componente.Compuesto);
+			componenteDb.IngredienteCompuesto = ingredienteDAO.ConvertirDeLogicaADb(Componente.Compuesto);
 			return componenteDb;
 		}
 

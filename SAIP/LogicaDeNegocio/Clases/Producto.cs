@@ -13,8 +13,9 @@ namespace LogicaDeNegocio.Clases
         public double CantidadEnInventario { get; set; }
         public string CodigoDeBarras { get; set; }
         public double Costo { get; set; }
-        public float CostoDeVenta { get; set; }
+        public double CostoDeVenta { get; set; }
         public string Creador { get; set; }
+        public bool Activo { get; set; }
 
         public bool DescontarIngredientesDeInventario(int CantidadADescontar)
         {
