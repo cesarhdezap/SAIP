@@ -13,6 +13,6 @@ namespace LogicaDeNegocio.Clases
         public string Telefono { get; set;}
         public List<string> Direcciones { get; set;}
         public string Comentario { get; set;}
-        public Cuenta Cuenta { get; set;}
+        public List<Cuenta> Cuenta { get; set;}
     }
 }

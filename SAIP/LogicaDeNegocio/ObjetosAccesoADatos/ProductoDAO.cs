@@ -1,4 +1,4 @@
-﻿using AccesoADatos;
+ using AccesoADatos;
 using LogicaDeNegocio.Enumeradores;
 using System;
 using System.Collections.Generic;
@@ -25,7 +25,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
 		public Clases.Producto ConvertirDeDbALogica(AccesoADatos.Producto ProductoDb)
 		{
-			Clases.Producto ingredienteConvertido = new Clases.Producto()
+			Clases.Producto productoConvertido = new Clases.Producto()
 			{
 				Id = ProductoDb.Id,
 				CantidadEnInventario = ProductoDb.CantidadEnInventario,
@@ -36,7 +36,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				Activo = ProductoDb.Activo,
 				Costo = ProductoDb.Costo
 			};
-			return ingredienteConvertido;
+			return productoConvertido;
 		}
 
 		private List<Clases.Producto> ConvertirListaDeDbAListaDeLogica(List<Producto> productosDb)

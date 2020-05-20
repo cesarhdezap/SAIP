@@ -9,7 +9,7 @@ namespace LogicaDeNegocio.Clases.ClasesAsociativas
     public class CantidadPlatillo
     {
         public int Cantidad { get; set;}
-        public Platillo Alimento { get; set;}
+        public Platillo Platillo { get; set;}
         public Pedido Orden { get; set; }
     }
 }

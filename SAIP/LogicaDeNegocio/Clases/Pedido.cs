@@ -1,4 +1,6 @@
 ﻿using LogicaDeNegocio.Clases;
+using LogicaDeNegocio.Clases.ClasesAsociativas;
+using LogicaDeNegocio.Enumeradores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,8 @@ namespace LogicaDeNegocio
     {
         public int Id { get; set; }
         public DateTime FechaDeCreacion { get; set; }
+        public List<CantidadPlatillo> CantidadPlatillos = new List<CantidadPlatillo>();
+        public List<CantidadProducto> CantidadProductos = new List<CantidadProducto>();
         public double PrecioTotal { get; set; }
         public double Iva { get; set; }
         public List<string> Comentarios { get; set; }
@@ -18,6 +22,7 @@ namespace LogicaDeNegocio
         public int EmpleadoId { get; set; }
         public int CuentaId { get; set; }
         public string Creador { get; set; }
+
 
         public void AñadirProducto(Producto producto)
         {
@@ -30,13 +35,5 @@ namespace LogicaDeNegocio
         }
     }
 
-     public enum EstadoPedido
-    {
-        Registrado = 1,
-        EnEspera = 2,
-        Realizado = 3,
-        Entregado = 4,
-        Completado = 5,
-        Cancelar = 6
-    }
+    
 }

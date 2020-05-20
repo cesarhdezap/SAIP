@@ -23,7 +23,6 @@ namespace InterfazDeUsuario.UserControls
 	public partial class BarraDeEstado : UserControl
 	{
 		public ControladorDeCambioDePantalla Controlador;
-		Cuenta Cuenta;
 
 		public BarraDeEstado()
 		{
