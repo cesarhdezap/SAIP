@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.AccessControl;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -60,15 +61,15 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             return resultado;
         }
 
-        public Cliente RecuperarClientePorIdCuenta(int idCuenta)
+        public Clases.Cliente RecuperarClientePorIdCuenta(int idCuenta)
         {
             Cliente cliente = new Cliente();
             using(ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
-
+                cliente = context.Clientes.FirstOrDefault(c => c.Cuenta.ToList().Exists(cuenta => cuenta.Id == idCuenta));
             }
 
-            return cliente;
+            return ConvertirClienteDatosALogica(cliente);
         }
     }
 }

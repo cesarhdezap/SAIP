@@ -46,7 +46,19 @@ namespace InterfazDeUsuario.CallCenter
         public void MostrarCliente(int idCuenta)
         {
             ClienteDAO clienteDAO = new ClienteDAO();
+            Cliente cliente = clienteDAO.RecuperarClientePorIdCuenta(idCuenta);
+
+            TextBlockNombreCliente.Text = cliente.Nombre;
+            TextBlockTelefonoCliente.Text = cliente.Telefono;
+
+            TextBlockComentarioCliente.Text = cliente.Comentario;
+
+
         }
 
+        private void ButtonEliminarAlimento_Click (object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
