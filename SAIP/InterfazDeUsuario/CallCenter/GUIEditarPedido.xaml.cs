@@ -1,4 +1,5 @@
-﻿using LogicaDeNegocio.Clases;
+﻿using LogicaDeNegocio;
+using LogicaDeNegocio.Clases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,10 @@ namespace InterfazDeUsuario.CallCenter
     /// </summary>
     public partial class GUIEditarPedido : Page
     {
-        public GUIEditarPedido(ControladorDeCambioDePantalla control, Empleado empleado)
+        public GUIEditarPedido(ControladorDeCambioDePantalla control, Empleado empleado, Pedido pedido)
         {
             InitializeComponent();
-            control.Regresar();
+            barraEstado.Controlador = control;
             barraEstado.ActualizarNombreDeUsuario(empleado.NombreDeUsuario);
 
         }

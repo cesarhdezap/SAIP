@@ -62,6 +62,9 @@
     <Compile Include="Direcciones.cs">
       <DependentUpon>ModeloDeDatos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Discrepancia.cs">
+      <DependentUpon>ModeloDeDatos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Empleado.cs">
       <DependentUpon>ModeloDeDatos.tt</DependentUpon>
     </Compile>

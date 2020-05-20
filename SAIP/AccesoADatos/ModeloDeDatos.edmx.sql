@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/12/2020 17:05:30
+-- Date Created: 05/19/2020 18:39:31
 -- Generated from EDMX file: C:\Users\CETDT\Desktop\repos\cesarhdezap\SAIP\SAIP\AccesoADatos\ModeloDeDatos.edmx
 -- --------------------------------------------------
 
@@ -270,6 +270,15 @@ CREATE TABLE [dbo].[IngredienteIngrediente] (
 );
 GO
 
+-- Creating table 'Discrepancias'
+CREATE TABLE [dbo].[Discrepancias] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Comentario] nvarchar(max)  NOT NULL,
+    [Fecha] datetime  NOT NULL,
+    [Tipo] int  NOT NULL
+);
+GO
+
 -- Creating table 'CuentaCliente'
 CREATE TABLE [dbo].[CuentaCliente] (
     [Cuenta_Id] int  NOT NULL,
@@ -362,6 +371,12 @@ GO
 -- Creating primary key on [Id] in table 'IngredienteIngrediente'
 ALTER TABLE [dbo].[IngredienteIngrediente]
 ADD CONSTRAINT [PK_IngredienteIngrediente]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Discrepancias'
+ALTER TABLE [dbo].[Discrepancias]
+ADD CONSTRAINT [PK_Discrepancias]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
