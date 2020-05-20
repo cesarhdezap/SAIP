@@ -21,6 +21,7 @@ using LogicaDeNegocio.Clases;
 using static InterfazDeUsuario.UtileriasGráficas;
 using InterfazDeUsuario.Gerente;
 using InterfazDeUsuario.Mesero;
+using LogicaDeNegocio;
 
 namespace InterfazDeUsuario.Paginas
 {

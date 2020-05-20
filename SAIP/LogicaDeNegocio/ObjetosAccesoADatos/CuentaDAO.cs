@@ -43,7 +43,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
         }
 
-        private List<Clases.Cuenta> ConvertirListaDeCuentasDatosALogica(List<AccesoADatos.Cuenta> cuentas)
+        public List<Clases.Cuenta> ConvertirListaDeCuentasDatosALogica(ICollection<Cuenta> cuentas)
         {
             List<Clases.Cuenta> cuentasLogica = new List<Clases.Cuenta>();
             foreach (AccesoADatos.Cuenta cuenta in cuentas)
@@ -56,12 +56,17 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
         public Clases.Cuenta ConvertirCuentaDatosALogica(Cuenta cuenta)
         {
             MesaDAO mesa = new MesaDAO();
+            ClienteDAO clienteDAO = new ClienteDAO();
             Clases.Cuenta cuentaLogica = new Clases.Cuenta()
             {
                 Id = cuenta.Id,
                 Estado = (EstadoCuenta) cuenta.Estado,
                 PrecioTotal = cuenta.PrecioTotal,
-                Mesa = mesa.ConvertirMesaDatosALogica(cuenta.Mesa)
+                Mesa = mesa.ConvertirMesaDatosALogica(cuenta.Mesa),
+                Cliente = clienteDAO.ConvertirListaDeClientesDatosALogica(cuenta.Clientes.ToList()) 
+                
+                //Traducir datos de la cuenta
+
             };
 
             PedidoDAO pedidoDAO = new PedidoDAO();
@@ -72,5 +77,6 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
             return cuentaLogica;
         }
+
     }
 }
