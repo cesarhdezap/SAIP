@@ -23,14 +23,13 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			return productosResultado;
 		}
 
-		public Clases.Producto ConvertirDeDbALogica(AccesoADatos.Producto ProductoDb)
+		public Clases.Producto ConvertirProductoDatosALogica(AccesoADatos.Producto ProductoDb)
 		{
 			Clases.Producto productoConvertido = new Clases.Producto()
 			{
 				Id = ProductoDb.Id,
 				CantidadEnInventario = ProductoDb.CantidadEnInventario,
 				Nombre = ProductoDb.Nombre,
-				CostoDeVenta = ProductoDb.Costo,
 				CodigoDeBarras = ProductoDb.CodigoDeBarras,
 				Creador = ProductoDb.NombreCreador,
 				Activo = ProductoDb.Activo,
@@ -45,7 +44,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
 			foreach (Producto producto in productosDb)
 			{
-				productosResultado.Add(ConvertirDeDbALogica(producto));
+				productosResultado.Add(ConvertirProductoDatosALogica(producto));
 			}
 
 			return productosResultado;
