@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\Alimento.cs" />
+    <Compile Include="Clases\ClasesAsociativas\CantidadAlimento.cs" />
     <Compile Include="Clases\Platillo.cs" />
     <Compile Include="Clases\ClasesAsociativas\CantidadPlatillo.cs" />
     <Compile Include="Clases\ClasesAsociativas\CantidadProducto.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Clases\ClasesAsociativas\Proporcion.cs" />
     <Compile Include="Clases\Producto.cs" />
     <Compile Include="Convertidores\ConversorDeEnumeradores.cs" />
+    <Compile Include="Convertidores\ConversorDeListaCantidadProductos.cs" />
     <Compile Include="Enumeradores\EstadoCuenta.cs" />
     <Compile Include="Enumeradores\EstadoMesa.cs" />
     <Compile Include="Enumeradores\EstadoPedido.cs" />

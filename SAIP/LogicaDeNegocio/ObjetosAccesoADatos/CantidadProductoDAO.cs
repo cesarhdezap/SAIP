@@ -33,7 +33,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 CantidadProducto cantidadPlatillo = new CantidadProducto
                 {
                     Cantidad = productoPedido.Cantidad,
-                    Producto = productoDAO.ConvertirProductoDatosALogica(productoPedido.Productos)
+                    Alimento = productoDAO.ConvertirProductoDatosALogica(productoPedido.Productos)
                 };
                 cantidadProductos.Add(cantidadPlatillo);
             }

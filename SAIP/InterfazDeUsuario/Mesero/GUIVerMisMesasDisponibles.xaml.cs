@@ -50,7 +50,13 @@ namespace InterfazDeUsuario.Mesero
             MessageBoxResult resultado = MessageBox.Show("¿Abrir nueva cuenta?", "CREAR NUEVA CUENTA", MessageBoxButton.OKCancel);
             if (resultado == MessageBoxResult.OK)
             {
+                Cuenta cuenta = new Cuenta
+                {
+                    Mesa = mesa,
+                    Empleado = Empleado
+                };
                 CuentaDAO cuentaDAO = new CuentaDAO();
+                cuentaDAO.CrearCuenta(cuenta);
             }
             MostrarMesasDisponibles();
         }
