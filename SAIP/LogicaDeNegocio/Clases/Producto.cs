@@ -8,7 +8,6 @@ namespace LogicaDeNegocio.Clases
 {
     public class Producto : Alimento
     {
-        
         public double CantidadEnInventario { get; set; }
         public string CodigoDeBarras { get; set; }
         public double Costo { get; set; }
@@ -18,6 +17,18 @@ namespace LogicaDeNegocio.Clases
         public bool DescontarIngredientesDeInventario(int CantidadADescontar)
         {
             throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            string resultado = string.Empty;
+            resultado = "Nombre: " + Nombre;
+            resultado += Environment.NewLine;
+            resultado = "Codigo: " + Codigo;
+            resultado += Environment.NewLine;
+            resultado = "Precio: " + Precio;
+
+            return resultado;
         }
     }
 }
