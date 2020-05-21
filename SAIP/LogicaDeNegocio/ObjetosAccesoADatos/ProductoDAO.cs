@@ -23,17 +23,19 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			return productosResultado;
 		}
 
-		public Clases.Producto ConvertirProductoDatosALogica(AccesoADatos.Producto ProductoDb)
+		public Clases.Producto ConvertirProductoDatosALogica(AccesoADatos.Producto productoDb)
 		{
 			Clases.Producto productoConvertido = new Clases.Producto()
 			{
-				Id = ProductoDb.Id,
-				CantidadEnInventario = ProductoDb.CantidadEnInventario,
-				Nombre = ProductoDb.Nombre,
-				CodigoDeBarras = ProductoDb.CodigoDeBarras,
-				Creador = ProductoDb.NombreCreador,
-				Activo = ProductoDb.Activo,
-				Costo = ProductoDb.Costo
+				Id = productoDb.Id,
+				CantidadEnInventario = productoDb.CantidadEnInventario,
+				Nombre = productoDb.Nombre,
+				Precio = productoDb.Precio,
+				CodigoDeBarras = productoDb.CodigoDeBarras,
+				Creador = productoDb.NombreCreador,
+				Activo = productoDb.Activo,
+				Costo = productoDb.Costo,
+				Codigo = productoDb.Codigo
 			};
 			return productoConvertido;
 		}

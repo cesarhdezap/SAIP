@@ -25,6 +25,7 @@ namespace InterfazDeUsuario
 
         public MainWindow()
         {
+            
             InitializeComponent();
             RegresarAInicioDeSesion();
         }

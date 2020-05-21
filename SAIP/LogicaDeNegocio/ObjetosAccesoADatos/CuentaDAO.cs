@@ -22,24 +22,45 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
-                cuentas = context.Cuentas.Where(c => c.Empleado.Id == empleado.Id)
+                cuentas = context.Cuentas.Where(c => c.Empleado.Id == empleado.Id && c.Estado == (short)EstadoCuenta.Abierta)
                     .Include(c => c.Mesa)
                     .Include(c => c.Empleado)
                     .Include(c=> c.Pedidos)
+                    .Include(c => c.Clientes)
                     .ToList();
             }
+
             return ConvertirListaDeCuentasDatosALogica(cuentas);
+        }
+
+        public void ActualizarCuenta(Clases.Cuenta cuenta)
+        {
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                Cuenta cuentaDb = context.Cuentas.Find(cuenta.Id);
+                cuentaDb.Estado = (short)cuenta.Estado;
+                cuentaDb.PrecioTotal = cuenta.PrecioTotal;
+                //Actualizar pedidos
+                context.SaveChanges();
+            }
+
         }
 
         public void CrearCuenta(Clases.Cuenta cuenta)
         {
             var cuentaDb = new AccesoADatos.Cuenta()
             {
-                Id = cuenta.Id,
-                Estado = (short)cuenta.Estado
+                Estado = (short)EstadoCuenta.Abierta
             };
-            //Empleado
-            //Mesa
+
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                cuentaDb.Mesa = context.Mesas.Find(cuenta.Mesa.NumeroDeMesa);
+                cuentaDb.Mesa.Estado = (short)EstadoMesa.Ocupada;
+                cuentaDb.Empleado = context.Empleados.Find(cuenta.Empleado.Id);
+                context.Cuentas.Add(cuentaDb);
+                context.SaveChanges();
+            }
 
         }
 
@@ -63,11 +84,16 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 Estado = (EstadoCuenta) cuenta.Estado,
                 PrecioTotal = cuenta.PrecioTotal,
                 Mesa = mesa.ConvertirMesaDatosALogica(cuenta.Mesa),
-                Cliente = clienteDAO.ConvertirListaDeClientesDatosALogica(cuenta.Clientes.ToList()) 
-                
-                //Traducir datos de la cuenta
-
             };
+
+            try
+            {
+                cuentaLogica.Clientes = clienteDAO.ConvertirListaDeClientesDatosALogica(cuenta.Clientes.ToList());
+            }
+            catch(ObjectDisposedException)
+            {
+                cuentaLogica.Clientes = new List<Clases.Cliente>();
+            }
 
             PedidoDAO pedidoDAO = new PedidoDAO();
             foreach(AccesoADatos.Pedido pedido in cuenta.Pedidos)
@@ -77,6 +103,5 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
             return cuentaLogica;
         }
-
     }
 }

@@ -34,7 +34,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 CantidadPlatillo cantidadPlatillo = new CantidadPlatillo
                 {
                     Cantidad = platilloPedido.Cantidad,
-                    Platillo = platilloDAO.ConvertirPlatilloDeAccesoADatosAPlatilloDeLogica(platilloPedido.Alimento)
+                    Alimento = platilloDAO.ConvertirPlatilloDeAccesoADatosAPlatilloDeLogica(platilloPedido.Alimento)
                 };
                 cantidadPlatillos.Add(cantidadPlatillo);
             }
