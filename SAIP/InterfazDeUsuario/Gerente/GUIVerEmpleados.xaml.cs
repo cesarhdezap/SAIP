@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -29,17 +28,16 @@ namespace InterfazDeUsuario.Gerente
 
         
         public Empleado Gerente { get; set; }
-        
 
         public GUIVerEmpleados(Empleado EmpleadoCargado)
         {
-            
             InitializeComponent();
             Gerente = EmpleadoCargado;
             BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
+            
             MostrarEmpleados();
 
-        }
+        } 
 
         public void MostrarEmpleados() {
             EmpleadoDAO empleadoDAO = new EmpleadoDAO();

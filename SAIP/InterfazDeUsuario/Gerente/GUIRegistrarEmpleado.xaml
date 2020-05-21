@@ -9,21 +9,25 @@
       Title="GUIRegistrarEmpleado" Width="928.622">
 
     <Grid Margin="0,0,101.6,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="0*"/>
         </Grid.RowDefinitions>
-        <controls:BarraDeEstado x:Name="BarraDeEstado" Margin="0,0,-101.2,121" Width="Auto" Height="Auto"/>
+        <controls:BarraDeEstado x:Name="BarraDeEstado" Margin="0,0,-102.2,10" Width="923" Height="Auto" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
         <Label Content="Nombre" HorizontalAlignment="Left" Margin="195,92,0,0" VerticalAlignment="Top" Height="29" Width="120" FontSize="14"/>
-        <TextBox x:Name="Nombre" HorizontalAlignment="Left" Height="23" Margin="195,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131"/>
-        <Button x:Name="Agregar" Content="Agregar" HorizontalAlignment="Left" Margin="406,304,0,0" VerticalAlignment="Top" Width="98" Height="35"/>
-        <Label Content="Nombre de Usuario" HorizontalAlignment="Left" Margin="195,154,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="Usuario" HorizontalAlignment="Left" Height="23" Margin="195,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131"/>
-        <Label Content="Correo Electronico" HorizontalAlignment="Left" Margin="571,92,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="correo" HorizontalAlignment="Left" Height="23" Margin="571,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127"/>
-        <Label Content="Tipo de Empleado" HorizontalAlignment="Left" Margin="571,154,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="puesto" HorizontalAlignment="Left" Height="23" Margin="571,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127"/>
-        <Label Content="Password" HorizontalAlignment="Left" Margin="195,221,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="password" HorizontalAlignment="Left" Height="23" Margin="195,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131"/>
+        <TextBox x:Name="Nombre" HorizontalAlignment="Left" Height="23" Margin="195,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" TextChanged="Nombre_TextChanged"/>
+        <Button x:Name="Agregar" Content="Agregar" HorizontalAlignment="Left" Margin="406,304,0,0" VerticalAlignment="Top" Width="98" Height="35" Click="Agregar_Click"/>
+        <Label Content="Nombre de Usuario" HorizontalAlignment="Left" Margin="195,154,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="131"/>
+        <TextBox x:Name="Usuario" HorizontalAlignment="Left" Height="23" Margin="195,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" TextChanged="Usuario_TextChanged"/>
+        <Label Content="Correo Electronico" HorizontalAlignment="Left" Margin="571,92,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="125"/>
+        <TextBox x:Name="correo" HorizontalAlignment="Left" Height="23" Margin="571,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127" TextChanged="correo_TextChanged"/>
+        <Label Content="Tipo de Empleado" HorizontalAlignment="Left" Margin="571,154,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="122"/>
+        <TextBox x:Name="puesto" HorizontalAlignment="Left" Height="23" Margin="571,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127" TextChanged="puesto_TextChanged"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="195,221,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="67"/>
+        <TextBox x:Name="password" HorizontalAlignment="Left" Height="23" Margin="195,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
     </Grid>
 </Window>
