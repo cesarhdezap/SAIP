@@ -43,8 +43,9 @@ namespace InterfazDeUsuario.Gerente
 
         private void registro_Click(object sender, RoutedEventArgs e)
         {
-            GUIRegistarMesa registarMesa = new GUIRegistarMesa();
-            registarMesa.S
+            GUIRegistarMesa registarMesa = new GUIRegistarMesa(Gerente);
+            Hide();
+            registarMesa.ShowDialog();
 
         }
     }

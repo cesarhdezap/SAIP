@@ -28,6 +28,6 @@
         <Label Content="Tipo de Empleado" HorizontalAlignment="Left" Margin="571,154,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="122"/>
         <TextBox x:Name="puesto" HorizontalAlignment="Left" Height="23" Margin="571,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127" TextChanged="puesto_TextChanged"/>
         <Label Content="Password" HorizontalAlignment="Left" Margin="195,221,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="67"/>
-        <TextBox x:Name="password" HorizontalAlignment="Left" Height="23" Margin="195,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
+        <TextBox x:Name="password" HorizontalAlignment="Left" Height="25" Margin="195,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" TextChanged="TextBox_TextChanged"/>
     </Grid>
 </Window>

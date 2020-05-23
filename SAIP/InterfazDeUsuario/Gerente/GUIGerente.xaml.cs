@@ -49,7 +49,7 @@ namespace InterfazDeUsuario.Gerente
 		private void Button_Click_Lista(object sender, RoutedEventArgs e)
 		{
 			GUIVerEmpleados verEmpleados = new GUIVerEmpleados(Gerente);
-
+			
 			verEmpleados.ShowDialog();
 			
 		}

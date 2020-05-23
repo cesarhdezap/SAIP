@@ -14,9 +14,13 @@
 
     </Window.Resources>
 
-    <DockPanel>
-        <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top" Width="Auto" Loaded="BarraDeEstado_Loaded"/>
-        <TextBox x:Name="Busqueda" Height="40" Margin="368,0,0,0" TextChanged="Busqueda_TextChanged" DockPanel.Dock="Top" Width="254" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="0" RenderTransformOrigin="0.5,0.5">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="173*"/>
+            <ColumnDefinition Width="244*"/>
+        </Grid.ColumnDefinitions>
+        <controls:BarraDeEstado x:Name="BarraDeEstado" Width="Auto" Margin="0,0,0.2,583.6" Grid.ColumnSpan="2" />
+        <TextBox x:Name="Busqueda" Height="40" Margin="10,148,0,0" TextChanged="Busqueda_TextChanged" Width="353" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="0" RenderTransformOrigin="0.5,0.5">
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="1" ScaleX="1"/>
@@ -26,7 +30,7 @@
                 </TransformGroup>
             </TextBox.RenderTransform>
         </TextBox>
-        <DataGrid x:Name="ListaE" AutoGenerateColumns="False" Height="449" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="935" Margin="0,0,0,-0.4" AutomationProperties.IsColumnHeader="True" FontFamily="Tahoma" FontSize="18">
+        <DataGrid x:Name="ListaE" AutoGenerateColumns="False"  Height="469" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="935" Margin="0,0,0,-0.4" AutomationProperties.IsColumnHeader="True" FontFamily="Tahoma" FontSize="18" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" CanUserResize ="False" />
                 <DataGridTextColumn Header="Usuario" Binding="{Binding NombreDeUsuario}" CanUserResize="False"/>
@@ -35,9 +39,9 @@
                 <DataGridCheckBoxColumn Header="Activo" Binding="{Binding Activo}" CanUserResize="False"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Registrar" x:Name="registro" Height="34" VerticalAlignment="Top" Width="144" Margin="0,0.4,0,0" Click="registro_Click"/>
+        <Button Content="Registrar" x:Name="registro" Height="40" VerticalAlignment="Top" Margin="247.2,148,316.2,0" Click="registro_Click" Grid.Column="1"/>
 
-    </DockPanel>
+    </Grid>
 
 
 

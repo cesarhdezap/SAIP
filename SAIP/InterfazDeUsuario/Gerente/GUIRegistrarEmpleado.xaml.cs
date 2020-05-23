@@ -23,13 +23,14 @@ namespace InterfazDeUsuario.Gerente
     /// <summary>
     /// Lógica de interacción para GUIRegistrarEmpleado.xaml
     /// </summary>
+
     public partial class GUIRegistrarEmpleado : Window
     {
         public Empleado Gerente { get; set; }
         public List<Empleado> Trabajadores { get; set; }
         public List<Empleado> Visible { get; set; }
         public Empleado empleado { get; set; } = new Empleado();
-        private bool CandadoDeRefrescadoDeCajasDeTexto = true;
+        ControladorDeCambioDePantalla controlador;
         public GUIRegistrarEmpleado(Empleado EmpleadoCargado)
         {
             InitializeComponent();
@@ -44,7 +45,7 @@ namespace InterfazDeUsuario.Gerente
 
         public void ActualizarLista()
         {
-
+            
         }
 
         private void Agregar_Click(object sender, RoutedEventArgs e)
@@ -111,6 +112,10 @@ namespace InterfazDeUsuario.Gerente
             MostrarEstadoDeValidacionCadena((TextBox)sender);
         }
 
-        
+        private void RegresarButton_Click(object sender, RoutedEventArgs e)
+        {
+            GUIVerEmpleados verEmpleados;
+            controlador.Regresar();
+        }
     }
 }

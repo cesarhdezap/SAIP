@@ -1,4 +1,5 @@
-﻿using LogicaDeNegocio.Clases;
+﻿using InterfazDeUsuario.UserControls;
+using LogicaDeNegocio.Clases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
