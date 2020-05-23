@@ -120,6 +120,24 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			return ingredienteResultado;
 		}
 
+		public void ActualizarIngrediente(Clases.Ingrediente ingrediente)
+		{
+			Ingrediente ingredienteDb;
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				 ingredienteDb = context.Ingredientes.Find(ingrediente.Id);
+				ingredienteDb.FechaDeModiciacion = DateTime.Now;
+				ingredienteDb.Nombre = ingrediente.Nombre;
+				ingredienteDb.CantidadEnInventario = ingrediente.CantidadEnInventario;
+				ingredienteDb.UnidadDeMedida = (short)ingrediente.UnidadDeMedida;
+				ingredienteDb.Codigo = ingrediente.Codigo;
+				ingredienteDb.CodigoDeBarras = ingrediente.CodigoDeBarras;
+				ingredienteDb.Costo = ingrediente.Costo;
+				ingredienteDb.Activo = ingrediente.Activo;
+				context.SaveChanges();
+			}
+		}
+
 		
 
 		public List<Clases.Ingrediente> ObtenerListaDeIngredientesPorIdDePlatillo(int Id)

@@ -9,7 +9,7 @@ namespace LogicaDeNegocio.Clases
     public class Producto : Alimento
     {
         
-        public double CantidadEnInventario { get; set; }
+        public int CantidadEnInventario { get; set; }
         public string CodigoDeBarras { get; set; }
         public double Costo { get; set; }
         public string Creador { get; set; }

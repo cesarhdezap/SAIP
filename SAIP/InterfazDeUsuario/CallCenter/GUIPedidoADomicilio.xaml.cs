@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using LogicaDeNegocio.Clases;
+using LogicaDeNegocio.Clases.ClasesCompuestas;
 using LogicaDeNegocio.ObjetosAccesoADatos;
 
 namespace InterfazDeUsuario.CallCenter
@@ -20,28 +21,26 @@ namespace InterfazDeUsuario.CallCenter
 	/// <summary>
 	/// Interaction logic for GUIPedidoADomicilio.xaml
 	/// </summary>
-	public partial class GUIPedidoADomicilio : Window
+	public partial class GUIPedidoADomicilio : Page
 	{
-
+		public ControladorDeCambioDePantalla Controlador { get; set; }
 		public Empleado EmpleadoDeCallCenter { get; set; } = new Empleado();
 		public Iva Iva { get; set; } = new Iva();
-		public List<Platillo> TodosLostAlimentos { get; set; } = new List<Platillo>();
-		public List<Platillo> AlimentosVisibles { get; set; } = new List<Platillo>();
-		public GUIPedidoADomicilio(Empleado EmpleadoDeCallCenter)
+		public List<Platillo> PlatillosCargados { get; set; } = new List<Platillo>();
+		public List<Producto> ProductosCargados { get; set; }
+		public GUIPedidoADomicilio(ControladorDeCambioDePantalla controlador, Empleado EmpleadoDeCallCenter)
 		{
 			InitializeComponent();
 			this.EmpleadoDeCallCenter = EmpleadoDeCallCenter;
-			IvaDAO ivaDAO = new IvaDAO();
+			IvaDAO ivaDAO = new IvaDAO(); 
+			PlatilloDAO platilloDAO = new PlatilloDAO();
+			ProductoDAO productoDAO = new ProductoDAO();
 			Iva = ivaDAO.CargarIvaActual();
 			IvaLabel.Content = "IVA(" + Iva.Valor + "%)";
-			PlatilloDAO alimentoDAO = new PlatilloDAO();
-			TodosLostAlimentos = alimentoDAO.CargarTodos();
-			AlimentosVisibles = TodosLostAlimentos;
-			BusquedaDataGrid.ItemsSource = AlimentosVisibles;
-			TodosLostAlimentos.ElementAt(0).CalcularCostoDeIngredientes();
-			NombreDeClienteTextBox.Content = TodosLostAlimentos.ElementAt(0).CostoDeIngredientes;
-			
-			
+			Controlador = controlador;
+			BarraDeEstado.Controlador = controlador;
+			ProductosCargados = productoDAO.CargarProductosActivos();
+			PlatillosCargados = platilloDAO.CargarTodos();
 		}
 
 		private void BusquedaTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -49,11 +48,11 @@ namespace InterfazDeUsuario.CallCenter
 			string busqueda = BusquedaTextBox.Text;
 			if (busqueda != string.Empty)
 			{
-				AlimentosVisibles = TodosLostAlimentos.TakeWhile(alimento => alimento.Nombre.ToLower().Contains(busqueda.ToLower())).ToList();
+				AlimentosVisibles = PlatillosCargados.TakeWhile(alimento => alimento.Nombre.ToLower().Contains(busqueda.ToLower())).ToList();
 			}
 			else
 			{
-				AlimentosVisibles = TodosLostAlimentos;
+				AlimentosVisibles = PlatillosCargados;
 			}
 			ActualizarPantalla();
 		}
@@ -62,6 +61,33 @@ namespace InterfazDeUsuario.CallCenter
 		{
 			BusquedaDataGrid.ItemsSource = null;
 			BusquedaDataGrid.ItemsSource = AlimentosVisibles;
+		}
+
+
+
+		private void ButtonAñadir_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void ButtonEliminar_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void CantidadDeIngrediente_TextChanged(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void TextBox_Loaded(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void CantidadDeIngrediente_PreviewTextInput(object sender, TextCompositionEventArgs e)
+		{
+
 		}
 	}
 }

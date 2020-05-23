@@ -152,6 +152,7 @@ namespace InterfazDeUsuario.Gerente
 					Nombre = producto.Nombre,
 					CodigoDeBarras = producto.CodigoDeBarras,
 					Cantidad = 0,
+					Codigo = producto.Codigo,
 					Costo = producto.Costo,
 					UnidadDeMedida = UnidadDeMedida.Unidad,
 					TipoDeProducto = TipoDeProducto.Producto
@@ -250,7 +251,7 @@ namespace InterfazDeUsuario.Gerente
 		{
 			if (ObjetosDeInventarioAñadidos.Count >= 0)
 			{ 
-				GUIReporteDeInventario reporteDeInventario = new GUIReporteDeInventario(Controlador, Gerente, CalcularDiscrepancias(ObjetosDeInventarioAñadidos));
+				GUIReporteDeInventario reporteDeInventario = new GUIReporteDeInventario(Controlador, Gerente, CalcularDiscrepancias(ObjetosDeInventarioAñadidos), ObjetosDeInventarioCargados);
 				Controlador.CambiarANuevaPage(reporteDeInventario);
 			}
 			else

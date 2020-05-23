@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -119,6 +120,25 @@ namespace InterfazDeUsuario
 				textBoxNombre.BorderBrush = Brushes.Red;
 				MostrarToolTip(textBoxNombre, "El nombre ingresado es invalido");
 			}
+		}
+
+		public static string MostrarVentanaDeSeleccionDeArchivos()
+		{
+
+			string direccionDeArchivoSeleccionado = string.Empty;
+
+			SaveFileDialog ventanaDeSeleccionDeArchivo = new SaveFileDialog
+			{
+				Filter = "DocumentosPDF (*.PDF)|*.PDF",
+				InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+			};
+
+			if (ventanaDeSeleccionDeArchivo.ShowDialog() == true)
+			{
+				direccionDeArchivoSeleccionado = ventanaDeSeleccionDeArchivo.FileName;
+			}
+
+			return direccionDeArchivoSeleccionado;
 		}
 	}
 }
