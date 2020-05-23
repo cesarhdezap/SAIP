@@ -31,12 +31,12 @@ namespace InterfazDeUsuario.Gerente
 		public Platillo Platillo { get; set; } = new Platillo();
 		public double Ganancia { get; set; }
 		private bool CandadoDeRefrescadoDeCajasDeTexto { get; set; } = true;
-		public GUIEditarPlatillo(ControladorDeCambioDePantalla controlador, Empleado EmpleadoCargado, Platillo platillo)
+		public GUIEditarPlatillo(ControladorDeCambioDePantalla controlador, Empleado empleadoCargado, Platillo platillo)
 		{
 			InitializeComponent();
 			Controlador = controlador;
 			BarraDeEstado.Controlador = controlador;
-			Gerente = EmpleadoCargado;
+			Gerente = empleadoCargado;
 			Platillo = platillo;
 			proporcionesOriginales = new List<Proporcion>();
 			foreach(Proporcion proporcion in Platillo.Proporciones)

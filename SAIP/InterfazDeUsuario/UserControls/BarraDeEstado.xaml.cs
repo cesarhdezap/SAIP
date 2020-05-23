@@ -35,9 +35,9 @@ namespace InterfazDeUsuario.UserControls
 		}
 		
 
-		public void ActualizarNombreDeUsuario(String NombreDeUsuario)
+		public void ActualizarNombreDeUsuario(String nombreDeUsuario)
 		{
-			NombreDeUsuarioLabel.Content = NombreDeUsuario;
+			NombreDeUsuarioLabel.Content = nombreDeUsuario;
 		}
 
 		public void OcultarNombreDeUsuarioYBotones()

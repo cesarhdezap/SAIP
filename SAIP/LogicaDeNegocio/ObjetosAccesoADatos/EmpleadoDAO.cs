@@ -11,48 +11,48 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 {
 	public class EmpleadoDAO
 	{
-		private AccesoADatos.Empleado ConvertirEmpleadoDeLogicaAEmpleadoDeAccesoADatos(Clases.Empleado EmpleadoLogica)
+		private AccesoADatos.Empleado ConvertirDeLogicaADatos(Clases.Empleado empleadoLogica)
 		{
 			AccesoADatos.Empleado empleadoConvertido = new AccesoADatos.Empleado()
 			{
-				Id = EmpleadoLogica.Id,
-				Contraseña = EmpleadoLogica.Contraseña,
-				NombreDeUsuario = EmpleadoLogica.NombreDeUsuario,
-				Nombre = EmpleadoLogica.Nombre,
-				FechaDeCreacion = EmpleadoLogica.FechaDeCreacion,
-				FechaDeModicacion = EmpleadoLogica.FechaDeModicacion,
-				NombreCreador = EmpleadoLogica.Creador,
-				Activo = EmpleadoLogica.Activo,
-				TipoDeEmpleado = (short)EmpleadoLogica.TipoDeEmpleado
+				Id = empleadoLogica.Id,
+				Contraseña = empleadoLogica.Contraseña,
+				NombreDeUsuario = empleadoLogica.NombreDeUsuario,
+				Nombre = empleadoLogica.Nombre,
+				FechaDeCreacion = empleadoLogica.FechaDeCreacion,
+				FechaDeModicacion = empleadoLogica.FechaDeModicacion,
+				NombreCreador = empleadoLogica.Creador,
+				Activo = empleadoLogica.Activo,
+				TipoDeEmpleado = (short)empleadoLogica.TipoDeEmpleado
 			};
 
 			return empleadoConvertido;
 		}
 
-		private Clases.Empleado ConvertireEmpleadoDeAccesoADatosAEmpleadoDeLogica(AccesoADatos.Empleado EmpleadoDb)
+		private Clases.Empleado ConvertirDeDatosALogica(AccesoADatos.Empleado empleadoDb)
 		{
 			Clases.Empleado empleadoConvertido = new Clases.Empleado()
 			{
-				Id = EmpleadoDb.Id,
-				Contraseña = EmpleadoDb.Contraseña,
-				NombreDeUsuario = EmpleadoDb.NombreDeUsuario,
-				Nombre = EmpleadoDb.Nombre,
-				FechaDeCreacion = EmpleadoDb.FechaDeCreacion,
-				FechaDeModicacion = EmpleadoDb.FechaDeModicacion,
-				Creador = EmpleadoDb.NombreCreador,
-				Activo = EmpleadoDb.Activo,
-				TipoDeEmpleado = (TipoDeEmpleado)EmpleadoDb.TipoDeEmpleado
+				Id = empleadoDb.Id,
+				Contraseña = empleadoDb.Contraseña,
+				NombreDeUsuario = empleadoDb.NombreDeUsuario,
+				Nombre = empleadoDb.Nombre,
+				FechaDeCreacion = empleadoDb.FechaDeCreacion,
+				FechaDeModicacion = empleadoDb.FechaDeModicacion,
+				Creador = empleadoDb.NombreCreador,
+				Activo = empleadoDb.Activo,
+				TipoDeEmpleado = (TipoDeEmpleado)empleadoDb.TipoDeEmpleado
 			};
 
 			return empleadoConvertido;
 		}
 
-		private List<Clases.Empleado> ConvertirListaDeEmpleadosDeAccesoADatosAListaDeEmpleadosDeLogica(List<AccesoADatos.Empleado> EmpleadosDb)
+		private List<Clases.Empleado> ConvertirListaDeDatosALogica(List<AccesoADatos.Empleado> empleadosDb)
 		{
 			List<Clases.Empleado> empleadosResultado = new List<Clases.Empleado>();
-			foreach(AccesoADatos.Empleado empleadoDb in EmpleadosDb)
+			foreach(AccesoADatos.Empleado empleadoDb in empleadosDb)
 			{
-				Clases.Empleado empleadoLogico = ConvertireEmpleadoDeAccesoADatosAEmpleadoDeLogica(empleadoDb);
+				Clases.Empleado empleadoLogico = ConvertirDeDatosALogica(empleadoDb);
 				empleadosResultado.Add(empleadoLogico);
 			}
 
@@ -70,7 +70,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			Clases.Empleado empleado;
 			if (empleadoDb != null)
 			{
-				empleado = ConvertireEmpleadoDeAccesoADatosAEmpleadoDeLogica(empleadoDb);
+				empleado = ConvertirDeDatosALogica(empleadoDb);
 			}
 			else
 			{
@@ -100,7 +100,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			}
 
 			List<Clases.Empleado> empleadosResultado = new List<Clases.Empleado>();
-			empleadosResultado = ConvertirListaDeEmpleadosDeAccesoADatosAListaDeEmpleadosDeLogica(empleadosDb);
+			empleadosResultado = ConvertirListaDeDatosALogica(empleadosDb);
 			return empleadosResultado;
 
 		}
@@ -119,7 +119,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
 				if (EmpleadoDb != null)
 				{
-					usuario = ConvertireEmpleadoDeAccesoADatosAEmpleadoDeLogica(EmpleadoDb);
+					usuario = ConvertirDeDatosALogica(EmpleadoDb);
 				}
 			}
 			else

@@ -38,13 +38,13 @@ namespace LogicaDeNegocio.Clases
             }
 
         }
-        public void AñadirIngredientePorId(int Id)
+        public void AñadirIngredientePorId(int id)
         {
             Ingrediente ingrediente = new Ingrediente();
             IngredienteDAO ingredienteDAO = new IngredienteDAO();
-            if (!IngredienteYaAñadido(Id))
+            if (!IngredienteYaAñadido(id))
             {
-                ingrediente = ingredienteDAO.CargarIngredientePorId(Id);
+                ingrediente = ingredienteDAO.CargarIngredientePorId(id);
                 Proporciones.Add(new Proporcion
                 {
                     Ingrediente = ingrediente,
@@ -53,23 +53,23 @@ namespace LogicaDeNegocio.Clases
             }
         }
 
-        public void EliminarIngredientePorId(int Id)
+        public void EliminarIngredientePorId(int id)
         {
             for (int i = 0;  i < Proporciones.Count; i++)
             {
-                if (Proporciones.ElementAt(i).Ingrediente.Id == Id)
+                if (Proporciones.ElementAt(i).Ingrediente.Id == id)
                 {
                     Proporciones.RemoveAt(i);
                 }
             }
         }
 
-        private bool IngredienteYaAñadido(int Id)
+        private bool IngredienteYaAñadido(int id)
         {
             bool resultado = false;
             foreach (Proporcion proporcion in Proporciones)
             {
-                if (proporcion.Ingrediente.Id == Id)
+                if (proporcion.Ingrediente.Id == id)
                 {
                     resultado = true;
                 }
