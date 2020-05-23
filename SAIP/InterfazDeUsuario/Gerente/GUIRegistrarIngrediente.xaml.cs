@@ -1,4 +1,5 @@
 ﻿using LogicaDeNegocio.Clases;
+using LogicaDeNegocio.Enumeradores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,8 @@ namespace InterfazDeUsuario.Gerente
             BarraDeEstado.Controlador = controlador;
             BarraDeEstado.ActualizarNombreDeUsuario(empleado.NombreDeUsuario);
             GridCompuestos.Visibility = Visibility.Collapsed;
+            ComboBoxUnidadMedida.ItemsSource = Enum.GetValues(typeof(UnidadDeMedida));
+            ComboBoxUnidadMedida.SelectedIndex = 0;
         }
 
         private void CheckBoxIngredienteCompuesto_Checked(object sender, RoutedEventArgs e)

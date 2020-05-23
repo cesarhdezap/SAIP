@@ -13,15 +13,15 @@
 
         <Grid>
             <Label Content="Código" HorizontalAlignment="Left" Margin="40,60,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="TextBoxCodigo" HorizontalAlignment="Left" Height="23" Margin="133,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20"/>
+            <TextBox x:Name="TextBoxCodigo" HorizontalAlignment="Left" Height="23" Margin="140,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20"/>
             <Label Content="Nombre" HorizontalAlignment="Left" Margin="40,107,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="TextBoxNombre" HorizontalAlignment="Left" Height="23" Margin="133,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20"/>
+            <TextBox x:Name="TextBoxNombre" HorizontalAlignment="Left" Height="23" Margin="140,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20"/>
             <Label Content="Costo" HorizontalAlignment="Left" Margin="40,158,0,0" VerticalAlignment="Top"/>
-            <ComboBox x:Name="ComboBoxUnidadMedida" HorizontalAlignment="Left" Margin="133,249,0,0" VerticalAlignment="Top" Width="120"/>
+            <ComboBox x:Name="ComboBoxUnidadMedida" HorizontalAlignment="Left" Margin="140,249,0,0" VerticalAlignment="Top" Width="120"/>
             <Label Content="Unidad de medida" HorizontalAlignment="Left" Margin="20,245,0,0" VerticalAlignment="Top"/>
             <Label Content="Cantidad" HorizontalAlignment="Left" Margin="40,201,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="TextBoxCosto" HorizontalAlignment="Left" Height="23" Margin="133,161,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20"/>
-            <TextBox x:Name="TextBoxCantidad" HorizontalAlignment="Left" Height="23" Margin="133,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20"/>
+            <TextBox x:Name="TextBoxCosto" HorizontalAlignment="Left" Height="23" Margin="140,161,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20"/>
+            <TextBox x:Name="TextBoxCantidad" HorizontalAlignment="Left" Height="23" Margin="140,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20"/>
             <CheckBox x:Name="CheckBoxIngredienteCompuesto" Content="¿Es un Ingrediente compuesto?" HorizontalAlignment="Left" Margin="320,48,0,0" VerticalAlignment="Top" Checked="CheckBoxIngredienteCompuesto_Checked" Unchecked="CheckBoxIngredienteCompuesto_Unchecked"/>
             <Grid x:Name="GridCompuestos" HorizontalAlignment="Left" Height="262" Margin="320,84,0,0" VerticalAlignment="Top" Width="440">
                 <Label Content="Código" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
