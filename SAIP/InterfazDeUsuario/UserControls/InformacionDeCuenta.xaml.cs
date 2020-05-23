@@ -3,21 +3,15 @@ using InterfazDeUsuario.Mesero;
 using LogicaDeNegocio;
 using LogicaDeNegocio.Clases;
 using LogicaDeNegocio.Clases.ClasesAsociativas;
+using LogicaDeNegocio.Enumeradores;
 using LogicaDeNegocio.ObjetosAccesoADatos;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using static InterfazDeUsuario.UtileriasGráficas;
 
 namespace InterfazDeUsuario.UserControls
 {
@@ -33,15 +27,16 @@ namespace InterfazDeUsuario.UserControls
         public InformacionDeCuenta()
         {
             InitializeComponent();
-
         }
 
         public void ActualizarCuenta(Cuenta cuenta)
         {
-            LabelMesa.Content = cuenta.Mesa.ToString();
-            DataGridPedidos.ItemsSource = cuenta.Pedidos;
             Cuenta = cuenta;
-            
+            LabelCuenta.Content = "Cuenta: " + cuenta.Id + " " + cuenta.Estado.ToString();
+            LabelMesa.Content = "Mesa: " + cuenta.Mesa.ToString();
+            CargarAlimentosDePedidos();
+            DataGridPedidos.ItemsSource = cuenta.Pedidos;
+
         }
 
         private void ButtonNuevoPedido_Click(object sender, RoutedEventArgs e)
@@ -55,51 +50,26 @@ namespace InterfazDeUsuario.UserControls
             Pedido pedido = ((FrameworkElement)sender).DataContext as Pedido;
             GUIEditarPedido page = new GUIEditarPedido(Controlador, Empleado, pedido);
             Controlador.CambiarANuevaPage(page);
+
         }
 
         private void Expander_Expanded(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-
-            Pedido pedido = ObtenerPedidoDeExpander(sender);
-            MostrarAlimentosDelPedido(pedido);
-
-
             CambiarEstadoDeExpander(sender);
             Mouse.OverrideCursor = null;
         }
 
-        //private DataGrid ObtenerDataGridCantidadPlatillos(object sender)
-        //{
-        //    Visual elementoVisual = sender as Visual;
-        //    for (int i = 0; i < VisualTreeHelper.GetChildrenCount(elementoVisual); i++)
-        //    {
-        //        VisualTreeHelper.GetChild(elementoVisual, i);
-
-        //    }
-        //}
-
-        private Pedido ObtenerPedidoDeExpander(object expander)
+        private void CargarAlimentosDePedidos()
         {
-            Pedido pedido = new Pedido();
-            for (Visual elementoVisual = expander as Visual; elementoVisual != null; elementoVisual = VisualTreeHelper.GetParent(elementoVisual) as Visual)
+            foreach (Pedido pedido in Cuenta.Pedidos)
             {
-                if (elementoVisual is DataGridRow fila)
-                {
-                    pedido = ((FrameworkElement)fila).DataContext as Pedido;
-                    break;
-                }
+                CantidadPlatilloDAO cantidadPlatilloDAO = new CantidadPlatilloDAO();
+                CantidadProductoDAO cantidadProductoDAO = new CantidadProductoDAO();
+                pedido.CantidadAlimentos = new List<CantidadAlimento>();
+                pedido.CantidadAlimentos = pedido.CantidadAlimentos.Concat(cantidadPlatilloDAO.RecuperarCantidadPlatilloPorIDPedido(pedido.Id)).ToList();
+                pedido.CantidadAlimentos = pedido.CantidadAlimentos.Concat(cantidadProductoDAO.RecuperarCantidadPlatilloPorIDPedido(pedido.Id)).ToList();
             }
-
-            return pedido;
-        }
-
-        private void MostrarAlimentosDelPedido(Pedido pedido)
-        {
-            CantidadPlatilloDAO cantidadPlatilloDAO = new CantidadPlatilloDAO();
-            CantidadProductoDAO cantidadProductoDAO = new CantidadProductoDAO();
-            //DataGridCantidadPlatillo.ItemSource = cantidadPlatilloDAO.RecuperarCantidadPlatilloPorIDPedido(pedido.Id);
-            //DataGridCantidadProducto.ItemSource = cantidadProductoDAO.RecuperarCantidadPlatilloPorIDPedido(pedido.Id);
         }
 
         private void Expander_Collapsed(object sender, RoutedEventArgs e)
@@ -125,6 +95,18 @@ namespace InterfazDeUsuario.UserControls
                     break;
                 }
             }
+        }
+
+
+        private void ButtonTerminarCuenta_Click(object sender, RoutedEventArgs e)
+        {
+            CuentaDAO cuentaDAO = new CuentaDAO();
+            //Actualizar precio de pedidos
+            Cuenta.Estado = EstadoCuenta.Terminada;
+            cuentaDAO.ActualizarCuenta(Cuenta);
+
+            MesaDAO mesaDAO = new MesaDAO();
+            mesaDAO.CambiarEstadoPorID(Cuenta.Mesa.NumeroDeMesa, EstadoMesa.Disponible);
         }
     }
 }

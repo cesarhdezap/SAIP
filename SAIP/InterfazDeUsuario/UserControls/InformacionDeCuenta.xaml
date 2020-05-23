@@ -14,64 +14,66 @@
     </UserControl.Resources>
 
     <StackPanel Orientation="Vertical">
-        <Label x:Name="LabelMesa" Content="Placeholder Mesa"/>
+        <StackPanel Orientation="Horizontal">
+            <Label x:Name="LabelCuenta" Content="Placeholder Cuenta"/>
+            <Label x:Name="LabelMesa" Content="Placeholder Mesa"/>
+        </StackPanel>
         
+
         <DataGrid x:Name="DataGridPedidos" Background="Transparent" AutoGenerateColumns="False" IsReadOnly="True" CanUserReorderColumns="False">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="BorderThickness" Value="0"/>
                 </Style>
             </DataGrid.CellStyle>
+
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="FontSize" Value="15"/>
+                </Style>
+
+            </DataGrid.ColumnHeaderStyle>
             
             <DataGrid.RowHeaderTemplate>
                 <DataTemplate>
-                    <Expander Expanded="Expander_Expanded" Collapsed="Expander_Collapsed">
-                        
-                    </Expander>
+                    <Expander Expanded="Expander_Expanded" Collapsed="Expander_Collapsed"/>
                 </DataTemplate>
             </DataGrid.RowHeaderTemplate>
 
             <DataGrid.RowDetailsTemplate>
-                <DataTemplate x:Name="DataTemplateAlimento">
-                    <StackPanel Orientation="Vertical">
-                        <DataGrid x:Name="DataGridCantidadPlatillos" ItemsSource="{Binding CantidadPlatillos}">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding Cantidad}"/>
-                                <DataGridTextColumn Binding="{Binding Platillo.Nombre}"/>
-                                <DataGridTextColumn Binding="{Binding Platillo.Precio}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                        <DataGrid ItemsSource="{Binding CantidadProducto}">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding Cantidad}"/>
-                                <DataGridTextColumn Binding="{Binding Producto.Nombre}"/>
-                                <DataGridTextColumn Binding="{Binding Producto.PrecioDeVenta}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </StackPanel>
+                <DataTemplate>
+                    <DataGrid ItemsSource="{Binding CantidadAlimentos}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Nombre" Binding="{Binding Alimento.Nombre}" FontSize="15"/>
+                            <DataGridTextColumn Header="Codigo" Binding="{Binding Alimento.Codigo}" FontSize="15"/>
+                            <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" FontSize="15"/>
+                            <DataGridTextColumn Header="Precio" Binding="{Binding Alimento.Precio}" FontSize="15"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
-            
+
             <DataGrid.Columns>
-                <DataGridTextColumn Header="#Pedido" Binding="{Binding Id}"/>
-                <DataGridTextColumn Header="PrecioTotal" Binding="{Binding PrecioTotal}" />
-                <DataGridTextColumn Header="Estado" Binding="{Binding Estado, Converter={StaticResource ResourceKey=ConversorDeEnumeradores} }"/>
-                
-                
+                <DataGridTextColumn Header="#Pedido" Binding="{Binding Id}" FontSize="15"/>
+                <DataGridTextColumn Header="PrecioTotal" Binding="{Binding PrecioTotal}" FontSize="15"/>
+                <DataGridTextColumn Header="Estado" Binding="{Binding Estado, Converter={StaticResource ResourceKey=ConversorDeEnumeradores} }" FontSize="15"/>
+
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Editar pedido" Click="ButtonEditarPedido_Click" Margin="2"/>
+                            <Button Content="Editar pedido" Click="ButtonEditarPedido_Click" Margin="2" FontSize="15"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
-
-            
         </DataGrid>
+        
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Name="ButtonNuevoPedido" Content="Nuevo pedido" Margin="2" Click="ButtonNuevoPedido_Click"/>
-            <Button x:Name="ButtonTerminarCuenta" Content="Terminar cuenta" Margin="2"/>
+            <Button Name="ButtonNuevoPedido" Content="Nuevo pedido" Margin="2" Click="ButtonNuevoPedido_Click" FontSize="15" Background="LightGreen"/>
+            <Button x:Name="ButtonTerminarCuenta" Content="Terminar cuenta" Margin="2" Click="ButtonTerminarCuenta_Click" FontSize="15" Background="PaleVioletRed"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

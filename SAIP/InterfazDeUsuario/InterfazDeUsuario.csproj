@@ -205,5 +205,16 @@
   <ItemGroup>
     <Resource Include="UserControls\italiapizza.jpeg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\pizza_pepperoni.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\borrar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\actualizar.png" />
+    <Resource Include="img\anadir.png" />
+    <Resource Include="img\disminuir.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

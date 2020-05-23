@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\Alimento.cs" />
+    <Compile Include="Clases\ClasesAsociativas\CantidadAlimento.cs" />
     <Compile Include="Clases\Platillo.cs" />
     <Compile Include="Clases\ClasesAsociativas\CantidadPlatillo.cs" />
     <Compile Include="Clases\ClasesAsociativas\CantidadProducto.cs" />

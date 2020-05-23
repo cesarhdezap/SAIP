@@ -13,14 +13,13 @@ namespace LogicaDeNegocio
     {
         public int Id { get; set; }
         public DateTime FechaDeCreacion { get; set; }
-        public List<CantidadPlatillo> CantidadPlatillos = new List<CantidadPlatillo>();
-        public List<CantidadProducto> CantidadProductos = new List<CantidadProducto>();
+        public List<CantidadAlimento> CantidadAlimentos { get; set; }
         public double PrecioTotal { get; set; }
         public double Iva { get; set; }
         public List<string> Comentarios { get; set; }
         public EstadoPedido Estado { get; set; }
-        public int EmpleadoId { get; set; }
-        public int CuentaId { get; set; }
+        public Empleado Empleado { get; set; }
+        public Cuenta Cuenta { get; set; }
         public string Creador { get; set; }
 
 

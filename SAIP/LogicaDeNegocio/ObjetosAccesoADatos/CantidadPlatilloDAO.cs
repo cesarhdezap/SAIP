@@ -1,4 +1,4 @@
-﻿using AccesoADatos;
+using AccesoADatos;
 using LogicaDeNegocio.Clases.ClasesAsociativas;
 using System;
 using System.Collections.Generic;
@@ -34,7 +34,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 CantidadPlatillo cantidadPlatillo = new CantidadPlatillo
                 {
                     Cantidad = platilloPedido.Cantidad,
-                    Platillo = platilloDAO.ConvertirDatosALogica(platilloPedido.Alimento)
+                    Platillo = platilloDAO.ConvertirDatosALogica(platilloPedido.Alimento) 
                 };
                 cantidadPlatillos.Add(cantidadPlatillo);
             }

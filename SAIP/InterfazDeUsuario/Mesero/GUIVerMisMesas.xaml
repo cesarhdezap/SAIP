@@ -54,7 +54,13 @@
     
     <DockPanel>
         <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top" Width="Auto"/>
-        <Label x:Name="LabelMisMesas" Margin="10" Content="MIS MESAS" FontSize="30" FontFamily="Script MT Bold" DockPanel.Dock="Top"/>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="10">
+            <Label x:Name="LabelMisMesas" Content="MIS MESAS" FontWeight="Bold" FontSize="45" HorizontalAlignment="Left"/>
+            <Button x:Name="ButtonActualizar" Height="50" Margin="10" HorizontalAlignment ="Right" Click="ButtonActualizar_Click" Background="Transparent" BorderThickness="0">
+                <Image Source="/img/actualizar.png"/>
+            </Button>
+        </StackPanel>
+        
 
         <StackPanel x:Name="StackPanelVerMesas" Orientation="Vertical" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0,0,20,0">
             <Button x:Name="ButtonVerMesasDiponibles" Click="VerMesasDiponiblesButton_Click">

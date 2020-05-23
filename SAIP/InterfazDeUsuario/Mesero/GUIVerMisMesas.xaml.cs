@@ -62,12 +62,16 @@ namespace InterfazDeUsuario.Mesero
         {
             GUIVerMisMesasDisponibles page = new GUIVerMisMesasDisponibles(Controlador, Empleado);
             Controlador.CambiarANuevaPage(page);
-            MostrarMisMesas();
         }
 
         private void ButtonOcultarCuenta_Click(object sender, RoutedEventArgs e)
         {
             StackPanelCuenta.Visibility = Visibility.Collapsed;
+        }
+
+        private void ButtonActualizar_Click(object sender, RoutedEventArgs e)
+        {
+            MostrarMisMesas();
         }
     }
 }

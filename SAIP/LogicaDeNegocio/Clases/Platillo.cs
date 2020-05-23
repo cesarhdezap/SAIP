@@ -88,5 +88,10 @@ namespace LogicaDeNegocio.Clases
 
             return resultado;
         }
+
+        public override bool ValidarCantidadAlimento(int cantidadAValidar)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
