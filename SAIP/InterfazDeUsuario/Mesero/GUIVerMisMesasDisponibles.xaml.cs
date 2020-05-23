@@ -23,6 +23,7 @@ namespace InterfazDeUsuario.Mesero
     /// </summary>
     public partial class GUIVerMisMesasDisponibles : Page
     {
+        const int TIEMPO_DE_ESPERA_REGRESAR = 1000;
         ControladorDeCambioDePantalla Controlador;
         List<Mesa> MesasDisponibles = new List<Mesa>();
         Empleado Empleado;
@@ -59,6 +60,13 @@ namespace InterfazDeUsuario.Mesero
                 cuentaDAO.CrearCuenta(cuenta);
             }
             MostrarMesasDisponibles();
+            Task.Delay(TIEMPO_DE_ESPERA_REGRESAR).ContinueWith(_ =>
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    Controlador.Regresar();
+                });
+            });
         }
     }
 }

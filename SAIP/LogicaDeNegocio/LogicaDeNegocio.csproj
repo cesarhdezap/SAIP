@@ -72,7 +72,6 @@
     <Compile Include="Clases\ClasesAsociativas\Proporcion.cs" />
     <Compile Include="Clases\Producto.cs" />
     <Compile Include="Convertidores\ConversorDeEnumeradores.cs" />
-    <Compile Include="Convertidores\ConversorDeListaCantidadProductos.cs" />
     <Compile Include="Enumeradores\EstadoCuenta.cs" />
     <Compile Include="Enumeradores\EstadoMesa.cs" />
     <Compile Include="Enumeradores\EstadoPedido.cs" />

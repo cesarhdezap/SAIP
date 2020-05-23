@@ -1,3 +1,4 @@
+using LogicaDeNegocio.ObjetosAccesoADatos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace LogicaDeNegocio.Clases
 {
     public class Producto : Alimento
     {
-        public double CantidadEnInventario { get; set; }
+        public int CantidadEnInventario { get; set; }
         public string CodigoDeBarras { get; set; }
         public double Costo { get; set; }
         public string Creador { get; set; }
@@ -27,6 +28,19 @@ namespace LogicaDeNegocio.Clases
             resultado = "Codigo: " + Codigo;
             resultado += Environment.NewLine;
             resultado = "Precio: " + Precio;
+
+            return resultado;
+        }
+
+        public override bool ValidarCantidadAlimento(int cantidadAValidar)
+        {
+            bool resultado = false;
+            ProductoDAO productoDAO = new ProductoDAO();
+            Producto productoActualizado = productoDAO.CargarPorID(Id);
+            if (productoActualizado.CantidadEnInventario >= cantidadAValidar)
+            {
+                resultado = true;
+            }
 
             return resultado;
         }

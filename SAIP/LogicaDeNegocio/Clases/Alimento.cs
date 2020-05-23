@@ -12,5 +12,7 @@ namespace LogicaDeNegocio.Clases
         public string Nombre { get; set; }
         public double Precio { get; set; }
         public string Codigo { get; set; }
+
+        public abstract bool ValidarCantidadAlimento(int cantidadAValidar);
     }
 }
