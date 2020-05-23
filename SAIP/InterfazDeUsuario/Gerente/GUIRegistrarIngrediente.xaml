@@ -1,0 +1,39 @@
+﻿<Page x:Class="InterfazDeUsuario.Gerente.GUIRegistrarIngrediente"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:controls="clr-namespace:InterfazDeUsuario.UserControls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InterfazDeUsuario.Gerente"
+      mc:Ignorable="d" d:DesignWidth="800"
+      Title="GUIRegistrarIngrediente" Height="470">
+
+    <DockPanel>
+        <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top" Width="Auto"/>
+
+        <Grid>
+            <Label Content="Código" HorizontalAlignment="Left" Margin="40,60,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="TextBoxCodigo" HorizontalAlignment="Left" Height="23" Margin="133,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20"/>
+            <Label Content="Nombre" HorizontalAlignment="Left" Margin="40,107,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="TextBoxNombre" HorizontalAlignment="Left" Height="23" Margin="133,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20"/>
+            <Label Content="Costo" HorizontalAlignment="Left" Margin="40,158,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="ComboBoxUnidadMedida" HorizontalAlignment="Left" Margin="133,249,0,0" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Unidad de medida" HorizontalAlignment="Left" Margin="20,245,0,0" VerticalAlignment="Top"/>
+            <Label Content="Cantidad" HorizontalAlignment="Left" Margin="40,201,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="TextBoxCosto" HorizontalAlignment="Left" Height="23" Margin="133,161,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20"/>
+            <TextBox x:Name="TextBoxCantidad" HorizontalAlignment="Left" Height="23" Margin="133,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20"/>
+            <CheckBox x:Name="CheckBoxIngredienteCompuesto" Content="¿Es un Ingrediente compuesto?" HorizontalAlignment="Left" Margin="320,48,0,0" VerticalAlignment="Top" Checked="CheckBoxIngredienteCompuesto_Checked" Unchecked="CheckBoxIngredienteCompuesto_Unchecked"/>
+            <Grid x:Name="GridCompuestos" HorizontalAlignment="Left" Height="262" Margin="320,84,0,0" VerticalAlignment="Top" Width="440">
+                <Label Content="Código" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label Content="Cantidad" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="TextBoxCodigoCompuesto" HorizontalAlignment="Left" Height="23" Margin="80,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="TextBoxCantidadCompuesto" HorizontalAlignment="Left" Height="23" Margin="80,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <DataGrid x:Name="DataGridComponentes" HorizontalAlignment="Left" Height="232" Margin="220,10,0,0" VerticalAlignment="Top" Width="200"/>
+                <Button x:Name="ButtonAgregarComponente" Content="Agregar Componente" HorizontalAlignment="Left" Margin="35,222,0,0" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.538,0.5"/>
+            </Grid>
+            <Button x:Name="ButtonGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="40,311,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="ButtonCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="165,311,0,0" VerticalAlignment="Top" Width="75" IsDefault="True"/>
+
+        </Grid>
+    </DockPanel>
+</Page>
