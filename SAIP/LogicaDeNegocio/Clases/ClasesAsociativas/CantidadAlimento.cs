@@ -9,6 +9,6 @@ namespace LogicaDeNegocio.Clases.ClasesAsociativas
     public abstract class CantidadAlimento
     {
         public int Cantidad { get; set; }
-        public Pedido Orden { get; set; }
+        public Pedido Pedido { get; set; }
     }
 }

@@ -54,9 +54,11 @@
     
     <DockPanel>
         <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top" Width="Auto"/>
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-            <Label x:Name="LabelMisMesas" Margin="10" Content="MIS MESAS" FontSize="30" FontFamily="Script MT Bold" HorizontalAlignment="Left"/>
-            <Button x:Name="ButtonActualizar" Margin="10" Content="Actualizar" HorizontalAlignment ="Right" Click="ButtonActualizar_Click"/>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="10">
+            <Label x:Name="LabelMisMesas" Content="MIS MESAS" FontWeight="Bold" FontSize="45" HorizontalAlignment="Left"/>
+            <Button x:Name="ButtonActualizar" Height="50" Margin="10" HorizontalAlignment ="Right" Click="ButtonActualizar_Click" Background="Transparent" BorderThickness="0">
+                <Image Source="/img/actualizar.png"/>
+            </Button>
         </StackPanel>
         
 

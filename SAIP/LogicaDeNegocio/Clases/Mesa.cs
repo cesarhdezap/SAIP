@@ -26,7 +26,7 @@ namespace LogicaDeNegocio.Clases
         public override string ToString()
         {
 
-            return NumeroDeMesa.ToString() + " Estado: " + Estado.ToString();
+            return "Mesa: " + NumeroDeMesa.ToString() + Environment.NewLine + " Estado: " + Estado.ToString();
         }
     }
     

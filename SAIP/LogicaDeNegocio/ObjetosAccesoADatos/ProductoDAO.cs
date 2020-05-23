@@ -10,6 +10,51 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 {
 	public class ProductoDAO
 	{
+		public void Guardar(Clases.Producto producto)
+		{
+			Producto productoDB = new Producto
+			{
+				Activo = true,
+				CantidadEnInventario = producto.CantidadEnInventario,
+				Codigo = producto.Codigo,
+				Precio = producto.Precio,
+				CodigoDeBarras = producto.CodigoDeBarras,
+				Costo = producto.Costo,
+				FechaDeCreacion = DateTime.Now,
+				Nombre = producto.Nombre,
+				NombreCreador = producto.Creador,
+				FechaDeModificacion = DateTime.Now
+			};
+
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				context.Productos.Add(productoDB);
+				context.SaveChanges();
+			}
+		}
+
+		public void Depuracion_Eliminar(string nombre)
+		{
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				Producto productoDb = context.Productos.FirstOrDefault(p => p.Nombre == nombre);
+				context.Productos.Remove(productoDb);
+				context.SaveChanges();
+			}
+		}
+
+
+
+		public Clases.Producto CargarPorID(int id)
+		{
+			Producto producto = new Producto();
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				producto = context.Productos.Find(id);
+			}
+			return ConvertirProductoDatosALogica(producto);
+		}
+
 		public List<Clases.Producto> CargarProductosActivos()
 		{
 			List<Producto> productosDb = new List<Producto>();
