@@ -3,13 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data.Entity;
 using System.Threading.Tasks;
 
 namespace LogicaDeNegocio.ObjetosAccesoADatos
 {
 	public class PlatilloDAO
 	{
-		public Clases.Platillo ConvertirPlatilloDeAccesoADatosAPlatilloDeLogica(AccesoADatos.Platillo PlatilloDb)
+		public Clases.Platillo ConvertirDatosALogica(AccesoADatos.Platillo PlatilloDb)
 		{
 			Clases.Platillo alimentoConvertido = new Clases.Platillo()
 			{
@@ -30,7 +31,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			return alimentoConvertido;
 		}
 
-		public AccesoADatos.Platillo ConvertirPlatilloDeLogicaAPlatilloDeAccesoADatos(Clases.Platillo Platillo)
+		public AccesoADatos.Platillo ConvertirPlatilloDeLogicaAPlatilloDeAccesoADatosParaGuardado(Clases.Platillo Platillo)
 		{
 			AccesoADatos.Platillo platilloDb = new AccesoADatos.Platillo()
 			{
@@ -45,7 +46,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				Descripcion = Platillo.Descripcion
 			};
 			ProporcionDAO proporcionDAO = new ProporcionDAO();
-			platilloDb.AlimentoIngrediente = (proporcionDAO.ConvertirListaDeProporcionesDeLogicaAListaDeProporcionesDeAccesoADatos(Platillo.Proporciones));
+			platilloDb.PlatilloIngredientes = (proporcionDAO.ConvertirListaLogicaAListaDeDB(Platillo.Proporciones));
 
 			return platilloDb;
 		}
@@ -56,7 +57,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
 			foreach (Platillo platillo in AlimentosDb)
 			{
-				alimentosResultado.Add(ConvertirPlatilloDeAccesoADatosAPlatilloDeLogica(platillo));
+				alimentosResultado.Add(ConvertirDatosALogica(platillo));
 			}
 
 			return alimentosResultado;
@@ -67,14 +68,14 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			Platillo.Activo = true;
 			Platillo.FechaDeCreacion = DateTime.Now;
 			Platillo.FechaDeModificacion = DateTime.Now;
-			AccesoADatos.Platillo platilloAGuardar = ConvertirPlatilloDeLogicaAPlatilloDeAccesoADatos(Platillo);
+			AccesoADatos.Platillo platilloAGuardar = ConvertirPlatilloDeLogicaAPlatilloDeAccesoADatosParaGuardado(Platillo);
 
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				foreach (PlatilloIngrediente proporcion in platilloAGuardar.AlimentoIngrediente)
+				foreach (PlatilloIngrediente proporcion in platilloAGuardar.PlatilloIngredientes)
 				{
-					proporcion.Alimento = platilloAGuardar;
-					proporcion.Ingredientes = context.Ingredientes.Find(proporcion.Ingredientes.Id);
+					proporcion.Platillo = platilloAGuardar;
+					proporcion.Ingrediente = context.Ingredientes.Find(proporcion.Ingrediente.Id);
 				}
 				
 				context.Platillos.Add(platilloAGuardar);
@@ -92,85 +93,64 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			resultado.Codigo = Platillo.Codigo;
 			resultado.Notas = Platillo.Notas;
 			resultado.Descripcion = Platillo.Descripcion;
-			resultado.AlimentoIngrediente = new List<PlatilloIngrediente>();
-			foreach (PlatilloIngrediente proporcion in Platillo.AlimentoIngrediente)
+			resultado.PlatilloIngredientes = new List<PlatilloIngrediente>();
+			foreach (PlatilloIngrediente proporcion in Platillo.PlatilloIngredientes)
 			{
-				resultado.AlimentoIngrediente.Add(proporcion);
+				resultado.PlatilloIngredientes.Add(proporcion);
 			}
 		}
 
 		public void EditarPlatillo(Clases.Platillo Platillo)
 		{
 			Platillo.FechaDeModificacion = DateTime.Now;
-			Platillo platilloDeConversion = ConvertirPlatilloDeLogicaAPlatilloDeAccesoADatos(Platillo);
-			foreach (PlatilloIngrediente proporcion in platilloDeConversion.AlimentoIngrediente)
-			{
-				proporcion.Alimento = platilloDeConversion;
-			}
+
+			Platillo platilloDb;
+
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				foreach (PlatilloIngrediente proporcion in platilloDeConversion.AlimentoIngrediente)
-				{
-					proporcion.Alimento = platilloDeConversion;
-					proporcion.Ingredientes = context.Ingredientes.Find(proporcion.Ingredientes.Id);
-					proporcion.Ingredientes.AlimentoIngrediente.Add(proporcion);
-				}
-				Platillo platilloAGuardar = context.Platillos.Find(Platillo.Id);
-				ClonarPlatilloDeAccesoADatos(platilloDeConversion, platilloAGuardar);
-				ProporcionDAO proporcionDAO = new ProporcionDAO();
-				List<Clases.Proporcion> proporcionesLogicas = proporcionDAO.CargarProporcionesPorIdPlatillo(platilloAGuardar.Id);
-				List<PlatilloIngrediente> todasLasProporciones = new List<PlatilloIngrediente>();
-				List<PlatilloIngrediente> paraEliminar = new List<PlatilloIngrediente>();
+				platilloDb = context.Platillos.Include(x => x.PlatilloIngredientes.Select(i => i.Ingrediente)).FirstOrDefault(p => p.Id == Platillo.Id);
 
-				foreach(PlatilloIngrediente proporcion in platilloAGuardar.AlimentoIngrediente)
-				{
-					proporcion.Alimento = platilloAGuardar;
-					proporcion.Ingredientes = context.Ingredientes.Find(proporcion.Ingredientes.Id);
-					proporcion.Ingredientes.AlimentoIngrediente.Add(proporcion);
-				}
+				platilloDb.Nombre = Platillo.Nombre;
+				platilloDb.Precio = Platillo.Precio;
+				platilloDb.FechaDeModificacion = Platillo.FechaDeModificacion;
+				platilloDb.Activo = Platillo.Activo;
+				platilloDb.Codigo = Platillo.Codigo;
+				platilloDb.Notas = Platillo.Notas;
+				platilloDb.Descripcion = Platillo.Descripcion;
 
-				foreach (Clases.Proporcion proporcion in proporcionesLogicas)
+				foreach (Clases.Proporcion proporcion in Platillo.Proporciones)
 				{
-					paraEliminar.Add(context.PlatilloIngrediente.Find(proporcion.Id));
-				}
-
-				foreach (PlatilloIngrediente proporcion in platilloAGuardar.AlimentoIngrediente)
-				{
-					PlatilloIngrediente putmdres = context.PlatilloIngrediente.Find(proporcion.Id);
-					if (putmdres != null)
+					if (proporcion.Id == 0)
 					{
-						putmdres.Cantidad = proporcion.Cantidad;
-						todasLasProporciones.Add(putmdres);
+						PlatilloIngrediente platilloIngrediente = new PlatilloIngrediente
+						{
+							Cantidad = proporcion.Cantidad,
+							Platillo = platilloDb,
+							Ingrediente = context.Ingredientes.Find(proporcion.Ingrediente.Id)
+						};
+
+						context.PlatilloIngrediente.Add(platilloIngrediente);
+						
 					}
 					else
 					{
-						todasLasProporciones.Add(proporcion);
+						foreach (PlatilloIngrediente proporcionDB in platilloDb.PlatilloIngredientes)
+						{
+							if (proporcion.Id == proporcionDB.Id)
+							{
+								proporcionDB.Cantidad = proporcion.Cantidad;
+								break;
+							}
+						}
 					}
 				}
 
-				foreach(PlatilloIngrediente proporcion in todasLasProporciones)
-				{
-					paraEliminar.Remove(proporcion);
-				}
+				List<PlatilloIngrediente> proporcionesAEliminar = platilloDb.PlatilloIngredientes.Where(p => !Platillo.Proporciones.Any(p2 => p2.Id == p.Id)).ToList();
 
-				foreach (PlatilloIngrediente proporcion in paraEliminar)
+				foreach (PlatilloIngrediente proporcion in proporcionesAEliminar)
 				{
 					context.PlatilloIngrediente.Remove(proporcion);
 				}
-
-				platilloAGuardar.AlimentoIngrediente = todasLasProporciones;
-
-
-				foreach (PlatilloIngrediente proporcion in platilloAGuardar.AlimentoIngrediente)
-				{
-					proporcion.Alimento = platilloAGuardar;
-					proporcion.Ingredientes = context.Ingredientes.Find(proporcion.Ingredientes.Id);
-					proporcion.Ingredientes.AlimentoIngrediente.Add(proporcion);
-				}
-
-
-
-				ClonarPlatilloDeAccesoADatos(platilloAGuardar, platilloDeConversion);
 
 				context.SaveChanges();
 			}
@@ -195,7 +175,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			{
 				platilloDb = context.Platillos.Find(IdPlatillo);
 			}
-			Clases.Platillo platilloResultado = ConvertirPlatilloDeAccesoADatosAPlatilloDeLogica(platilloDb);
+			Clases.Platillo platilloResultado = ConvertirDatosALogica(platilloDb);
 
 			return platilloResultado;
 		}

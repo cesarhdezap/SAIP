@@ -20,26 +20,11 @@
     <EntitySet Name="Ivas" EntityType="ModeloDeDatos.Store.Ivas" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Cuentas" EntityType="ModeloDeDatos.Store.Cuentas" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="IngredienteIngrediente" EntityType="ModeloDeDatos.Store.IngredienteIngrediente" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Discrepancias" EntityType="ModeloDeDatos.Store.Discrepancias" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CuentaCliente" EntityType="ModeloDeDatos.Store.CuentaCliente" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="AlimentoIngredienteIngrediente" Association="ModeloDeDatos.Store.AlimentoIngredienteIngrediente">
-      <End Role="AlimentoIngrediente" EntitySet="PlatilloIngrediente" />
-      <End Role="Ingrediente" EntitySet="Ingredientes" />
-    </AssociationSet>
-    <AssociationSet Name="PedidoAlimentoPedido" Association="ModeloDeDatos.Store.PedidoAlimentoPedido">
-      <End Role="Pedido" EntitySet="Pedidos" />
-      <End Role="AlimentoPedido" EntitySet="PlatilloPedido" />
-    </AssociationSet>
     <AssociationSet Name="DireccionesCliente" Association="ModeloDeDatos.Store.DireccionesCliente">
       <End Role="Direcciones" EntitySet="Direcciones" />
       <End Role="Cliente" EntitySet="Clientes" />
-    </AssociationSet>
-    <AssociationSet Name="AlimentoAlimentoPedido" Association="ModeloDeDatos.Store.AlimentoAlimentoPedido">
-      <End Role="Alimento" EntitySet="Platillos" />
-      <End Role="AlimentoPedido" EntitySet="PlatilloPedido" />
-    </AssociationSet>
-    <AssociationSet Name="AlimentoAlimentoIngrediente" Association="ModeloDeDatos.Store.AlimentoAlimentoIngrediente">
-      <End Role="Alimento" EntitySet="Platillos" />
-      <End Role="AlimentoIngrediente" EntitySet="PlatilloIngrediente" />
     </AssociationSet>
     <AssociationSet Name="PedidoProductoPedido" Association="ModeloDeDatos.Store.PedidoProductoPedido">
       <End Role="Pedido" EntitySet="Pedidos" />
@@ -76,6 +61,22 @@
     <AssociationSet Name="CuentaEmpleado" Association="ModeloDeDatos.Store.CuentaEmpleado">
       <End Role="Cuenta" EntitySet="Cuentas" />
       <End Role="Empleado" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="PedidoPlatilloPedido" Association="ModeloDeDatos.Store.PedidoPlatilloPedido">
+      <End Role="Pedido" EntitySet="Pedidos" />
+      <End Role="PlatilloPedido" EntitySet="PlatilloPedido" />
+    </AssociationSet>
+    <AssociationSet Name="PlatilloPlatilloPedido" Association="ModeloDeDatos.Store.PlatilloPlatilloPedido">
+      <End Role="Platillo" EntitySet="Platillos" />
+      <End Role="PlatilloPedido" EntitySet="PlatilloPedido" />
+    </AssociationSet>
+    <AssociationSet Name="PlatilloPlatilloIngrediente" Association="ModeloDeDatos.Store.PlatilloPlatilloIngrediente">
+      <End Role="Platillo" EntitySet="Platillos" />
+      <End Role="PlatilloIngrediente" EntitySet="PlatilloIngrediente" />
+    </AssociationSet>
+    <AssociationSet Name="IngredientePlatilloIngrediente" Association="ModeloDeDatos.Store.IngredientePlatilloIngrediente">
+      <End Role="Ingrediente" EntitySet="Ingredientes" />
+      <End Role="PlatilloIngrediente" EntitySet="PlatilloIngrediente" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Ingredientes">
@@ -154,7 +155,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Cantidad" Type="int" Nullable="false" />
     <Property Name="Pedido_Id" Type="int" Nullable="false" />
-    <Property Name="Alimento_Id" Type="int" Nullable="false" />
+    <Property Name="Platillo_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PlatilloIngrediente">
     <Key>
@@ -162,8 +163,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Cantidad" Type="float" Nullable="false" />
-    <Property Name="Ingredientes_Id" Type="int" Nullable="false" />
-    <Property Name="Alimento_Id" Type="int" Nullable="false" />
+    <Property Name="Platillo_Id" Type="int" Nullable="false" />
+    <Property Name="Ingrediente_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Empleados">
     <Key>
@@ -234,6 +235,15 @@
     <Property Name="IngredienteCompuesto_Id" Type="int" Nullable="false" />
     <Property Name="IngredienteComponente_Id" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Discrepancias">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Comentario" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Tipo" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="CuentaCliente">
     <Key>
       <PropertyRef Name="Cuenta_Id" />
@@ -242,30 +252,6 @@
     <Property Name="Cuenta_Id" Type="int" Nullable="false" />
     <Property Name="Clientes_Id" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="AlimentoIngredienteIngrediente">
-    <End Role="AlimentoIngrediente" Type="ModeloDeDatos.Store.PlatilloIngrediente" Multiplicity="*" />
-    <End Role="Ingrediente" Type="ModeloDeDatos.Store.Ingredientes" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Ingrediente">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="AlimentoIngrediente">
-        <PropertyRef Name="Ingredientes_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PedidoAlimentoPedido">
-    <End Role="Pedido" Type="ModeloDeDatos.Store.Pedidos" Multiplicity="1" />
-    <End Role="AlimentoPedido" Type="ModeloDeDatos.Store.PlatilloPedido" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Pedido">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="AlimentoPedido">
-        <PropertyRef Name="Pedido_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="DireccionesCliente">
     <End Role="Direcciones" Type="ModeloDeDatos.Store.Direcciones" Multiplicity="*" />
     <End Role="Cliente" Type="ModeloDeDatos.Store.Clientes" Multiplicity="1" />
@@ -275,30 +261,6 @@
       </Principal>
       <Dependent Role="Direcciones">
         <PropertyRef Name="Clientes_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="AlimentoAlimentoPedido">
-    <End Role="Alimento" Type="ModeloDeDatos.Store.Platillos" Multiplicity="1" />
-    <End Role="AlimentoPedido" Type="ModeloDeDatos.Store.PlatilloPedido" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Alimento">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="AlimentoPedido">
-        <PropertyRef Name="Alimento_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="AlimentoAlimentoIngrediente">
-    <End Role="Alimento" Type="ModeloDeDatos.Store.Platillos" Multiplicity="1" />
-    <End Role="AlimentoIngrediente" Type="ModeloDeDatos.Store.PlatilloIngrediente" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Alimento">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="AlimentoIngrediente">
-        <PropertyRef Name="Alimento_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -386,6 +348,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="PedidoPlatilloPedido">
+    <End Role="Pedido" Type="ModeloDeDatos.Store.Pedidos" Multiplicity="1" />
+    <End Role="PlatilloPedido" Type="ModeloDeDatos.Store.PlatilloPedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pedido">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlatilloPedido">
+        <PropertyRef Name="Pedido_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PlatilloPlatilloPedido">
+    <End Role="Platillo" Type="ModeloDeDatos.Store.Platillos" Multiplicity="1" />
+    <End Role="PlatilloPedido" Type="ModeloDeDatos.Store.PlatilloPedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Platillo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlatilloPedido">
+        <PropertyRef Name="Platillo_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PlatilloPlatilloIngrediente">
+    <End Role="Platillo" Type="ModeloDeDatos.Store.Platillos" Multiplicity="1" />
+    <End Role="PlatilloIngrediente" Type="ModeloDeDatos.Store.PlatilloIngrediente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Platillo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlatilloIngrediente">
+        <PropertyRef Name="Platillo_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="IngredientePlatilloIngrediente">
+    <End Role="Ingrediente" Type="ModeloDeDatos.Store.Ingredientes" Multiplicity="1" />
+    <End Role="PlatilloIngrediente" Type="ModeloDeDatos.Store.PlatilloIngrediente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ingrediente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlatilloIngrediente">
+        <PropertyRef Name="Ingrediente_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CuentaCliente_Cuenta">
     <End Role="Cuenta" Type="ModeloDeDatos.Store.Cuentas" Multiplicity="1" />
     <End Role="CuentaCliente" Type="ModeloDeDatos.Store.CuentaCliente" Multiplicity="*" />
@@ -424,25 +434,9 @@
           <EntitySet Name="PlatilloPedido" EntityType="ModeloDeDatos.PlatilloPedido" />
           <EntitySet Name="PlatilloIngrediente" EntityType="ModeloDeDatos.PlatilloIngrediente" />
           <EntitySet Name="Empleados" EntityType="ModeloDeDatos.Empleado" />
-          <AssociationSet Name="AlimentoIngredienteIngrediente" Association="ModeloDeDatos.AlimentoIngredienteIngrediente">
-            <End Role="AlimentoIngrediente" EntitySet="PlatilloIngrediente" />
-            <End Role="Ingrediente" EntitySet="Ingredientes" />
-          </AssociationSet>
-          <AssociationSet Name="PedidoAlimentoPedido" Association="ModeloDeDatos.PedidoAlimentoPedido">
-            <End Role="Pedido" EntitySet="Pedidos" />
-            <End Role="AlimentoPedido" EntitySet="PlatilloPedido" />
-          </AssociationSet>
           <AssociationSet Name="DireccionesCliente" Association="ModeloDeDatos.DireccionesCliente">
             <End Role="Direcciones" EntitySet="Direcciones" />
             <End Role="Cliente" EntitySet="Clientes" />
-          </AssociationSet>
-          <AssociationSet Name="AlimentoAlimentoPedido" Association="ModeloDeDatos.AlimentoAlimentoPedido">
-            <End Role="Alimento" EntitySet="Platillos" />
-            <End Role="AlimentoPedido" EntitySet="PlatilloPedido" />
-          </AssociationSet>
-          <AssociationSet Name="AlimentoAlimentoIngrediente" Association="ModeloDeDatos.AlimentoAlimentoIngrediente">
-            <End Role="Alimento" EntitySet="Platillos" />
-            <End Role="AlimentoIngrediente" EntitySet="PlatilloIngrediente" />
           </AssociationSet>
           <EntitySet Name="Productos" EntityType="ModeloDeDatos.Producto" />
           <EntitySet Name="ProductoPedido" EntityType="ModeloDeDatos.ProductoPedido" />
@@ -481,6 +475,23 @@
             <End Role="Cuenta" EntitySet="Cuentas" />
             <End Role="Empleado" EntitySet="Empleados" />
           </AssociationSet>
+          <EntitySet Name="Discrepancias" EntityType="ModeloDeDatos.Discrepancia" />
+          <AssociationSet Name="PedidoPlatilloPedido" Association="ModeloDeDatos.PedidoPlatilloPedido">
+            <End Role="Pedido" EntitySet="Pedidos" />
+            <End Role="PlatilloPedido" EntitySet="PlatilloPedido" />
+          </AssociationSet>
+          <AssociationSet Name="PlatilloPlatilloPedido" Association="ModeloDeDatos.PlatilloPlatilloPedido">
+            <End Role="Platillo" EntitySet="Platillos" />
+            <End Role="PlatilloPedido" EntitySet="PlatilloPedido" />
+          </AssociationSet>
+          <AssociationSet Name="PlatilloPlatilloIngrediente" Association="ModeloDeDatos.PlatilloPlatilloIngrediente">
+            <End Role="Platillo" EntitySet="Platillos" />
+            <End Role="PlatilloIngrediente" EntitySet="PlatilloIngrediente" />
+          </AssociationSet>
+          <AssociationSet Name="IngredientePlatilloIngrediente" Association="ModeloDeDatos.IngredientePlatilloIngrediente">
+            <End Role="Ingrediente" EntitySet="Ingredientes" />
+            <End Role="PlatilloIngrediente" EntitySet="PlatilloIngrediente" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Ingrediente">
           <Key>
@@ -495,11 +506,11 @@
           <Property Name="FechaDeCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FechaDeModiciacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NombreCreador" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="AlimentoIngrediente" Relationship="ModeloDeDatos.AlimentoIngredienteIngrediente" FromRole="Ingrediente" ToRole="AlimentoIngrediente" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="IngredienteIngrediente" Relationship="ModeloDeDatos.IngredienteIngredienteIngrediente" FromRole="Ingrediente" ToRole="IngredienteIngrediente" />
-          <NavigationProperty Name="IngredienteIngrediente1" Relationship="ModeloDeDatos.IngredienteIngredienteIngrediente1" FromRole="Ingrediente" ToRole="IngredienteIngrediente" />
+          <NavigationProperty Name="IngredienteIngredienteCompuesto" Relationship="ModeloDeDatos.IngredienteIngredienteIngrediente" FromRole="Ingrediente" ToRole="IngredienteIngrediente" />
+          <NavigationProperty Name="IngredienteIngredienteComponente" Relationship="ModeloDeDatos.IngredienteIngredienteIngrediente1" FromRole="Ingrediente" ToRole="IngredienteIngrediente" />
           <Property Name="Codigo" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="PlatilloIngredientes" Relationship="ModeloDeDatos.IngredientePlatilloIngrediente" FromRole="Ingrediente" ToRole="PlatilloIngrediente" />
           </EntityType>
         <EntityType Name="Mesa">
           <Key>
@@ -516,11 +527,11 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FechaDeCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PrecioTotal" Type="Double" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <NavigationProperty Name="AlimentoPedido" Relationship="ModeloDeDatos.PedidoAlimentoPedido" FromRole="Pedido" ToRole="AlimentoPedido" />
           <NavigationProperty Name="ProductoPedido" Relationship="ModeloDeDatos.PedidoProductoPedido" FromRole="Pedido" ToRole="ProductoPedido" />
           <Property Name="Iva" Type="Double" Nullable="false" />
           <Property Name="Estado" Type="Int16" Nullable="false" />
           <NavigationProperty Name="Cuenta" Relationship="ModeloDeDatos.CuentaPedido" FromRole="Pedido" ToRole="Cuenta" />
+          <NavigationProperty Name="PlatilloPedidos" Relationship="ModeloDeDatos.PedidoPlatilloPedido" FromRole="Pedido" ToRole="PlatilloPedido" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
@@ -554,12 +565,12 @@
           <Property Name="Precio" Type="Double" Nullable="false" />
           <Property Name="FechaDeCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FechaDeModificacion" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="AlimentoPedido" Relationship="ModeloDeDatos.AlimentoAlimentoPedido" FromRole="Alimento" ToRole="AlimentoPedido" />
-          <NavigationProperty Name="AlimentoIngrediente" Relationship="ModeloDeDatos.AlimentoAlimentoIngrediente" FromRole="Alimento" ToRole="AlimentoIngrediente" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <Property Name="Codigo" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Notas" Type="String" Nullable="false" />
           <Property Name="Descripcion" Type="String" Nullable="false" />
+          <NavigationProperty Name="PlatilloPedidos" Relationship="ModeloDeDatos.PlatilloPlatilloPedido" FromRole="Platillo" ToRole="PlatilloPedido" />
+          <NavigationProperty Name="PlatilloIngredientes" Relationship="ModeloDeDatos.PlatilloPlatilloIngrediente" FromRole="Platillo" ToRole="PlatilloIngrediente" />
         </EntityType>
         <EntityType Name="PlatilloPedido">
           <Key>
@@ -567,8 +578,8 @@
           </Key>
           <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Pedido" Relationship="ModeloDeDatos.PedidoAlimentoPedido" FromRole="AlimentoPedido" ToRole="Pedido" />
-          <NavigationProperty Name="Alimento" Relationship="ModeloDeDatos.AlimentoAlimentoPedido" FromRole="AlimentoPedido" ToRole="Alimento" />
+          <NavigationProperty Name="Pedido" Relationship="ModeloDeDatos.PedidoPlatilloPedido" FromRole="PlatilloPedido" ToRole="Pedido" />
+          <NavigationProperty Name="Platillo" Relationship="ModeloDeDatos.PlatilloPlatilloPedido" FromRole="PlatilloPedido" ToRole="Platillo" />
         </EntityType>
         <EntityType Name="Producto">
           <Key>
@@ -593,8 +604,8 @@
           </Key>
           <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
           <Property Name="Cantidad" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Ingredientes" Relationship="ModeloDeDatos.AlimentoIngredienteIngrediente" FromRole="AlimentoIngrediente" ToRole="Ingrediente" />
-          <NavigationProperty Name="Alimento" Relationship="ModeloDeDatos.AlimentoAlimentoIngrediente" FromRole="AlimentoIngrediente" ToRole="Alimento" />
+          <NavigationProperty Name="Platillo" Relationship="ModeloDeDatos.PlatilloPlatilloIngrediente" FromRole="PlatilloIngrediente" ToRole="Platillo" />
+          <NavigationProperty Name="Ingrediente" Relationship="ModeloDeDatos.IngredientePlatilloIngrediente" FromRole="PlatilloIngrediente" ToRole="Ingrediente" />
         </EntityType>
         <EntityType Name="Empleado">
           <Key>
@@ -611,25 +622,9 @@
           <Property Name="TipoDeEmpleado" Type="Int16" Nullable="false" />
           <NavigationProperty Name="Cuenta" Relationship="ModeloDeDatos.CuentaEmpleado" FromRole="Empleado" ToRole="Cuenta" />
         </EntityType>
-        <Association Name="AlimentoIngredienteIngrediente">
-          <End Type="ModeloDeDatos.PlatilloIngrediente" Role="AlimentoIngrediente" Multiplicity="*" />
-          <End Type="ModeloDeDatos.Ingrediente" Role="Ingrediente" Multiplicity="1" />
-        </Association>
-        <Association Name="PedidoAlimentoPedido">
-          <End Type="ModeloDeDatos.Pedido" Role="Pedido" Multiplicity="1" />
-          <End Type="ModeloDeDatos.PlatilloPedido" Role="AlimentoPedido" Multiplicity="*" />
-        </Association>
         <Association Name="DireccionesCliente">
           <End Type="ModeloDeDatos.Direcciones" Role="Direcciones" Multiplicity="*" />
           <End Type="ModeloDeDatos.Cliente" Role="Cliente" Multiplicity="1" />
-        </Association>
-        <Association Name="AlimentoAlimentoPedido">
-          <End Type="ModeloDeDatos.Platillo" Role="Alimento" Multiplicity="1" />
-          <End Type="ModeloDeDatos.PlatilloPedido" Role="AlimentoPedido" Multiplicity="*" />
-        </Association>
-        <Association Name="AlimentoAlimentoIngrediente">
-          <End Type="ModeloDeDatos.Platillo" Role="Alimento" Multiplicity="1" />
-          <End Type="ModeloDeDatos.PlatilloIngrediente" Role="AlimentoIngrediente" Multiplicity="*" />
         </Association>
         <EntityType Name="ProductoPedido">
           <Key>
@@ -703,6 +698,31 @@
         <Association Name="CuentaEmpleado">
           <End Type="ModeloDeDatos.Cuenta" Role="Cuenta" Multiplicity="*" />
           <End Type="ModeloDeDatos.Empleado" Role="Empleado" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Discrepancia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Comentario" Type="String" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" />
+          <Property Name="Tipo" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="PedidoPlatilloPedido">
+          <End Type="ModeloDeDatos.Pedido" Role="Pedido" Multiplicity="1" />
+          <End Type="ModeloDeDatos.PlatilloPedido" Role="PlatilloPedido" Multiplicity="*" />
+        </Association>
+        <Association Name="PlatilloPlatilloPedido">
+          <End Type="ModeloDeDatos.Platillo" Role="Platillo" Multiplicity="1" />
+          <End Type="ModeloDeDatos.PlatilloPedido" Role="PlatilloPedido" Multiplicity="*" />
+        </Association>
+        <Association Name="PlatilloPlatilloIngrediente">
+          <End Type="ModeloDeDatos.Platillo" Role="Platillo" Multiplicity="1" />
+          <End Type="ModeloDeDatos.PlatilloIngrediente" Role="PlatilloIngrediente" Multiplicity="*" />
+        </Association>
+        <Association Name="IngredientePlatilloIngrediente">
+          <End Type="ModeloDeDatos.Ingrediente" Role="Ingrediente" Multiplicity="1" />
+          <End Type="ModeloDeDatos.PlatilloIngrediente" Role="PlatilloIngrediente" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -868,43 +888,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="AlimentoIngredienteIngrediente" TypeName="ModeloDeDatos.AlimentoIngredienteIngrediente" StoreEntitySet="PlatilloIngrediente">
-      <EndProperty Name="Ingrediente">
-        <ScalarProperty Name="Id" ColumnName="Ingredientes_Id" />
-      </EndProperty>
-      <EndProperty Name="AlimentoIngrediente">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="PedidoAlimentoPedido" TypeName="ModeloDeDatos.PedidoAlimentoPedido" StoreEntitySet="PlatilloPedido">
-      <EndProperty Name="Pedido">
-        <ScalarProperty Name="Id" ColumnName="Pedido_Id" />
-      </EndProperty>
-      <EndProperty Name="AlimentoPedido">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
+    <EntitySetMapping Name="Discrepancias">
+      <EntityTypeMapping TypeName="IsTypeOf(ModeloDeDatos.Discrepancia)">
+        <MappingFragment StoreEntitySet="Discrepancias">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="DireccionesCliente" TypeName="ModeloDeDatos.DireccionesCliente" StoreEntitySet="Direcciones">
       <EndProperty Name="Cliente">
         <ScalarProperty Name="Id" ColumnName="Clientes_Id" />
       </EndProperty>
       <EndProperty Name="Direcciones">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="AlimentoAlimentoPedido" TypeName="ModeloDeDatos.AlimentoAlimentoPedido" StoreEntitySet="PlatilloPedido">
-      <EndProperty Name="Alimento">
-        <ScalarProperty Name="Id" ColumnName="Alimento_Id" />
-      </EndProperty>
-      <EndProperty Name="AlimentoPedido">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="AlimentoAlimentoIngrediente" TypeName="ModeloDeDatos.AlimentoAlimentoIngrediente" StoreEntitySet="PlatilloIngrediente">
-      <EndProperty Name="Alimento">
-        <ScalarProperty Name="Id" ColumnName="Alimento_Id" />
-      </EndProperty>
-      <EndProperty Name="AlimentoIngrediente">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
@@ -969,6 +967,38 @@
         <ScalarProperty Name="Id" ColumnName="Empleado_Id" />
       </EndProperty>
       <EndProperty Name="Cuenta">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PedidoPlatilloPedido" TypeName="ModeloDeDatos.PedidoPlatilloPedido" StoreEntitySet="PlatilloPedido">
+      <EndProperty Name="Pedido">
+        <ScalarProperty Name="Id" ColumnName="Pedido_Id" />
+      </EndProperty>
+      <EndProperty Name="PlatilloPedido">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PlatilloPlatilloPedido" TypeName="ModeloDeDatos.PlatilloPlatilloPedido" StoreEntitySet="PlatilloPedido">
+      <EndProperty Name="Platillo">
+        <ScalarProperty Name="Id" ColumnName="Platillo_Id" />
+      </EndProperty>
+      <EndProperty Name="PlatilloPedido">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PlatilloPlatilloIngrediente" TypeName="ModeloDeDatos.PlatilloPlatilloIngrediente" StoreEntitySet="PlatilloIngrediente">
+      <EndProperty Name="Platillo">
+        <ScalarProperty Name="Id" ColumnName="Platillo_Id" />
+      </EndProperty>
+      <EndProperty Name="PlatilloIngrediente">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="IngredientePlatilloIngrediente" TypeName="ModeloDeDatos.IngredientePlatilloIngrediente" StoreEntitySet="PlatilloIngrediente">
+      <EndProperty Name="Ingrediente">
+        <ScalarProperty Name="Id" ColumnName="Ingrediente_Id" />
+      </EndProperty>
+      <EndProperty Name="PlatilloIngrediente">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>

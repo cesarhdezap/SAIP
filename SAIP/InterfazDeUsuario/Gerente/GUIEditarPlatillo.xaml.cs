@@ -21,19 +21,22 @@ namespace InterfazDeUsuario.Gerente
 	/// <summary>
 	/// Interaction logic for GUIEditarPlatillo.xaml
 	/// </summary>
-	public partial class GUIEditarPlatillo : Window
+	public partial class GUIEditarPlatillo : Page
 	{
+		public ControladorDeCambioDePantalla Controlador { get; set; }
 		public Empleado Gerente { get; set; }
 		public List<Ingrediente> IngredientesCargados { get; set; }
 		public List<Ingrediente> IngredientesVisibles { get; set; }
 		public List<Proporcion> proporcionesOriginales { get; set; }
 		public Platillo Platillo { get; set; } = new Platillo();
 		public double Ganancia { get; set; }
-		private bool CandadoDeRefrescadoDeCajasDeTexto = true;
-		public GUIEditarPlatillo(Empleado EmpleadoCargado, Platillo platillo)
+		private bool CandadoDeRefrescadoDeCajasDeTexto { get; set; } = true;
+		public GUIEditarPlatillo(ControladorDeCambioDePantalla controlador, Empleado empleadoCargado, Platillo platillo)
 		{
 			InitializeComponent();
-			Gerente = EmpleadoCargado;
+			Controlador = controlador;
+			BarraDeEstado.Controlador = controlador;
+			Gerente = empleadoCargado;
 			Platillo = platillo;
 			proporcionesOriginales = new List<Proporcion>();
 			foreach(Proporcion proporcion in Platillo.Proporciones)
@@ -278,8 +281,13 @@ namespace InterfazDeUsuario.Gerente
 			MessageBoxResult resultadoDeMessageBox = MessageBox.Show("¿Esta seguro que desea cancelar el registro? Se perderan los cambios sin guardar", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
 			if (resultadoDeMessageBox == MessageBoxResult.Yes)
 			{
-				Close();
+				Controlador.Regresar();
 			}
+		}
+
+		private void BusquedaTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+		{
+
 		}
 	}
 }

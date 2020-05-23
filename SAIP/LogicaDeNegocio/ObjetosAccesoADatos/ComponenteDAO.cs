@@ -9,57 +9,57 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 {
 	public class ComponenteDAO
 	{
-		private List<Clases.Componente> ConvertirListaDeComponentesDeAccesoADatosAListaDeComponentesDeLogica(List<AccesoADatos.IngredienteIngrediente> ComponentesDb)
+		private List<Clases.Componente> ConvertirListaDeDatosALogica(List<AccesoADatos.IngredienteIngrediente> componentesDb)
 		{
 			List<Clases.Componente> componentesConvertidos = new List<Clases.Componente>();
-			foreach(IngredienteIngrediente componente in ComponentesDb)
+			foreach(IngredienteIngrediente componente in componentesDb)
 			{
-				componentesConvertidos.Add(ConvertirComponenteDeAccesoADatosAComponenteDelogica(componente));
+				componentesConvertidos.Add(ConvertirDeDatosALogica(componente));
 			}
 			return componentesConvertidos;
 		}
 
-		private Clases.Componente ConvertirComponenteDeAccesoADatosAComponenteDelogica(AccesoADatos.IngredienteIngrediente ComponenteDb)
+		private Clases.Componente ConvertirDeDatosALogica(AccesoADatos.IngredienteIngrediente componenteDb)
 		{
 			Clases.Componente componenteConvertido = new Clases.Componente()
 			{
-				Cantidad = ComponenteDb.Cantidad
+				Cantidad = componenteDb.Cantidad
 			};
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
-			componenteConvertido.Ingrediente = ingredienteDAO.ConvertirIngredienteDeAccesoADatosAIngredienteDeLogica(ComponenteDb.IngredienteComponente);
+			componenteConvertido.Ingrediente = ingredienteDAO.ConvertirDeDatosALogica(componenteDb.IngredienteComponente);
 			return componenteConvertido;
 		}
 
-		public AccesoADatos.IngredienteIngrediente ConvertirComponenteDeLogicaAComponenteDeAccesoADatos(Clases.Componente Componente)
+		public AccesoADatos.IngredienteIngrediente ConvertirDeLogicaADatos(Clases.Componente componente)
 		{
 			IngredienteIngrediente componenteDb = new IngredienteIngrediente();
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
-			componenteDb.IngredienteComponente = ingredienteDAO.ConvertirIngredienteDeLogicaAIngredienteDeAccesoADatos(Componente.Ingrediente);
-			componenteDb.Cantidad = Componente.Cantidad;
-			componenteDb.IngredienteCompuesto = ingredienteDAO.ConvertirIngredienteDeLogicaAIngredienteDeAccesoADatos(Componente.Compuesto);
+			componenteDb.IngredienteComponente = ingredienteDAO.ConvertirDeLogicaADb(componente.Ingrediente);
+			componenteDb.Cantidad = componente.Cantidad;
+			componenteDb.IngredienteCompuesto = ingredienteDAO.ConvertirDeLogicaADb(componente.Compuesto);
 			return componenteDb;
 		}
 
-		public List<AccesoADatos.IngredienteIngrediente> ConvertirListaDeComponentesDeLogicaAListaDeComponentesDeAccesoADatos(List<Clases.Componente> Componentes)
+		public List<AccesoADatos.IngredienteIngrediente> ConvertirlistaDeLogicaADatos(List<Clases.Componente> componentes)
 		{
 			List<AccesoADatos.IngredienteIngrediente> componentesDb = new List<IngredienteIngrediente>();
-			foreach (Clases.Componente componente in Componentes)
+			foreach (Clases.Componente componente in componentes)
 			{
-				componentesDb.Add(ConvertirComponenteDeLogicaAComponenteDeAccesoADatos(componente));
+				componentesDb.Add(ConvertirDeLogicaADatos(componente));
 			}
 
 			return componentesDb;
 		}
 
-		public List<Clases.Componente> ObtenerComponentesPorIdDeIngredienteCompuesto(int Id)
+		public List<Clases.Componente> ObtenerComponentesPorIdDeIngredienteCompuesto(int id)
 		{
 			List<IngredienteIngrediente> componentes = new List<IngredienteIngrediente>();
 			List<Clases.Componente> componentesResultado = new List<Clases.Componente>();
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				componentes = context.IngredienteIngrediente.ToList().TakeWhile(objeto => objeto.IngredienteCompuesto.Id == Id).ToList();
+				componentes = context.IngredienteIngrediente.ToList().TakeWhile(objeto => objeto.IngredienteCompuesto.Id == id).ToList();
 				IngredienteDAO ingredienteDAO = new IngredienteDAO();
-				componentesResultado = ConvertirListaDeComponentesDeAccesoADatosAListaDeComponentesDeLogica(componentes);
+				componentesResultado = ConvertirListaDeDatosALogica(componentes);
 			}
 
 			return componentesResultado;

@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace LogicaDeNegocio.Clases.ClasesAsociativas
 {
-    public class CantidadPlatillo
+    public class CantidadPlatillo : CantidadAlimento
     {
-        public int Cantidad { get; set;}
         public Platillo Alimento { get; set;}
-        public Pedido Orden { get; set; }
     }
 }

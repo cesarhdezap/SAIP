@@ -25,6 +25,7 @@ namespace InterfazDeUsuario
 
         public MainWindow()
         {
+            
             InitializeComponent();
             RegresarAInicioDeSesion();
         }
@@ -34,6 +35,7 @@ namespace InterfazDeUsuario
             Pantallas.Push(page);
             Content = page;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.SizeToContent = SizeToContent.WidthAndHeight;
         }
 
         public void Regresar()
@@ -51,6 +53,8 @@ namespace InterfazDeUsuario
             {
                 RegresarAInicioDeSesion();
             }
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.SizeToContent = SizeToContent.WidthAndHeight;
         }
 
         public void RegresarAInicioDeSesion()

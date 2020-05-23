@@ -17,7 +17,7 @@ namespace AccesoADatos
         public int Id { get; set; }
         public double Cantidad { get; set; }
     
-        public virtual Ingrediente Ingredientes { get; set; }
-        public virtual Platillo Alimento { get; set; }
+        public virtual Platillo Platillo { get; set; }
+        public virtual Ingrediente Ingrediente { get; set; }
     }
 }

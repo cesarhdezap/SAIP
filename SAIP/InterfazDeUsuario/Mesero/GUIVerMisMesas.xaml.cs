@@ -37,6 +37,8 @@ namespace InterfazDeUsuario.Mesero
             Controlador = controlador;
             Empleado = empleado;
             InitializeComponent();
+            UserControlInformacionDeCuenta.Controlador = controlador;
+            UserControlInformacionDeCuenta.Empleado = empleado;
             BarraDeEstado.Controlador = controlador;
             BarraDeEstado.ActualizarNombreDeUsuario(empleado.Nombre);
             MostrarMisMesas();
@@ -60,7 +62,6 @@ namespace InterfazDeUsuario.Mesero
         {
             GUIVerMisMesasDisponibles page = new GUIVerMisMesasDisponibles(Controlador, Empleado);
             Controlador.CambiarANuevaPage(page);
-            MostrarMisMesas();
         }
 
         private void ButtonOcultarCuenta_Click(object sender, RoutedEventArgs e)
@@ -68,7 +69,10 @@ namespace InterfazDeUsuario.Mesero
             StackPanelCuenta.Visibility = Visibility.Collapsed;
         }
 
-        
+        private void ButtonActualizar_Click(object sender, RoutedEventArgs e)
+        {
+            MostrarMisMesas();
+        }
     }
 }
  

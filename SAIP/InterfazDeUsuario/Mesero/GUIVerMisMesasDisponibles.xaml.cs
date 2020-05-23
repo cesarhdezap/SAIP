@@ -23,6 +23,7 @@ namespace InterfazDeUsuario.Mesero
     /// </summary>
     public partial class GUIVerMisMesasDisponibles : Page
     {
+        const int TIEMPO_DE_ESPERA_REGRESAR = 1000;
         ControladorDeCambioDePantalla Controlador;
         List<Mesa> MesasDisponibles = new List<Mesa>();
         Empleado Empleado;
@@ -50,10 +51,22 @@ namespace InterfazDeUsuario.Mesero
             MessageBoxResult resultado = MessageBox.Show("¿Abrir nueva cuenta?", "CREAR NUEVA CUENTA", MessageBoxButton.OKCancel);
             if (resultado == MessageBoxResult.OK)
             {
-                GUIRegistrarPedidoLocal page = new GUIRegistrarPedidoLocal(Controlador, Empleado);
-                Controlador.CambiarANuevaPage(page);
+                Cuenta cuenta = new Cuenta
+                {
+                    Mesa = mesa,
+                    Empleado = Empleado
+                };
+                CuentaDAO cuentaDAO = new CuentaDAO();
+                cuentaDAO.CrearCuenta(cuenta);
             }
             MostrarMesasDisponibles();
+            Task.Delay(TIEMPO_DE_ESPERA_REGRESAR).ContinueWith(_ =>
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    Controlador.Regresar();
+                });
+            });
         }
     }
 }

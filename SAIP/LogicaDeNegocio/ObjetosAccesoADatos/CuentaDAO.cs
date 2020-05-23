@@ -11,24 +11,60 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 {
     public class CuentaDAO
     {
-
+        /// <summary>
+        /// Recupera las cuentas con estado <see cref="EstadoCuenta.Abierta"/> con Mesa, Empleado, Pedidos.CantidadPlatillo, Pedidos.CantidadProducto.
+        /// </summary>
+        /// <param name="empleado"></param>
+        /// <returns></returns>
         public List<Clases.Cuenta> RecuperarCuentasAbiertasPorEmpleado(Clases.Empleado empleado)
         {
             List<AccesoADatos.Cuenta> cuentas = new List<AccesoADatos.Cuenta>();
 
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
-                cuentas = context.Cuentas.Where(c => c.Empleado.Id == empleado.Id).Include(c => c.Mesa).Include(c => c.Empleado).Include(c=> c.Pedidos).ToList();
+                cuentas = context.Cuentas.Where(c => c.Empleado.Id == empleado.Id && c.Estado == (short)EstadoCuenta.Abierta)
+                    .Include(c => c.Mesa)
+                    .Include(c => c.Empleado)
+                    .Include(c=> c.Pedidos)
+                    .Include(c => c.Clientes)
+                    .ToList();
             }
+
             return ConvertirListaDeCuentasDatosALogica(cuentas);
         }
 
-        public List<Clases.Cuenta> RecuperarCuentasPorEstado(EstadoCuenta estado)
+        public void ActualizarCuenta(Clases.Cuenta cuenta)
         {
-            throw new NotImplementedException();
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                Cuenta cuentaDb = context.Cuentas.Find(cuenta.Id);
+                cuentaDb.Estado = (short)cuenta.Estado;
+                cuentaDb.PrecioTotal = cuenta.PrecioTotal;
+                //Actualizar pedidos
+                context.SaveChanges();
+            }
+
         }
 
-        private List<Clases.Cuenta> ConvertirListaDeCuentasDatosALogica(List<AccesoADatos.Cuenta> cuentas)
+        public void CrearCuenta(Clases.Cuenta cuenta)
+        {
+            var cuentaDb = new AccesoADatos.Cuenta()
+            {
+                Estado = (short)EstadoCuenta.Abierta
+            };
+
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                cuentaDb.Mesa = context.Mesas.Find(cuenta.Mesa.NumeroDeMesa);
+                cuentaDb.Mesa.Estado = (short)EstadoMesa.Ocupada;
+                cuentaDb.Empleado = context.Empleados.Find(cuenta.Empleado.Id);
+                context.Cuentas.Add(cuentaDb);
+                context.SaveChanges();
+            }
+
+        }
+
+        public List<Clases.Cuenta> ConvertirListaDeCuentasDatosALogica(ICollection<Cuenta> cuentas)
         {
             List<Clases.Cuenta> cuentasLogica = new List<Clases.Cuenta>();
             foreach (AccesoADatos.Cuenta cuenta in cuentas)
@@ -41,14 +77,26 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
         public Clases.Cuenta ConvertirCuentaDatosALogica(Cuenta cuenta)
         {
             MesaDAO mesa = new MesaDAO();
+            ClienteDAO clienteDAO = new ClienteDAO();
             Clases.Cuenta cuentaLogica = new Clases.Cuenta()
             {
                 Id = cuenta.Id,
                 Estado = (EstadoCuenta) cuenta.Estado,
                 PrecioTotal = cuenta.PrecioTotal,
-                Mesa = mesa.ConvertirMesaDatosALogica(cuenta.Mesa)
+                Mesa = mesa.ConvertirMesaDatosALogica(cuenta.Mesa),               
+                Clientes = clienteDAO.ConvertirListaDeDatosALogica(cuenta.Clientes.ToList()) 
+                
                 //Traducir datos de la cuenta
             };
+
+            try
+            {
+                cuentaLogica.Clientes = clienteDAO.ConvertirListaDeDatosALogica(cuenta.Clientes.ToList());
+            }
+            catch(ObjectDisposedException)
+            {
+                cuentaLogica.Clientes = new List<Clases.Cliente>();
+            }
 
             PedidoDAO pedidoDAO = new PedidoDAO();
             foreach(AccesoADatos.Pedido pedido in cuenta.Pedidos)

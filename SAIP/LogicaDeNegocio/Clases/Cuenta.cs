@@ -12,15 +12,23 @@ namespace LogicaDeNegocio.Clases
         public int Id { get; set;}
         public string Direccion { get; set;}
         public double PrecioTotal { get; set;}
-        public Cliente Cliente { get; set;}
+        public List<Cliente> Clientes { get; set;}
         public EstadoCuenta Estado { get; set; }
         public Mesa Mesa { get; set; }
+        public Empleado Empleado { get; set; }
+
         public List<Pedido> Pedidos = new List<Pedido>();
 
-        public void AñadirPedido()
+        public void AñadirPedido(Pedido pedido)
         {
-            throw new NotImplementedException();
+            Pedidos.Add(pedido);
+
+        }
+
+        public void TerminarCuenta()
+        {
+            Estado = EstadoCuenta.Terminada;
+            //Calcular PrecioTotal
         }
     }
-
 }

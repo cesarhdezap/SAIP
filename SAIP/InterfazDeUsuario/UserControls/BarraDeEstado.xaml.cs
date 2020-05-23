@@ -23,7 +23,6 @@ namespace InterfazDeUsuario.UserControls
 	public partial class BarraDeEstado : UserControl
 	{
 		public ControladorDeCambioDePantalla Controlador;
-		Cuenta Cuenta;
 
 		public BarraDeEstado()
 		{
@@ -36,9 +35,9 @@ namespace InterfazDeUsuario.UserControls
 		}
 		
 
-		public void ActualizarNombreDeUsuario(String NombreDeUsuario)
+		public void ActualizarNombreDeUsuario(String nombreDeUsuario)
 		{
-			NombreDeUsuarioLabel.Content = NombreDeUsuario;
+			NombreDeUsuarioLabel.Content = nombreDeUsuario;
 		}
 
 		public void OcultarNombreDeUsuarioYBotones()

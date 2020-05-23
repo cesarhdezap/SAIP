@@ -18,6 +18,6 @@ namespace AccesoADatos
         public int Cantidad { get; set; }
     
         public virtual Pedido Pedido { get; set; }
-        public virtual Platillo Alimento { get; set; }
+        public virtual Platillo Platillo { get; set; }
     }
 }
