@@ -19,9 +19,8 @@ namespace AccesoADatos
             : base("name=ModeloDeDatosContainer")
         {
             var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
-
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

@@ -18,7 +18,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
                 platilloPedido = context.PlatilloPedido.Where(p => p.Pedido.Id == idPedido)
-                    .Include(p => p.Alimento)
+                    .Include(p => p.Platillo)
                     .ToList();
             }
             return ConvertirListaDatosALogica(platilloPedido);
