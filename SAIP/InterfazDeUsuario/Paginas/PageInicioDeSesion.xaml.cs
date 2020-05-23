@@ -41,8 +41,8 @@ namespace InterfazDeUsuario.Paginas
 
         private void IniciarSesionButton_Click(object sender, RoutedEventArgs e)
         {
-			string nombreDeUsuario = NombreDeUsuarioTextBox.Text;
-			string contraseña = ContraseñaPasswordbox.Password;
+			string nombreDeUsuario = NombreDeUsuarioTextBox.Text.Trim();
+			string contraseña = ContraseñaPasswordbox.Password.Trim();
 
 			if (ValidarCadena(nombreDeUsuario) && ValidarContraseña(contraseña))
 			{
@@ -55,9 +55,8 @@ namespace InterfazDeUsuario.Paginas
 					Empleado empleadoCargado = empleadoDAO.CargarEmpleadoPorNombreDeUsuario(nombreDeUsuario);
 					if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.CallCenter)
 					{
-						GUIPedidoADomicilio pedidoADomicilio = new GUIPedidoADomicilio(empleadoCargado);
-						//Controlador.CambiarANuevaPage(pedidoADomicilio);
-						throw new NotImplementedException("GUIPedidoADomicilio debe ser page");
+						GUIPedidoADomicilio pedidoADomicilio = new GUIPedidoADomicilio(Controlador, empleadoCargado);
+						Controlador.CambiarANuevaPage(pedidoADomicilio);
 					}
 					else if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.Gerente)
 					{

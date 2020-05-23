@@ -10,7 +10,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 {
 	public class PlatilloDAO
 	{
-		public Clases.Platillo ConvertirPlatilloDeAccesoADatosAPlatilloDeLogica(AccesoADatos.Platillo PlatilloDb)
+		public Clases.Platillo ConvertirDatosALogica(AccesoADatos.Platillo PlatilloDb)
 		{
 			Clases.Platillo alimentoConvertido = new Clases.Platillo()
 			{
@@ -57,7 +57,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
 			foreach (Platillo platillo in AlimentosDb)
 			{
-				alimentosResultado.Add(ConvertirPlatilloDeAccesoADatosAPlatilloDeLogica(platillo));
+				alimentosResultado.Add(ConvertirDatosALogica(platillo));
 			}
 
 			return alimentosResultado;
@@ -175,7 +175,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			{
 				platilloDb = context.Platillos.Find(IdPlatillo);
 			}
-			Clases.Platillo platilloResultado = ConvertirPlatilloDeAccesoADatosAPlatilloDeLogica(platilloDb);
+			Clases.Platillo platilloResultado = ConvertirDatosALogica(platilloDb);
 
 			return platilloResultado;
 		}

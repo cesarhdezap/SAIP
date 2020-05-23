@@ -83,12 +83,15 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 Id = cuenta.Id,
                 Estado = (EstadoCuenta) cuenta.Estado,
                 PrecioTotal = cuenta.PrecioTotal,
-                Mesa = mesa.ConvertirMesaDatosALogica(cuenta.Mesa),
+                Mesa = mesa.ConvertirMesaDatosALogica(cuenta.Mesa),               
+                Clientes = clienteDAO.ConvertirListaDeDatosALogica(cuenta.Clientes.ToList()) 
+                
+                //Traducir datos de la cuenta
             };
 
             try
             {
-                cuentaLogica.Clientes = clienteDAO.ConvertirListaDeClientesDatosALogica(cuenta.Clientes.ToList());
+                cuentaLogica.Clientes = clienteDAO.ConvertirListaDeDatosALogica(cuenta.Clientes.ToList());
             }
             catch(ObjectDisposedException)
             {

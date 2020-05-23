@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LogicaDeNegocio.Clases.ClasesCompuestas
 {
-	public class ObjetoDeInventario
+	public class ObjetoDeInventario	
 	{
 		public int Id { get; set; }
 		public string Nombre { get; set; }

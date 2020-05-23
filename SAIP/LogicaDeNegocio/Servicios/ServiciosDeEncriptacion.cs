@@ -21,13 +21,13 @@ namespace LogicaDeNegocio.Servicios
 
             using (SHA256 hash = SHA256.Create())
             {
-                byte[] ContrasenaEncriptada = hash.ComputeHash(Encoding.UTF8.GetBytes(contraseña));
+                byte[] contrasenaEncriptada = hash.ComputeHash(Encoding.UTF8.GetBytes(contraseña));
 
                 try
                 {
-                    for (int indice = 0; indice < ContrasenaEncriptada.Length; indice++)
+                    for (int indice = 0; indice < contrasenaEncriptada.Length; indice++)
                     {
-                        cadenaFinal.Append(ContrasenaEncriptada[indice].ToString("x2"));
+                        cadenaFinal.Append(contrasenaEncriptada[indice].ToString("x2"));
                     }
 
                 }

@@ -35,10 +35,10 @@ namespace InterfazDeUsuario.Gerente
 		public Empleado Gerente { get; set; }
 		private bool CandadoDeRefrescadoDeCajasDeTexto { get;  set; }
 
-		public GUIPasarInventario(ControladorDeCambioDePantalla controlador, Empleado EmpleadoCargado)
+		public GUIPasarInventario(ControladorDeCambioDePantalla controlador, Empleado empleadoCargado)
 		{
 			InitializeComponent();
-			Gerente = EmpleadoCargado;
+			Gerente = empleadoCargado;
 			Controlador = controlador;
 			BarraDeEstado.Controlador = controlador;
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
@@ -152,6 +152,7 @@ namespace InterfazDeUsuario.Gerente
 					Nombre = producto.Nombre,
 					CodigoDeBarras = producto.CodigoDeBarras,
 					Cantidad = 0,
+					Codigo = producto.Codigo,
 					Costo = producto.Costo,
 					UnidadDeMedida = UnidadDeMedida.Unidad,
 					TipoDeProducto = TipoDeProducto.Producto
@@ -250,7 +251,7 @@ namespace InterfazDeUsuario.Gerente
 		{
 			if (ObjetosDeInventarioAñadidos.Count >= 0)
 			{ 
-				GUIReporteDeInventario reporteDeInventario = new GUIReporteDeInventario(Controlador, Gerente, CalcularDiscrepancias(ObjetosDeInventarioAñadidos));
+				GUIReporteDeInventario reporteDeInventario = new GUIReporteDeInventario(Controlador, Gerente, CalcularDiscrepancias(ObjetosDeInventarioAñadidos), ObjetosDeInventarioCargados);
 				Controlador.CambiarANuevaPage(reporteDeInventario);
 			}
 			else

@@ -15,7 +15,7 @@ namespace LogicaDeNegocio.Clases
         public string Creador { get; set; }
         public bool Activo { get; set; }
 
-        public bool DescontarIngredientesDeInventario(int CantidadADescontar)
+        public bool DescontarIngredientesDeInventario(int cantidadADescontar)
         {
             throw new NotImplementedException();
         }
