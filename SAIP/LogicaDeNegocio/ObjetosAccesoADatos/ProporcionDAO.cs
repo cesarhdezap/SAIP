@@ -68,7 +68,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			};
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
 			PlatilloDAO platilloDAO = new PlatilloDAO();
-			proporcionConvertida.Ingrediente = ingredienteDAO.ConvertirDeDbALogica(ProporcionDb.Ingredientes);
+			proporcionConvertida.Ingrediente = ingredienteDAO.ConvertirDeDatosAlogica(ProporcionDb.Ingredientes);
 			return proporcionConvertida;
 		}
 

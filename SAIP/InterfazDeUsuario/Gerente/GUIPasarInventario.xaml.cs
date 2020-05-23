@@ -35,10 +35,10 @@ namespace InterfazDeUsuario.Gerente
 		public Empleado Gerente { get; set; }
 		private bool CandadoDeRefrescadoDeCajasDeTexto { get;  set; }
 
-		public GUIPasarInventario(ControladorDeCambioDePantalla controlador, Empleado EmpleadoCargado)
+		public GUIPasarInventario(ControladorDeCambioDePantalla controlador, Empleado empleadoCargado)
 		{
 			InitializeComponent();
-			Gerente = EmpleadoCargado;
+			Gerente = empleadoCargado;
 			Controlador = controlador;
 			BarraDeEstado.Controlador = controlador;
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();

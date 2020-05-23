@@ -63,7 +63,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 Estado = (EstadoCuenta) cuenta.Estado,
                 PrecioTotal = cuenta.PrecioTotal,
                 Mesa = mesa.ConvertirMesaDatosALogica(cuenta.Mesa),
-                Cliente = clienteDAO.ConvertirListaDeClientesDatosALogica(cuenta.Clientes.ToList()) 
+                Cliente = clienteDAO.ConvertirListaDeDatosALogica(cuenta.Clientes.ToList()) 
                 
                 //Traducir datos de la cuenta
 

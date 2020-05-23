@@ -28,16 +28,16 @@ namespace InterfazDeUsuario.Gerente
 		public Empleado Gerente { get; set; }
 		public ControladorDeCambioDePantalla Controlador { get; set; }
 		public List<Discrepancia> Discrepancias { get; set; }
-		public List<ObjetoDeInventario> objetosDeInventario { get; set; }
-		public GUIReporteDeInventario(ControladorDeCambioDePantalla Controlador, Empleado EmpleadoCargado, List<Discrepancia> Discrepancias, List<ObjetoDeInventario> objetosDeInventario)
+		public List<ObjetoDeInventario> ObjetosDeInventario { get; set; }
+		public GUIReporteDeInventario(ControladorDeCambioDePantalla controlador, Empleado empleadoCargado, List<Discrepancia> discrepancias, List<ObjetoDeInventario> objetosDeInventario)
 		{
 			InitializeComponent();
-			this.Controlador = Controlador;
-			this.objetosDeInventario = objetosDeInventario;
-			Gerente = EmpleadoCargado;
-			this.Discrepancias = Discrepancias; 
-			BarraDeEstado.Controlador = Controlador;
-			DiscrepanciasDataGrid.ItemsSource = Discrepancias;
+			this.Controlador = controlador;
+			this.ObjetosDeInventario = objetosDeInventario;
+			Gerente = empleadoCargado;
+			this.Discrepancias = discrepancias; 
+			BarraDeEstado.Controlador = controlador;
+			DiscrepanciasDataGrid.ItemsSource = discrepancias;
 			InventarioDataGrid.ItemsSource = objetosDeInventario;
 		}
 
@@ -74,7 +74,7 @@ namespace InterfazDeUsuario.Gerente
 				{
 
 
-					ServiciosDeCreacionDePDF.GenerarReporteDeInventario(Discrepancias, objetosDeInventario, direccionDeGuardado);
+					ServiciosDeCreacionDePDF.GenerarReporteDeInventario(Discrepancias, ObjetosDeInventario, direccionDeGuardado);
 					MessageBox.Show("¡El archivo fue creado con exito!", "¡Exito!");
 					System.Diagnostics.Process.Start(direccionDeGuardado);
 				}

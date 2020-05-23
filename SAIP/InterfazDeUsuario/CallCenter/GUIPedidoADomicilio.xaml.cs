@@ -28,10 +28,10 @@ namespace InterfazDeUsuario.CallCenter
 		public Iva Iva { get; set; } = new Iva();
 		public List<Platillo> PlatillosCargados { get; set; } = new List<Platillo>();
 		public List<Producto> ProductosCargados { get; set; }
-		public GUIPedidoADomicilio(ControladorDeCambioDePantalla controlador, Empleado EmpleadoDeCallCenter)
+		public GUIPedidoADomicilio(ControladorDeCambioDePantalla controlador, Empleado empleadoDeCallCenter)
 		{
 			InitializeComponent();
-			this.EmpleadoDeCallCenter = EmpleadoDeCallCenter;
+			this.EmpleadoDeCallCenter = empleadoDeCallCenter;
 			IvaDAO ivaDAO = new IvaDAO(); 
 			PlatilloDAO platilloDAO = new PlatilloDAO();
 			ProductoDAO productoDAO = new ProductoDAO();
@@ -45,22 +45,22 @@ namespace InterfazDeUsuario.CallCenter
 
 		private void BusquedaTextBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
-			string busqueda = BusquedaTextBox.Text;
-			if (busqueda != string.Empty)
-			{
-				AlimentosVisibles = PlatillosCargados.TakeWhile(alimento => alimento.Nombre.ToLower().Contains(busqueda.ToLower())).ToList();
-			}
-			else
-			{
-				AlimentosVisibles = PlatillosCargados;
-			}
-			ActualizarPantalla();
+			//string busqueda = BusquedaTextBox.Text;
+			//if (busqueda != string.Empty)
+			//{
+			//	AlimentosVisibles = PlatillosCargados.TakeWhile(alimento => alimento.Nombre.ToLower().Contains(busqueda.ToLower())).ToList();
+			//}
+			//else
+			//{
+			//	AlimentosVisibles = PlatillosCargados;
+			//}
+			//ActualizarPantalla();
 		}
 
 		private void ActualizarPantalla()
 		{
-			BusquedaDataGrid.ItemsSource = null;
-			BusquedaDataGrid.ItemsSource = AlimentosVisibles;
+			//BusquedaDataGrid.ItemsSource = null;
+			//BusquedaDataGrid.ItemsSource = AlimentosVisibles;
 		}
 
 

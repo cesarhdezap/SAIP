@@ -30,12 +30,12 @@ namespace InterfazDeUsuario.Gerente
 		public Platillo Platillo { get; set; } = new Platillo();
 		public double Ganancia { get; set; }
 		private bool CandadoDeRefrescadoDeCajasDeTexto = true;
-		public GUIRegistrarPlatillo(ControladorDeCambioDePantalla controlador, Empleado EmpleadoCargado)
+		public GUIRegistrarPlatillo(ControladorDeCambioDePantalla controlador, Empleado empleadoCargado)
 		{
 			InitializeComponent();
 			Controlador = controlador;
 			BarraDeEstado.Controlador = controlador;
-			Gerente = EmpleadoCargado;
+			Gerente = empleadoCargado;
 			BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
 			IngredientesCargados = ingredienteDAO.CargarIngredientesActivos();

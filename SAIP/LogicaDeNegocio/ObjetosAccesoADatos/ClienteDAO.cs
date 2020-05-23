@@ -50,7 +50,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             return resultado;
         }
 
-        public List<Clases.Cliente> ConvertirListaDeClientesDatosALogica(List<AccesoADatos.Cliente> clientes)
+        public List<Clases.Cliente> ConvertirListaDeDatosALogica(List<AccesoADatos.Cliente> clientes)
         {
             List<Clases.Cliente> resultado = new List<Clases.Cliente>();
             foreach (Cliente cliente in clientes)

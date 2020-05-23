@@ -18,7 +18,7 @@ namespace LogicaDeNegocio.Servicios
 {
 	public static class ServiciosDeCreacionDePDF
 	{
-		public static void GenerarReporteDeInventario(List<Discrepancia> Discrepancias, List<ObjetoDeInventario> objetosDeInventario, string direccion)
+		public static void GenerarReporteDeInventario(List<Discrepancia> discrepancias, List<ObjetoDeInventario> objetosDeInventario, string direccion)
 		{
 			PdfWriter writer = new PdfWriter(direccion);
 			PdfDocument pdf = new PdfDocument(writer);
@@ -34,10 +34,10 @@ namespace LogicaDeNegocio.Servicios
 			documento.Add(new Paragraph("Reporte de inventario de italia pizza"));
 			documento.Add(new Paragraph("Fecha: " + DateTime.Now.ToString()));
 
-			if (Discrepancias.Count > 0)
+			if (discrepancias.Count > 0)
 			{
 				documento.Add(new Paragraph("Reporte de discrepancias"));
-				foreach (Discrepancia discrepancia in Discrepancias)
+				foreach (Discrepancia discrepancia in discrepancias)
 				{
 					AñadirDiscrepanciaATabla(tablaDeDiscrepancias, discrepancia);
 				}
