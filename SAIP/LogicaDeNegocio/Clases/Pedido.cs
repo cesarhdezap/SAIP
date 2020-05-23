@@ -22,16 +22,6 @@ namespace LogicaDeNegocio
         public Cuenta Cuenta { get; set; }
         public string Creador { get; set; }
 
-
-        public void AñadirProducto(Producto producto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string EstadoToString()
-        {
-            return Estado.ToString();
-        }
     }
 
     

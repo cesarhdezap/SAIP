@@ -91,7 +91,16 @@ namespace LogicaDeNegocio.Clases
 
         public override bool ValidarCantidadAlimento(int cantidadAValidar)
         {
-            throw new NotImplementedException();
+            ProporcionDAO proporcionDAO = new ProporcionDAO();
+            Proporciones = proporcionDAO.CargarProporcionesPorIdPlatillo(Id);
+
+            bool resultado = false;
+            foreach(Proporcion propoporcion in Proporciones)
+            {
+                throw new NotImplementedException();
+            }
+
+            return resultado;
         }
     }
 }
