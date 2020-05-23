@@ -26,7 +26,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				Cantidad = componenteDb.Cantidad
 			};
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
-			componenteConvertido.Ingrediente = ingredienteDAO.ConvertirDeDatosAlogica(componenteDb.IngredienteComponente);
+			componenteConvertido.Ingrediente = ingredienteDAO.ConvertirDeDatosALogica(componenteDb.IngredienteComponente);
 			return componenteConvertido;
 		}
 

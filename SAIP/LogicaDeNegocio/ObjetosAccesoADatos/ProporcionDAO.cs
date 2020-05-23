@@ -71,7 +71,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			{
 				Id = proporcionDb.Id,
 				Cantidad = proporcionDb.Cantidad,
-				Ingrediente = ingredienteDAO.ConvertirDeDbALogica(proporcionDb.Ingrediente)
+				Ingrediente = ingredienteDAO.ConvertirDeDatosALogica(proporcionDb.Ingrediente)
 			};
 
 			return proporcionConvertida;
