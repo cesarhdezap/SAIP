@@ -21,16 +21,18 @@ namespace InterfazDeUsuario.Gerente
     /// <summary>
     /// Lógica de interacción para GUIVerEmpleados.xaml
     /// </summary>
-    public partial class GUIVerEmpleados : Window
+    public partial class GUIVerEmpleados : Page
     {
         private List<Empleado> Trabajadores { get; set; }
         private List<Empleado> Visibles { get; set; }
         public Empleado Gerente { get; set; }
-        ControladorDeCambioDePantalla controlador;
-        public GUIVerEmpleados(Empleado EmpleadoCargado)
+        ControladorDeCambioDePantalla Controlador;
+        public GUIVerEmpleados(ControladorDeCambioDePantalla controlador, Empleado EmpleadoCargado)
         {
             InitializeComponent();
             Gerente = EmpleadoCargado;
+            BarraDeEstado.Controlador = controlador;
+            Controlador = controlador;
             BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
  
             MostrarEmpleados();
@@ -65,18 +67,13 @@ namespace InterfazDeUsuario.Gerente
             ActualizarPantalla();
         }
 
-        private void registro_Click(object sender, RoutedEventArgs e)
+        private void Registro_Click(object sender, RoutedEventArgs e)
         {
-            GUIRegistrarEmpleado registrarEmpleado = new GUIRegistrarEmpleado(Gerente);
-            Hide();
-            registrarEmpleado.ShowDialog();
-            Show();
+            GUIRegistrarEmpleado registrarEmpleado = new GUIRegistrarEmpleado(Controlador, Gerente);
+            Controlador.CambiarANuevaPage(registrarEmpleado);
         }
 
         
-        private void RegresarButton_Click(object sender, RoutedEventArgs e)
-        {
-            controlador.Regresar();
-        }
+        
     }
 }

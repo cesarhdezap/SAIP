@@ -60,7 +60,7 @@ namespace InterfazDeUsuario.Paginas
 					}
 					else if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.Gerente)
 					{
-						GUIGerente gerente = new GUIGerente(empleadoCargado);
+						GUIGerente gerente = new GUIGerente(Controlador, empleadoCargado);
 						Controlador.CambiarANuevaPage(gerente);
 						
 					}

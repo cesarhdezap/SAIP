@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
 using static InterfazDeUsuario.UtileriasGráficas;
+using LogicaDeNegocio.Enumeradores;
 
 namespace InterfazDeUsuario.Gerente
 {
@@ -24,41 +25,47 @@ namespace InterfazDeUsuario.Gerente
     /// Lógica de interacción para GUIRegistrarEmpleado.xaml
     /// </summary>
 
-    public partial class GUIRegistrarEmpleado : Window
+    public partial class GUIRegistrarEmpleado : Page
     {
         public Empleado Gerente { get; set; }
         public List<Empleado> Trabajadores { get; set; }
         public List<Empleado> Visible { get; set; }
         public Empleado empleado { get; set; } = new Empleado();
-        ControladorDeCambioDePantalla controlador;
-        public GUIRegistrarEmpleado(Empleado EmpleadoCargado)
+        ControladorDeCambioDePantalla Controlador;
+        public GUIRegistrarEmpleado(ControladorDeCambioDePantalla controlador, Empleado empleadoCargado)
         {
             InitializeComponent();
-            Gerente = EmpleadoCargado;
+            Gerente = empleadoCargado;
+            BarraDeEstado.Controlador = controlador;
+            Controlador = controlador;
             BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
             EmpleadoDAO empleadoDAO = new EmpleadoDAO();
             Trabajadores = empleadoDAO.CargarTodos();
             Visible = Trabajadores;
-            ActualizarLista();
 
         }
 
-        public void ActualizarLista()
-        {
-            
-        }
 
         private void Agregar_Click(object sender, RoutedEventArgs e)
         {
-           /// Empleado empleadoa = (Empleado);
-            
+            CapturarEmpleado();
+            ValidarCampos();
+            ActualizarPantalla();
         }
 
+        public void ActualizarPantalla()
+        {
+            TextBoxNombre.Clear();
+            Usuario.Clear();
+            correo.Clear();
+            password.Clear();
+            puesto.Clear();
+        }
 
         private bool ValidarCampos()
         {
             bool resultado = false;
-            if (ValidarCadena(Nombre.Text) &&
+            if (ValidarCadena(TextBoxNombre.Text) &&
                 ValidarCadena(Usuario.Text) &&
                 ValidarCadena(correo.Text) &&
                 ValidarCadena(password.Text)&&
@@ -68,7 +75,7 @@ namespace InterfazDeUsuario.Gerente
             }
             else
             {
-                MostrarEstadoDeValidacionCadena(Nombre);
+                MostrarEstadoDeValidacionCadena(TextBoxNombre);
                 MostrarEstadoDeValidacionCadena(Usuario);
                 MostrarEstadoDeValidacionCadena(correo);
                 MostrarEstadoDeValidacionCadena(password);
@@ -83,13 +90,13 @@ namespace InterfazDeUsuario.Gerente
             MostrarEstadoDeValidacionCadena((TextBox)sender);
 
             }
-        public void GuardarEmpleado()
+        public void CapturarEmpleado()
         {
-            empleado.Nombre = Nombre.Text;
+            empleado.Nombre = TextBoxNombre.Text;
             empleado.NombreDeUsuario = Usuario.Text;
             empleado.Contraseña = password.Text;
             empleado.CorreoElectronico = correo.Text;
-           /// empleado.TipoDeEmpleado = puesto.Text. ;
+            empleado.TipoDeEmpleado = TipoDeEmpleado.Mesero;
         }
 
         private void Usuario_TextChanged(object sender, TextChangedEventArgs e)
@@ -112,10 +119,6 @@ namespace InterfazDeUsuario.Gerente
             MostrarEstadoDeValidacionCadena((TextBox)sender);
         }
 
-        private void RegresarButton_Click(object sender, RoutedEventArgs e)
-        {
-            GUIVerEmpleados verEmpleados;
-            controlador.Regresar();
-        }
+        
     }
 }

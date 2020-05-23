@@ -22,10 +22,13 @@ namespace InterfazDeUsuario.Gerente
 	public partial class GUIGerente : Page
 	{
 		public Empleado Gerente { get; set; }
-		public GUIGerente(Empleado empleadoCargado)
+		ControladorDeCambioDePantalla Controlador;
+		public GUIGerente(ControladorDeCambioDePantalla controlador, Empleado empleadoCargado)
 		{
 			InitializeComponent();
 			Gerente = empleadoCargado;
+			BarraDeEstado.Controlador = controlador;
+			Controlador = controlador;
 			BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
 		}
 
@@ -48,9 +51,9 @@ namespace InterfazDeUsuario.Gerente
 
 		private void Button_Click_Lista(object sender, RoutedEventArgs e)
 		{
-			GUIVerEmpleados verEmpleados = new GUIVerEmpleados(Gerente);
+			GUIVerEmpleados verEmpleados = new GUIVerEmpleados(Controlador, Gerente);
+			Controlador.CambiarANuevaPage(verEmpleados);
 			
-			verEmpleados.ShowDialog();
 			
 		}
 	}
