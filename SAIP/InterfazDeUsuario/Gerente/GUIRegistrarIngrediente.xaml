@@ -20,19 +20,22 @@
             <ComboBox x:Name="ComboBoxUnidadMedida" HorizontalAlignment="Left" Margin="140,249,0,0" VerticalAlignment="Top" Width="120"/>
             <Label Content="Unidad de medida" HorizontalAlignment="Left" Margin="20,245,0,0" VerticalAlignment="Top"/>
             <Label Content="Cantidad" HorizontalAlignment="Left" Margin="40,201,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="TextBoxCosto" HorizontalAlignment="Left" Height="23" Margin="140,161,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20"/>
-            <TextBox x:Name="TextBoxCantidad" HorizontalAlignment="Left" Height="23" Margin="140,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20"/>
-            <CheckBox x:Name="CheckBoxIngredienteCompuesto" Content="¿Es un Ingrediente compuesto?" HorizontalAlignment="Left" Margin="320,48,0,0" VerticalAlignment="Top" Checked="CheckBoxIngredienteCompuesto_Checked" Unchecked="CheckBoxIngredienteCompuesto_Unchecked"/>
-            <Grid x:Name="GridCompuestos" HorizontalAlignment="Left" Height="262" Margin="320,84,0,0" VerticalAlignment="Top" Width="440">
+            <TextBox x:Name="TextBoxCosto" DataObject.Pasting="TextBoxCosto_Pasting" HorizontalAlignment="Left" Height="23" Margin="140,161,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20" PreviewTextInput="TextBoxCosto_PreviewTextInput" TextChanged="TextBoxCosto_TextChanged"/>
+            <TextBox x:Name="TextBoxCantidad" DataObject.Pasting="TextBoxCantidad_Pasting" HorizontalAlignment="Left" Height="23" Margin="140,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20" PreviewTextInput="TextBoxCantidad_PreviewTextInput" TextChanged="TextBoxCantidad_TextChanged"/>
+            <CheckBox x:Name="CheckBoxIngredienteCompuesto" Content="¿Es un Ingrediente compuesto?" HorizontalAlignment="Left" Margin="320,95,0,0" VerticalAlignment="Top" Checked="CheckBoxIngredienteCompuesto_Checked" Unchecked="CheckBoxIngredienteCompuesto_Unchecked"/>
+            <Grid x:Name="GridCompuestos" HorizontalAlignment="Left" Height="262" Margin="320,124,0,0" VerticalAlignment="Top" Width="440">
                 <Label Content="Código" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                 <Label Content="Cantidad" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top"/>
                 <TextBox x:Name="TextBoxCodigoCompuesto" HorizontalAlignment="Left" Height="23" Margin="80,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                <TextBox x:Name="TextBoxCantidadCompuesto" HorizontalAlignment="Left" Height="23" Margin="80,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="TextBoxCantidadCompuesto" DataObject.Pasting="TextBoxCantidad_Pasting" HorizontalAlignment="Left" Height="23" Margin="80,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBoxCantidadCompuesto_TextChanged" PreviewTextInput="TextBoxCantidadCompuesto_PreviewTextInput"/>
                 <DataGrid x:Name="DataGridComponentes" HorizontalAlignment="Left" Height="232" Margin="220,10,0,0" VerticalAlignment="Top" Width="200"/>
                 <Button x:Name="ButtonAgregarComponente" Content="Agregar Componente" HorizontalAlignment="Left" Margin="35,222,0,0" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.538,0.5"/>
             </Grid>
-            <Button x:Name="ButtonGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="40,311,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="ButtonCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="165,311,0,0" VerticalAlignment="Top" Width="75" IsDefault="True"/>
+            <Button x:Name="ButtonGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="40,351,0,0" VerticalAlignment="Top" Width="75" Click="ButtonGuardar_Click"/>
+            <Button x:Name="ButtonCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="165,351,0,0" VerticalAlignment="Top" Width="75" IsDefault="True"/>
+            <CheckBox x:Name="CheckBoxCodigoBarra" Content="¿Tiene código de barras?" HorizontalAlignment="Left" Margin="320,60,0,0" VerticalAlignment="Top" Checked="CheckBoxCodigoBarra_Checked" Unchecked="CheckBoxCodigoBarra_Unchecked"/>
+            <Label x:Name="LabelCodigoBarra" Content="Código de barras " HorizontalAlignment="Left" Margin="500,54,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+            <TextBox x:Name="TextBoxCodigoBarras" DataObject.Pasting="TextBoxCodigoBarras_Pasting" HorizontalAlignment="Left" Height="23" Margin="609,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" IsEnabled="False" PreviewTextInput="TextBoxCodigoBarras_PreviewTextInput" TextChanged="TextBoxCodigoBarras_TextChanged"/>
 
         </Grid>
     </DockPanel>

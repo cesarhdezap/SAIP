@@ -1,7 +1,9 @@
 ﻿using AccesoADatos;
+using iText.Barcodes.Qrcode;
 using LogicaDeNegocio.Enumeradores;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +12,27 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 {
 	public class IngredienteDAO
 	{
+		public void GuardarIngrediente(Clases.Ingrediente ingrediente)
+		{
+			AccesoADatos.Ingrediente ingredienteDb = new Ingrediente();
+			ingrediente.FechaDeCreacion = DateTime.Now;
+			ingrediente.FechaDeModificacion = DateTime.Now;
+			ingrediente.Activo = true;
+			try
+			{
+				ingredienteDb = ConvertirDeLogicaADb(ingrediente);
+			}
+			catch (EntityException ex)
+			{
+				throw new EntityException("Error al guardar Ingrediente", ex);
+			}
+				using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+				{
+					context.Ingredientes.Add(ingredienteDb);
+					context.SaveChanges();
+				}
+
+		}
 		public Clases.Ingrediente ConvertirDeDatosALogica(AccesoADatos.Ingrediente ingredienteDb)
 		{
 			Clases.Ingrediente ingredienteConvertido = new Clases.Ingrediente()
