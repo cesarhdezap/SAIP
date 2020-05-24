@@ -13,7 +13,7 @@
 
         <Grid>
             <Label Content="Código" HorizontalAlignment="Left" Margin="40,60,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="TextBoxCodigo" HorizontalAlignment="Left" Height="23" Margin="140,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20"/>
+            <TextBox x:Name="TextBoxCodigo" HorizontalAlignment="Left" Height="23" Margin="140,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20" TextChanged="TextBoxCodigo_TextChanged"/>
             <Label Content="Nombre" HorizontalAlignment="Left" Margin="40,107,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="TextBoxNombre" HorizontalAlignment="Left" Height="23" Margin="140,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20"/>
             <Label Content="Costo" HorizontalAlignment="Left" Margin="40,158,0,0" VerticalAlignment="Top"/>

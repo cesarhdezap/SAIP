@@ -126,7 +126,7 @@ namespace InterfazDeUsuario.Gerente
 
         private void TextBoxCosto_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UtileriasGráficas.MostrarEstadoDeValidacionTelefono((TextBox)sender);
+            UtileriasGráficas.MostrarEstadoDeValidacionNumero((TextBox)sender);
         }
 
         private void TextBoxCantidad_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -177,7 +177,7 @@ namespace InterfazDeUsuario.Gerente
 
         private void TextBoxCantidadCompuesto_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UtileriasGráficas.MostrarEstadoDeValidacionTelefono((TextBox)sender);
+            UtileriasGráficas.MostrarEstadoDeValidacionNumero((TextBox)sender);
         }
 
         private void TextBoxCantidadCompuesto_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -191,7 +191,14 @@ namespace InterfazDeUsuario.Gerente
 
         private void ButtonGuardar_Click(object sender, RoutedEventArgs e)
         {
-            
+            Ingrediente ingrediente = new Ingrediente();
+
+            UtileriasGráficas.MostrarEstadoDeValidacionCadena(TextBoxCodigo);
+        }
+
+        private void TextBoxCodigo_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UtileriasGráficas.MostrarEstadoDeValidacionCadena((TextBox)sender);
         }
     }
 }
