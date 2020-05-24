@@ -73,7 +73,17 @@ namespace InterfazDeUsuario.Gerente
             Controlador.CambiarANuevaPage(registrarEmpleado);
         }
 
-        
-        
+        public void Editar_Click(object sender, RoutedEventArgs e)
+        {
+            GUI_EditarEmpleado editarEmpleado = new GUI_EditarEmpleado(Controlador, Gerente);
+            Controlador.CambiarANuevaPage(editarEmpleado);
+        }
+
+        private void Eliminar_Click(object sender, RoutedEventArgs e, EmpleadoDAO empleado)
+        {
+          ///  empleado.DesactivarEmpleado();
+        }
+
+
     }
 }

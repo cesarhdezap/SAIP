@@ -8,36 +8,27 @@
       mc:Ignorable="d" 
       Title="GUIVerEmpleados" Height="691" Width="1258">
 
-    
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="173*"/>
-            <ColumnDefinition Width="244*"/>
-        </Grid.ColumnDefinitions>
-        <controls:BarraDeEstado x:Name="BarraDeEstado" Width="Auto" Margin="0,0,0.2,583.6" Grid.ColumnSpan="2" />
-        <TextBox x:Name="Busqueda" Height="40" Margin="10,148,0,0" TextChanged="Busqueda_TextChanged" Width="353" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="0" RenderTransformOrigin="0.5,0.5">
-            <TextBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="1" ScaleX="1"/>
-                    <SkewTransform AngleY="0" AngleX="0"/>
-                    <RotateTransform Angle="0"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBox.RenderTransform>
-        </TextBox>
-        <DataGrid x:Name="ListaE" AutoGenerateColumns="False"  Height="469" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="935" Margin="0,0,0,-0.4" AutomationProperties.IsColumnHeader="True" FontFamily="Tahoma" FontSize="18" Grid.ColumnSpan="2">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" CanUserResize ="False" />
-                <DataGridTextColumn Header="Usuario" Binding="{Binding NombreDeUsuario}" CanUserResize="False"/>
-                <DataGridTextColumn Header="Correo" Binding="{Binding CorreoElectronico}" CanUserResize="False"/>
-                <DataGridTextColumn Header="Tipo de Empleado" Binding="{Binding TipoDeEmpleado}" CanUserResize="False"/>
-                <DataGridCheckBoxColumn Header="Activo" Binding="{Binding Activo}" CanUserResize="False"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Content="Registrar" x:Name="Registro" Height="40" VerticalAlignment="Top" Margin="247.2,148,316.2,0" Click="Registro_Click" Grid.Column="1"/>
 
-    </Grid>
+    <DockPanel>
+        <controls:BarraDeEstado x:Name="BarraDeEstado"  DockPanel.Dock="Top" Width="Auto"   />
+        <Grid>
+            <TextBox x:Name="Busqueda" Height="40" TextChanged="Busqueda_TextChanged" Width="353" VerticalAlignment="Top"  Padding="0" Margin="10,77,894.6,0"/>
+            <Button Content="Registrar" x:Name="Registro" Height="38" VerticalAlignment="Top"  Click="Registro_Click" Margin="765,77,322.6,0" />
+            <DataGrid x:Name="ListaE" AutoGenerateColumns="False"  Height="469" VerticalAlignment="Bottom"  Width="935" AutomationProperties.IsColumnHeader="True" FontFamily="Tahoma" FontSize="18" Margin="0,0,322.6,9.6">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" CanUserResize ="False" />
+                    <DataGridTextColumn Header="Usuario" Binding="{Binding NombreDeUsuario}" CanUserResize="False"/>
+                    <DataGridTextColumn Header="Correo" Binding="{Binding CorreoElectronico}" CanUserResize="False"/>
+                    <DataGridTextColumn Header="Tipo de Empleado" Binding="{Binding TipoDeEmpleado}" CanUserResize="False"/>
+                    <DataGridCheckBoxColumn Header="Activo" Binding="{Binding Activo}" CanUserResize="False"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button x:Name="Editar" Content="Editar" HorizontalAlignment="Left" Margin="982,147,0,0" VerticalAlignment="Top" Click="Editar_Click" Width="104" Height="27"/>
+            <Button x:Name="Eliminar" Content="Dar de Baja" HorizontalAlignment="Left" Margin="1124,147,0,0" VerticalAlignment="Top" Width="103" Height="27"/>
+
+        </Grid>
+    </DockPanel>
 
 
 
