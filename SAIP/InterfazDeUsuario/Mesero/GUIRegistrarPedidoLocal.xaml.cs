@@ -30,7 +30,7 @@ namespace InterfazDeUsuario.Mesero
         Cuenta Cuenta;
         List<CantidadAlimento> AlimentosDelPedido = new List<CantidadAlimento>();
         readonly ControladorDeCambioDePantalla Controlador;
-        const int TIEMPO_DE_ESPERA_CANTIDAD_INSUFICIENTE = 5000;
+        const int TIEMPO_DE_ESPERA_CANTIDAD_INSUFICIENTE = 3000;
         const int TIEMPO_DE_ESPERA_NOTIFICACION_PEDIDO_REALIZADO = 2000;
         const int CANTIDAD_ALIMENTOS_POR_CLIC = 1;
 
@@ -76,7 +76,6 @@ namespace InterfazDeUsuario.Mesero
                 {
                     if (alimento is Producto producto)
                     {
-                        cantidadInsuficiente = true;
                         CantidadProducto cantidadProducto = new CantidadProducto();
                         cantidadProducto.Alimento = producto;
                         cantidadProducto.Cantidad = CANTIDAD_ALIMENTOS_POR_CLIC;
@@ -118,16 +117,22 @@ namespace InterfazDeUsuario.Mesero
 
         private void MostrarMensajeCantidadInsuficiente(string elemento)
         {
+            StackPanelRealizarPedido.Visibility = Visibility.Collapsed;
+            StackPanelConfirmacion.Visibility = Visibility.Visible;
             ButtonNotificacionConfirmar.Visibility = Visibility.Collapsed;
             ButtonNotificacionCancelar.Visibility = Visibility.Collapsed;
-            StackPanelConfirmacion.Visibility = Visibility.Visible;
-            LabelNotificacion.Content = elemento + " no tiene cantidad suficiente";
+            LabelNotificacion.Foreground = Brushes.Red;
+            LabelNotificacion.Content = elemento + " no tiene existencias.";
 
             Task.Delay(TIEMPO_DE_ESPERA_CANTIDAD_INSUFICIENTE).ContinueWith(_ =>
             {
                 Dispatcher.Invoke(() =>
                 {
                     StackPanelConfirmacion.Visibility = Visibility.Collapsed;
+                    StackPanelRealizarPedido.Visibility = Visibility.Visible;
+                    ButtonNotificacionConfirmar.Visibility = Visibility.Visible;
+                    ButtonNotificacionCancelar.Visibility = Visibility.Visible;
+                    LabelNotificacion.Foreground = Brushes.Black;
                 });
             });
         }
@@ -170,6 +175,7 @@ namespace InterfazDeUsuario.Mesero
                 Estado = EstadoPedido.EnEspera,
                 CantidadAlimentos = AlimentosDelPedido,
             };
+            
             PedidoDAO pedidoDAO = new PedidoDAO();
             pedidoDAO.Guardar(pedido);
 
@@ -186,27 +192,48 @@ namespace InterfazDeUsuario.Mesero
         private void ButtonDisminuir_Click(object sender, RoutedEventArgs e)
         {
             CantidadAlimento cantidadAlimento = ((FrameworkElement)sender).DataContext as CantidadAlimento;
+            if(cantidadAlimento.Cantidad - 1 > 0)
+            {
+                cantidadAlimento.Cantidad--;
+            }
+            else
+            {
+                AlimentosDelPedido.Remove(cantidadAlimento);
+            }
+
+            DataGridAlimentosEnPedido.ItemsSource = null;
+            DataGridAlimentosEnPedido.ItemsSource = AlimentosDelPedido;
+        }
+
+        private void ButtonAñadir_Click(object sender, RoutedEventArgs e)
+        {
+            CantidadAlimento cantidadAlimento = ((FrameworkElement)sender).DataContext as CantidadAlimento;
             if (cantidadAlimento is CantidadPlatillo cantidadPlatillo)
             {
-                throw new NotImplementedException();
+                bool existenAlimentos = cantidadPlatillo.Alimento.ValidarCantidadAlimento(cantidadPlatillo.Cantidad + CANTIDAD_ALIMENTOS_POR_CLIC);
+                if (existenAlimentos)
+                {
+                    cantidadAlimento.Cantidad++;
+                }
+                else
+                {
+                    MostrarMensajeCantidadInsuficiente(cantidadPlatillo.Alimento.Nombre);
+                }
             }
             else if (cantidadAlimento is CantidadProducto cantidadProducto)
             {
                 bool existenAlimentos = cantidadProducto.Alimento.ValidarCantidadAlimento(cantidadProducto.Cantidad + CANTIDAD_ALIMENTOS_POR_CLIC);
                 if (existenAlimentos)
                 {
-                    cantidadAlimento.Cantidad--;
+                    cantidadAlimento.Cantidad++;
                 }
                 else
                 {
                     MostrarMensajeCantidadInsuficiente(cantidadProducto.Alimento.Nombre);
                 }
             }
-        }
-
-        private void ButtonAñadir_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
+            DataGridAlimentosEnPedido.ItemsSource = null;
+            DataGridAlimentosEnPedido.ItemsSource = AlimentosDelPedido;
         }
 
         private CantidadAlimento BuscarCantidadAlimento(Alimento alimento)

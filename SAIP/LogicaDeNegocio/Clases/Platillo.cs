@@ -95,10 +95,21 @@ namespace LogicaDeNegocio.Clases
             Proporciones = proporcionDAO.CargarProporcionesPorIdPlatillo(Id);
 
             bool resultado = false;
-            foreach(Proporcion propoporcion in Proporciones)
+            bool cantidadSuficiente = false;
+            foreach(Proporcion proporcion in Proporciones)
             {
-                throw new NotImplementedException();
+                if (proporcion.Ingrediente.Componentes.Count > 0)
+                {
+                    //Cantidad IngredienteComponente * Cantidad proporcion >= cantidad en base de ingrediente componente
+                }
+                else if(proporcion.Ingrediente.CantidadEnInventario >= cantidadAValidar * proporcion.Cantidad)
+                {
+                    cantidadSuficiente = true;
+                }
             }
+
+            if (cantidadSuficiente)
+                resultado = true;
 
             return resultado;
         }

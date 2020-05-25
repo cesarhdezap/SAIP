@@ -72,6 +72,8 @@ namespace InterfazDeUsuario.Mesero
         private void ButtonActualizar_Click(object sender, RoutedEventArgs e)
         {
             MostrarMisMesas();
+            StackPanelCuenta.Visibility = Visibility.Collapsed;
+            
         }
     }
 }

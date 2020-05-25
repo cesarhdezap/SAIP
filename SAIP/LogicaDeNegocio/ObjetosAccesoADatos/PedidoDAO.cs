@@ -14,7 +14,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
     {
         public void Guardar(Pedido pedido)
         {
-            if (pedido.CantidadAlimentos.Count > 0 && ValidarCantidadDeCantidadAlimentos(pedido.CantidadAlimentos))
+            if (ValidarCuentaParaGuardado(pedido) && ValidarCantidadDeCantidadAlimentos(pedido.CantidadAlimentos))
             {
                 pedido.FechaDeCreacion = DateTime.Now;
                 IvaDAO ivaDAO = new IvaDAO();
@@ -27,12 +27,42 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             }
 
             AccesoADatos.Pedido pedidoAGuardar = ConvertirPedidoLogicaADatos(pedido);
+
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
+                foreach(CantidadAlimento cantidadAlimento in pedido.CantidadAlimentos)
+                {
+                    if (cantidadAlimento is CantidadProducto cantidadProducto)
+                    {
+                        ProductoPedido productoPedido = new ProductoPedido();
+                        productoPedido.Cantidad = cantidadProducto.Cantidad;
+                        productoPedido.Productos = context.Productos.Find(cantidadProducto.Alimento.Id);
+                        pedidoAGuardar.ProductoPedido.Add(productoPedido);
+                    }
+                    else if (cantidadAlimento is CantidadPlatillo cantidadPlatillo)
+                    {
+                        PlatilloPedido platilloPedido = new PlatilloPedido();
+                        platilloPedido.Cantidad = cantidadPlatillo.Cantidad;
+                        platilloPedido.Platillo = context.Platillos.Find(cantidadPlatillo.Alimento.Id);
+                        pedidoAGuardar.PlatilloPedidos.Add(platilloPedido);
+                    }
+                }
+
+                pedidoAGuardar.Cuenta = context.Cuentas.Find(pedido.Cuenta.Id);
                 context.Pedidos.Add(pedidoAGuardar);
                 context.SaveChanges();
             }
 
+        }
+
+        private bool ValidarCuentaParaGuardado(Pedido pedido)
+        {
+            bool resultado = false;
+            if (pedido.CantidadAlimentos.Count > 0)
+            {
+                resultado = true;
+            }
+            return resultado;
         }
 
         public bool ValidarCantidadDeCantidadAlimentos(List<CantidadAlimento> cantidadAlimentos)

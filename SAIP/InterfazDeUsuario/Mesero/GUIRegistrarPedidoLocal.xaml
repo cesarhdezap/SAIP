@@ -73,13 +73,14 @@
         </StackPanel>
 
         <StackPanel Orientation="Vertical" DockPanel.Dock="Right">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                <Label Content="Alimentos" FontSize="15" HorizontalAlignment="Left"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="2">
-                    <ComboBox x:Name="ComboBoxCategoria" FontSize="15" Text="Categoria"/>
-                    <TextBox x:Name="TextBoxBusqueda" Text="Buscar"/>
-                </StackPanel>
-            </StackPanel>
+            
+            <DockPanel>
+                <Label Content="Alimentos" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <UniformGrid Columns="2" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <ComboBox x:Name="ComboBoxCategoria" FontSize="20" Text="Categoria" Width="200"/>
+                    <TextBox x:Name="TextBoxBusqueda" Text="Buscar" FontSize="20"/>
+                </UniformGrid>
+            </DockPanel>
 
             <DockPanel >
                 <ListBox x:Name="ListBoxAlimentos" BorderThickness="0"
@@ -105,8 +106,8 @@
             </DockPanel>
 
             <StackPanel x:Name="StackPanelRealizarPedido" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
-                <Button x:Name="ButtonRealizarPedido" Content="Realizar" Margin="2" FontSize="20" Background="LightGreen" Click="ButtonRealizarPedido_Click"/>
-                <Button x:Name="ButtonCancelar" Content="Cancelar" Margin="2" FontSize="20" Background="PaleVioletRed" Click="ButtonCancelar_Click"/>
+                <Button x:Name="ButtonRealizarPedido" Content="Realizar pedido" Margin="2" FontSize="20" Background="LightGreen" Click="ButtonRealizarPedido_Click"/>
+                <Button x:Name="ButtonCancelar" Content="Cancelar pedido" Margin="2" FontSize="20" Background="PaleVioletRed" Click="ButtonCancelar_Click"/>
             </StackPanel>
             
             <StackPanel x:Name="StackPanelConfirmacion" Orientation="Horizontal" Visibility="Collapsed" DockPanel.Dock="Bottom">
