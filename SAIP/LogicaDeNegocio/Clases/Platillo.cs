@@ -43,7 +43,7 @@ namespace LogicaDeNegocio.Clases
             Ingrediente ingrediente = new Ingrediente();
             IngredienteDAO ingredienteDAO = new IngredienteDAO();
             if (!IngredienteYaAñadido(id))
-            {
+            {   
                 ingrediente = ingredienteDAO.CargarIngredientePorId(id);
                 Proporciones.Add(new Proporcion
                 {

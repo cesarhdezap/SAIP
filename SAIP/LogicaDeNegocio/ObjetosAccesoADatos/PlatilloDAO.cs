@@ -51,7 +51,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			return platilloDb;
 		}
 
-		private List<Clases.Platillo> ConvertirListaDePlatillosDeAccesoADatosAListaDePLatillosDeLogica(List<Platillo> AlimentosDb)
+		private List<Clases.Platillo> ConvertirListaDeDatosAListaDeLogica(List<Platillo> AlimentosDb)
 		{
 			List<Clases.Platillo> alimentosResultado = new List<Clases.Platillo>();
 
@@ -168,7 +168,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				alimentosDb = context.Platillos.ToList();
 			}
 
-			List<Clases.Platillo> alimentosResultado = ConvertirListaDePlatillosDeAccesoADatosAListaDePLatillosDeLogica(alimentosDb);
+			List<Clases.Platillo> alimentosResultado = ConvertirListaDeDatosAListaDeLogica(alimentosDb);
 			return alimentosResultado;
 		}
 
