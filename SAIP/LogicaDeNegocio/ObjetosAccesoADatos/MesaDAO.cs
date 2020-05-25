@@ -70,8 +70,9 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             {
                 mesas = context.Mesas.ToList();
             }
-            
-            return ConvertirListaDeMesasDatosALogica(mesas);
+            List<Clases.Mesa> mesasresultado = new List<Clases.Mesa>();
+            mesasresultado = ConvertirListaDeMesasDatosALogica(mesas);
+            return mesasresultado;
         }
 
 

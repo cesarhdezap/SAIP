@@ -59,5 +59,11 @@ namespace InterfazDeUsuario.Gerente
 			GUIVerEmpleados verEmpleados = new GUIVerEmpleados(Controlador, Gerente);
 			Controlador.CambiarANuevaPage(verEmpleados);
 		}
+
+		private void Button_Click_Mesas(Object sender, RoutedEventArgs e)
+		{
+			GUI_VerMesas verMesas = new GUI_VerMesas(Controlador, Gerente);
+			Controlador.CambiarANuevaPage(verMesas);
+		}
 	}
 }

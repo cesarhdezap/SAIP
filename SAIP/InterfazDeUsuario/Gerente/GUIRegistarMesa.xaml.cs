@@ -20,14 +20,16 @@ namespace InterfazDeUsuario.Gerente
     /// <summary>
     /// Lógica de interacción para GUIRegistarMesa.xaml
     /// </summary>
-    public partial class GUIRegistarMesa : Window
+    public partial class GUIRegistarMesa : Page
     {
         public Empleado Gerente { get; set; }
-        public GUIRegistarMesa(Empleado EmpleadoCargado)
+        ControladorDeCambioDePantalla Controlador;
+        public GUIRegistarMesa(ControladorDeCambioDePantalla controlador, Empleado EmpleadoCargado)
         {
             InitializeComponent();
             Gerente = EmpleadoCargado;
-            
+            BarraDeEstado.Controlador = controlador;
+            Controlador = controlador;
             BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
         }
 

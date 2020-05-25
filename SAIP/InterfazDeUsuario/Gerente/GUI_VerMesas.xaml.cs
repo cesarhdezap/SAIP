@@ -20,32 +20,33 @@ namespace InterfazDeUsuario.Gerente
     /// <summary>
     /// Lógica de interacción para GUI_VerMesas.xaml
     /// </summary>
-    public partial class GUI_VerMesas : Window
+    public partial class GUI_VerMesas : Page
     {
         public Empleado Gerente { get; set; }
-        private List<Cuenta> Cuentas = new List<Cuenta>();
-        Empleado Empleado;
-        public GUI_VerMesas(Empleado EmpleadoCargado, Empleado empleado)
+        private List<Mesa> Mesas = new List<Mesa>();
+        
+        ControladorDeCambioDePantalla Controlador;
+        public GUI_VerMesas(ControladorDeCambioDePantalla controlador ,Empleado EmpleadoCargado)
         {
             InitializeComponent();
             Gerente = EmpleadoCargado;
-            Empleado = empleado;
+            BarraDeEstado.Controlador = controlador;
+            Controlador = controlador;
             BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
             VerMesas();
         }
 
         public void VerMesas()
         {
-            CuentaDAO cuentaDAO = new CuentaDAO();
-            Cuentas = cuentaDAO.RecuperarCuentasAbiertasPorEmpleado(Empleado);
-            ListaM.ItemsSource = Cuentas;
+            MesaDAO mesaDAO = new MesaDAO();
+            Mesas = mesaDAO.RecuperarTodos();
+            ListaM.ItemsSource = Mesas;
         }
 
         private void registro_Click(object sender, RoutedEventArgs e)
         {
-            GUIRegistarMesa registarMesa = new GUIRegistarMesa(Gerente);
-            Hide();
-            registarMesa.ShowDialog();
+            GUIRegistarMesa registarMesa = new GUIRegistarMesa(Controlador, Gerente);
+            Controlador.CambiarANuevaPage(registarMesa);
 
         }
     }
