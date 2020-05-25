@@ -1,6 +1,7 @@
 ﻿using AccesoADatos;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Security.Cryptography.X509Certificates;
@@ -11,7 +12,36 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 {
     public class ClienteDAO
     {
-        private AccesoADatos.Cliente ConvertirPedidoLogicaADatos(Clases.Cliente cliente)
+        public void DarDeBaja(Clases.Cliente cliente)
+        {
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                Cliente clienteDb = context.Clientes.Find(cliente.Id);
+                if (clienteDb != null)
+                {
+                    clienteDb.Activo = false;
+                }
+                else
+                {
+                    throw new ArgumentException("Id no encontrada ClienteDAO.DarDeBaja");
+                }
+            }
+        }
+        public List<Clases.Cliente> CargarTodosActivos()
+        {
+            List<Cliente> clientes = new List<Cliente>();
+            using(ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                clientes = context.Clientes.Where(c => c.Activo == true)
+                    .Include(c => c.Direcciones)
+                    .Include(c => c.Cuenta)
+                    .ToList();
+            }
+
+            return ConvertirListaDeDatosALogica(clientes);
+        }
+        
+        private AccesoADatos.Cliente ConvertirClienteLogicaADatos(Clases.Cliente cliente)
         {
             AccesoADatos.Cliente clienteDatos = new AccesoADatos.Cliente
             {

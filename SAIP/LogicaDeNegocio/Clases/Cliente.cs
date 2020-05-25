@@ -14,5 +14,10 @@ namespace LogicaDeNegocio.Clases
         public List<string> Direcciones { get; set;}
         public string Comentario { get; set;}
         public List<Cuenta> Cuenta { get; set;}
+
+        public Cliente()
+        {
+            Direcciones = new List<string>();
+        }
     }
 }

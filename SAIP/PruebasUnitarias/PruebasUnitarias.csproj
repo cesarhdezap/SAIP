@@ -52,6 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PruebasClases\PruebasMesa.cs" />
     <Compile Include="PruebasClases\PruebasProducto.cs" />
+    <Compile Include="PruebasClases\PruebasPlatillo.cs" />
     <Compile Include="PruebasDAO\PruebasMesaDAO.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -22,6 +22,7 @@ using static InterfazDeUsuario.UtileriasGráficas;
 using InterfazDeUsuario.Gerente;
 using InterfazDeUsuario.Mesero;
 using LogicaDeNegocio;
+using System.Xml;
 
 namespace InterfazDeUsuario.Paginas
 {
@@ -48,14 +49,23 @@ namespace InterfazDeUsuario.Paginas
 			{
 				contraseña = EncriptarCadena(contraseña);
 				EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-				bool resultadoDeValidacion = empleadoDAO.ValidarExistenciaDeNombreDeUsuarioYContraseña(nombreDeUsuario, contraseña);
+				bool resultadoDeValidacion;
+				try
+				{
+					resultadoDeValidacion = empleadoDAO.ValidarExistenciaDeNombreDeUsuarioYContraseña(nombreDeUsuario, contraseña);
+				}
+				catch(InvalidOperationException ex)
+				{
+					MessageBox.Show(ex.Message);
+					resultadoDeValidacion = false;
+				}
 
 				if (resultadoDeValidacion)
 				{
 					Empleado empleadoCargado = empleadoDAO.CargarEmpleadoPorNombreDeUsuario(nombreDeUsuario);
 					if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.CallCenter)
 					{
-						GUIPedidoADomicilio pedidoADomicilio = new GUIPedidoADomicilio(Controlador, empleadoCargado);
+						GUIVisualizarListaDeClientes pedidoADomicilio = new GUIVisualizarListaDeClientes(Controlador, empleadoCargado);
 						Controlador.CambiarANuevaPage(pedidoADomicilio);
 					}
 					else if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.Gerente)

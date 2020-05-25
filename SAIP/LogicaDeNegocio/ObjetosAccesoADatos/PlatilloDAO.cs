@@ -76,6 +76,10 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				{
 					proporcion.Platillo = platilloAGuardar;
 					proporcion.Ingrediente = context.Ingredientes.Find(proporcion.Ingrediente.Id);
+
+					Empleado empleado = context.Empleados.FirstOrDefault(e => e.Nombre == "X");
+					empleado.Activo = false;
+					context.SaveChanges();
 				}
 				
 				context.Platillos.Add(platilloAGuardar);
@@ -183,6 +187,16 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 		public List<Clases.Platillo> CargarListaDeIdsDePlatilloPorIdDePedido(int IdPedido)
 		{
 			throw new NotImplementedException();
+		}
+
+		public void Depuracion_Eliminar(string nombre)
+		{
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				Platillo platillo = context.Platillos.FirstOrDefault(p => p.Nombre == nombre);
+				context.Platillos.Remove(platillo);
+				context.SaveChanges();
+			}
 		}
 	}
 }
