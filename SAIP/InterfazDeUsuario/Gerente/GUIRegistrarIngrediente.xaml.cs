@@ -96,7 +96,7 @@ namespace InterfazDeUsuario.Gerente
 
         private void TextBoxCodigoBarras_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UtileriasGráficas.MostrarEstadoDeValidacionTelefono((TextBox)sender);
+            UtileriasGráficas.MostrarEstadoDeValidacionNumero((TextBox)sender);
         }
 
         private void TextBoxCosto_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -156,7 +156,7 @@ namespace InterfazDeUsuario.Gerente
 
         private void TextBoxCantidad_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UtileriasGráficas.MostrarEstadoDeValidacionTelefono((TextBox)sender);
+            UtileriasGráficas.MostrarEstadoDeValidacionNumero((TextBox)sender);
         }
 
         private void TextBoxCantidadCompuesto_Pasting(object sender, DataObjectPastingEventArgs e)
@@ -189,16 +189,92 @@ namespace InterfazDeUsuario.Gerente
             }
         }
 
+        private void TextBoxCodigo_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UtileriasGráficas.MostrarEstadoDeValidacionCadena((TextBox)sender);
+        }
+
+        private void TextBoxNombre_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UtileriasGráficas.MostrarEstadoDeValidacionCadena((TextBox)sender);
+        }
+
         private void ButtonGuardar_Click(object sender, RoutedEventArgs e)
         {
             Ingrediente ingrediente = new Ingrediente();
 
-            UtileriasGráficas.MostrarEstadoDeValidacionCadena(TextBoxCodigo);
+            if (!ServiciosDeValidacion.ValidarCadena(TextBoxCodigo.Text))
+            {
+                UtileriasGráficas.MostrarEstadoDeValidacionCadena(TextBoxCodigo);
+            }
+            else
+            {
+                ingrediente.Codigo = TextBoxCodigo.Text;
+
+                if (!ServiciosDeValidacion.ValidarCadena(TextBoxNombre.Text))
+                {
+                    UtileriasGráficas.MostrarEstadoDeValidacionCadena(TextBoxNombre);
+                }
+                else
+                {
+                    ingrediente.Nombre = TextBoxNombre.Text;
+
+                    if (!ServiciosDeValidacion.ValidarEntradaDeDatosSoloDecimal(TextBoxCosto.Text))
+                    {
+                        UtileriasGráficas.MostrarEstadoDeValidacionNumero(TextBoxCosto);
+                    }
+                    else
+                    {
+                        ingrediente.Costo = double.Parse(TextBoxCosto.Text);
+
+                        if (!ServiciosDeValidacion.ValidarEntradaDeDatosSoloDecimal(TextBoxCantidad.Text))
+                        {
+                            UtileriasGráficas.MostrarEstadoDeValidacionNumero(TextBoxCantidad);
+                        }
+                        else
+                        {
+                            ingrediente.CantidadEnInventario = double.Parse(TextBoxCantidad.Text);
+                        }
+                    }
+                }
+            }
+            
+            if (CheckBoxIngredienteCompuesto.IsChecked == true)
+            {
+                if (!ServiciosDeValidacion.ValidarCadena(TextBoxCodigoCompuesto.Text))
+                {
+                    UtileriasGráficas.MostrarEstadoDeValidacionNumero(TextBoxCodigoCompuesto);
+
+                   
+                }else
+                {
+                    if (!ServiciosDeValidacion.ValidarEntradaDeDatosSoloDecimal(TextBoxCantidadCompuesto.Text))
+                    {
+                        UtileriasGráficas.MostrarEstadoDeValidacionNumero(TextBoxCantidadCompuesto);
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+
+            if (CheckBoxCodigoBarra.IsChecked == true)
+            {
+                if (!ServiciosDeValidacion.ValidarEntradaDeDatosSoloEntero(TextBoxCodigoBarras.Text))
+                {
+                    UtileriasGráficas.MostrarEstadoDeValidacionCadena(TextBoxCodigoBarras);
+                }
+                else
+                {
+
+                }
+            }
         }
 
-        private void TextBoxCodigo_TextChanged(object sender, TextChangedEventArgs e)
+        private void ButtonCancelar_Click(object sender, RoutedEventArgs e)
         {
-            UtileriasGráficas.MostrarEstadoDeValidacionCadena((TextBox)sender);
+            Controlador.Regresar();
         }
     }
 }
