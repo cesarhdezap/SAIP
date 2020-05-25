@@ -8,10 +8,12 @@
       d:DesignHeight="450"
       Title="GUIRegistarMesa" Width="869.122">
 
-    <Grid Margin="0,0,3.4,0">
-        <controls:BarraDeEstado x:Name="BarraDeEstado"  VerticalAlignment="Top" HorizontalAlignment="Left"  Width="864"  Height="74" Margin="0,0,-98.4,0"  AutomationProperties.IsColumnHeader="True" FontFamily="Tahoma" FontSize="18"/>
-        <TextBox Height="31" TextWrapping="Wrap" VerticalAlignment="Top" Margin="334,169,320,0"/>
-        <Label Content="Numero de Mesa" HorizontalAlignment="Left" FontSize="24" Margin="334,104,0,0" VerticalAlignment="Top" Height="42" Width="205"/>
-        <Button Content="Agregar" HorizontalAlignment="Left" Margin="358,271,0,0" VerticalAlignment="Top" Width="151" Height="33"/>
-    </Grid>
+    <DockPanel >
+        <controls:BarraDeEstado x:Name="BarraDeEstado"  Width="Auto"  DockPanel.Dock="Top"/>
+        <Grid>
+            <TextBox x:Name="TextBoxNumeroMesa" Height="31" TextWrapping="Wrap" VerticalAlignment="Top" Margin="334,169,320,0"/>
+            <Label Content="Numero de Mesa" HorizontalAlignment="Left" FontSize="24" Margin="334,104,0,0" VerticalAlignment="Top" Height="42" Width="205"/>
+            <Button Content="Agregar" HorizontalAlignment="Left" Margin="358,271,0,0" VerticalAlignment="Top" Width="151" Height="33" Click="Button_Click"/>
+        </Grid>
+    </DockPanel>
 </Page>

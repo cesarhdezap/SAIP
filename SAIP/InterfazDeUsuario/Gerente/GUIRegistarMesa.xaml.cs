@@ -1,5 +1,6 @@
 ﻿using InterfazDeUsuario.UserControls;
 using LogicaDeNegocio.Clases;
+using LogicaDeNegocio.ObjetosAccesoADatos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace InterfazDeUsuario.Gerente
     public partial class GUIRegistarMesa : Page
     {
         public Empleado Gerente { get; set; }
+        public Mesa MesaRegistar { get; set; }
         ControladorDeCambioDePantalla Controlador;
         public GUIRegistarMesa(ControladorDeCambioDePantalla controlador, Empleado EmpleadoCargado)
         {
@@ -33,6 +35,19 @@ namespace InterfazDeUsuario.Gerente
             BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
         }
 
-        
+        public void CapturarMesa()
+        {
+            String NMesa = TextBoxNumeroMesa.Text;
+            MesaRegistar.NumeroDeMesa = int.Parse(NMesa);
+            MesaDAO mesaDAO = new MesaDAO();
+            mesaDAO.Guardar(MesaRegistar);
+            MessageBox.Show("Mesa Registrada con Exito!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult resultadoDeMesageBox = MessageBox.Show("Esta a punto de guardar un Empleado nuevo dentro del sistema ¿Esta seguro que desea continuar?", "ADVERTENCIA", MessageBoxButton.YesNo, MessageBoxImage.Error);
+            CapturarMesa();
+        }
     }
 }

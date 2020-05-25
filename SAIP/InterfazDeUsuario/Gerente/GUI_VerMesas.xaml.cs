@@ -43,7 +43,7 @@ namespace InterfazDeUsuario.Gerente
             ListaM.ItemsSource = Mesas;
         }
 
-        private void registro_Click(object sender, RoutedEventArgs e)
+        private void Registro_Click(object sender, RoutedEventArgs e)
         {
             GUIRegistarMesa registarMesa = new GUIRegistarMesa(Controlador, Gerente);
             Controlador.CambiarANuevaPage(registarMesa);

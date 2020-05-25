@@ -74,7 +74,7 @@ namespace InterfazDeUsuario.Gerente
             Usuario.Clear();
             correo.Clear();
             PasswordBoxContraseña.Clear();
-
+            
         }
 
         private bool ValidarCampos()

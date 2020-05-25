@@ -12,12 +12,12 @@
     <DockPanel Margin="0,0,0.4,-0.4">
         <controls:BarraDeEstado x:Name="BarraDeEstado"  DockPanel.Dock="Top" Width="864"  Height="74"   AutomationProperties.IsColumnHeader="True" FontFamily="Tahoma" FontSize="18"/>
         <Grid>
-            <DataGrid x:Name="ListaM" Height="302" VerticalAlignment="Top" AutoGenerateColumns="False" Width="669" Margin="0,44,187,0">
+            <DataGrid x:Name="ListaM" Height="312" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="0,64,154.4,0" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Numero" Binding="{Binding NumeroDeMesa}" CanUserResize="False"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Content="Registrar" x:Name="registro" Height="34" VerticalAlignment="Top" Width="144" Margin="525,10,187,0" Click="registro_Click"/>
+            <Button Content="Registrar" x:Name="registro" Height="34" VerticalAlignment="Top" Width="144" Margin="525,10,187,0" FontSize="18" Click="Registro_Click"/>
         </Grid>
     </DockPanel>
 </Page>
