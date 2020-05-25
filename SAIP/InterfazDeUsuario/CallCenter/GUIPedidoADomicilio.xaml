@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:l ="clr-namespace:LogicaDeNegocio.Convertidores;assembly=LogicaDeNegocio"
         xmlns:local="clr-namespace:InterfazDeUsuario.CallCenter" xmlns:controls="clr-namespace:InterfazDeUsuario.UserControls"
         mc:Ignorable="d"
-        Title="SAIP" Height="520.5" Width="1013">
+        Title="SAIP" Height="576" Width="1184">
 	<Page.Resources>
 		<DataTemplate x:Key="BotonDeAñadir">
 			<Button Content="Asignar" Click="ButtonAñadir_Click"></Button>
@@ -17,45 +18,47 @@
 			<TextBox PreviewTextInput="CantidadDeIngrediente_PreviewTextInput" LostFocus="CantidadDeIngrediente_TextChanged" Text="1" Loaded="TextBox_Loaded">
 			</TextBox>
 		</DataTemplate>
+		<l:ConversorDeCantidadAsubtotal x:Key="ConversorDeCantidadAsubtotal"></l:ConversorDeCantidadAsubtotal>
 	</Page.Resources>
 	<Grid>
-		<controls:BarraDeEstado x:Name="BarraDeEstado" Margin="0,0,0,468" Width="Auto"/>
-		<DataGrid x:Name="PlatillosDataGrid" HorizontalAlignment="Left" Height="116" Margin="10,80,0,0" VerticalAlignment="Top" Width="327">
-		<DataGrid.Columns>
-				<DataGridTextColumn Header="Nombre de producto" Binding="{Binding Nombre}"></DataGridTextColumn>
-				<DataGridTextColumn Header="Código" Binding="{Binding Codigo}"></DataGridTextColumn>
-				<DataGridTextColumn Header="Cantidad" Binding="{ Binding Cantidad}"></DataGridTextColumn>
-				<DataGridTemplateColumn Header="Eliminar" CellTemplate="{StaticResource BotonDeEliminar}"></DataGridTemplateColumn>
-				<DataGridTextColumn Header="Costo unitario" Binding="{ Binding Costo}"></DataGridTextColumn>
-				<DataGridTextColumn Header="Sub-Total" Binding="{ Binding Subtotal}"></DataGridTextColumn>
-			</DataGrid.Columns>
-		</DataGrid>
-		<Label x:Name="IvaLabel" Content="IVA(*)" HorizontalAlignment="Left" Margin="10,201,0,0" VerticalAlignment="Top"/>
-		<Label x:Name="TotalLabel" Content="TOTAL" HorizontalAlignment="Left" Margin="10,232,0,0" VerticalAlignment="Top"/>
-		<Label x:Name="ComentariosOrdenLabel" Content="Comentarios extra" HorizontalAlignment="Left" Margin="10,274,0,0" VerticalAlignment="Top"/>
-		<TextBox x:Name="ComentariosOrdenTextBlock" HorizontalAlignment="Left" Height="130" Margin="10,305,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="327" BorderBrush="Black"/>
-		<Button x:Name="CancelarButton" Content="Cancelar Orden" HorizontalAlignment="Left" Margin="10,440,0,0" VerticalAlignment="Top" Width="109"/>
-		<Button x:Name="FinalizarButton" Content=" Finalizar Orden" HorizontalAlignment="Left" Margin="228,440,0,0" VerticalAlignment="Top" Width="109"/>
-		<Label x:Name="IvaValorLabel" Content="0.00" HorizontalAlignment="Left" Margin="294,201,0,0" VerticalAlignment="Top"/>
-		<Label x:Name="TotalValorLabel" Content="0.00" HorizontalAlignment="Left" Margin="294,232,0,0" VerticalAlignment="Top"/>
-		<DataGrid x:Name="BusquedaDataGrid" HorizontalAlignment="Left" Height="327" Margin="359,108,0,0" VerticalAlignment="Top" Width="327">
+		<controls:BarraDeEstado x:Name="BarraDeEstado" Margin="0,0,0,445" Width="Auto"/>
+		<DataGrid x:Name="AlimentosDataGrid" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="false" CanUserDeleteRows="False" SelectionUnit="FullRow" HorizontalAlignment="Left" Height="116" Margin="23,135,0,0" VerticalAlignment="Top" Width="449">
 			<DataGrid.Columns>
+				<DataGridTextColumn Header="Nombre de producto" Binding="{Binding Alimento.Nombre}"></DataGridTextColumn>
+				<DataGridTextColumn Header="Código" Binding="{Binding Alimento.Codigo}"></DataGridTextColumn>
+				<DataGridTemplateColumn Header="Cantidad" Width="75"  CellEditingTemplate="{StaticResource CampoDeTextoDeCantidadDeIngrediente}" CellTemplate="{StaticResource CampoDeTextoDeCantidadDeIngrediente}"/>
+				<DataGridTemplateColumn Header="Eliminar" CellTemplate="{StaticResource BotonDeEliminar}"></DataGridTemplateColumn>
+				<DataGridTextColumn Header="Costo unitario" Binding="{ Binding Alimento.Precio}"></DataGridTextColumn>
+				<DataGridTextColumn Header="Sub-Total" Binding="{ Binding Converter={ StaticResource ConversorDeCantidadAsubtotal}}"></DataGridTextColumn>
+			</DataGrid.Columns>
+		</DataGrid>
+		<Label x:Name="IvaLabel" Content="IVA(*)" HorizontalAlignment="Left" Margin="23,256,0,0" VerticalAlignment="Top"/>
+		<Label x:Name="TotalLabel" Content="TOTAL" HorizontalAlignment="Left" Margin="23,287,0,0" VerticalAlignment="Top"/>
+		<Label x:Name="ComentariosOrdenLabel" Content="Comentarios extra" HorizontalAlignment="Left" Margin="23,329,0,0" VerticalAlignment="Top"/>
+		<TextBox x:Name="ComentariosOrdenTextBlock" HorizontalAlignment="Left" Height="130" Margin="23,360,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="449" BorderBrush="Black" TextChanged="ComentariosOrdenTextBlock_TextChanged"/>
+		<Button x:Name="CancelarButton" Content="Cancelar Orden" HorizontalAlignment="Left" Margin="23,495,0,0" VerticalAlignment="Top" Width="109" Click="CancelarButton_Click"/>
+		<Button x:Name="FinalizarButton" Content=" Finalizar Orden" HorizontalAlignment="Left" Margin="363,495,0,0" VerticalAlignment="Top" Width="109" Click="FinalizarButton_Click"/>
+		<Label x:Name="IvaValorLabel" Content="0.00" HorizontalAlignment="Left" Margin="440,256,0,0" VerticalAlignment="Top"/>
+		<Label x:Name="TotalValorLabel" Content="0.00" HorizontalAlignment="Left" Margin="440,287,0,0" VerticalAlignment="Top"/>
+		<DataGrid x:Name="BusquedaDataGrid" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="false" CanUserDeleteRows="False" SelectionUnit="FullRow" HorizontalAlignment="Left" Height="393" Margin="499,121,0,0" VerticalAlignment="Top" Width="327">
+			<DataGrid.Columns>
+				<DataGridTemplateColumn Width="50"  CellEditingTemplate="{StaticResource BotonDeAñadir}" CellTemplate="{StaticResource BotonDeAñadir}"/>
 				<DataGridTextColumn Header="Nombre de producto" Binding="{Binding Nombre}"></DataGridTextColumn>
 				<DataGridTextColumn Header="Código" Binding="{Binding Codigo}"></DataGridTextColumn>
-				<DataGridTextColumn Header="Costo unitario" Binding="{ Binding Costo}"></DataGridTextColumn>
+				<DataGridTextColumn Header="Costo unitario" Binding="{ Binding Precio}"></DataGridTextColumn>
 			</DataGrid.Columns>
 		</DataGrid>
 
 
-		<TextBox x:Name="BusquedaTextBox" HorizontalAlignment="Left" Height="23" Margin="362,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="324" TextChanged="BusquedaTextBox_TextChanged"/>
-		<Label x:Name="NumeroTelefonicoLabel" Content="Número teléfonico" HorizontalAlignment="Left" Margin="715,108,0,0" VerticalAlignment="Top"/>
-		<Label x:Name="NombreDeClienteTextBox" Content="Nombre del cliente" HorizontalAlignment="Left" Margin="715,162,0,0" VerticalAlignment="Top"/>
-		<Label x:Name="DireccionLabel" Content="Dirección" HorizontalAlignment="Left" Margin="715,216,0,0" VerticalAlignment="Top"/>
-		<Label x:Name="ComentariosClienteLabel" Content="Comentarios extra" HorizontalAlignment="Left" Margin="715,305,0,0" VerticalAlignment="Top"/>
-		<TextBox x:Name="DireccionClienteTextBlock" HorizontalAlignment="Left" Height="58" Margin="715,242,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" BorderBrush="Black"/>
-		<TextBox x:Name="ComentariosClienteTextBlock" HorizontalAlignment="Left" Height="104" Margin="715,331,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" BorderBrush="Black"/>
-		<TextBox x:Name="NumeroTelefonicoTextBox" HorizontalAlignment="Left" Height="23" Margin="715,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="204"/>
-		<TextBox x:Name="NombreDeClienteTextBox1" HorizontalAlignment="Left" Height="23" Margin="715,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="204"/>
+		<TextBox x:Name="BusquedaTextBox" HorizontalAlignment="Left" Height="23" Margin="499,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="327" TextChanged="BusquedaTextBox_TextChanged"/>
+		<Label x:Name="NumeroTelefonicoLabel" Content="Número teléfonico" HorizontalAlignment="Left" Margin="857,121,0,0" VerticalAlignment="Top"/>
+		<Label x:Name="NombreDeClienteLabel" Content="Nombre del cliente" HorizontalAlignment="Left" Margin="857,175,0,0" VerticalAlignment="Top"/>
+		<Label x:Name="DireccionLabel" Content="Dirección" HorizontalAlignment="Left" Margin="857,229,0,0" VerticalAlignment="Top"/>
+		<Label x:Name="ComentariosClienteLabel" Content="Comentarios extra" HorizontalAlignment="Left" Margin="857,358,0,0" VerticalAlignment="Top"/>
+		<TextBox x:Name="DireccionClienteTextBlock" HorizontalAlignment="Left" Height="98" Margin="857,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" BorderBrush="Black" TextChanged="DireccionClienteTextBlock_TextChanged"/>
+		<TextBox x:Name="ComentariosClienteTextBlock" HorizontalAlignment="Left" Height="130" Margin="857,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" BorderBrush="Black" TextChanged="ComentariosClienteTextBlock_TextChanged"/>
+		<TextBox x:Name="NumeroTelefonicoTextBox" HorizontalAlignment="Left" Height="23" Margin="857,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" TextChanged="NumeroTelefonicoTextBox_TextChanged"/>
+		<TextBox x:Name="NombreDeClienteTextBox" HorizontalAlignment="Left" Height="23" Margin="857,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" TextChanged="NombreDeClienteTextBox_TextChanged"/>
 
 	</Grid>
 </Page>
