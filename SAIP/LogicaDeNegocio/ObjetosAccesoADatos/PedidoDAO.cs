@@ -23,11 +23,11 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             }
             else
             {
-                throw new ArgumentException("Pedido inválido");
+                throw new ArgumentException("Pedido no tiene contenido");
             }
 
             AccesoADatos.Pedido pedidoAGuardar = ConvertirPedidoLogicaADatos(pedido);
-
+            pedido.DescontarIngredientes();
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
                 foreach(CantidadAlimento cantidadAlimento in pedido.CantidadAlimentos)

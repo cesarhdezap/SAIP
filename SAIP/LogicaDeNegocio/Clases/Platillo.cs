@@ -1,4 +1,5 @@
-﻿using LogicaDeNegocio.ObjetosAccesoADatos;
+﻿using AccesoADatos;
+using LogicaDeNegocio.ObjetosAccesoADatos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -113,5 +114,13 @@ namespace LogicaDeNegocio.Clases
 
             return resultado;
         }
-    }
+
+		internal void DescontarIngredientes(int cantidad)
+		{
+			foreach(Proporcion proporcion in Proporciones)
+            {
+                proporcion.Ingrediente.DescontarDeInventario(proporcion.Cantidad * cantidad);
+            }
+		}
+	}
 }

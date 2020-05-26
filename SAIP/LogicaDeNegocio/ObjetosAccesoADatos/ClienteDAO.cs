@@ -20,6 +20,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 if (clienteDb != null)
                 {
                     clienteDb.Activo = false;
+                    context.SaveChanges();
                 }
                 else
                 {
