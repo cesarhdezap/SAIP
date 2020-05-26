@@ -33,7 +33,7 @@ namespace InterfazDeUsuario.Gerente
             Gerente = EmpleadoCargado;
             BarraDeEstado.Controlador = controlador;
             Controlador = controlador;
-            BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
+            BarraDeEstado.AsignarUsuarioActual(Gerente);
  
             MostrarEmpleados();
 
