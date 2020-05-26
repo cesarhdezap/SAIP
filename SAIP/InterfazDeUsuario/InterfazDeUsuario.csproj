@@ -55,8 +55,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CallCenter\GUIEditarCliente.xaml.cs">
+      <DependentUpon>GUIEditarCliente.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CallCenter\GUIEditarPedido.xaml.cs">
       <DependentUpon>GUIEditarPedido.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CallCenter\GUIRegistrarCliente.xaml.cs">
+      <DependentUpon>GUIRegistrarCliente.xaml</DependentUpon>
     </Compile>
     <Compile Include="CallCenter\GUIVisualizarListaDeClientes.xaml.cs">
       <DependentUpon>GUIVisualizarListaDeClientes.xaml</DependentUpon>
@@ -108,11 +114,19 @@
       <DependentUpon>InformacionDeCuenta.xaml</DependentUpon>
     </Compile>
     <Compile Include="UtileriasGráficas.cs" />
+    <Page Include="CallCenter\GUIEditarCliente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CallCenter\GUIEditarPedido.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CallCenter\GUIPedidoADomicilio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CallCenter\GUIRegistrarCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

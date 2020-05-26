@@ -51,7 +51,7 @@ namespace InterfazDeUsuario.CallCenter
 
         private void ButtonDarDeBaja_Click(object sender, RoutedEventArgs e)
         {
-            Cliente cliente = new Cliente();
+            Cliente cliente;
             try
             {
                 cliente = (Cliente)DataGridClientes.SelectedItem;
@@ -61,6 +61,7 @@ namespace InterfazDeUsuario.CallCenter
                 MessageBox.Show("Seleccione un cliente válido");
                 cliente = null;
             }
+
             if (cliente != null)
             {
                 MessageBoxResult messageBoxResult = MessageBox.Show("¿Seguro que quieres dar de baja Cliente?", "DAR DE BAJA CLIENTE", MessageBoxButton.YesNo);
@@ -93,7 +94,7 @@ namespace InterfazDeUsuario.CallCenter
 
         private void ButtonEditar_Click(object sender, RoutedEventArgs e)
         {
-            Cliente cliente = new Cliente();
+            Cliente cliente;
             try
             {
                 cliente = (Cliente)DataGridClientes.SelectedItem;
@@ -101,6 +102,13 @@ namespace InterfazDeUsuario.CallCenter
             catch (InvalidCastException)
             {
                 MessageBox.Show("Seleccione un cliente válido");
+                cliente = null;
+            }
+
+            if(cliente != null)
+            {
+                GUIEditarCliente page = new GUIEditarCliente(Controlador, Empleado, cliente);
+                Controlador.CambiarANuevaPage(page);
             }
         }
 
