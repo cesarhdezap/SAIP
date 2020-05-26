@@ -41,7 +41,12 @@ namespace InterfazDeUsuario.Paginas
         }
 
         private void IniciarSesionButton_Click(object sender, RoutedEventArgs e)
-        {
+		{
+			IniciarSesion();
+		}
+
+		private void IniciarSesion()
+		{
 			string nombreDeUsuario = NombreDeUsuarioTextBox.Text.Trim();
 			string contraseña = ContraseñaPasswordbox.Password.Trim();
 
@@ -54,7 +59,7 @@ namespace InterfazDeUsuario.Paginas
 				{
 					resultadoDeValidacion = empleadoDAO.ValidarExistenciaDeNombreDeUsuarioYContraseña(nombreDeUsuario, contraseña);
 				}
-				catch(InvalidOperationException ex)
+				catch (InvalidOperationException ex)
 				{
 					MessageBox.Show(ex.Message);
 					resultadoDeValidacion = false;
@@ -94,6 +99,14 @@ namespace InterfazDeUsuario.Paginas
 		private void ContraseñaPasswordbox_PasswordChanged(object sender, RoutedEventArgs e)
 		{
 			MostrarEstadoDeValidacionContraseña((PasswordBox)sender);
+		}
+
+		private void IniciarSesionButton_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Return)
+			{
+				IniciarSesion();
+			}
 		}
 	}
 }
