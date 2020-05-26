@@ -48,6 +48,7 @@ namespace InterfazDeUsuario.CallCenter
 			IvaLabel.Content = "IVA(" + Iva.Valor * 10 + "%)";
 			Controlador = controlador;
 			BarraDeEstado.Controlador = controlador;
+			BarraDeEstado.AsignarUsuarioActual(empleadoDeCallCenter);
 			ProductosCargados = productoDAO.CargarProductosActivos();
 			PlatillosCargados = platilloDAO.CargarTodos();
 			AlimentosCargados = AlimentosCargados.Concat(PlatillosCargados).ToList();
@@ -173,7 +174,29 @@ namespace InterfazDeUsuario.CallCenter
 
 		private void NumeroTelefonicoTextBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
-			MostrarEstadoDeValidacionTelefono((TextBox)sender);
+			//MostrarEstadoDeValidacionTelefono((TextBox)sender);
+			//string numeroTelefonico = ((TextBox)sender).Text;
+			//if (ValidarTelefono(numeroTelefonico))
+			//{
+			//	ClienteDAO clienteDAO = new ClienteDAO();
+			//	if (clienteDAO.)
+			//	Cliente = clienteDAO.CargarClientePorNumeroTelefonico(numeroTelefonico);
+			//	if (Cliente.Id > 0)
+			//	{
+			//		AsignarClienteAPantalla();
+			//	}
+			//}
+		}
+
+		private void AsignarClienteAPantalla()
+		{
+			NombreDeClienteTextBox.Text = Cliente.Nombre;
+			if(Cliente.Direcciones.FirstOrDefault() != null)
+			{
+				DireccionClienteTextBlock.Text = Cliente.Direcciones.FirstOrDefault();
+			}
+
+			ComentariosClienteTextBlock.Text = Cliente.Comentario;
 		}
 
 		private void NombreDeClienteTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -207,8 +230,29 @@ namespace InterfazDeUsuario.CallCenter
 
 		private void FinalizarButton_Click(object sender, RoutedEventArgs e)
 		{
+			Pedido.CalcularPrecioTotal();
+			Cuenta cuenta = new Cuenta()
+			{
+				Direccion = Cliente.Direcciones.First(),
+				Clientes = new List<Cliente>()
+				{
+					Cliente
+				},
+				Estado = LogicaDeNegocio.Enumeradores.EstadoCuenta.Abierta,
+				Empleado = EmpleadoDeCallCenter,
+				Pedidos = new List<Pedido>()
+				{
+					Pedido
+				}
+			};
+			Pedido.Cuenta = cuenta;
+			cuenta.CalcularPrecioTotal();
+			cuenta.Clientes.Add(Cliente);
+			CuentaDAO cuentaDAO = new CuentaDAO();
+			cuentaDAO.CrearCuenta(cuenta);
 			PedidoDAO pedidoDAO = new PedidoDAO();
 			pedidoDAO.Guardar(Pedido);
+			Pedido.DescontarIngredientes();
 		}
 	}
 }
