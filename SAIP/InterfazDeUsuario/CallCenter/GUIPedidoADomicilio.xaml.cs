@@ -30,6 +30,7 @@ namespace InterfazDeUsuario.CallCenter
 		public ControladorDeCambioDePantalla Controlador { get; set; }
 		public Empleado EmpleadoDeCallCenter { get; set; } = new Empleado();
 		public Iva Iva { get; set; } = new Iva();
+		public Cliente Cliente { get; set; }
 		public Pedido Pedido { get; set; } = new Pedido();
 		public List<Platillo> PlatillosCargados { get; set; } 
 		public List<Producto> ProductosCargados { get; set; }
@@ -207,7 +208,7 @@ namespace InterfazDeUsuario.CallCenter
 		private void FinalizarButton_Click(object sender, RoutedEventArgs e)
 		{
 			PedidoDAO pedidoDAO = new PedidoDAO();
-			//pedidoDAO.Guardar(Platillo);
+			pedidoDAO.Guardar(Pedido);
 		}
 	}
 }

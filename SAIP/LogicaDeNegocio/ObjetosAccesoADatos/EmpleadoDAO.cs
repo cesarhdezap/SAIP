@@ -143,7 +143,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				{
 					empleadoLocalizado = context.Empleados.FirstOrDefault(empleado => empleado.NombreDeUsuario == NombreDeUsuario && empleado.Contraseña == Contraseña);
 				}
-				catch(EntityException e)
+				catch(System.Data.Entity.Core.EntityException e)
 				{
 					throw new InvalidOperationException(e.Message);
 				}

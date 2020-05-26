@@ -135,5 +135,20 @@ namespace LogicaDeNegocio
 
             
         }
+
+        public void DescontarIngredientes()
+        {
+            foreach(CantidadAlimento proporcion in CantidadAlimentos)
+            {
+                if(proporcion is CantidadPlatillo proporcionPlatillo)
+                {
+                    proporcionPlatillo.Alimento.DescontarIngredientes(proporcionPlatillo.Cantidad);
+                }
+                else if(proporcion is CantidadProducto proporcionProducto)
+                {
+                    proporcionProducto.Alimento.DescontarIngredientesDeInventario(proporcionProducto.Cantidad);
+                }
+            }
+        }
     }
 }

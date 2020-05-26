@@ -59,26 +59,34 @@ namespace InterfazDeUsuario.CallCenter
             catch (InvalidCastException)
             {
                 MessageBox.Show("Seleccione un cliente válido");
+                cliente = null;
             }
-            MessageBoxResult messageBoxResult = MessageBox.Show("¿Seguro que quieres dar de baja Cliente?", "DAR DE BAJA CLIENTE", MessageBoxButton.YesNo);
-            if (messageBoxResult == MessageBoxResult.Yes)
+            if (cliente != null)
             {
-                ClienteDAO clienteDAO = new ClienteDAO();
-                bool falloDarDeBaja = false;
-                try
+                MessageBoxResult messageBoxResult = MessageBox.Show("¿Seguro que quieres dar de baja Cliente?", "DAR DE BAJA CLIENTE", MessageBoxButton.YesNo);
+                if (messageBoxResult == MessageBoxResult.Yes)
                 {
-                    clienteDAO.DarDeBaja(cliente);
-                }
-                catch (ArgumentException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    falloDarDeBaja = true;
-                }
+                    ClienteDAO clienteDAO = new ClienteDAO();
+                    bool falloDarDeBaja = false;
+                    try
+                    {
+                        clienteDAO.DarDeBaja(cliente);
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                        falloDarDeBaja = true;
+                    }
 
-                if (!falloDarDeBaja)
-                {
-                    MessageBox.Show("Cliente dado de baja!");
+                    if (!falloDarDeBaja)
+                    {
+                        MessageBox.Show("Cliente dado de baja!");
+                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Por favor seleccione un cliente", "Aviso");
             }
             MostrarClientes();
         }
