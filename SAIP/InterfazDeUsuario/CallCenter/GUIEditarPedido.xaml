@@ -7,10 +7,14 @@
       xmlns:UserControls="clr-namespace:InterfazDeUsuario.UserControls" 
       x:Class="InterfazDeUsuario.CallCenter.GUIEditarPedido"
       mc:Ignorable="d"
-      Title="EditarPedido" Height="615" Width="1315">
+      Title="EditarPedido" Height="555" Width="1325">
 
-    <Grid Background="White" HorizontalAlignment="Left" Width="1315" Height="615" VerticalAlignment="Top">
-        <UserControls:BarraDeEstado x:Name="barraEstado" Width="Auto" VerticalAlignment="Top"></UserControls:BarraDeEstado>
+    <Grid Background="White" HorizontalAlignment="Left" Width="1325" Height="560" VerticalAlignment="Top" Margin="0,0,-10,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <UserControls:BarraDeEstado x:Name="barraEstado" Width="Auto" VerticalAlignment="Top" Height="74"></UserControls:BarraDeEstado>
 
         <Grid HorizontalAlignment="Left" Height="408" Margin="891,102,0,0" VerticalAlignment="Top" Width="416">
             <Rectangle HorizontalAlignment="Left" Height="386" Margin="0,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="416"/>
@@ -38,10 +42,11 @@
             <Label Content="Orden" Margin="4,2,0,0" VerticalAlignment="Top" FontSize="22" HorizontalAlignment="Left" Width="443"/>
             <DataGrid x:Name="PedidoDataGrid" Height="210" Margin="0,46,0,0" VerticalAlignment="Top" BorderBrush="Black" Background="White">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Pedido" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Header="N° Pedido" Binding="{Binding Pedido.Id}"/>
                     <DataGridTextColumn Header="Alimento" Binding="{Binding Alimento}"/>
                     <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}"/>
                     <DataGridTextColumn Header="Estado" Binding="{Binding Estado}"/>
+                    <DataGridTextColumn Header="Precio" Binding="{Binding Precio}"/>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -49,11 +54,10 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    
                 </DataGrid.Columns>
             </DataGrid>
 
-                <Rectangle Height="64" Margin="0,256,0,0" Stroke="Black" VerticalAlignment="Top" Fill="White"/>
+            <Rectangle Height="64" Margin="0,256,0,0" Stroke="Black" VerticalAlignment="Top" Fill="White"/>
             <Label x:Name="IVALabel" Content="IVA :" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <Label x:Name="TotalLabel" Content="TOTAL" HorizontalAlignment="Left" Margin="10,281,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
             <TextBlock x:Name="IVATextBlock" Margin="0,265,34,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Right" Width="55"/>
