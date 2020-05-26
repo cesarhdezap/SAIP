@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,6 +42,20 @@ namespace InterfazDeUsuario
 		public static void MostrarEstadoDeValidacionCadena(TextBox textBoxCadena)
 		{
 			if (ValidarCadena(textBoxCadena.Text))
+			{
+				textBoxCadena.BorderBrush = Brushes.Green;
+				OcultarToolTip(textBoxCadena);
+			}
+			else
+			{
+				textBoxCadena.BorderBrush = Brushes.Red;
+				MostrarToolTip(textBoxCadena, "Debe tener un largo de 0 a 255 caractéres y no puede estar vacio");
+			}
+		}
+
+		public static void MostrarEstadoDeValidacionCadenaVacioPermitido(TextBox textBoxCadena)
+		{
+			if (ValidarCadenaVacioPermitido(textBoxCadena.Text))
 			{
 				textBoxCadena.BorderBrush = Brushes.Green;
 				OcultarToolTip(textBoxCadena);
@@ -120,6 +135,25 @@ namespace InterfazDeUsuario
 				textBoxNombre.BorderBrush = Brushes.Red;
 				MostrarToolTip(textBoxNombre, "El nombre ingresado es invalido");
 			}
+		}
+
+		public static string MostrarVentanaDeSeleccionDeArchivos()
+		{
+
+			string direccionDeArchivoSeleccionado = string.Empty;
+
+			SaveFileDialog ventanaDeSeleccionDeArchivo = new SaveFileDialog
+			{
+				Filter = "DocumentosPDF (*.PDF)|*.PDF",
+				InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+			};
+
+			if (ventanaDeSeleccionDeArchivo.ShowDialog() == true)
+			{
+				direccionDeArchivoSeleccionado = ventanaDeSeleccionDeArchivo.FileName;
+			}
+
+			return direccionDeArchivoSeleccionado;
 		}
 	}
 }

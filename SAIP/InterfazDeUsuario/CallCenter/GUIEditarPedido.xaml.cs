@@ -35,7 +35,7 @@ namespace InterfazDeUsuario.CallCenter
             Empleado = empleado;
             InitializeComponent();
             barraEstado.Controlador = control;
-            barraEstado.ActualizarNombreDeUsuario(empleado.NombreDeUsuario);
+            barraEstado.AsignarUsuarioActual(empleado);
             MostrarPedido(pedido.Id);
         }
 

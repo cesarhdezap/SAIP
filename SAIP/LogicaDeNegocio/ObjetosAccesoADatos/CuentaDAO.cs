@@ -55,7 +55,10 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
-                cuentaDb.Mesa = context.Mesas.Find(cuenta.Mesa.NumeroDeMesa);
+                if(cuenta.Id > 0)
+                {
+                    cuentaDb.Mesa = context.Mesas.Find(cuenta.Mesa.NumeroDeMesa);
+                }
                 cuentaDb.Mesa.Estado = (short)EstadoMesa.Ocupada;
                 cuentaDb.Empleado = context.Empleados.Find(cuenta.Empleado.Id);
                 context.Cuentas.Add(cuentaDb);
@@ -83,12 +86,15 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 Id = cuenta.Id,
                 Estado = (EstadoCuenta) cuenta.Estado,
                 PrecioTotal = cuenta.PrecioTotal,
-                Mesa = mesa.ConvertirMesaDatosALogica(cuenta.Mesa),
+                Mesa = mesa.ConvertirMesaDatosALogica(cuenta.Mesa),               
+                Clientes = clienteDAO.ConvertirListaDeDatosALogica(cuenta.Clientes.ToList()) 
+                
+                //Traducir datos de la cuenta
             };
 
             try
             {
-                cuentaLogica.Clientes = clienteDAO.ConvertirListaDeClientesDatosALogica(cuenta.Clientes.ToList());
+                cuentaLogica.Clientes = clienteDAO.ConvertirListaDeDatosALogica(cuenta.Clientes.ToList());
             }
             catch(ObjectDisposedException)
             {

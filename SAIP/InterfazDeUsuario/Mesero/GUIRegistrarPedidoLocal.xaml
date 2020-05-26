@@ -8,50 +8,115 @@
       mc:Ignorable="d" 
       Height="691" Width="1258"
       Title="GUIRegistrarPedidoLocal">
-
     <DockPanel>
         <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top" Width="Auto"/>
-        <Label Margin="10" Content="Registrar nuevo pedido" FontSize="25" FontFamily="MS Reference Sans Serif" DockPanel.Dock="Top" HorizontalAlignment="Left"/>
-        
+
         <StackPanel Orientation="Vertical" DockPanel.Dock="Left" Margin="10">
-            <Label Content="Cuenta" Margin="2" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <DataGrid x:Name="DataGridAlimentos"/>
+            <Label Margin="5" Content="Registrar nuevo pedido" FontSize="30" FontWeight="UltraBlack" FontFamily="MS Reference Sans Serif" DockPanel.Dock="Top" HorizontalAlignment="Left"/>
             <StackPanel Orientation="Horizontal">
+                <Label Content="Placeholder numero de pedido"/>
+                <Label Content="Mesa: Placeholder num mesa"/>
+            </StackPanel>
+            <Label Content="Cuenta" Margin="2" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"/>
+            
+            <DataGrid x:Name="DataGridAlimentosEnPedido" AutoGenerateColumns="False">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="FontSize" Value="18"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nombre del alimento" Binding="{Binding Alimento.Nombre}" FontSize="15"/>
+                    <DataGridTextColumn Header="Codigo" Binding="{Binding Alimento.Codigo}" FontSize="15"/>
+                    <DataGridTemplateColumn Header="Cantidad" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" >
+                                    <Button Height="30" Click="ButtonDisminuir_Click">
+                                        <Image Source="/img/disminuir.png"/>
+                                    </Button>
+                                    <Label Content="{Binding Cantidad}"/>
+                                    <Button Height="30" Click="ButtonAñadir_Click">
+                                        <Image Source="/img/anadir.png"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Costo/U" Binding="{Binding Alimento.Precio}" FontSize="15"/>
+
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="ButtonBorrarAlimento_Click" Margin="2" FontSize="15">
+                                    <Image Source="/img/borrar.png" Stretch="Fill" Height="20" Width="20"/>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
                 <Label Content="IVA(16%):" x:Name="LabelIva"/>
                 <Label Content="PlaceHolderIVA" x:Name="LabelCantidadIva"/>
             </StackPanel>
+            
             <StackPanel Orientation="Horizontal">
                 <Label Content="Total:" x:Name="LabelTotal"/>
                 <Label Content="PlaceHolderTotal" x:Name="LabelCantidadTotal"/>
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right">
-            <ComboBox x:Name="ComboBoxCategoria" DockPanel.Dock="Top" HorizontalAlignment="Right"/>
-            <TextBox x:Name="TextBoxBusqueda" Text="Buscar" DockPanel.Dock="Top" HorizontalAlignment="Right"/>
-        </StackPanel>
+        <StackPanel Orientation="Vertical" DockPanel.Dock="Right">
+            
+            <DockPanel>
+                <Label Content="Alimentos" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <UniformGrid Columns="2" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <ComboBox x:Name="ComboBoxCategoria" FontSize="20" Text="Categoria" Width="200"/>
+                    <TextBox x:Name="TextBoxBusqueda" Text="Buscar" FontSize="20"/>
+                </UniformGrid>
+            </DockPanel>
 
-        <DockPanel DockPanel.Dock="Right">
-            <ListBox x:Name="ListBoxAlimentos" BorderThickness="0"
+            <DockPanel >
+                <ListBox x:Name="ListBoxAlimentos" BorderThickness="0"
                      ScrollViewer.VerticalScrollBarVisibility="Auto"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="3"/>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="4"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
 
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Margin="5">
+                                <Button Click="ButtonAñadirAlimento_Click">
+                                    <Image Source="/img/pizza_pepperoni.jpg" Stretch="UniformToFill" Height="150" Width="150"/>
+                                </Button>
+                                <Label Content="{Binding Nombre}" FontSize="20"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
 
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </DockPanel>
-
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Margin="5" Height="30">
-            <Button x:Name="ButtonRealizar" Content="Realizar" Margin="2" Click="ButtonRealizar_Click"/>
-            <Button x:Name="ButtonCancelar" Content="Cancelar" Margin="2" Click="ButtonCancelar_Click"/>
+            <StackPanel x:Name="StackPanelRealizarPedido" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                <Button x:Name="ButtonRealizarPedido" Content="Realizar pedido" Margin="2" FontSize="20" Background="LightGreen" Click="ButtonRealizarPedido_Click"/>
+                <Button x:Name="ButtonCancelar" Content="Cancelar pedido" Margin="2" FontSize="20" Background="PaleVioletRed" Click="ButtonCancelar_Click"/>
+            </StackPanel>
+            
+            <StackPanel x:Name="StackPanelConfirmacion" Orientation="Horizontal" Visibility="Collapsed" DockPanel.Dock="Bottom">
+                <Label x:Name="LabelNotificacion" FontSize="20"/>
+                <Button x:Name="ButtonNotificacionConfirmar" Content="Aceptar" FontSize="20" Background="LightGreen" Click="ButtonNotificacionConfirmar_Click"/>
+                <Button x:Name="ButtonNotificacionCancelar" Content="Cancelar" FontSize="20" Background="PaleVioletRed" Click="ButtonNotificacionCancelar_Click"/>
+            </StackPanel>
         </StackPanel>
+        
+        
     </DockPanel>
 </Page>

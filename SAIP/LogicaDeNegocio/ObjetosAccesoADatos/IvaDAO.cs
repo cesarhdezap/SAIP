@@ -9,7 +9,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 {
 	public class IvaDAO
 	{
-		private Clases.Iva ConvertireIvaDeAccesoADatosAIvaDeLogica(AccesoADatos.Iva IvaDb)
+		private Clases.Iva ConvertirDeDatosALogica(AccesoADatos.Iva IvaDb)
 		{
 			Clases.Iva ivaConvertido = new Clases.Iva()
 			{
@@ -32,7 +32,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				ivaContext = context.Ivas.ToList();
 			}
 			AccesoADatos.Iva ivaEncontrado = ivaContext.FirstOrDefault(iva => iva.Activo == true);
-			Clases.Iva ivaLogico = ConvertireIvaDeAccesoADatosAIvaDeLogica(ivaEncontrado);
+			Clases.Iva ivaLogico = ConvertirDeDatosALogica(ivaEncontrado);
 			return ivaLogico;
 		}
 	}

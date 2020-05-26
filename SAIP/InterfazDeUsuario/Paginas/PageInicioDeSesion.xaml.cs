@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +22,7 @@ using static InterfazDeUsuario.UtileriasGráficas;
 using InterfazDeUsuario.Gerente;
 using InterfazDeUsuario.Mesero;
 using LogicaDeNegocio;
+using System.Xml;
 
 namespace InterfazDeUsuario.Paginas
 {
@@ -40,24 +41,37 @@ namespace InterfazDeUsuario.Paginas
         }
 
         private void IniciarSesionButton_Click(object sender, RoutedEventArgs e)
-        {
-			string nombreDeUsuario = NombreDeUsuarioTextBox.Text;
-			string contraseña = ContraseñaPasswordbox.Password;
+		{
+			IniciarSesion();
+		}
+
+		private void IniciarSesion()
+		{
+			string nombreDeUsuario = NombreDeUsuarioTextBox.Text.Trim();
+			string contraseña = ContraseñaPasswordbox.Password.Trim();
 
 			if (ValidarCadena(nombreDeUsuario) && ValidarContraseña(contraseña))
 			{
 				contraseña = EncriptarCadena(contraseña);
 				EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-				bool resultadoDeValidacion = empleadoDAO.ValidarExistenciaDeNombreDeUsuarioYContraseña(nombreDeUsuario, contraseña);
+				bool resultadoDeValidacion;
+				try
+				{
+					resultadoDeValidacion = empleadoDAO.ValidarExistenciaDeNombreDeUsuarioYContraseña(nombreDeUsuario, contraseña);
+				}
+				catch (InvalidOperationException ex)
+				{
+					MessageBox.Show(ex.Message);
+					resultadoDeValidacion = false;
+				}
 
 				if (resultadoDeValidacion)
 				{
 					Empleado empleadoCargado = empleadoDAO.CargarEmpleadoPorNombreDeUsuario(nombreDeUsuario);
 					if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.CallCenter)
 					{
-						GUIPedidoADomicilio pedidoADomicilio = new GUIPedidoADomicilio(empleadoCargado);
-						//Controlador.CambiarANuevaPage(pedidoADomicilio);
-						throw new NotImplementedException("GUIPedidoADomicilio debe ser page");
+						GUIVisualizarListaDeClientes pedidoADomicilio = new GUIVisualizarListaDeClientes(Controlador, empleadoCargado);
+						Controlador.CambiarANuevaPage(pedidoADomicilio);
 					}
 					else if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.Gerente)
 					{
@@ -85,6 +99,14 @@ namespace InterfazDeUsuario.Paginas
 		private void ContraseñaPasswordbox_PasswordChanged(object sender, RoutedEventArgs e)
 		{
 			MostrarEstadoDeValidacionContraseña((PasswordBox)sender);
+		}
+
+		private void IniciarSesionButton_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Return)
+			{
+				IniciarSesion();
+			}
 		}
 	}
 }

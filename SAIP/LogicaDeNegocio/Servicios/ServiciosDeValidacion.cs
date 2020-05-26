@@ -145,6 +145,18 @@ namespace LogicaDeNegocio.Servicios
             return resultadoDeValidacion;
         }
 
+        public static bool ValidarCadenaVacioPermitido(string cadena)
+        {
+            bool resultadoDeValidacion = false;
+
+            if (!string.IsNullOrWhiteSpace(cadena) && cadena.Length <= TAMAÑO_MAXIMO_VARCHAR)
+            {
+                resultadoDeValidacion = true;
+            }
+
+            return resultadoDeValidacion;
+        }
+
         /// <summary>
         /// Valida una cadena para la entrada a la base de datos.
         /// </summary>

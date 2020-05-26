@@ -1,4 +1,4 @@
-﻿using AccesoADatos;
+using AccesoADatos;
 using LogicaDeNegocio.Clases.ClasesAsociativas;
 using System;
 using System.Collections.Generic;
@@ -11,14 +11,14 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 {
     public class CantidadPlatilloDAO
     {
-        public List<CantidadPlatillo> RecuperarCantidadPlatilloPorIDPedido(int idPedido)
+        public List<CantidadPlatillo> RecuperarPorIDPedido(int idPedido)
         {
             List<AccesoADatos.PlatilloPedido> platilloPedido = new List<AccesoADatos.PlatilloPedido>();
 
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
                 platilloPedido = context.PlatilloPedido.Where(p => p.Pedido.Id == idPedido)
-                    .Include(p => p.Alimento)
+                    .Include(p => p.Platillo)
                     .ToList();
             }
             return ConvertirListaDatosALogica(platilloPedido);
@@ -34,7 +34,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 CantidadPlatillo cantidadPlatillo = new CantidadPlatillo
                 {
                     Cantidad = platilloPedido.Cantidad,
-                    Alimento = platilloDAO.ConvertirPlatilloDeAccesoADatosAPlatilloDeLogica(platilloPedido.Alimento)
+                    Alimento = platilloDAO.ConvertirDatosALogica(platilloPedido.Platillo) 
                 };
                 cantidadPlatillos.Add(cantidadPlatillo);
             }

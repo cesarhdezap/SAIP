@@ -1,5 +1,6 @@
 ﻿using AccesoADatos;
 using LogicaDeNegocio.Clases;
+using LogicaDeNegocio.Clases.ClasesAsociativas;
 using LogicaDeNegocio.Enumeradores;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,85 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
     {
         public void Guardar(Pedido pedido)
         {
-            
+            if (ValidarCuentaParaGuardado(pedido) && ValidarCantidadDeCantidadAlimentos(pedido.CantidadAlimentos))
+            {
+                pedido.FechaDeCreacion = DateTime.Now;
+                IvaDAO ivaDAO = new IvaDAO();
+                pedido.Iva = ivaDAO.CargarIvaActual().Valor;
+                pedido.CalcularPrecioTotal();
+            }
+            else
+            {
+                throw new ArgumentException("Pedido no tiene contenido");
+            }
+
             AccesoADatos.Pedido pedidoAGuardar = ConvertirPedidoLogicaADatos(pedido);
+            pedido.DescontarIngredientes();
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
+                foreach(CantidadAlimento cantidadAlimento in pedido.CantidadAlimentos)
+                {
+                    if (cantidadAlimento is CantidadProducto cantidadProducto)
+                    {
+                        ProductoPedido productoPedido = new ProductoPedido();
+                        productoPedido.Cantidad = cantidadProducto.Cantidad;
+                        productoPedido.Productos = context.Productos.Find(cantidadProducto.Alimento.Id);
+                        pedidoAGuardar.ProductoPedido.Add(productoPedido);
+                    }
+                    else if (cantidadAlimento is CantidadPlatillo cantidadPlatillo)
+                    {
+                        PlatilloPedido platilloPedido = new PlatilloPedido();
+                        platilloPedido.Cantidad = cantidadPlatillo.Cantidad;
+                        platilloPedido.Platillo = context.Platillos.Find(cantidadPlatillo.Alimento.Id);
+                        pedidoAGuardar.PlatilloPedidos.Add(platilloPedido);
+                    }
+                }
+
+                pedidoAGuardar.Cuenta = context.Cuentas.Find(pedido.Cuenta.Id);
                 context.Pedidos.Add(pedidoAGuardar);
                 context.SaveChanges();
             }
+
+        }
+
+        private bool ValidarCuentaParaGuardado(Pedido pedido)
+        {
+            bool resultado = false;
+            if (pedido.CantidadAlimentos.Count > 0)
+            {
+                resultado = true;
+            }
+            return resultado;
+        }
+
+        public bool ValidarCantidadDeCantidadAlimentos(List<CantidadAlimento> cantidadAlimentos)
+        {
+            bool discrepanciaEncontrada = false;
+
+            foreach(CantidadAlimento cantidadAlimento in cantidadAlimentos)
+            {
+                if(cantidadAlimento is CantidadProducto cantidadProducto)
+                {
+                    if(!cantidadProducto.Alimento.ValidarCantidadAlimento(cantidadAlimento.Cantidad))
+                    {
+                        discrepanciaEncontrada = true;
+                        break;
+                    }
+                }
+                else
+                {
+                    if(cantidadAlimento is CantidadPlatillo cantidadPlatillo)
+                    {
+                        if (!cantidadPlatillo.Alimento.ValidarCantidadAlimento(cantidadPlatillo.Cantidad))
+                        {
+                            discrepanciaEncontrada = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return !discrepanciaEncontrada;
         }
 
         public Pedido RecuperarPedidoPorId(int idPedido) 
@@ -46,7 +119,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 FechaDeCreacion = pedidoLogica.FechaDeCreacion,
                 PrecioTotal = pedidoLogica.PrecioTotal,
                 Iva = pedidoLogica.Iva,
-                Estado = (short)pedidoLogica.Estado
+                Estado = (short)pedidoLogica.Estado,
             };
             return pedidoDatos;
         }

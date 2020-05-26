@@ -1,4 +1,5 @@
-﻿using LogicaDeNegocio.ObjetosAccesoADatos;
+﻿using AccesoADatos;
+using LogicaDeNegocio.ObjetosAccesoADatos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,13 +39,13 @@ namespace LogicaDeNegocio.Clases
             }
 
         }
-        public void AñadirIngredientePorId(int Id)
+        public void AñadirIngredientePorId(int id)
         {
             Ingrediente ingrediente = new Ingrediente();
             IngredienteDAO ingredienteDAO = new IngredienteDAO();
-            if (!IngredienteYaAñadido(Id))
-            {
-                ingrediente = ingredienteDAO.CargarIngredientePorId(Id);
+            if (!IngredienteYaAñadido(id))
+            {   
+                ingrediente = ingredienteDAO.CargarIngredientePorId(id);
                 Proporciones.Add(new Proporcion
                 {
                     Ingrediente = ingrediente,
@@ -53,23 +54,23 @@ namespace LogicaDeNegocio.Clases
             }
         }
 
-        public void EliminarIngredientePorId(int Id)
+        public void EliminarIngredientePorId(int id)
         {
             for (int i = 0;  i < Proporciones.Count; i++)
             {
-                if (Proporciones.ElementAt(i).Ingrediente.Id == Id)
+                if (Proporciones.ElementAt(i).Ingrediente.Id == id)
                 {
                     Proporciones.RemoveAt(i);
                 }
             }
         }
 
-        private bool IngredienteYaAñadido(int Id)
+        private bool IngredienteYaAñadido(int id)
         {
             bool resultado = false;
             foreach (Proporcion proporcion in Proporciones)
             {
-                if (proporcion.Ingrediente.Id == Id)
+                if (proporcion.Ingrediente.Id == id)
                 {
                     resultado = true;
                 }
@@ -88,5 +89,38 @@ namespace LogicaDeNegocio.Clases
 
             return resultado;
         }
-    }
+
+        public override bool ValidarCantidadAlimento(int cantidadAValidar)
+        {
+            ProporcionDAO proporcionDAO = new ProporcionDAO();
+            Proporciones = proporcionDAO.CargarProporcionesPorIdPlatillo(Id);
+
+            bool resultado = false;
+            bool cantidadSuficiente = false;
+            foreach(Proporcion proporcion in Proporciones)
+            {
+                if (proporcion.Ingrediente.Componentes.Count > 0)
+                {
+                    //Cantidad IngredienteComponente * Cantidad proporcion >= cantidad en base de ingrediente componente
+                }
+                else if(proporcion.Ingrediente.CantidadEnInventario >= cantidadAValidar * proporcion.Cantidad)
+                {
+                    cantidadSuficiente = true;
+                }
+            }
+
+            if (cantidadSuficiente)
+                resultado = true;
+
+            return resultado;
+        }
+
+		internal void DescontarIngredientes(int cantidad)
+		{
+			foreach(Proporcion proporcion in Proporciones)
+            {
+                proporcion.Ingrediente.DescontarDeInventario(proporcion.Cantidad * cantidad);
+            }
+		}
+	}
 }
