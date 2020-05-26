@@ -1,20 +1,12 @@
 ﻿using LogicaDeNegocio.Clases;
 using LogicaDeNegocio.Enumeradores;
+using LogicaDeNegocio.ObjetosAccesoADatos;
+using LogicaDeNegocio.Servicios;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using LogicaDeNegocio.Servicios;
 
 namespace InterfazDeUsuario.Gerente
 {
@@ -25,6 +17,7 @@ namespace InterfazDeUsuario.Gerente
     {
         Empleado Empleado;
         readonly ControladorDeCambioDePantalla Controlador;
+        List<Componente> Componentes = new List<Componente>();
         public GUIRegistrarIngrediente(ControladorDeCambioDePantalla controlador, Empleado empleado)
         {
             Controlador = controlador;
@@ -189,9 +182,65 @@ namespace InterfazDeUsuario.Gerente
             }
         }
 
+        private void TextBoxCodigoCompuesto_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UtileriasGráficas.MostrarEstadoDeValidacionCadena((TextBox)sender);
+
+        }
+
+        private void TextBoxCodigo_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(string)))
+            {
+                string entrada = (string)e.DataObject.GetData(typeof(string));
+                if (!ServiciosDeValidacion.ValidarCadena(entrada))
+                {
+                    e.CancelCommand();
+                }
+            }
+            else
+            {
+                e.CancelCommand();
+            }
+        }
+
+        private void TextBoxCodigoCompuesto_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(string)))
+            {
+                string entrada = (string)e.DataObject.GetData(typeof(string));
+                if (!ServiciosDeValidacion.ValidarCadena(entrada))
+                {
+                    e.CancelCommand();
+                }
+            }
+            else
+            {
+                e.CancelCommand();
+            }
+        }
+
         private void TextBoxCodigo_TextChanged(object sender, TextChangedEventArgs e)
         {
             UtileriasGráficas.MostrarEstadoDeValidacionCadena((TextBox)sender);
+        }
+
+        private void TextBoxCodigo_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox padre = sender as TextBox;
+            if (!ServiciosDeValidacion.ValidarCadena(e.Text))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TextBoxCodigoCompuesto_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox padre = sender as TextBox;
+            if (!ServiciosDeValidacion.ValidarCadena(e.Text))
+            {
+                e.Handled = true;
+            }
         }
 
         private void TextBoxNombre_TextChanged(object sender, TextChangedEventArgs e)
@@ -199,75 +248,78 @@ namespace InterfazDeUsuario.Gerente
             UtileriasGráficas.MostrarEstadoDeValidacionCadena((TextBox)sender);
         }
 
-        private void ButtonGuardar_Click(object sender, RoutedEventArgs e)
+        private void TextBoxNombre_Pasting(object sender, DataObjectPastingEventArgs e)
         {
-            Ingrediente ingrediente = new Ingrediente();
-
-            if (!ServiciosDeValidacion.ValidarCadena(TextBoxCodigo.Text))
+            if (e.DataObject.GetDataPresent(typeof(string)))
             {
-                UtileriasGráficas.MostrarEstadoDeValidacionCadena(TextBoxCodigo);
+                string entrada = (string)e.DataObject.GetData(typeof(string));
+                if (!ServiciosDeValidacion.ValidarCadena(entrada))
+                {
+                    e.CancelCommand();
+                }
             }
             else
             {
-                ingrediente.Codigo = TextBoxCodigo.Text;
-
-                if (!ServiciosDeValidacion.ValidarCadena(TextBoxNombre.Text))
-                {
-                    UtileriasGráficas.MostrarEstadoDeValidacionCadena(TextBoxNombre);
-                }
-                else
-                {
-                    ingrediente.Nombre = TextBoxNombre.Text;
-
-                    if (!ServiciosDeValidacion.ValidarEntradaDeDatosSoloDecimal(TextBoxCosto.Text))
-                    {
-                        UtileriasGráficas.MostrarEstadoDeValidacionNumero(TextBoxCosto);
-                    }
-                    else
-                    {
-                        ingrediente.Costo = double.Parse(TextBoxCosto.Text);
-
-                        if (!ServiciosDeValidacion.ValidarEntradaDeDatosSoloDecimal(TextBoxCantidad.Text))
-                        {
-                            UtileriasGráficas.MostrarEstadoDeValidacionNumero(TextBoxCantidad);
-                        }
-                        else
-                        {
-                            ingrediente.CantidadEnInventario = double.Parse(TextBoxCantidad.Text);
-                        }
-                    }
-                }
+                e.CancelCommand();
             }
-            
-            if (CheckBoxIngredienteCompuesto.IsChecked == true)
+        }
+
+        private void TextBoxNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox padre = sender as TextBox;
+            if (!ServiciosDeValidacion.ValidarCadena(e.Text))
             {
-                if (!ServiciosDeValidacion.ValidarCadena(TextBoxCodigoCompuesto.Text))
-                {
-                    UtileriasGráficas.MostrarEstadoDeValidacionNumero(TextBoxCodigoCompuesto);
+                e.Handled = true;
+            }
+        }
 
-                   
-                }else
-                {
-                    if (!ServiciosDeValidacion.ValidarEntradaDeDatosSoloDecimal(TextBoxCantidadCompuesto.Text))
-                    {
-                        UtileriasGráficas.MostrarEstadoDeValidacionNumero(TextBoxCantidadCompuesto);
-                    }
-                    else
-                    {
+        private void ButtonGuardar_Click(object sender, RoutedEventArgs e)
+        {
+            Ingrediente ingredienteNuevo = new Ingrediente
+            {
+                Codigo = TextBoxCodigo.Text,
+                Nombre = TextBoxNombre.Text,
+                Costo = double.Parse(TextBoxCosto.Text),
+                CantidadEnInventario = double.Parse(TextBoxCantidad.Text),
+                UnidadDeMedida = (UnidadDeMedida)ComboBoxUnidadMedida.SelectedItem,
+                CodigoDeBarras = TextBoxCodigoBarras.Text,
+                Creador = Empleado.Nombre
+            };
 
-                    }
-                }
+            if (CheckBoxIngredienteCompuesto.IsChecked == true && Componentes.Count > 0)
+            {
+                ingredienteNuevo.Componentes = Componentes;
+            }
+            else
+            {
+                MessageBox.Show("El ingrediente compuesto no tiene ningun componente, porfavor agregar componentes.", "Alerta");
             }
 
-            if (CheckBoxCodigoBarra.IsChecked == true)
-            {
-                if (!ServiciosDeValidacion.ValidarEntradaDeDatosSoloEntero(TextBoxCodigoBarras.Text))
-                {
-                    UtileriasGráficas.MostrarEstadoDeValidacionCadena(TextBoxCodigoBarras);
-                }
-                else
-                {
+            IngredienteDAO ingredienteDAO = new IngredienteDAO();
 
+            bool resultadoValidacion = false;
+
+            if (ingredienteNuevo.ValidarParaGuardar())
+            {
+                resultadoValidacion = true;
+            }
+            else
+            {
+                UtileriasGráficas.MostrarEstadoDeValidacionCadena(TextBoxCodigo);
+                UtileriasGráficas.MostrarEstadoDeValidacionCadena(TextBoxNombre);
+                UtileriasGráficas.MostrarEstadoDeValidacionNumero(TextBoxCosto);
+                UtileriasGráficas.MostrarEstadoDeValidacionNumero(TextBoxCantidad);
+            }
+
+            if (resultadoValidacion)
+            {
+                try
+                {
+                    ingredienteDAO.GuardarIngrediente(ingredienteNuevo);
+                }
+                catch (InvalidOperationException ex)
+                {
+                    MessageBox.Show(ex.Message, "Alerta");
                 }
             }
         }
@@ -276,5 +328,49 @@ namespace InterfazDeUsuario.Gerente
         {
             Controlador.Regresar();
         }
+
+        private void ButtonAgregarComponente_Click(object sender, RoutedEventArgs e)
+        {
+            Ingrediente ingredienteHijo = new Ingrediente()
+            {
+                Codigo = TextBoxCodigoCompuesto.Text,
+                CantidadEnInventario = double.Parse(TextBoxCantidadCompuesto.Text)
+            };
+
+            Ingrediente ingredientePadre = new Ingrediente()
+            {
+                Codigo = TextBoxCodigo.Text
+            };
+
+            IngredienteDAO ingredienteDAO = new IngredienteDAO();
+
+            if (ServiciosDeValidacion.ValidarNumeroDecimal(ingredienteHijo.CantidadEnInventario.ToString()) && ServiciosDeValidacion.ValidarCadena(ingredienteHijo.Codigo))
+            {
+                if (ingredienteDAO.ValidarCodigoExistente(ingredienteHijo.Codigo))
+                {
+                    Componente componente = new Componente();
+                    componente.Cantidad = ingredienteHijo.CantidadEnInventario;
+
+                    ingredienteHijo = ingredienteDAO.RecuperarIngredientePorCodigo(ingredienteHijo.Codigo);
+
+                    componente.Compuesto = ingredientePadre;
+                    componente.Ingrediente = ingredienteHijo;
+
+                    Componentes.Add(componente);
+                }
+                else
+                {
+                    MessageBox.Show("El codigo no esta asoiado a ningun ingrediente registrado \nPorfavor ingrese un código válido ", "Alerta");
+                }
+            }
+            else
+            {
+                UtileriasGráficas.MostrarEstadoDeValidacionCadena(TextBoxCodigoCompuesto);
+                UtileriasGráficas.MostrarEstadoDeValidacionNumero(TextBoxCantidadCompuesto);
+            }
+            DataGridComponentes.ItemsSource = null;
+            DataGridComponentes.ItemsSource = Componentes;
+        }
+
     }
 }

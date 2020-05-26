@@ -1,12 +1,9 @@
 ﻿using AccesoADatos;
-using iText.Barcodes.Qrcode;
 using LogicaDeNegocio.Enumeradores;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicaDeNegocio.ObjetosAccesoADatos
 {
@@ -14,24 +11,25 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 	{
 		public void GuardarIngrediente(Clases.Ingrediente ingrediente)
 		{
-			AccesoADatos.Ingrediente ingredienteDb = new Ingrediente();
+			AccesoADatos.Ingrediente ingredienteDb = new AccesoADatos.Ingrediente();
 			ingrediente.FechaDeCreacion = DateTime.Now;
 			ingrediente.FechaDeModificacion = DateTime.Now;
 			ingrediente.Activo = true;
-			try
+
+			ingredienteDb = ConvertirDeLogicaADb(ingrediente);
+
+			if (!ValidarExistenciaDeIngrediente(ingredienteDb))
 			{
-				ingredienteDb = ConvertirDeLogicaADb(ingrediente);
-			}
-			catch (EntityException ex)
-			{
-				throw new EntityException("Error al guardar Ingrediente", ex);
-			}
 				using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 				{
 					context.Ingredientes.Add(ingredienteDb);
 					context.SaveChanges();
 				}
-
+			}
+			else
+			{
+				throw new InvalidOperationException("Se ha detectado que el código o el código de barras a ingresar se encuentran repetidos, porfavor ingrese uno distinto");
+			}
 		}
 		public Clases.Ingrediente ConvertirDeDatosALogica(AccesoADatos.Ingrediente ingredienteDb)
 		{
@@ -50,9 +48,16 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				Costo = ingredienteDb.Costo
 			};
 
-			foreach(IngredienteIngrediente ingredienteIngrediente in ingredienteDb.IngredienteIngredienteComponente)
+			List<Clases.Componente> componentes = new List<Clases.Componente>();
+
+			foreach (IngredienteIngrediente ingredienteIngrediente in ingredienteDb.IngredienteIngredienteComponente)
 			{
-				throw new NotImplementedException();
+				componentes.Add(new Clases.Componente 
+				{
+					Cantidad = ingredienteIngrediente.Cantidad,
+					Compuesto = ingredienteConvertido,
+					Ingrediente = ConvertirDeDatosALogica(ingredienteIngrediente.IngredienteComponente)
+				});
 			}
 
 			ComponenteDAO componenteDAO = new ComponenteDAO();
@@ -75,7 +80,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				NombreCreador = ingrediente.Creador,
 				Activo = ingrediente.Activo,
 				Costo = ingrediente.Costo
-				
+
 			};
 			ComponenteDAO componenteDAO = new ComponenteDAO();
 			if (ingrediente.Componentes.Count > 0)
@@ -142,7 +147,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
 				ingredienteDb = context.Ingredientes.Find(Id);
-			
+
 			}
 			Clases.Ingrediente ingredienteResultado = ConvertirDeDatosALogica(ingredienteDb);
 
@@ -154,7 +159,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			Ingrediente ingredienteDb;
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				 ingredienteDb = context.Ingredientes.Find(ingrediente.Id);
+				ingredienteDb = context.Ingredientes.Find(ingrediente.Id);
 				ingredienteDb.FechaDeModiciacion = DateTime.Now;
 				ingredienteDb.Nombre = ingrediente.Nombre;
 				ingredienteDb.CantidadEnInventario = ingrediente.CantidadEnInventario;
@@ -167,7 +172,48 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			}
 		}
 
-		
+		public Clases.Ingrediente RecuperarIngredientePorCodigo(string codigo)
+		{
+			Ingrediente ingredienteDb = new Ingrediente();
+
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				ingredienteDb = context.Ingredientes.Include(i => i.IngredienteIngredienteComponente).FirstOrDefault(i => i.Codigo == codigo);
+			}
+			Clases.Ingrediente ingredienteResultado = ConvertirDeDatosALogica(ingredienteDb);
+
+			return ingredienteResultado;
+		}
+
+		public bool ValidarCodigoExistente(string codigo)
+		{
+			bool codigoRepetido = false;
+
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				codigoRepetido = context.Ingredientes.ToList().Exists(i => i.Codigo == codigo);
+			}
+
+			return codigoRepetido;
+		}
+		private bool ValidarExistenciaDeIngrediente(Ingrediente ingredienteDb)
+		{
+			bool resultado = false;
+
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				if (context.Ingredientes.ToList().Exists(i => i.Codigo == ingredienteDb.Codigo) && context.Ingredientes.ToList().Exists(i => i.Codigo == ingredienteDb.CodigoDeBarras))
+				{
+					resultado = true;
+				}
+				else
+				{
+					throw new InvalidOperationException("El código no existe en la base de datos");
+				}
+			}
+			return resultado;
+		}
+
 
 		public List<Clases.Ingrediente> ObtenerListaDeIngredientesPorIdDePlatillo(int Id)
 		{
