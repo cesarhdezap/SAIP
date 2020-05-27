@@ -36,7 +36,7 @@ namespace InterfazDeUsuario.Gerente
 			Controlador = controlador;
 			BarraDeEstado.Controlador = controlador;
 			Gerente = empleadoCargado;
-			BarraDeEstado.AsignarUsuarioActual(Gerente);
+			BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
 			IngredientesCargados = ingredienteDAO.CargarIngredientesActivos();
 			IngredientesVisibles = IngredientesCargados;
@@ -49,7 +49,7 @@ namespace InterfazDeUsuario.Gerente
 			string busqueda = BusquedaTextBox.Text;
 			if (busqueda != string.Empty)
 			{
-				IngredientesVisibles = IngredientesCargados.Where(ingrediente => ingrediente.Nombre.ToLower().Contains(busqueda.ToLower())).ToList();
+				IngredientesVisibles = IngredientesCargados.TakeWhile(ingrediente => ingrediente.Nombre.ToLower().Contains(busqueda.ToLower())).ToList();
 			}
 			else
 			{

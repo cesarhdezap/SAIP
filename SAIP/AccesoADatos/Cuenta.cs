@@ -18,6 +18,7 @@ namespace AccesoADatos
         public Cuenta()
         {
             this.Pedidos = new HashSet<Pedido>();
+            this.Clientes = new HashSet<Cliente>();
         }
     
         public int Id { get; set; }
@@ -27,7 +28,8 @@ namespace AccesoADatos
         public virtual Mesa Mesa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pedido> Pedidos { get; set; }
-        public virtual Cliente Clientes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cliente> Clientes { get; set; }
         public virtual Empleado Empleado { get; set; }
     }
 }

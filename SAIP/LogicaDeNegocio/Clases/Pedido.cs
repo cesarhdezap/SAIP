@@ -16,8 +16,9 @@ namespace LogicaDeNegocio
         public List<CantidadAlimento> CantidadAlimentos { get; set; } = new List<CantidadAlimento>();
         public double PrecioTotal { get; set; }
         public double Iva { get; set; }
-        public string Comentario { get; set; }
+        public List<string> Comentarios { get; set; }
         public EstadoPedido Estado { get; set; }
+        public Empleado Empleado { get; set; }
         public Cuenta Cuenta { get; set; }
         public string Creador { get; set; }
 
@@ -148,24 +149,6 @@ namespace LogicaDeNegocio
                     proporcionProducto.Alimento.DescontarIngredientesDeInventario(proporcionProducto.Cantidad);
                 }
             }
-        }
-
-        public void CalcularPrecioTotal()
-        {
-            double precioTotal = 0;
-            foreach (CantidadAlimento cantidadAlimento in CantidadAlimentos)
-            {
-                if (cantidadAlimento is CantidadProducto cantidadProducto)
-                {
-                    precioTotal += cantidadProducto.Alimento.Precio * cantidadProducto.Cantidad;
-                }
-                else if (cantidadAlimento is CantidadPlatillo cantidadPlatillo)
-                {
-                    precioTotal += cantidadPlatillo.Alimento.Precio * cantidadPlatillo.Cantidad;
-                }
-            }
-
-            PrecioTotal = precioTotal;
         }
     }
 }
