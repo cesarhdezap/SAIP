@@ -16,9 +16,8 @@ namespace LogicaDeNegocio
         public List<CantidadAlimento> CantidadAlimentos { get; set; } = new List<CantidadAlimento>();
         public double PrecioTotal { get; set; }
         public double Iva { get; set; }
-        public List<string> Comentarios { get; set; }
+        public string Comentario { get; set; }
         public EstadoPedido Estado { get; set; }
-        public Empleado Empleado { get; set; }
         public Cuenta Cuenta { get; set; }
         public string Creador { get; set; }
 

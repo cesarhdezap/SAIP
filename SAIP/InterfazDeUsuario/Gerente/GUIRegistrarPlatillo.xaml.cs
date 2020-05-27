@@ -49,7 +49,7 @@ namespace InterfazDeUsuario.Gerente
 			string busqueda = BusquedaTextBox.Text;
 			if (busqueda != string.Empty)
 			{
-				IngredientesVisibles = IngredientesCargados.TakeWhile(ingrediente => ingrediente.Nombre.ToLower().Contains(busqueda.ToLower())).ToList();
+				IngredientesVisibles = IngredientesCargados.Where(ingrediente => ingrediente.Nombre.ToLower().Contains(busqueda.ToLower())).ToList();
 			}
 			else
 			{

@@ -12,7 +12,7 @@ namespace LogicaDeNegocio.Clases
         public int Id { get; set;}
         public string Direccion { get; set;}
         public double PrecioTotal { get; set;}
-        public List<Cliente> Clientes { get; set; } = new List<Cliente>();
+        public Cliente Cliente { get; set; } = new Cliente();
         public EstadoCuenta Estado { get; set; }
         public Mesa Mesa { get; set; }
         public Empleado Empleado { get; set; }

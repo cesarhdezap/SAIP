@@ -118,6 +118,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 Id = pedidoLogica.Id,
                 FechaDeCreacion = pedidoLogica.FechaDeCreacion,
                 PrecioTotal = pedidoLogica.PrecioTotal,
+                Creador = pedidoLogica.Creador,
+                Comentario = pedidoLogica.Comentario,
                 Iva = pedidoLogica.Iva,
                 Estado = (short)pedidoLogica.Estado,
             };
@@ -133,6 +135,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 PrecioTotal = pedidoDatos.PrecioTotal,
                 Iva = pedidoDatos.Iva,
                 Estado = (EstadoPedido)pedidoDatos.Estado,
+                Comentario = pedidoDatos.Comentario,
+                Creador = pedidoDatos.Creador
             };
 
             return pedidoLogica;

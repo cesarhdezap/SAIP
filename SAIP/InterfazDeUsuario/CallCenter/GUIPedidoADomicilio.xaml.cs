@@ -174,18 +174,20 @@ namespace InterfazDeUsuario.CallCenter
 
 		private void NumeroTelefonicoTextBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
-			//MostrarEstadoDeValidacionTelefono((TextBox)sender);
-			//string numeroTelefonico = ((TextBox)sender).Text;
-			//if (ValidarTelefono(numeroTelefonico))
-			//{
-			//	ClienteDAO clienteDAO = new ClienteDAO();
-			//	if (clienteDAO.)
-			//	Cliente = clienteDAO.CargarClientePorNumeroTelefonico(numeroTelefonico);
-			//	if (Cliente.Id > 0)
-			//	{
-			//		AsignarClienteAPantalla();
-			//	}
-			//}
+			MostrarEstadoDeValidacionTelefono((TextBox)sender);
+			string numeroTelefonico = ((TextBox)sender).Text;
+			if (ValidarTelefono(numeroTelefonico))
+			{
+				ClienteDAO clienteDAO = new ClienteDAO();
+				if (clienteDAO.ValidarExistenciaDeEmpleadoPorNumeroTelefonico(numeroTelefonico))
+				{
+					Cliente = clienteDAO.CargarClientePorNumeroTelefonico(numeroTelefonico);
+				}
+				if (Cliente.Id > 0)
+				{
+					AsignarClienteAPantalla();
+				}
+			}
 		}
 
 		private void AsignarClienteAPantalla()
@@ -231,13 +233,15 @@ namespace InterfazDeUsuario.CallCenter
 		private void FinalizarButton_Click(object sender, RoutedEventArgs e)
 		{
 			Pedido.CalcularPrecioTotal();
+			Pedido.Comentario = ComentariosOrdenTextBlock.Text;
+			Pedido.Creador = EmpleadoDeCallCenter.Nombre;
+			Pedido.Iva = Iva.Valor;
+			Pedido.FechaDeCreacion = DateTime.Now;
+			Cliente.Direcciones.Add(DireccionClienteTextBlock.Text);
 			Cuenta cuenta = new Cuenta()
 			{
-				Direccion = Cliente.Direcciones.First(),
-				Clientes = new List<Cliente>()
-				{
-					Cliente
-				},
+				Direccion = DireccionClienteTextBlock.Text,
+				Cliente = Cliente,
 				Estado = LogicaDeNegocio.Enumeradores.EstadoCuenta.Abierta,
 				Empleado = EmpleadoDeCallCenter,
 				Pedidos = new List<Pedido>()
@@ -246,10 +250,10 @@ namespace InterfazDeUsuario.CallCenter
 				}
 			};
 			Pedido.Cuenta = cuenta;
+			cuenta.PrecioTotal = Pedido.PrecioTotal;
 			cuenta.CalcularPrecioTotal();
-			cuenta.Clientes.Add(Cliente);
 			CuentaDAO cuentaDAO = new CuentaDAO();
-			cuentaDAO.CrearCuenta(cuenta);
+			Pedido.Cuenta.Id = cuentaDAO.CrearCuenta(cuenta);
 			PedidoDAO pedidoDAO = new PedidoDAO();
 			pedidoDAO.Guardar(Pedido);
 			Pedido.DescontarIngredientes();
