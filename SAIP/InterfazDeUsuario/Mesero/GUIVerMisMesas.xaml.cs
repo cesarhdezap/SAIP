@@ -40,7 +40,7 @@ namespace InterfazDeUsuario.Mesero
             UserControlInformacionDeCuenta.Controlador = controlador;
             UserControlInformacionDeCuenta.Empleado = empleado;
             BarraDeEstado.Controlador = controlador;
-            BarraDeEstado.ActualizarNombreDeUsuario(empleado.Nombre);
+            BarraDeEstado.AsignarUsuarioActual(empleado);
             MostrarMisMesas();
         }
 
@@ -72,6 +72,8 @@ namespace InterfazDeUsuario.Mesero
         private void ButtonActualizar_Click(object sender, RoutedEventArgs e)
         {
             MostrarMisMesas();
+            StackPanelCuenta.Visibility = Visibility.Collapsed;
+            
         }
     }
 }

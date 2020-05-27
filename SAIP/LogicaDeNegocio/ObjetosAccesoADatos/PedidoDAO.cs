@@ -14,25 +14,55 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
     {
         public void Guardar(Pedido pedido)
         {
-            if (pedido.CantidadAlimentos.Count > 0 && ValidarCantidadDeCantidadAlimentos(pedido.CantidadAlimentos))
+            if (ValidarCuentaParaGuardado(pedido) && ValidarCantidadDeCantidadAlimentos(pedido.CantidadAlimentos))
             {
                 pedido.FechaDeCreacion = DateTime.Now;
                 IvaDAO ivaDAO = new IvaDAO();
                 pedido.Iva = ivaDAO.CargarIvaActual().Valor;
-                pedido.PrecioTotal = CalcularPrecioTotal(pedido);
+                pedido.CalcularPrecioTotal();
             }
             else
             {
-                throw new ArgumentException("Pedido inválido");
+                throw new ArgumentException("Pedido no tiene contenido");
             }
 
             AccesoADatos.Pedido pedidoAGuardar = ConvertirPedidoLogicaADatos(pedido);
+            pedido.DescontarIngredientes();
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
+                foreach(CantidadAlimento cantidadAlimento in pedido.CantidadAlimentos)
+                {
+                    if (cantidadAlimento is CantidadProducto cantidadProducto)
+                    {
+                        ProductoPedido productoPedido = new ProductoPedido();
+                        productoPedido.Cantidad = cantidadProducto.Cantidad;
+                        productoPedido.Productos = context.Productos.Find(cantidadProducto.Alimento.Id);
+                        pedidoAGuardar.ProductoPedido.Add(productoPedido);
+                    }
+                    else if (cantidadAlimento is CantidadPlatillo cantidadPlatillo)
+                    {
+                        PlatilloPedido platilloPedido = new PlatilloPedido();
+                        platilloPedido.Cantidad = cantidadPlatillo.Cantidad;
+                        platilloPedido.Platillo = context.Platillos.Find(cantidadPlatillo.Alimento.Id);
+                        pedidoAGuardar.PlatilloPedidos.Add(platilloPedido);
+                    }
+                }
+
+                pedidoAGuardar.Cuenta = context.Cuentas.Find(pedido.Cuenta.Id);
                 context.Pedidos.Add(pedidoAGuardar);
                 context.SaveChanges();
             }
 
+        }
+
+        private bool ValidarCuentaParaGuardado(Pedido pedido)
+        {
+            bool resultado = false;
+            if (pedido.CantidadAlimentos.Count > 0)
+            {
+                resultado = true;
+            }
+            return resultado;
         }
 
         public bool ValidarCantidadDeCantidadAlimentos(List<CantidadAlimento> cantidadAlimentos)
@@ -65,24 +95,6 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             return !discrepanciaEncontrada;
         }
 
-        private double CalcularPrecioTotal(Pedido pedido)
-        {
-            double precioTotal = 0;
-            foreach(CantidadAlimento cantidadAlimento in pedido.CantidadAlimentos)
-            {
-                if (cantidadAlimento is CantidadProducto cantidadProducto)
-                {
-                    precioTotal += cantidadProducto.Alimento.Precio * cantidadProducto.Cantidad;
-                }
-                else if (cantidadAlimento is CantidadPlatillo cantidadPlatillo)
-                {
-                    precioTotal += cantidadPlatillo.Alimento.Precio * cantidadPlatillo.Cantidad;
-                }
-            }
-
-            return precioTotal;
-        }
-
         public Pedido RecuperarPedidoPorId(int idPedido) 
         {
             AccesoADatos.Pedido pedido;
@@ -106,6 +118,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 Id = pedidoLogica.Id,
                 FechaDeCreacion = pedidoLogica.FechaDeCreacion,
                 PrecioTotal = pedidoLogica.PrecioTotal,
+                Creador = pedidoLogica.Creador,
+                Comentario = pedidoLogica.Comentario,
                 Iva = pedidoLogica.Iva,
                 Estado = (short)pedidoLogica.Estado,
             };
@@ -121,6 +135,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 PrecioTotal = pedidoDatos.PrecioTotal,
                 Iva = pedidoDatos.Iva,
                 Estado = (EstadoPedido)pedidoDatos.Estado,
+                Comentario = pedidoDatos.Comentario,
+                Creador = pedidoDatos.Creador
             };
 
             return pedidoLogica;

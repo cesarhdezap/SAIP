@@ -26,6 +26,8 @@ namespace AccesoADatos
         public double PrecioTotal { get; set; }
         public double Iva { get; set; }
         public short Estado { get; set; }
+        public string Comentario { get; set; }
+        public string Creador { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductoPedido> ProductoPedido { get; set; }

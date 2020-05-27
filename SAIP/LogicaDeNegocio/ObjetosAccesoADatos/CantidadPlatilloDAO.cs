@@ -11,7 +11,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 {
     public class CantidadPlatilloDAO
     {
-        public List<CantidadPlatillo> RecuperarCantidadPlatilloPorIDPedido(int idPedido)
+        public List<CantidadPlatillo> RecuperarPorIDPedido(int idPedido)
         {
             List<AccesoADatos.PlatilloPedido> platilloPedido = new List<AccesoADatos.PlatilloPedido>();
 

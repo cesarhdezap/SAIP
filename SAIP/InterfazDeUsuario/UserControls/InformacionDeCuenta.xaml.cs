@@ -67,8 +67,8 @@ namespace InterfazDeUsuario.UserControls
                 CantidadPlatilloDAO cantidadPlatilloDAO = new CantidadPlatilloDAO();
                 CantidadProductoDAO cantidadProductoDAO = new CantidadProductoDAO();
                 pedido.CantidadAlimentos = new List<CantidadAlimento>();
-                pedido.CantidadAlimentos = pedido.CantidadAlimentos.Concat(cantidadPlatilloDAO.RecuperarCantidadPlatilloPorIDPedido(pedido.Id)).ToList();
-                pedido.CantidadAlimentos = pedido.CantidadAlimentos.Concat(cantidadProductoDAO.RecuperarCantidadPlatilloPorIDPedido(pedido.Id)).ToList();
+                pedido.CantidadAlimentos = pedido.CantidadAlimentos.Concat(cantidadPlatilloDAO.RecuperarPorIDPedido(pedido.Id)).ToList();
+                pedido.CantidadAlimentos = pedido.CantidadAlimentos.Concat(cantidadProductoDAO.RecuperarPorIDPedido(pedido.Id)).ToList();
             }
         }
 

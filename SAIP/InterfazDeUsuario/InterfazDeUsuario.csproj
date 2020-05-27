@@ -58,6 +58,9 @@
     <Compile Include="CallCenter\GUIEditarPedido.xaml.cs">
       <DependentUpon>GUIEditarPedido.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CallCenter\GUIVisualizarListaDeClientes.xaml.cs">
+      <DependentUpon>GUIVisualizarListaDeClientes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Gerente\GUIPasarInventario.xaml.cs">
       <DependentUpon>GUIPasarInventario.xaml</DependentUpon>
     </Compile>
@@ -66,6 +69,18 @@
     </Compile>
     <Compile Include="Gerente\GUIReporteDeInventario.xaml.cs">
       <DependentUpon>GUIReporteDeInventario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gerente\GUIRegistarMesa.xaml.cs">
+      <DependentUpon>GUIRegistarMesa.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gerente\GUIRegistrarEmpleado.xaml.cs">
+      <DependentUpon>GUIRegistrarEmpleado.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gerente\GUIVerEmpleados.xaml.cs">
+      <DependentUpon>GUIVerEmpleados.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gerente\GUI_VerMesas.xaml.cs">
+      <DependentUpon>GUI_VerMesas.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUICancelarPedido.xaml.cs">
       <DependentUpon>GUICancelarPedido.xaml</DependentUpon>
@@ -104,6 +119,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CallCenter\GUIVisualizarListaDeClientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Gerente\GUIPasarInventario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -113,6 +132,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Gerente\GUIReporteDeInventario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gerente\GUIRegistarMesa.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gerente\GUIRegistrarEmpleado.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gerente\GUIVerEmpleados.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gerente\GUI_VerMesas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
