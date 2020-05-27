@@ -55,7 +55,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
-                if(cuenta.Id > 0)
+                if(cuenta.Id >= 0)
                 {
                     cuentaDb.Mesa = context.Mesas.Find(cuenta.Mesa.NumeroDeMesa);
                 }

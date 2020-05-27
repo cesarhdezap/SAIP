@@ -78,7 +78,7 @@
                 <Label Content="Alimentos" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <UniformGrid Columns="2" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top">
                     <ComboBox x:Name="ComboBoxCategoria" FontSize="20" Text="Categoria" Width="200"/>
-                    <TextBox x:Name="TextBoxBusqueda" Text="Buscar" FontSize="20"/>
+                    <TextBox x:Name="TextBoxBusqueda" FontSize="20" TextChanged="TextBoxBusqueda_TextChanged"/>
                 </UniformGrid>
             </DockPanel>
 

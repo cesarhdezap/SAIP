@@ -29,6 +29,7 @@ namespace InterfazDeUsuario.Mesero
         Empleado Empleado;
         Cuenta Cuenta;
         List<CantidadAlimento> AlimentosDelPedido = new List<CantidadAlimento>();
+        List<Alimento> AlimentosCargados = new List<Alimento>();
         readonly ControladorDeCambioDePantalla Controlador;
         const int TIEMPO_DE_ESPERA_CANTIDAD_INSUFICIENTE = 3000;
         const int TIEMPO_DE_ESPERA_NOTIFICACION_PEDIDO_REALIZADO = 2000;
@@ -52,7 +53,7 @@ namespace InterfazDeUsuario.Mesero
             List<Alimento> alimentos = new List<Alimento>();
             alimentos = alimentos.Concat(platilloDAO.CargarTodos()).ToList();
             alimentos = alimentos.Concat(productoDAO.CargarProductosActivos()).ToList();
-
+            AlimentosCargados = alimentos;
             ListBoxAlimentos.ItemsSource = alimentos;
         }
 
@@ -257,6 +258,41 @@ namespace InterfazDeUsuario.Mesero
                 }
             }
             return resultadoBusqueda;
+        }
+
+        private void TextBoxBusqueda_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string busqueda = TextBoxBusqueda.Text;
+            if (busqueda != string.Empty)
+            {
+                List<Alimento> alimentos = AlimentosCargados.Where(a => ValidarCantidadAlimentoConBusqueda(a, busqueda)).ToList();
+                ListBoxAlimentos.ItemsSource = null;
+                ListBoxAlimentos.ItemsSource = alimentos;
+            }
+            else
+            {
+                ListBoxAlimentos.ItemsSource = null;
+                ListBoxAlimentos.ItemsSource = AlimentosCargados;
+            }
+        }
+
+        private bool ValidarCantidadAlimentoConBusqueda(Alimento alimento, string busqueda)
+        {
+            string nombre = string.Empty;
+            string codigo = string.Empty;
+
+            if(alimento is Producto producto)
+            {
+                nombre = producto.Nombre;
+                codigo = producto.Codigo;
+            }
+            else if(alimento is Platillo platillo)
+            {
+                nombre = platillo.Nombre;
+                codigo = platillo.Codigo;
+            }
+
+            return nombre.ToLower().Contains(busqueda.ToLower()) || codigo.ToLower().Contains(busqueda.ToLower());
         }
     }
 }

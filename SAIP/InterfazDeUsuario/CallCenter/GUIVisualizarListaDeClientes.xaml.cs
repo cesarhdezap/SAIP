@@ -134,5 +134,10 @@ namespace InterfazDeUsuario.CallCenter
                 TextBlockDirecciones.Text += direccion + Environment.NewLine;
             }
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            MostrarClientes();
+        }
     }
 }

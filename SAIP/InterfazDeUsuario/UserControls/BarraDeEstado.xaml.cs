@@ -58,6 +58,7 @@ namespace InterfazDeUsuario.UserControls
 				case LogicaDeNegocio.Enumeradores.TipoDeEmpleado.CallCenter:
 					botones.Add((Button)FindResource("ButtonCallCenterNuevoPedidoADomicilio"));
 					botones.Add((Button)FindResource("ButtonCallCenterListaDeClientes"));
+					botones.Add((Button)FindResource("ButtonCallCenterRegistrarCliente"));
 				break;
 				case LogicaDeNegocio.Enumeradores.TipoDeEmpleado.Gerente:
 					botones.Add((Button)FindResource("ButtonGerenteVerMesas"));
@@ -156,6 +157,12 @@ namespace InterfazDeUsuario.UserControls
 			//Falta ponerle controlador a la pantalla
 			MessageBox.Show("Falta ponerle controlador a la pantalla");
 			throw new NotImplementedException("Falta ponerle controlador a la pantalla");
+		}
+
+		private void ButtonCallCenterRegistrarCliente_Click(object sender, RoutedEventArgs e)
+		{
+			GUIRegistrarCliente registrarCliente = new GUIRegistrarCliente(Controlador, Empleado);
+			Controlador.CambiarANuevaPage(registrarCliente);
 		}
 	}
 }

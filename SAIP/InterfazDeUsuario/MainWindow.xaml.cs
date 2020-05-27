@@ -36,8 +36,6 @@ namespace InterfazDeUsuario
             {
                 Pantallas.Push(page);
                 Content = page;
-                page.Width = double.NaN;
-                page.Height = double.NaN;
             }
             else
             {
@@ -47,7 +45,6 @@ namespace InterfazDeUsuario
                 Content = pageExistente;
             }
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            SizeToContent = SizeToContent.WidthAndHeight;
         }
 
         private void Remover(Page page)
@@ -81,7 +78,6 @@ namespace InterfazDeUsuario
                 RegresarAInicioDeSesion();
             }
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            SizeToContent = SizeToContent.WidthAndHeight;
         }
 
         public void RegresarAInicioDeSesion()
@@ -89,10 +85,7 @@ namespace InterfazDeUsuario
             PageInicioDeSesion inicioDeSesion = new PageInicioDeSesion(this);
             Pantallas.Clear();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            SizeToContent = SizeToContent.WidthAndHeight;
             Content = inicioDeSesion;
-            inicioDeSesion.Width = double.NaN;
-            inicioDeSesion.Height = double.NaN; 
         }
     }
 }

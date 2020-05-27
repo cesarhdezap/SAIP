@@ -25,6 +25,32 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             }
         }
 
+        public void Actualizar(Clases.Cliente cliente)
+        {
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                Cliente clienteDb = context.Clientes.Find(cliente.Id);
+                clienteDb.FechaDeModicacion = DateTime.Now;
+                clienteDb.Nombre = cliente.Nombre;
+                clienteDb.Telefono = cliente.Telefono;
+                clienteDb.Comentarios = cliente.Comentario;
+
+                List<Direcciones> direcciones = new List<Direcciones>();
+                foreach (string direccion in cliente.Direcciones)
+                {
+                    Direcciones direccionTabla = new Direcciones
+                    {
+                        Direccion = direccion
+                    };
+                    direcciones.Add(direccionTabla);
+                }
+                context.Direcciones.RemoveRange(clienteDb.Direcciones);
+                clienteDb.Direcciones.Clear();
+                clienteDb.Direcciones = direcciones;
+                context.SaveChanges();
+            }
+        }
+
         public void DarDeBaja(Clases.Cliente cliente)
         {
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())

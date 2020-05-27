@@ -37,7 +37,7 @@ namespace InterfazDeUsuario.CallCenter
             Empleado = empleado;
             InitializeComponent();
             BarraDeEstado.Controlador = Controlador;
-            BarraDeEstado.ActualizarNombreDeUsuario(empleado.Nombre);
+            BarraDeEstado.AsignarUsuarioActual(Empleado);
             MostrarCliente();
         }
 
@@ -55,6 +55,7 @@ namespace InterfazDeUsuario.CallCenter
         {
             Cliente cliente = new Cliente
             {
+                Id = Cliente.Id,
                 Nombre = TextBoxNombre.Text,
                 Telefono = TextBoxTelefono.Text,
                 Comentario = TextBoxComentarios.Text,
@@ -65,8 +66,8 @@ namespace InterfazDeUsuario.CallCenter
             if (cliente.Validar())
             {
                 ClienteDAO clienteDAO = new ClienteDAO();
-                clienteDAO.Guardar(cliente);
-                MessageBox.Show("Cliente registrado correctamente!", "EXITO");
+                clienteDAO.Actualizar(cliente);
+                MessageBox.Show("Cliente actualizado correctamente!", "EXITO");
                 Controlador.Regresar();
             }
         }
@@ -106,8 +107,6 @@ namespace InterfazDeUsuario.CallCenter
                 if (ValidarCadena(direccion))
                 {
                     Direcciones.Add(direccion);
-                    ListBoxDirecciones.ItemsSource = null;
-                    ListBoxDirecciones.ItemsSource = Direcciones;
                 }
             }
             else
@@ -117,14 +116,12 @@ namespace InterfazDeUsuario.CallCenter
                 {
                     int indice = Direcciones.IndexOf((string)ListBoxDirecciones.SelectedItem);
                     Direcciones[indice] = direccion;
-                    
-                    ListBoxDirecciones.ItemsSource = null;
-                    ListBoxDirecciones.ItemsSource = Direcciones;
                 }
             }
 
-            MostrarEstadoDeValidacionCadena(TextBoxDireccion);
-            TextBoxDireccion.Text = DireccionEnBuffer;
+            ListBoxDirecciones.SelectedItem = null;
+            ListBoxDirecciones.ItemsSource = null;
+            ListBoxDirecciones.ItemsSource = Direcciones;
         }
 
         private void TextBoxTelefono_TextChanged(object sender, TextChangedEventArgs e)
@@ -144,13 +141,14 @@ namespace InterfazDeUsuario.CallCenter
 
         private void ListBoxDirecciones_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(DireccionEnBuffer == string.Empty)
+            if(ListBoxDirecciones.SelectedItem == null)
+            {
+                TextBoxDireccion.Text = DireccionEnBuffer;
+                DireccionEnBuffer = string.Empty;
+            }
+            else
             {
                 DireccionEnBuffer = TextBoxDireccion.Text;
-            }
-
-            if(ListBoxDirecciones.SelectedItem != null)
-            {
                 TextBoxDireccion.Text = (string)ListBoxDirecciones.SelectedItem;
             }
         }
