@@ -48,7 +48,6 @@ namespace InterfazDeUsuario.CallCenter
 			IvaLabel.Content = "IVA(" + Iva.Valor * 10 + "%)";
 			Controlador = controlador;
 			BarraDeEstado.Controlador = controlador;
-			BarraDeEstado.AsignarUsuarioActual(empleadoDeCallCenter);
 			ProductosCargados = productoDAO.CargarProductosActivos();
 			PlatillosCargados = platilloDAO.CargarTodos();
 			AlimentosCargados = AlimentosCargados.Concat(PlatillosCargados).ToList();
@@ -175,30 +174,6 @@ namespace InterfazDeUsuario.CallCenter
 		private void NumeroTelefonicoTextBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
 			MostrarEstadoDeValidacionTelefono((TextBox)sender);
-			string numeroTelefonico = ((TextBox)sender).Text;
-			if (ValidarTelefono(numeroTelefonico))
-			{
-				ClienteDAO clienteDAO = new ClienteDAO();
-				if (clienteDAO.ValidarExistenciaDeEmpleadoPorNumeroTelefonico(numeroTelefonico))
-				{
-					Cliente = clienteDAO.CargarClientePorNumeroTelefonico(numeroTelefonico);
-				}
-				if (Cliente.Id > 0)
-				{
-					AsignarClienteAPantalla();
-				}
-			}
-		}
-
-		private void AsignarClienteAPantalla()
-		{
-			NombreDeClienteTextBox.Text = Cliente.Nombre;
-			if(Cliente.Direcciones.FirstOrDefault() != null)
-			{
-				DireccionClienteTextBlock.Text = Cliente.Direcciones.FirstOrDefault();
-			}
-
-			ComentariosClienteTextBlock.Text = Cliente.Comentario;
 		}
 
 		private void NombreDeClienteTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -232,31 +207,8 @@ namespace InterfazDeUsuario.CallCenter
 
 		private void FinalizarButton_Click(object sender, RoutedEventArgs e)
 		{
-			Pedido.CalcularPrecioTotal();
-			Pedido.Comentario = ComentariosOrdenTextBlock.Text;
-			Pedido.Creador = EmpleadoDeCallCenter.Nombre;
-			Pedido.Iva = Iva.Valor;
-			Pedido.FechaDeCreacion = DateTime.Now;
-			Cliente.Direcciones.Add(DireccionClienteTextBlock.Text);
-			Cuenta cuenta = new Cuenta()
-			{
-				Direccion = DireccionClienteTextBlock.Text,
-				Cliente = Cliente,
-				Estado = LogicaDeNegocio.Enumeradores.EstadoCuenta.Abierta,
-				Empleado = EmpleadoDeCallCenter,
-				Pedidos = new List<Pedido>()
-				{
-					Pedido
-				}
-			};
-			Pedido.Cuenta = cuenta;
-			cuenta.PrecioTotal = Pedido.PrecioTotal;
-			cuenta.CalcularPrecioTotal();
-			CuentaDAO cuentaDAO = new CuentaDAO();
-			Pedido.Cuenta.Id = cuentaDAO.CrearCuenta(cuenta);
 			PedidoDAO pedidoDAO = new PedidoDAO();
 			pedidoDAO.Guardar(Pedido);
-			Pedido.DescontarIngredientes();
 		}
 	}
 }
