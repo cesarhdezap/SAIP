@@ -18,6 +18,8 @@ namespace InterfazDeUsuario.Gerente
         Empleado Empleado;
         readonly ControladorDeCambioDePantalla Controlador;
         List<Componente> Componentes = new List<Componente>();
+        Ingrediente ingredienteNuevo = new Ingrediente();
+
         public GUIRegistrarIngrediente(ControladorDeCambioDePantalla controlador, Empleado empleado)
         {
             Controlador = controlador;
@@ -26,8 +28,6 @@ namespace InterfazDeUsuario.Gerente
             BarraDeEstado.Controlador = controlador;
             BarraDeEstado.ActualizarNombreDeUsuario(empleado.NombreDeUsuario);
             GridCompuestos.Visibility = Visibility.Collapsed;
-            LabelCodigoBarra.Visibility = Visibility.Collapsed;
-            TextBoxCodigoBarras.Visibility = Visibility.Collapsed;
             ComboBoxUnidadMedida.ItemsSource = Enum.GetValues(typeof(UnidadDeMedida));
             ComboBoxUnidadMedida.SelectedIndex = 0;
         }
@@ -36,7 +36,6 @@ namespace InterfazDeUsuario.Gerente
         {
             GridCompuestos.Visibility = Visibility.Visible;
             TextBoxCantidad.IsEnabled = false;
-            ComboBoxUnidadMedida.IsEnabled = false;
             TextBoxCosto.IsEnabled = false;
         }
 
@@ -44,22 +43,7 @@ namespace InterfazDeUsuario.Gerente
         {
             GridCompuestos.Visibility = Visibility.Collapsed;
             TextBoxCantidad.IsEnabled = true;
-            ComboBoxUnidadMedida.IsEnabled = true;
             TextBoxCosto.IsEnabled = true;
-        }
-
-        private void CheckBoxCodigoBarra_Checked(object sender, RoutedEventArgs e)
-        {
-            LabelCodigoBarra.Visibility = Visibility.Visible;
-            TextBoxCodigoBarras.Visibility = Visibility.Visible;
-            LabelCodigoBarra.IsEnabled = true;
-            TextBoxCodigoBarras.IsEnabled = true;
-        }
-
-        private void CheckBoxCodigoBarra_Unchecked(object sender, RoutedEventArgs e)
-        {
-            LabelCodigoBarra.Visibility = Visibility.Collapsed;
-            TextBoxCodigoBarras.Visibility = Visibility.Collapsed;
         }
 
         private void TextBoxCodigoBarras_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -275,16 +259,27 @@ namespace InterfazDeUsuario.Gerente
 
         private void ButtonGuardar_Click(object sender, RoutedEventArgs e)
         {
-            Ingrediente ingredienteNuevo = new Ingrediente
+            ingredienteNuevo.Codigo = TextBoxCodigo.Text;
+            ingredienteNuevo.Nombre = TextBoxNombre.Text;
+            try
             {
-                Codigo = TextBoxCodigo.Text,
-                Nombre = TextBoxNombre.Text,
-                Costo = double.Parse(TextBoxCosto.Text),
-                CantidadEnInventario = double.Parse(TextBoxCantidad.Text),
-                UnidadDeMedida = (UnidadDeMedida)ComboBoxUnidadMedida.SelectedItem,
-                CodigoDeBarras = TextBoxCodigoBarras.Text,
-                Creador = Empleado.Nombre
-            };
+                ingredienteNuevo.Costo = double.Parse(TextBoxCosto.Text);
+            }
+            catch (FormatException ex)
+            {
+                MessageBox.Show(ex.Message, "Alerta");
+            }
+            try
+            {
+                ingredienteNuevo.CantidadEnInventario = double.Parse(TextBoxCantidad.Text);
+            }
+            catch (FormatException ex)
+            {
+                MessageBox.Show(ex.Message, "Alerta");
+            }
+            ingredienteNuevo.UnidadDeMedida = (UnidadDeMedida)ComboBoxUnidadMedida.SelectedItem;
+            ingredienteNuevo.CodigoDeBarras = TextBoxCodigoBarras.Text;
+            ingredienteNuevo.Creador = Empleado.Nombre;
 
             if (CheckBoxIngredienteCompuesto.IsChecked == true && Componentes.Count > 0)
             {
@@ -292,23 +287,29 @@ namespace InterfazDeUsuario.Gerente
             }
             else
             {
-                MessageBox.Show("El ingrediente compuesto no tiene ningun componente, porfavor agregar componentes.", "Alerta");
+                MessageBox.Show("Este ingrediente no tiene componentes.", "Alerta");
             }
 
             IngredienteDAO ingredienteDAO = new IngredienteDAO();
 
             bool resultadoValidacion = false;
 
-            if (ingredienteNuevo.ValidarParaGuardar())
+            try
             {
-                resultadoValidacion = true;
+                if (ingredienteNuevo.ValidarParaGuardar())
+                {
+                    resultadoValidacion = true;
+                }
             }
-            else
+            catch (InvalidOperationException ex)
             {
+                MessageBox.Show(ex.Message, "Alerta");
                 UtileriasGráficas.MostrarEstadoDeValidacionCadena(TextBoxCodigo);
+                UtileriasGráficas.MostrarEstadoDeValidacionCadena(TextBoxCodigoBarras);
                 UtileriasGráficas.MostrarEstadoDeValidacionCadena(TextBoxNombre);
                 UtileriasGráficas.MostrarEstadoDeValidacionNumero(TextBoxCosto);
                 UtileriasGráficas.MostrarEstadoDeValidacionNumero(TextBoxCantidad);
+
             }
 
             if (resultadoValidacion)
@@ -317,10 +318,11 @@ namespace InterfazDeUsuario.Gerente
                 {
                     ingredienteDAO.GuardarIngrediente(ingredienteNuevo);
                 }
-                catch (InvalidOperationException ex)
+                catch (ArgumentException ex)
                 {
                     MessageBox.Show(ex.Message, "Alerta");
                 }
+
             }
         }
 
@@ -331,16 +333,18 @@ namespace InterfazDeUsuario.Gerente
 
         private void ButtonAgregarComponente_Click(object sender, RoutedEventArgs e)
         {
-            Ingrediente ingredienteHijo = new Ingrediente()
-            {
-                Codigo = TextBoxCodigoCompuesto.Text,
-                CantidadEnInventario = double.Parse(TextBoxCantidadCompuesto.Text)
-            };
+            Ingrediente ingredienteHijo = new Ingrediente();
 
-            Ingrediente ingredientePadre = new Ingrediente()
+            ingredienteHijo.Codigo = TextBoxCodigoCompuesto.Text;
+
+            try
             {
-                Codigo = TextBoxCodigo.Text
-            };
+                ingredienteHijo.CantidadEnInventario = double.Parse(TextBoxCantidadCompuesto.Text);
+            }
+            catch (FormatException ex)
+            {
+                MessageBox.Show(ex.Message, "Alerta");
+            }
 
             IngredienteDAO ingredienteDAO = new IngredienteDAO();
 
@@ -353,10 +357,12 @@ namespace InterfazDeUsuario.Gerente
 
                     ingredienteHijo = ingredienteDAO.RecuperarIngredientePorCodigo(ingredienteHijo.Codigo);
 
-                    componente.Compuesto = ingredientePadre;
+                    componente.Compuesto = ingredienteNuevo;
                     componente.Ingrediente = ingredienteHijo;
 
                     Componentes.Add(componente);
+                    ingredienteNuevo.Componentes = Componentes;
+                    TextBoxCosto.Text = ingredienteNuevo.CalcularCosto().ToString();
                 }
                 else
                 {
@@ -368,6 +374,7 @@ namespace InterfazDeUsuario.Gerente
                 UtileriasGráficas.MostrarEstadoDeValidacionCadena(TextBoxCodigoCompuesto);
                 UtileriasGráficas.MostrarEstadoDeValidacionNumero(TextBoxCantidadCompuesto);
             }
+
             DataGridComponentes.ItemsSource = null;
             DataGridComponentes.ItemsSource = Componentes;
         }

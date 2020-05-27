@@ -26,11 +26,25 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 					context.SaveChanges();
 				}
 			}
-			else
+		}
+
+		public void DarDeBajaIngrediente(Clases.Ingrediente ingrediente)
+		{
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				throw new InvalidOperationException("Se ha detectado que el código o el código de barras a ingresar se encuentran repetidos, porfavor ingrese uno distinto");
+				Ingrediente ingredienteDb = context.Ingredientes.Find(ingrediente.Id);
+				if(ingredienteDb != null)
+				{
+					ingredienteDb.Activo = false;
+					context.SaveChanges();
+				}
+				else
+				{
+					throw new ArgumentException("La id del ingrediente no encontrada");
+				}
 			}
 		}
+
 		public Clases.Ingrediente ConvertirDeDatosALogica(AccesoADatos.Ingrediente ingredienteDb)
 		{
 			Clases.Ingrediente ingredienteConvertido = new Clases.Ingrediente()
@@ -59,7 +73,6 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 					Ingrediente = ConvertirDeDatosALogica(ingredienteIngrediente.IngredienteComponente)
 				});
 			}
-
 			ComponenteDAO componenteDAO = new ComponenteDAO();
 			ingredienteConvertido.Componentes = componenteDAO.ObtenerComponentesPorIdDeIngredienteCompuesto(ingredienteDb.Id);
 			return ingredienteConvertido;
@@ -67,25 +80,38 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
 		public AccesoADatos.Ingrediente ConvertirDeLogicaADb(Clases.Ingrediente ingrediente)
 		{
-			AccesoADatos.Ingrediente ingredienteConvertido = new AccesoADatos.Ingrediente()
-			{
-				Id = ingrediente.Id,
-				UnidadDeMedida = (short)ingrediente.UnidadDeMedida,
-				CantidadEnInventario = ingrediente.CantidadEnInventario,
-				Nombre = ingrediente.Nombre,
-				FechaDeCreacion = ingrediente.FechaDeCreacion,
-				FechaDeModiciacion = ingrediente.FechaDeModificacion,
-				Codigo = ingrediente.Codigo,
-				CodigoDeBarras = ingrediente.CodigoDeBarras,
-				NombreCreador = ingrediente.Creador,
-				Activo = ingrediente.Activo,
-				Costo = ingrediente.Costo
+			AccesoADatos.Ingrediente ingredienteConvertido;
 
-			};
+			if (ingrediente.Id > 0)
+            {
+                using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+                {
+					ingredienteConvertido = context.Ingredientes.Find(ingrediente.Id);
+                }
+            }
+            else
+            {
+				ingredienteConvertido = new AccesoADatos.Ingrediente()
+				{
+					Id = ingrediente.Id,
+					UnidadDeMedida = (short)ingrediente.UnidadDeMedida,
+					CantidadEnInventario = ingrediente.CantidadEnInventario,
+					Nombre = ingrediente.Nombre,
+					FechaDeCreacion = ingrediente.FechaDeCreacion,
+					FechaDeModiciacion = ingrediente.FechaDeModificacion,
+					Codigo = ingrediente.Codigo,
+					CodigoDeBarras = ingrediente.CodigoDeBarras,
+					NombreCreador = ingrediente.Creador,
+					Activo = ingrediente.Activo,
+					Costo = ingrediente.Costo
+
+				};
+			}
+
 			ComponenteDAO componenteDAO = new ComponenteDAO();
 			if (ingrediente.Componentes.Count > 0)
 			{
-				ingredienteConvertido.IngredienteIngredienteComponente = componenteDAO.ConvertirlistaDeLogicaADatos(ingrediente.Componentes);
+				ingredienteConvertido.IngredienteIngredienteComponente = componenteDAO.ConvertirlistaDeLogicaADatos(ingrediente.Componentes, ingredienteConvertido);
 			}
 			return ingredienteConvertido;
 		}
@@ -191,7 +217,9 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				codigoRepetido = context.Ingredientes.ToList().Exists(i => i.Codigo == codigo);
+				if (context.Ingredientes.ToList().Exists(i => i.Codigo == codigo) || context.Ingredientes.ToList().Exists(i => i.CodigoDeBarras == codigo))
+
+					codigoRepetido = true;
 			}
 
 			return codigoRepetido;
@@ -205,10 +233,6 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				if (context.Ingredientes.ToList().Exists(i => i.Codigo == ingredienteDb.Codigo) && context.Ingredientes.ToList().Exists(i => i.Codigo == ingredienteDb.CodigoDeBarras))
 				{
 					resultado = true;
-				}
-				else
-				{
-					throw new InvalidOperationException("El código no existe en la base de datos");
 				}
 			}
 			return resultado;

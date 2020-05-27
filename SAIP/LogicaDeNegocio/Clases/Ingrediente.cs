@@ -29,7 +29,8 @@ namespace LogicaDeNegocio.Clases
                 Costo = 0;
                 foreach (Componente componente in Componentes)
                 {
-                    Costo += componente.Ingrediente.CalcularCosto();
+                    double cantidad = componente.Cantidad;
+                    Costo += cantidad * componente.Ingrediente.CalcularCosto();
                 }
             }
 
@@ -46,8 +47,9 @@ namespace LogicaDeNegocio.Clases
                 && ValidarNumeroDecimal(CantidadEnInventario.ToString())
                 && ValidarNumeroDecimal(Costo.ToString())
                 && ValidarCadena(Codigo)
-                && ValidarEntero(CodigoDeBarras)
-                && !ingredienteDAO.ValidarCodigoExistente(Codigo))
+                && ValidarCadena(CodigoDeBarras)
+                && !ingredienteDAO.ValidarCodigoExistente(Codigo)
+                && !ingredienteDAO.ValidarCodigoExistente(CodigoDeBarras))
             {
                 resultado = true;
 
@@ -59,7 +61,10 @@ namespace LogicaDeNegocio.Clases
                         break;
                     }
                 }
-
+            }
+            else
+            {
+                throw new InvalidOperationException("Error en datos del Ingrediente: " + Nombre + "\nCódigo repetido: " + ingredienteDAO.ValidarCodigoExistente(Codigo) +"\nCódigo de Barras repetido: " + ingredienteDAO.ValidarCodigoExistente(CodigoDeBarras) + "\nCantidad Inválida: " + ValidarNumeroDecimal(CantidadEnInventario.ToString()) + "\nCosto inválido: " + ValidarNumeroDecimal(Costo.ToString()));
             }
 
             return resultado;

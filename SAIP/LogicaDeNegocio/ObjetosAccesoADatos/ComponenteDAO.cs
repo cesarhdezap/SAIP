@@ -36,16 +36,19 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
 			componenteDb.IngredienteComponente = ingredienteDAO.ConvertirDeLogicaADb(componente.Ingrediente);
 			componenteDb.Cantidad = componente.Cantidad;
-			componenteDb.IngredienteCompuesto = ingredienteDAO.ConvertirDeLogicaADb(componente.Compuesto);
 			return componenteDb;
 		}
 
-		public List<AccesoADatos.IngredienteIngrediente> ConvertirlistaDeLogicaADatos(List<Clases.Componente> componentes)
+		public List<AccesoADatos.IngredienteIngrediente> ConvertirlistaDeLogicaADatos(List<Clases.Componente> componentes, Ingrediente ingrediente)
 		{
 			List<AccesoADatos.IngredienteIngrediente> componentesDb = new List<IngredienteIngrediente>();
+
 			foreach (Clases.Componente componente in componentes)
 			{
-				componentesDb.Add(ConvertirDeLogicaADatos(componente));
+				IngredienteIngrediente componenteDb = ConvertirDeLogicaADatos(componente);
+				componenteDb.IngredienteCompuesto = ingrediente;
+				componenteDb.IngredienteComponente.IngredienteIngredienteCompuesto = componentesDb;
+				componentesDb.Add(componenteDb);
 			}
 
 			return componentesDb;
