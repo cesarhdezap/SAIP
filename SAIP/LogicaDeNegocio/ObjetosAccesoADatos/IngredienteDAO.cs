@@ -1,7 +1,9 @@
 ﻿using AccesoADatos;
 using LogicaDeNegocio.Enumeradores;
+using Org.BouncyCastle.Math.EC.Rfc7748;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -105,7 +107,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			List<Ingrediente> ingredientesDb = new List<Ingrediente>();
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				ingredientesDb = context.Ingredientes.ToList().TakeWhile(ingredienteCargado => ingredienteCargado.Activo == true).ToList();
+				ingredientesDb = context.Ingredientes.Include(x => x.IngredienteIngredienteComponente).ToList().Where(ingredienteCargado => ingredienteCargado.Activo == true).ToList();
 			}
 
 			List<Clases.Ingrediente> ingredientesResultado = new List<Clases.Ingrediente>();
@@ -118,7 +120,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			Ingrediente ingredienteDb = new Ingrediente();
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				ingredienteDb = context.Ingredientes.Find(Id);
+				ingredienteDb = context.Ingredientes.Include(x => x.IngredienteIngredienteComponente).ToList().Find(x => x.Id == Id);
 			
 			}
 			Clases.Ingrediente ingredienteResultado = ConvertirDeDatosALogica(ingredienteDb);
@@ -152,7 +154,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			List<Clases.Ingrediente> ingredientesResultado = new List<Clases.Ingrediente>();
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				componentes = context.IngredienteIngrediente.ToList().TakeWhile(ingrediente => ingrediente.IngredienteCompuesto.Id == Id).ToList();
+				componentes = context.IngredienteIngrediente.ToList().Where(ingrediente => ingrediente.IngredienteCompuesto.Id == Id).ToList();
 
 				foreach (IngredienteIngrediente ingrediente in componentes)
 				{

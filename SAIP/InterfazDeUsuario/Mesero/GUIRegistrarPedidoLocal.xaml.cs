@@ -41,7 +41,7 @@ namespace InterfazDeUsuario.Mesero
             Cuenta = cuenta;
             InitializeComponent();
             BarraDeEstado.Controlador = controlador;
-            BarraDeEstado.ActualizarNombreDeUsuario(empleado.NombreDeUsuario);
+            BarraDeEstado.AsignarUsuarioActual(empleado);
             MostrarAlimentos();
         }
 
@@ -168,11 +168,10 @@ namespace InterfazDeUsuario.Mesero
         {
             Pedido pedido = new Pedido
             {
-                Comentarios = new List<string>(),
+                Comentario = string.Empty,
                 Creador = Empleado.Nombre,
-                Empleado = Empleado,
                 Cuenta = Cuenta,
-                Estado = EstadoPedido.EnEspera,
+                Estado = EstadoPedido.EnEspera, 
                 CantidadAlimentos = AlimentosDelPedido,
             };
             

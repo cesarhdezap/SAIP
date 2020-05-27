@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7e2b9a2d192b4adcb15f8283c2c73735" Name="Diagram1" ZoomLevel="62" >
+      <Diagram DiagramId="7e2b9a2d192b4adcb15f8283c2c73735" Name="Diagram1" ZoomLevel="117" >
         <EntityTypeShape EntityType="ModeloDeDatos.Ingrediente" Width="1.5" PointX="15" PointY="4.875" />
         <EntityTypeShape EntityType="ModeloDeDatos.Mesa" Width="1.5" PointX="1.5" PointY="8.875" />
         <EntityTypeShape EntityType="ModeloDeDatos.Pedido" Width="1.5" PointX="5" PointY="1.75" />
@@ -13,7 +13,7 @@
         <EntityTypeShape EntityType="ModeloDeDatos.Platillo" Width="1.5" PointX="12.25" PointY="2.125" />
         <EntityTypeShape EntityType="ModeloDeDatos.PlatilloPedido" Width="1.5" PointX="8.125" PointY="2.375" />
         <EntityTypeShape EntityType="ModeloDeDatos.Producto" Width="1.5" PointX="12.875" PointY="6.375" />
-        <EntityTypeShape EntityType="ModeloDeDatos.PlatilloIngrediente" Width="1.5" PointX="15.125" PointY="2.125" />
+        <EntityTypeShape EntityType="ModeloDeDatos.PlatilloIngrediente" Width="1.5" PointX="17.25" PointY="3.5" />
         <EntityTypeShape EntityType="ModeloDeDatos.Empleado" Width="1.5" PointX="1.5" PointY="1.125" />
         <AssociationConnector Association="ModeloDeDatos.DireccionesCliente" />
         <EntityTypeShape EntityType="ModeloDeDatos.ProductoPedido" Width="1.5" PointX="9.875" PointY="3.75" />

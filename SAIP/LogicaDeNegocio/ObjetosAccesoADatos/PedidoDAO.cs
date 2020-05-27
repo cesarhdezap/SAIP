@@ -19,7 +19,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 pedido.FechaDeCreacion = DateTime.Now;
                 IvaDAO ivaDAO = new IvaDAO();
                 pedido.Iva = ivaDAO.CargarIvaActual().Valor;
-                pedido.PrecioTotal = CalcularPrecioTotal(pedido);
+                pedido.CalcularPrecioTotal();
             }
             else
             {
@@ -95,24 +95,6 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             return !discrepanciaEncontrada;
         }
 
-        private double CalcularPrecioTotal(Pedido pedido)
-        {
-            double precioTotal = 0;
-            foreach(CantidadAlimento cantidadAlimento in pedido.CantidadAlimentos)
-            {
-                if (cantidadAlimento is CantidadProducto cantidadProducto)
-                {
-                    precioTotal += cantidadProducto.Alimento.Precio * cantidadProducto.Cantidad;
-                }
-                else if (cantidadAlimento is CantidadPlatillo cantidadPlatillo)
-                {
-                    precioTotal += cantidadPlatillo.Alimento.Precio * cantidadPlatillo.Cantidad;
-                }
-            }
-
-            return precioTotal;
-        }
-
         public Pedido RecuperarPedidoPorId(int idPedido) 
         {
             AccesoADatos.Pedido pedido;
@@ -136,6 +118,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 Id = pedidoLogica.Id,
                 FechaDeCreacion = pedidoLogica.FechaDeCreacion,
                 PrecioTotal = pedidoLogica.PrecioTotal,
+                Creador = pedidoLogica.Creador,
+                Comentario = pedidoLogica.Comentario,
                 Iva = pedidoLogica.Iva,
                 Estado = (short)pedidoLogica.Estado,
             };
@@ -151,6 +135,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 PrecioTotal = pedidoDatos.PrecioTotal,
                 Iva = pedidoDatos.Iva,
                 Estado = (EstadoPedido)pedidoDatos.Estado,
+                Comentario = pedidoDatos.Comentario,
+                Creador = pedidoDatos.Creador
             };
 
             return pedidoLogica;
