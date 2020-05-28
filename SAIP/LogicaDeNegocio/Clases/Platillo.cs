@@ -122,5 +122,13 @@ namespace LogicaDeNegocio.Clases
                 proporcion.Ingrediente.DescontarDeInventario(proporcion.Cantidad * cantidad);
             }
 		}
+
+        public void AumentarIngrediente(int cantidad)
+        {
+            foreach (Proporcion proporcion in Proporciones)
+            {
+                proporcion.Ingrediente.AumentarEnInventario(proporcion.Cantidad * cantidad);
+            }
+        }
 	}
 }
