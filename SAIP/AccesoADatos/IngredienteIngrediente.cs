@@ -12,11 +12,12 @@ namespace AccesoADatos
     using System;
     using System.Collections.Generic;
     
-    public partial class Direcciones
+    public partial class IngredienteIngrediente
     {
         public int Id { get; set; }
-        public string Direccion { get; set; }
+        public double Cantidad { get; set; }
     
-        public virtual Cliente Clientes { get; set; }
+        public virtual Ingrediente IngredienteCompuesto { get; set; }
+        public virtual Ingrediente IngredienteComponente { get; set; }
     }
 }

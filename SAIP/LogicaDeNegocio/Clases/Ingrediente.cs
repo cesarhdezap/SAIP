@@ -2,12 +2,14 @@
 using LogicaDeNegocio.ObjetosAccesoADatos;
 using System;
 using System.Collections.Generic;
-using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LogicaDeNegocio.Clases
 {
-    public class Ingrediente
-    {
+	public class Ingrediente
+	{
         public int Id { get; set; }
         public UnidadDeMedida UnidadDeMedida { get; set; }
         public string Nombre { get; set; }
@@ -27,10 +29,9 @@ namespace LogicaDeNegocio.Clases
             if (Componentes.Count > 0)
             {
                 Costo = 0;
-                foreach (Componente componente in Componentes)
+                foreach(Componente componente in Componentes)
                 {
-                    double cantidad = componente.Cantidad;
-                    Costo += cantidad * componente.Ingrediente.CalcularCosto();
+                    Costo += componente.Ingrediente.CalcularCosto();
                 }
             }
 
@@ -38,41 +39,21 @@ namespace LogicaDeNegocio.Clases
             return resultado;
         }
 
-        public bool ValidarParaGuardar()
+        internal void DescontarDeInventario(double cantidad)
         {
-            bool resultado = false;
-            IngredienteDAO ingredienteDAO = new IngredienteDAO();
-
-            if (ValidarNombre(Nombre)
-                && ValidarNumeroDecimal(CantidadEnInventario.ToString())
-                && ValidarNumeroDecimal(Costo.ToString())
-                && ValidarCadena(Codigo)
-                && ValidarCadena(CodigoDeBarras)
-                && !ingredienteDAO.ValidarCodigoExistente(Codigo)
-                && !ingredienteDAO.ValidarCodigoExistente(CodigoDeBarras))
+            if (Componentes.Count > 0)
             {
-                resultado = true;
-
-                foreach (Componente componente in Componentes)
+                foreach(Componente componente in Componentes)
                 {
-                    if (!componente.Validar())
-                    {
-                        resultado = false;
-                        break;
-                    }
+                    componente.Ingrediente.DescontarDeInventario(cantidad * componente.Cantidad);
                 }
             }
             else
             {
-                throw new InvalidOperationException("Error en datos del Ingrediente: " + Nombre + "\nCódigo repetido: " + ingredienteDAO.ValidarCodigoExistente(Codigo) +"\nCódigo de Barras repetido: " + ingredienteDAO.ValidarCodigoExistente(CodigoDeBarras) + "\nCantidad Inválida: " + ValidarNumeroDecimal(CantidadEnInventario.ToString()) + "\nCosto inválido: " + ValidarNumeroDecimal(Costo.ToString()));
+                CantidadEnInventario -= cantidad;
+                IngredienteDAO ingredienteDAO = new IngredienteDAO();
+                ingredienteDAO.ActualizarIngrediente(this);
             }
-
-            return resultado;
-        }
-
-        internal void DescontarDeInventario(double v)
-        {
-            throw new NotImplementedException();
         }
     }
 }
