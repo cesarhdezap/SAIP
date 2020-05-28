@@ -1,4 +1,4 @@
-﻿using LogicaDeNegocio.Clases;
+﻿	using LogicaDeNegocio.Clases;
 using LogicaDeNegocio.Clases.ClasesCompuestas;
 using LogicaDeNegocio.ObjetosAccesoADatos;
 using LogicaDeNegocio.Enumeradores;
@@ -258,6 +258,18 @@ namespace InterfazDeUsuario.Gerente
 			{
 				MessageBox.Show("Debe ingresar almenos un ingrediente o producto para pasar al inventario", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
+		}
+
+		private void CancelarButton_Click(object sender, RoutedEventArgs e)
+		{
+			MessageBoxResult messageBoxResultado = MessageBox.Show("¿Esta seguro que desea cancelar el inventariado? La informacion ingresada se perdera", "Alerta", MessageBoxButton.YesNo);
+
+			if(messageBoxResultado == MessageBoxResult.Yes)
+			{
+				Controlador.Regresar();
+			}
+			
+			
 		}
 	}
 }

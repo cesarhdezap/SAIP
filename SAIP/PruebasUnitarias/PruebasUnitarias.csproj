@@ -55,6 +55,7 @@
     <Compile Include="PruebasClases\PruebasMesa.cs" />
     <Compile Include="PruebasClases\PruebasProducto.cs" />
     <Compile Include="PruebasClases\PruebasPlatillo.cs" />
+    <Compile Include="PruebasDAO\PruebasIngredienteDAO.cs" />
     <Compile Include="PruebasClases\PruebasIngrediente.cs" />
     <Compile Include="PruebasDAO\PruebasMesaDAO.cs" />
     <Compile Include="PruebasDAO\PruebaPedidoDAO.cs" />
