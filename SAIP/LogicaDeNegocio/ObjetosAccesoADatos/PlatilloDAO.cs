@@ -76,9 +76,6 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				{
 					proporcion.Platillo = platilloAGuardar;
 					proporcion.Ingrediente = context.Ingredientes.Find(proporcion.Ingrediente.Id);
-
-					Empleado empleado = context.Empleados.FirstOrDefault(e => e.Nombre == "X");
-					empleado.Activo = false;
 					context.SaveChanges();
 				}
 				

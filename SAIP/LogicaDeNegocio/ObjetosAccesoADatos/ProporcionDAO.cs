@@ -22,7 +22,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				proporcionesDb = context.PlatilloIngrediente.Where(p => p.Platillo.Id == platilloID)
 					.Include(p => p.Platillo)
 					.Include(p => p.Ingrediente)
-					.Include(p => p.Ingrediente.RelacionIngredientesHijo)
+					.Include(p => p.Ingrediente.IngredienteIngredienteComponente)
 					.ToList();
 			}
 
