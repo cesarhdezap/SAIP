@@ -6,9 +6,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InterfazDeUsuario"
       mc:Ignorable="d"
-      Title="PageInicioDeSesion" Height="450" Width="828">
+      Title="PageInicioDeSesion" Height="464" Width="828">
 
-	<Grid>
+    <Grid>
 
 		<controls:BarraDeEstado x:Name="BarraDeEstado" Width="Auto" VerticalAlignment="Top"/>
 		<TextBox x:Name="NombreDeUsuarioTextBox" HorizontalAlignment="Center" Height="23" Margin="0,241,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="157" TextChanged="NombreDeUsuarioTextBox_TextChanged" TabIndex="1"/>
@@ -16,5 +16,5 @@
 		<Image HorizontalAlignment="Center" Height="156" Margin="258,294,414,0" VerticalAlignment="Top" Width="156" Source="italiapizza.jpeg"/>
 		<PasswordBox x:Name="ContraseñaPasswordbox" HorizontalAlignment="Center" Margin="0,271,0,0" VerticalAlignment="Top" Width="157" Height="23" PasswordChanged="ContraseñaPasswordbox_PasswordChanged" TabIndex="2"/>
 
-	</Grid>
+    </Grid>
 </Page>

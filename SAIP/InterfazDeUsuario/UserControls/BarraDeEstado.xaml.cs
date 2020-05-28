@@ -1,6 +1,4 @@
-﻿using InterfazDeUsuario.CallCenter;
-using InterfazDeUsuario.Gerente;
-using LogicaDeNegocio.Clases;
+﻿using LogicaDeNegocio.Clases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +23,6 @@ namespace InterfazDeUsuario.UserControls
 	public partial class BarraDeEstado : UserControl
 	{
 		public ControladorDeCambioDePantalla Controlador;
-		public Empleado Empleado { get; set; } = new Empleado();
 
 		public BarraDeEstado()
 		{
@@ -37,13 +34,8 @@ namespace InterfazDeUsuario.UserControls
 			HoraLabel.Content = DateTime.Now.ToString("MM/dd/yyyy hh:mm tt");
 		}
 		
-		private void AsignarNombreDeUsuario()
-		{
-			NombreDeUsuarioLabel.Content = Empleado.Nombre;
 
-		}
-
-		public void AsignarUsuarioActual(Empleado empleado)
+		public void ActualizarNombreDeUsuario(String nombreDeUsuario)
 		{
 			Empleado = empleado;
 			AsignarNombreDeUsuario();

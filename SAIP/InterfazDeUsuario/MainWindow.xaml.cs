@@ -32,6 +32,7 @@ namespace InterfazDeUsuario
 
         public void CambiarANuevaPage(Page page)
         {
+
             if (!Pantallas.Any(x => x.GetType() == page.GetType()))
             {
                 Pantallas.Push(page);
@@ -60,6 +61,7 @@ namespace InterfazDeUsuario
                 Remover(page);
                 Pantallas.Push(almacenamiento);
             }
+
         }
 
         public void Regresar()
@@ -78,6 +80,7 @@ namespace InterfazDeUsuario
                 RegresarAInicioDeSesion();
             }
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
         }
 
         public void RegresarAInicioDeSesion()
@@ -85,6 +88,7 @@ namespace InterfazDeUsuario
             PageInicioDeSesion inicioDeSesion = new PageInicioDeSesion(this);
             Pantallas.Clear();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
             Content = inicioDeSesion;
         }
     }

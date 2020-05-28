@@ -38,7 +38,7 @@ namespace InterfazDeUsuario.Gerente
             Gerente = empleadoCargado;
             BarraDeEstado.Controlador = controlador;
             Controlador = controlador;
-            BarraDeEstado.AsignarUsuarioActual(Gerente);
+            BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
             EmpleadoDAO empleadoDAO = new EmpleadoDAO();
             Trabajadores = empleadoDAO.CargarTodos();
             Visible = Trabajadores;

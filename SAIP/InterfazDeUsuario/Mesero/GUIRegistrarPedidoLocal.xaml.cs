@@ -42,7 +42,7 @@ namespace InterfazDeUsuario.Mesero
             Cuenta = cuenta;
             InitializeComponent();
             BarraDeEstado.Controlador = controlador;
-            BarraDeEstado.AsignarUsuarioActual(empleado);
+            BarraDeEstado.ActualizarNombreDeUsuario(empleado.NombreDeUsuario);
             MostrarAlimentos();
 
         }

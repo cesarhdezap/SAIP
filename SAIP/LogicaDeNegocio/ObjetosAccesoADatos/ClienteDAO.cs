@@ -150,18 +150,5 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
             return ConvertirClienteDatosALogica(cliente);
         }
-
-		public Clases.Cliente CargarClientePorNumeroTelefonico(string numeroTelefonico)
-		{
-            Cliente cliente = new Cliente();
-
-            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
-            {
-                cliente = context.Clientes.Include(c => c.Direcciones).Include(c => c.Cuenta).FirstOrDefault(c => c.Telefono == numeroTelefonico);
-                
-            }
-            return ConvertirClienteDatosALogica(cliente);
-
-        }
     }
 }

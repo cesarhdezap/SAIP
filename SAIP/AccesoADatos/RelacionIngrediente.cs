@@ -12,13 +12,12 @@ namespace AccesoADatos
     using System;
     using System.Collections.Generic;
     
-    public partial class Iva
+    public partial class RelacionIngrediente
     {
         public int Id { get; set; }
-        public System.DateTime FechaDeInicio { get; set; }
-        public double Valor { get; set; }
-        public string Creador { get; set; }
-        public System.DateTime FechaDeCreacion { get; set; }
-        public bool Activo { get; set; }
+        public double Cantidad { get; set; }
+    
+        public virtual Ingrediente IngredientePadre { get; set; }
+        public virtual Ingrediente IngredienteHijo { get; set; }
     }
 }

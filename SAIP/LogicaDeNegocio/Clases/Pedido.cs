@@ -148,23 +148,5 @@ namespace LogicaDeNegocio
                 }
             }
         }
-
-        public void CalcularPrecioTotal()
-        {
-            double precioTotal = 0;
-            foreach (CantidadAlimento cantidadAlimento in CantidadAlimentos)
-            {
-                if (cantidadAlimento is CantidadProducto cantidadProducto)
-                {
-                    precioTotal += cantidadProducto.Alimento.Precio * cantidadProducto.Cantidad;
-                }
-                else if (cantidadAlimento is CantidadPlatillo cantidadPlatillo)
-                {
-                    precioTotal += cantidadPlatillo.Alimento.Precio * cantidadPlatillo.Cantidad;
-                }
-            }
-
-            PrecioTotal = precioTotal;
-        }
     }
 }
