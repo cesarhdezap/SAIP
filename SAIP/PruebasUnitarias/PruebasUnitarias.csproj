@@ -56,6 +56,7 @@
     <Compile Include="PruebasClases\PruebasProducto.cs" />
     <Compile Include="PruebasClases\PruebasPlatillo.cs" />
     <Compile Include="PruebasDAO\PruebasMesaDAO.cs" />
+    <Compile Include="PruebasDAO\PruebaPedidoDAO.cs" />
     <Compile Include="PruebasDAO\PruebasIvaDAO.cs" />
   </ItemGroup>
   <ItemGroup>

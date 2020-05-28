@@ -155,5 +155,31 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
             return pedidoLogica;
         }
+
+        public void CambiarEstadoPedido(Pedido pedido)
+        {
+            using(ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                if (pedido.Estado != EstadoPedido.EnEspera || pedido.Estado != EstadoPedido.Completado || pedido.Estado != EstadoPedido.Realizado || pedido.Estado != EstadoPedido.Entregado) {
+                    AccesoADatos.Pedido pedidoDb = context.Pedidos.Find(pedido.Id);
+                    if (pedidoDb != null)
+                    {
+                        pedidoDb.Estado = 6;
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Id no encontrada PedidoDAO.DarDeBaja");
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("El pedido ya se encuentra en un estado imposible de cancelar");
+                }
+            }
+
+            pedido.AumentarIngredientes();
+
+        }
     }
 }
