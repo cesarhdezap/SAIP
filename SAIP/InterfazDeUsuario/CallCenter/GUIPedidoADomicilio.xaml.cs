@@ -54,6 +54,7 @@ namespace InterfazDeUsuario.CallCenter
 			AlimentosCargados = AlimentosCargados.Concat(ProductosCargados).ToList();
 			AlimentosVisibles = AlimentosCargados;
 			ActualizarPantalla();
+			BarraDeEstado.ActualizarEmpleado(empleadoDeCallCenter);
 		}
 
 		private void BusquedaTextBox_TextChanged(object sender, TextChangedEventArgs e)

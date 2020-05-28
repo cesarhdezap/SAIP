@@ -44,11 +44,14 @@ namespace InterfazDeUsuario.Gerente
             IvaDAO ivaDAO = new IvaDAO();
             Ivas = ivaDAO.CargarTodos();
             IvaActual = Ivas.FirstOrDefault(i => i.Activo == true);
+            if(IvaActual != null)
+            {
+                LabelValorIvaActual.Content = "Valor: " + IvaActual.Valor;
+                LabelFechaCreacionIvaActual.Content = "Fecha creación: " + IvaActual.FechaDeCreacion.ToString();
+                LabelFechaDeInicioIvaActual.Content = "Fecha de inicio: " + IvaActual.FechaDeInicio.ToString();
+                LabelCreadorIvaActual.Content = "Creador: " + IvaActual.Creador;
+            }
             Ivas.Remove(IvaActual);
-            LabelValorIvaActual.Content = "Valor: " + IvaActual.Valor;
-            LabelFechaCreacionIvaActual.Content = "Fecha creación: " + IvaActual.FechaDeCreacion.ToString();
-            LabelFechaDeInicioIvaActual.Content = "Fecha de inicio: " + IvaActual.FechaDeInicio.ToString();
-            LabelCreadorIvaActual.Content = "Creador: " + IvaActual.Creador;
 
             DataGridIvasAnteriores.ItemsSource = null;
             DataGridIvasAnteriores.ItemsSource = Ivas;
