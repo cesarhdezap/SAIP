@@ -30,7 +30,7 @@ namespace InterfazDeUsuario.Gerente
 			Gerente = empleadoCargado;
 			BarraDeEstado.Controlador = controlador;
 			Controlador = controlador;
-			BarraDeEstado.AsignarUsuarioActual(Gerente);
+			BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
 			Controlador = controlador;
 			BarraDeEstado.Controlador = controlador;
 		}
@@ -52,6 +52,12 @@ namespace InterfazDeUsuario.Gerente
 		{
 			GUIPasarInventario pasarInventario = new GUIPasarInventario(Controlador, Gerente);
 			Controlador.CambiarANuevaPage(pasarInventario);
+		}
+
+		private void ButtonRegistrarIngrediente_Click(object sender, RoutedEventArgs e)
+		{
+			GUIRegistrarIngrediente registrarIngrediente = new GUIRegistrarIngrediente(Controlador, Gerente);
+			Controlador.CambiarANuevaPage(registrarIngrediente);
 		}
 
 		private void Button_Click_Lista(object sender, RoutedEventArgs e)

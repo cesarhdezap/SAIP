@@ -6,15 +6,15 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InterfazDeUsuario"
       mc:Ignorable="d"
-      Title="PageInicioDeSesion" Height="450" Width="828">
+      Title="PageInicioDeSesion" Height="464" Width="828">
 
-	<Grid>
+    <Grid>
 
-		<controls:BarraDeEstado x:Name="BarraDeEstado" Width="Auto" VerticalAlignment="Top"/>
-		<TextBox x:Name="NombreDeUsuarioTextBox" HorizontalAlignment="Center" Height="23" Margin="0,241,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="157" TextChanged="NombreDeUsuarioTextBox_TextChanged" TabIndex="1" KeyDown="IniciarSesionButton_KeyDown"/>
-		<Button x:Name="IniciarSesionButton" Content="Iniciar Sesion" HorizontalAlignment="Center" Margin="358,313,358,0" VerticalAlignment="Top" Width="76" Click="IniciarSesionButton_Click" TabIndex="3" KeyDown="IniciarSesionButton_KeyDown"/>
-		<Image HorizontalAlignment="Center" Height="156" Margin="258,294,414,0" VerticalAlignment="Top" Width="156" Source="italiapizza.jpeg"/>
-		<PasswordBox x:Name="ContraseñaPasswordbox" HorizontalAlignment="Center" Margin="0,271,0,0" VerticalAlignment="Top" Width="157" Height="23" PasswordChanged="ContraseñaPasswordbox_PasswordChanged" TabIndex="2" KeyDown="IniciarSesionButton_KeyDown"/>
+        <controls:BarraDeEstado x:Name="BarraDeEstado" Margin="0,0,-1,390"/>
+        <TextBox x:Name="NombreDeUsuarioTextBox" HorizontalAlignment="Center" Height="23" Margin="0,241,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="157" TextChanged="NombreDeUsuarioTextBox_TextChanged" TabIndex="1"/>
+        <Button x:Name="IniciarSesionButton" Content="Iniciar Sesion" HorizontalAlignment="Center" Margin="358,313,358,0" VerticalAlignment="Top" Width="76" Click="IniciarSesionButton_Click" TabIndex="3"/>
+        <Image HorizontalAlignment="Center" Height="156" Margin="336,85,336,0" VerticalAlignment="Top" Width="156" Source="italiapizza.jpeg"/>
+        <PasswordBox x:Name="ContraseñaPasswordbox" HorizontalAlignment="Center" Margin="0,271,0,0" VerticalAlignment="Top" Width="157" Height="23" PasswordChanged="ContraseñaPasswordbox_PasswordChanged" TabIndex="2"/>
 
-	</Grid>
+    </Grid>
 </Page>

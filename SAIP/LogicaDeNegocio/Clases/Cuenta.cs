@@ -12,7 +12,7 @@ namespace LogicaDeNegocio.Clases
         public int Id { get; set;}
         public string Direccion { get; set;}
         public double PrecioTotal { get; set;}
-        public List<Cliente> Clientes { get; set; } = new List<Cliente>();
+        public List<Cliente> Clientes { get; set;}
         public EstadoCuenta Estado { get; set; }
         public Mesa Mesa { get; set; }
         public Empleado Empleado { get; set; }
@@ -22,23 +22,13 @@ namespace LogicaDeNegocio.Clases
         public void AñadirPedido(Pedido pedido)
         {
             Pedidos.Add(pedido);
+
         }
 
         public void TerminarCuenta()
         {
             Estado = EstadoCuenta.Terminada;
-            CalcularPrecioTotal();
-        }
-
-        public void CalcularPrecioTotal()
-        {
-            double precioTotal = 0;
-
-            foreach(Pedido pedido in Pedidos)
-            {
-                pedido.CalcularPrecioTotal();
-                precioTotal += pedido.PrecioTotal;
-            }
+            //Calcular PrecioTotal
         }
     }
 }

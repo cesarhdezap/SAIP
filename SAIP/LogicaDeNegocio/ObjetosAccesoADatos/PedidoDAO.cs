@@ -19,7 +19,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 pedido.FechaDeCreacion = DateTime.Now;
                 IvaDAO ivaDAO = new IvaDAO();
                 pedido.Iva = ivaDAO.CargarIvaActual().Valor;
-                pedido.CalcularPrecioTotal();
+                pedido.PrecioTotal = CalcularPrecioTotal(pedido);
             }
             else
             {
@@ -93,6 +93,24 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             }
 
             return !discrepanciaEncontrada;
+        }
+
+        private double CalcularPrecioTotal(Pedido pedido)
+        {
+            double precioTotal = 0;
+            foreach(CantidadAlimento cantidadAlimento in pedido.CantidadAlimentos)
+            {
+                if (cantidadAlimento is CantidadProducto cantidadProducto)
+                {
+                    precioTotal += cantidadProducto.Alimento.Precio * cantidadProducto.Cantidad;
+                }
+                else if (cantidadAlimento is CantidadPlatillo cantidadPlatillo)
+                {
+                    precioTotal += cantidadPlatillo.Alimento.Precio * cantidadPlatillo.Cantidad;
+                }
+            }
+
+            return precioTotal;
         }
 
         public Pedido RecuperarPedidoPorId(int idPedido) 
