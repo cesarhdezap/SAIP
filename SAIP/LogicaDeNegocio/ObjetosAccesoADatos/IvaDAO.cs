@@ -1,6 +1,7 @@
 ﻿using AccesoADatos;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,6 +75,29 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 					context.SaveChanges();
 				}
 				context.Ivas.Add(ivaDb);
+				context.SaveChanges();
+			}
+		}
+
+		public void Depuracion_Eliminar(double valor)
+		{
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				Iva iva = context.Ivas.FirstOrDefault(i => i.Valor == valor);
+				context.Ivas.Remove(iva);
+
+				Iva ultimoIva = context.Ivas.First();
+
+				context.Ivas.ToList().ForEach((i) =>
+				{
+					if (ultimoIva.FechaDeInicio > i.FechaDeInicio)
+					{
+						ultimoIva = i;
+					}
+				});
+
+				ultimoIva.Activo = true;
+
 				context.SaveChanges();
 			}
 		}
