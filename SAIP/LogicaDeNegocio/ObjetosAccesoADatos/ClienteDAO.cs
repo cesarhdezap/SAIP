@@ -89,7 +89,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 Nombre = cliente.Nombre,
                 Telefono = cliente.Telefono,
                 Comentarios = cliente.Comentario,
-                NombreCreador = cliente.Creador
+                NombreCreador = cliente.NombreDelCreador
             };
 
             foreach(string direccion in cliente.Direcciones)

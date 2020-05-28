@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/27/2020 20:59:21
--- Generated from EDMX file: C:\Users\Man_S\source\repos\SAIP\SAIP\AccesoADatos\ModeloDeDatos.edmx
+-- Date Created: 05/27/2020 23:27:26
+-- Generated from EDMX file: C:\Users\marcu\Documents\SAIP\COD\SAIP\AccesoADatos\ModeloDeDatos.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -32,8 +32,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_CuentaPedido]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Pedidos] DROP CONSTRAINT [FK_CuentaPedido];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CuentaCliente]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Cuentas] DROP CONSTRAINT [FK_CuentaCliente];
+IF OBJECT_ID(N'[dbo].[FK_CuentaCliente_Cuenta]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CuentaCliente] DROP CONSTRAINT [FK_CuentaCliente_Cuenta];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CuentaCliente_Cliente]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CuentaCliente] DROP CONSTRAINT [FK_CuentaCliente_Cliente];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CuentaEmpleado]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Cuentas] DROP CONSTRAINT [FK_CuentaEmpleado];
@@ -50,11 +53,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_IngredientePlatilloIngrediente]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PlatilloIngrediente] DROP CONSTRAINT [FK_IngredientePlatilloIngrediente];
 GO
-IF OBJECT_ID(N'[dbo].[FK_IngredienteRelacionIngredienteHijo]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[RelacionIngredientes] DROP CONSTRAINT [FK_IngredienteRelacionIngredienteHijo];
+IF OBJECT_ID(N'[dbo].[FK_IngredienteRelacionIngrediente]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RelacionIngredientes] DROP CONSTRAINT [FK_IngredienteRelacionIngrediente];
 GO
-IF OBJECT_ID(N'[dbo].[FK_RelacionIngredienteIngredientePadre]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[RelacionIngredientes] DROP CONSTRAINT [FK_RelacionIngredienteIngredientePadre];
+IF OBJECT_ID(N'[dbo].[FK_RelacionIngredienteIngredienteCompuesto]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RelacionIngredientes] DROP CONSTRAINT [FK_RelacionIngredienteIngredienteCompuesto];
 GO
 
 -- --------------------------------------------------
@@ -105,6 +108,9 @@ IF OBJECT_ID(N'[dbo].[RelacionIngredientes]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Discrepancias]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Discrepancias];
+GO
+IF OBJECT_ID(N'[dbo].[CuentaCliente]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CuentaCliente];
 GO
 
 -- --------------------------------------------------
@@ -253,11 +259,7 @@ CREATE TABLE [dbo].[Cuentas] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [PrecioTotal] float  NOT NULL,
     [Estado] smallint  NOT NULL,
-<<<<<<< HEAD
     [Mesa_Id] int  NULL,
-=======
-    [Mesa_Id] int  NOT NULL,
->>>>>>> Refactorizacindesistemademenu
     [Empleado_Id] int  NOT NULL
 );
 GO

@@ -60,7 +60,7 @@ namespace InterfazDeUsuario.CallCenter
                 Telefono = TextBoxTelefono.Text,
                 Comentario = TextBoxComentarios.Text,
                 Direcciones = Direcciones,
-                Creador = Empleado.Nombre
+                NombreDelCreador = Empleado.Nombre
             };
 
             if (cliente.Validar())

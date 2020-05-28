@@ -194,7 +194,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             List<Ingrediente> ingredientesDb = new List<Ingrediente>();
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
-                ingredientesDb = context.Ingredientes.ToList().TakeWhile(ingredienteCargado => ingredienteCargado.Activo == true).ToList();
+                ingredientesDb = context.Ingredientes.Include(i => i.RelacionIngredientesHijo).Where(ingredienteCargado => ingredienteCargado.Activo == true).ToList();
             }
 
             List<Clases.Ingrediente> ingredientesResultado = new List<Clases.Ingrediente>();
@@ -207,7 +207,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             Ingrediente ingredienteDb = new Ingrediente();
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
-                ingredienteDb = context.Ingredientes.Find(Id);
+                ingredienteDb = context.Ingredientes.Include(i => i.RelacionIngredientesHijo).FirstOrDefault(i => i.Id == Id);
 
             }
             Clases.Ingrediente ingredienteResultado = ConvertirDeDatosALogica(ingredienteDb);
