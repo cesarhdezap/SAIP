@@ -150,6 +150,20 @@ namespace LogicaDeNegocio
             }
         }
 
+        public void AumentarIngredientes()
+        {
+            foreach(CantidadAlimento proporcion in CantidadAlimentos)
+            {
+                if(proporcion is CantidadPlatillo proporcionPlatillo)
+                {
+                    proporcionPlatillo.Alimento.AumentarIngrediente(proporcionPlatillo.Cantidad);
+                }
+                else if (proporcion is CantidadProducto proporcionProducto)
+                {
+                    proporcionProducto.Alimento.AumentarIngredienteInventario(proporcionProducto.Cantidad);
+                }
+            }
+        }
         public void CalcularPrecioTotal()
         {
             double precioTotal = 0;

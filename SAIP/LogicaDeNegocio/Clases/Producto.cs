@@ -54,5 +54,20 @@ namespace LogicaDeNegocio.Clases
                 throw new ArgumentException("No hay suficientes existencias para realizar el descuento");
             }
 		}
+
+        public void AumentarIngredienteInventario(int cantidad)
+        {
+            if (Activo)
+            {
+                ProductoDAO productoDAO = new ProductoDAO();
+                this.CantidadEnInventario += cantidad;
+                productoDAO.ActualizarProducto(this);
+            }
+            else
+            {
+                throw new ArgumentException("No se ha podido realizar el aumento");
+            }
+        }
+       
 	}
 }

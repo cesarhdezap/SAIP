@@ -36,6 +36,7 @@ namespace InterfazDeUsuario.UserControls
             LabelCuenta.Content = "Cuenta: " + cuenta.Id + " " + cuenta.Estado.ToString();
             LabelMesa.Content = "Mesa: " + cuenta.Mesa.ToString();
             cuenta.CalcularPrecioTotal();
+
             LabelPrecioTotal.Content = "Precio total: " + cuenta.PrecioTotal;
             DataGridPedidos.ItemsSource = cuenta.Pedidos;
         }
@@ -104,6 +105,7 @@ namespace InterfazDeUsuario.UserControls
             CuentaDAO cuentaDAO = new CuentaDAO();
             //Actualizar precio de pedidos
             Cuenta.Estado = EstadoCuenta.Terminada;
+            Cuenta.CalcularPrecioTotal();
             cuentaDAO.ActualizarCuenta(Cuenta);
 
             MesaDAO mesaDAO = new MesaDAO();

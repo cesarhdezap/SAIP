@@ -7,16 +7,16 @@
       xmlns:local="clr-namespace:InterfazDeUsuario.Mesero"
       mc:Ignorable="d" 
       Height="691" Width="1258"
-      Title="GUIRegistrarPedidoLocal">
+      Title="GUIRegistrarPedidoLocal"
+      Loaded="Page_Loaded">
     <DockPanel>
         <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top" Width="Auto"/>
 		<UniformGrid Columns="2">
 			<StackPanel Orientation="Vertical" Margin="10">
 
 				<Label Margin="5" Content="Registrar nuevo pedido" FontSize="30" FontWeight="UltraBlack" FontFamily="MS Reference Sans Serif" DockPanel.Dock="Top" HorizontalAlignment="Left"/>
-				<StackPanel Orientation="Horizontal">
-					<Label Content="Placeholder numero de pedido"/>
-					<Label Content="Mesa: Placeholder num mesa"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label x:Name="LabelNumeroDeMesa" Content="Mesa: Placeholder num mesa"/>
 				</StackPanel>
 				<Label Content="Cuenta" Margin="2" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"/>
 

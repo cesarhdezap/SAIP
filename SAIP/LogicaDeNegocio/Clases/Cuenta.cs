@@ -25,12 +25,6 @@ namespace LogicaDeNegocio.Clases
 
         }
 
-        public void TerminarCuenta()
-        {
-            Estado = EstadoCuenta.Terminada;
-            //Calcular PrecioTotal
-        }
-
         public void CalcularPrecioTotal()
         {
             double precioTotal = 0;
@@ -40,6 +34,7 @@ namespace LogicaDeNegocio.Clases
                 pedido.CalcularPrecioTotal();
                 precioTotal += pedido.PrecioTotal;
             }
+            PrecioTotal = precioTotal;
         }
     }
 }

@@ -86,6 +86,23 @@ namespace LogicaDeNegocio.Clases
                 ingredienteDAO.ActualizarIngrediente(this);
             }
         }
+
+        public void AumentarEnInventario(double cantidad)
+        {
+            if(Componentes.Count > 0)
+            {
+                foreach(Componente componente in Componentes)
+                {
+                    componente.Ingrediente.AumentarEnInventario(cantidad * componente.Cantidad);
+                }
+            }
+            else
+            {
+                CantidadEnInventario += cantidad;
+                IngredienteDAO ingredienteDAO = new IngredienteDAO();
+                ingredienteDAO.ActualizarIngrediente(this);
+            }
+        }
     }
 }
 
