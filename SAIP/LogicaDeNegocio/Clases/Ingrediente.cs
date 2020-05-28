@@ -70,9 +70,21 @@ namespace LogicaDeNegocio.Clases
             return resultado;
         }
 
-        internal void DescontarDeInventario(double v)
+        internal void DescontarDeInventario(double cantidad)
         {
-            throw new NotImplementedException();
+            if (Componentes.Count > 0)
+            {
+                foreach (Componente componente in Componentes)
+                {
+                    componente.Ingrediente.DescontarDeInventario(cantidad * componente.Cantidad);
+                }
+            }
+            else
+            {
+                CantidadEnInventario -= cantidad;
+                IngredienteDAO ingredienteDAO = new IngredienteDAO();
+                ingredienteDAO.ActualizarIngrediente(this);
+            }
         }
     }
 }

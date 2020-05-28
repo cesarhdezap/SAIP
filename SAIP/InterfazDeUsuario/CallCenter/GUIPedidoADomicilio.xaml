@@ -55,10 +55,12 @@
 		<Label x:Name="NombreDeClienteLabel" Content="Nombre del cliente" HorizontalAlignment="Left" Margin="857,175,0,0" VerticalAlignment="Top"/>
 		<Label x:Name="DireccionLabel" Content="Dirección" HorizontalAlignment="Left" Margin="857,229,0,0" VerticalAlignment="Top"/>
 		<Label x:Name="ComentariosClienteLabel" Content="Comentarios extra" HorizontalAlignment="Left" Margin="857,358,0,0" VerticalAlignment="Top"/>
-		<TextBox x:Name="DireccionClienteTextBlock" HorizontalAlignment="Left" Height="98" Margin="857,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" BorderBrush="Black" TextChanged="DireccionClienteTextBlock_TextChanged"/>
-		<TextBox x:Name="ComentariosClienteTextBlock" HorizontalAlignment="Left" Height="130" Margin="857,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" BorderBrush="Black" TextChanged="ComentariosClienteTextBlock_TextChanged"/>
-		<TextBox x:Name="NumeroTelefonicoTextBox" HorizontalAlignment="Left" Height="23" Margin="857,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" TextChanged="NumeroTelefonicoTextBox_TextChanged"/>
-		<TextBox x:Name="NombreDeClienteTextBox" HorizontalAlignment="Left" Height="23" Margin="857,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" TextChanged="NombreDeClienteTextBox_TextChanged"/>
+		<TextBox x:Name="DireccionClienteTextBlock" Height="98" Margin="857,255,22,0" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="Black" TextChanged="DireccionClienteTextBlock_TextChanged"/>
+		<TextBox x:Name="ComentariosClienteTextBlock" Height="130" Margin="857,384,22,0" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="Black" TextChanged="ComentariosClienteTextBlock_TextChanged"/>
+		<TextBox x:Name="NumeroTelefonicoTextBox" Height="23" Margin="857,147,123,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="NumeroTelefonicoTextBox_TextChanged"/>
+		<TextBox x:Name="NombreDeClienteTextBox" Height="23" Margin="857,201,123,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="NombreDeClienteTextBox_TextChanged"/>
+		<Label x:Name="LabelErrorDeCantidad"  HorizontalAlignment="Left" Margin="23,106,0,0" VerticalAlignment="Top" Background="Transparent" Foreground="Red"/>
+		<Button x:Name="ButtonLimpiarCliente" Content="Limpiar cliente" HorizontalAlignment="Left" Margin="1065,148,0,0" VerticalAlignment="Top" Width="97" Height="21" IsEnabled="False" Click="ButtonLimpiarCliente_Click"/>
 
 	</Grid>
 </Page>

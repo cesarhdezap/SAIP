@@ -32,11 +32,8 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_CuentaPedido]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Pedidos] DROP CONSTRAINT [FK_CuentaPedido];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CuentaCliente_Cuenta]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CuentaCliente] DROP CONSTRAINT [FK_CuentaCliente_Cuenta];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CuentaCliente_Cliente]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CuentaCliente] DROP CONSTRAINT [FK_CuentaCliente_Cliente];
+IF OBJECT_ID(N'[dbo].[FK_CuentaCliente]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Cuentas] DROP CONSTRAINT [FK_CuentaCliente];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CuentaEmpleado]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Cuentas] DROP CONSTRAINT [FK_CuentaEmpleado];
@@ -108,9 +105,6 @@ IF OBJECT_ID(N'[dbo].[RelacionIngredientes]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Discrepancias]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Discrepancias];
-GO
-IF OBJECT_ID(N'[dbo].[CuentaCliente]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CuentaCliente];
 GO
 
 -- --------------------------------------------------
@@ -259,7 +253,11 @@ CREATE TABLE [dbo].[Cuentas] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [PrecioTotal] float  NOT NULL,
     [Estado] smallint  NOT NULL,
+<<<<<<< HEAD
+    [Mesa_Id] int  NULL,
+=======
     [Mesa_Id] int  NOT NULL,
+>>>>>>> Refactorizacindesistemademenu
     [Empleado_Id] int  NOT NULL
 );
 GO

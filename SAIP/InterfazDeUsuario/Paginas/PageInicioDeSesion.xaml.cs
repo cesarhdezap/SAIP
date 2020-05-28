@@ -66,7 +66,7 @@ namespace InterfazDeUsuario.Paginas
 					Empleado empleadoCargado = empleadoDAO.CargarEmpleadoPorNombreDeUsuario(nombreDeUsuario);
 					if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.CallCenter)
 					{
-						GUIVisualizarListaDeClientes pedidoADomicilio = new GUIVisualizarListaDeClientes(Controlador, empleadoCargado);
+						GUIPedidoADomicilio pedidoADomicilio = new GUIPedidoADomicilio(Controlador, empleadoCargado);
 						Controlador.CambiarANuevaPage(pedidoADomicilio);
 					}
 					else if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.Gerente)
