@@ -35,7 +35,7 @@ namespace InterfazDeUsuario.CallCenter
             Empleado = empleado;
             InitializeComponent();
             BarraDeEstado.Controlador = Controlador;
-            BarraDeEstado.AsignarUsuarioActual(empleado);
+            BarraDeEstado.ActualizarEmpleado(empleado);
         }
 
         private void ButtonAñadirDireccion_Click(object sender, RoutedEventArgs e)

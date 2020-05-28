@@ -30,5 +30,10 @@ namespace LogicaDeNegocio.Clases
             Estado = EstadoCuenta.Terminada;
             //Calcular PrecioTotal
         }
+
+        public void CalcularPrecioTotal()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

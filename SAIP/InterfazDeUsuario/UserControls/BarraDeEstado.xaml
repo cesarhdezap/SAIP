@@ -27,7 +27,7 @@
 		<Label x:Name="NombreDeUsuarioLabel" Content="NombreDeUsuario" HorizontalAlignment="Center" Margin="355,5,312,0" VerticalAlignment="Top" FontSize="18" Width="162"/>
 		<Button x:Name="CambiarUsuarioButton" Content="Cambiar usuario" HorizontalAlignment="Center" Margin="361,34,372,0" VerticalAlignment="Top" Width="96" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FFB60000" FontWeight="Bold" Click="CambiarUsuarioButton_Click"/>
 		<Label x:Name="HoraLabel" Content="Reloj" HorizontalAlignment="Right" Margin="0,5,10,0" VerticalAlignment="Top" FontSize="24" Width="271" HorizontalContentAlignment="Right"/>
-		<Image x:Name="LogoImage" HorizontalAlignment="Left" Height="74" VerticalAlignment="Top" Width="87" Source="/img/italiapizza.jpeg" Margin="10,0,0,0"/>
-
-	</Grid>
+        <Image x:Name="LogoImage" HorizontalAlignment="Left" Height="74" VerticalAlignment="Top" Width="87" Source="/img/italiapizza.jpeg" Margin="10,0,0,0"/>
+        <UniformGrid Rows="2" x:Name="UniformGridBotones" Margin="168,5,448,10" />
+    </Grid>
 </UserControl>

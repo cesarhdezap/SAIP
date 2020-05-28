@@ -35,7 +35,7 @@ namespace InterfazDeUsuario.Gerente
             MostrarIvas();
             Empleado = empleado;
             BarraDeEstado.Controlador = controlador;
-            BarraDeEstado.AsignarUsuarioActual(empleado);
+            BarraDeEstado.ActualizarEmpleado(empleado);
             Controlador = controlador;
         }
 

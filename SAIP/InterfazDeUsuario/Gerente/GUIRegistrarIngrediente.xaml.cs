@@ -26,7 +26,7 @@ namespace InterfazDeUsuario.Gerente
             Empleado = empleado;
             InitializeComponent();
             BarraDeEstado.Controlador = controlador;
-            BarraDeEstado.ActualizarNombreDeUsuario(empleado.NombreDeUsuario);
+            BarraDeEstado.ActualizarEmpleado(empleado);
             GridCompuestos.Visibility = Visibility.Collapsed;
             ComboBoxUnidadMedida.ItemsSource = Enum.GetValues(typeof(UnidadDeMedida));
             ComboBoxUnidadMedida.SelectedIndex = 0;

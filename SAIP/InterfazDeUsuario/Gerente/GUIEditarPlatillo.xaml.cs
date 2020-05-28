@@ -43,7 +43,7 @@ namespace InterfazDeUsuario.Gerente
 			{
 				ProporcionesOriginales.Add(proporcion);
 			}
-			BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
+			BarraDeEstado.ActualizarEmpleado(Gerente);
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
 			IngredientesCargados = ingredienteDAO.CargarIngredientesActivos();
 			IngredientesVisibles = IngredientesCargados;
