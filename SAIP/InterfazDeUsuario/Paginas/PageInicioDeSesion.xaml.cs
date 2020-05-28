@@ -55,10 +55,12 @@ namespace InterfazDeUsuario.Paginas
 				{
 					resultadoDeValidacion = empleadoDAO.ValidarExistenciaDeNombreDeUsuarioYContraseña(nombreDeUsuario, contraseña);
 				}
-				catch(InvalidOperationException ex)
+				catch (InvalidOperationException ex)
 				{
-					MessageBox.Show(ex.Message);
+					Mouse.OverrideCursor = null;
+					MessageBox.Show("No se pudo establecer conexión a la base de datos, consulte a su técnico." + ex.Message, "Error!");
 					resultadoDeValidacion = false;
+					return;
 				}
 
 				if (resultadoDeValidacion)

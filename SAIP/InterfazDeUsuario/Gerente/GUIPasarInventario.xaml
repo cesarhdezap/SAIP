@@ -19,31 +19,34 @@
 			</TextBox>
 		</DataTemplate>
 	</Page.Resources>
+	<DockPanel>
+		<controls:BarraDeEstado x:Name="BarraDeEstado" Margin="0,0,0,0" Width="Auto" DockPanel.Dock="Top"/>
+		<Grid>
 
-	<Grid>
-		<controls:BarraDeEstado x:Name="BarraDeEstado" Margin="0,0,0,468" Width="Auto"/>
-		<TextBox x:Name="BusquedaTextBox" HorizontalAlignment="Left" Height="23" Margin="889,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="357" TextChanged="BusquedaTextBox_TextChanged"/>
-		<DataGrid x:Name="BusquedaDataGrid" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="false" CanUserDeleteRows="False" SelectionUnit="FullRow" HorizontalAlignment="Left" Height="327" Margin="889,99,0,0" VerticalAlignment="Top" Width="357">
-			<DataGrid.Columns>
-				<DataGridTemplateColumn Width="50"  CellEditingTemplate="{StaticResource BotonDeAñadir}" CellTemplate="{StaticResource BotonDeAñadir}"/>
-				<DataGridTextColumn Header="Ingrediente" IsReadOnly="True" Width="75" Binding="{Binding Nombre}"/>
-				<DataGridTextColumn Header="Código" IsReadOnly="True" Width="75" Binding="{Binding CodigoDeBarras}"/>
-				<DataGridTextColumn Header="Costo" IsReadOnly="True" Width="75" Binding="{Binding Costo}"/>
-				<DataGridTextColumn Header="Unidad de medida" IsReadOnly="True" Width="75" Binding="{Binding UnidadDeMedida}"/>
-			</DataGrid.Columns>
-		</DataGrid>
-		<TextBox x:Name="CodigoDeBarrasTextBox" HorizontalAlignment="Left" Height="23" Margin="10,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="303" TextChanged="CodigoDeBarrasTextBox_TextChanged" PreviewTextInput="CodigoDeBarrasTextBox_PreviewTextInput"/>
-		<DataGrid x:Name="IngredientesOProductosDataGrid" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="false" CanUserDeleteRows="False" SelectionUnit="FullRow" HorizontalAlignment="Left" Height="218" Margin="372,99,0,0" VerticalAlignment="Top" Width="482" RenderTransformOrigin="0.317,0.56">
-			<DataGrid.Columns>
-				<DataGridTextColumn Header="Ingrediente" IsReadOnly="True" Width="75" Binding="{Binding Nombre}"/>
-				<DataGridTextColumn Header="Código" IsReadOnly="True" Width="75" Binding="{Binding CodigoDeBarras}"/>
-				<DataGridTemplateColumn Width="75"  CellEditingTemplate="{StaticResource CampoDeTextoDeCantidadDeIngrediente}" CellTemplate="{StaticResource CampoDeTextoDeCantidadDeIngrediente}"/>
-				<DataGridTemplateColumn Width="75"  CellEditingTemplate="{StaticResource BotonDeEliminar}" CellTemplate="{StaticResource BotonDeEliminar}"/>
-				<DataGridTextColumn Header="Costo" IsReadOnly="True" Width="75" Binding="{Binding Costo}"/>
-				<DataGridTextColumn Header="Unidad de medida" IsReadOnly="True" Width="75" Binding="{Binding UnidadDeMedida}"/>
-			</DataGrid.Columns>
-		</DataGrid>
-		<Button x:Name="CancelarButton" Content="Cancelar inventariado" HorizontalAlignment="Left" Margin="372,330,0,0" VerticalAlignment="Top" Width="140"/>
-		<Button x:Name="ContinuarButton" Content="Continuar" HorizontalAlignment="Left" Margin="779,330,0,0" VerticalAlignment="Top" Width="75" Click="ContinuarButton_Click"/>
-	</Grid>
+			<TextBox x:Name="BusquedaTextBox" HorizontalAlignment="Left" Height="23" Margin="889,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="357" TextChanged="BusquedaTextBox_TextChanged"/>
+			<DataGrid x:Name="BusquedaDataGrid" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="false" CanUserDeleteRows="False" SelectionUnit="FullRow" HorizontalAlignment="Left" Height="327" Margin="889,99,0,0" VerticalAlignment="Top" Width="357">
+				<DataGrid.Columns>
+					<DataGridTemplateColumn Width="50"  CellEditingTemplate="{StaticResource BotonDeAñadir}" CellTemplate="{StaticResource BotonDeAñadir}"/>
+					<DataGridTextColumn Header="Ingrediente" IsReadOnly="True" Width="75" Binding="{Binding Nombre}"/>
+					<DataGridTextColumn Header="Código" IsReadOnly="True" Width="75" Binding="{Binding CodigoDeBarras}"/>
+					<DataGridTextColumn Header="Costo" IsReadOnly="True" Width="75" Binding="{Binding Costo}"/>
+					<DataGridTextColumn Header="Unidad de medida" IsReadOnly="True" Width="75" Binding="{Binding UnidadDeMedida}"/>
+				</DataGrid.Columns>
+			</DataGrid>
+			<TextBox x:Name="CodigoDeBarrasTextBox" HorizontalAlignment="Left" Height="23" Margin="10,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="303" TextChanged="CodigoDeBarrasTextBox_TextChanged" PreviewTextInput="CodigoDeBarrasTextBox_PreviewTextInput"/>
+			<DataGrid x:Name="IngredientesOProductosDataGrid" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="false" CanUserDeleteRows="False" SelectionUnit="FullRow" HorizontalAlignment="Left" Height="218" Margin="372,99,0,0" VerticalAlignment="Top" Width="482" RenderTransformOrigin="0.317,0.56">
+				<DataGrid.Columns>
+					<DataGridTextColumn Header="Ingrediente" IsReadOnly="True" Width="75" Binding="{Binding Nombre}"/>
+					<DataGridTextColumn Header="Código" IsReadOnly="True" Width="75" Binding="{Binding CodigoDeBarras}"/>
+					<DataGridTemplateColumn Width="75"  CellEditingTemplate="{StaticResource CampoDeTextoDeCantidadDeIngrediente}" CellTemplate="{StaticResource CampoDeTextoDeCantidadDeIngrediente}"/>
+					<DataGridTemplateColumn Width="75"  CellEditingTemplate="{StaticResource BotonDeEliminar}" CellTemplate="{StaticResource BotonDeEliminar}"/>
+					<DataGridTextColumn Header="Costo" IsReadOnly="True" Width="75" Binding="{Binding Costo}"/>
+					<DataGridTextColumn Header="Unidad de medida" IsReadOnly="True" Width="75" Binding="{Binding UnidadDeMedida}"/>
+				</DataGrid.Columns>
+			</DataGrid>
+			<Button x:Name="CancelarButton" Content="Cancelar inventariado" HorizontalAlignment="Left" Margin="372,330,0,0" VerticalAlignment="Top" Width="140"/>
+			<Button x:Name="ContinuarButton" Content="Continuar" HorizontalAlignment="Left" Margin="779,330,0,0" VerticalAlignment="Top" Width="75" Click="ContinuarButton_Click"/>
+		</Grid>
+	</DockPanel>
+	
 </Page>

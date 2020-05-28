@@ -44,12 +44,29 @@ namespace InterfazDeUsuario.CallCenter
 			IvaDAO ivaDAO = new IvaDAO(); 
 			PlatilloDAO platilloDAO = new PlatilloDAO();
 			ProductoDAO productoDAO = new ProductoDAO();
-			Iva = ivaDAO.CargarIvaActual();
+			try
+			{
+				Iva = ivaDAO.CargarIvaActual();
+			} 
+			catch (InvalidOperationException e)
+			{
+				MessageBox.Show(e.Message + "Porfavor contacte a su administrador", "Error! ", MessageBoxButton.OK);
+				controlador.Regresar();
+			}
+
 			IvaLabel.Content = "IVA(" + Iva.Valor * 10 + "%)";
 			Controlador = controlador;
 			BarraDeEstado.Controlador = controlador;
-			ProductosCargados = productoDAO.CargarProductosActivos();
-			PlatillosCargados = platilloDAO.CargarTodos();
+			try
+			{
+				ProductosCargados = productoDAO.CargarProductosActivos();
+				PlatillosCargados = platilloDAO.CargarTodos();
+			}
+			catch (InvalidOperationException e)
+			{
+				MessageBox.Show(e.Message + "Porfavor contacte a su administrador", "Error! ", MessageBoxButton.OK);
+				controlador.Regresar();
+			}
 			AlimentosCargados = AlimentosCargados.Concat(PlatillosCargados).ToList();
 			AlimentosCargados = AlimentosCargados.Concat(ProductosCargados).ToList();
 			AlimentosVisibles = AlimentosCargados;
@@ -267,6 +284,8 @@ namespace InterfazDeUsuario.CallCenter
 			{
 				LimpiarPantalla();
 			}
+			ButtonLimpiarCliente.IsEnabled = false;
+			NumeroTelefonicoTextBox.IsEnabled = true;
 		}
 
 		private void FinalizarButton_Click(object sender, RoutedEventArgs e)
@@ -338,6 +357,7 @@ namespace InterfazDeUsuario.CallCenter
 			NumeroTelefonicoTextBox.Text = string.Empty;
 			ComentariosClienteTextBlock.Text = string.Empty;
 			DireccionClienteTextBlock.Text = string.Empty;
+
 		}
 	}
 }
