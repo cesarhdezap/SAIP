@@ -1,0 +1,48 @@
+﻿<Page x:Class="InterfazDeUsuario.Gerente.GUIEditarImpuesto"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:controls="clr-namespace:InterfazDeUsuario.UserControls"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InterfazDeUsuario.Gerente"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Height="691" Width="1258"
+      FontSize="20"
+      Title="GUIEditarImpuesto">
+
+    <DockPanel>
+        <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top" Width="Auto"/>
+        <UniformGrid Columns="2">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="20">
+                <DockPanel Margin="10">
+                    <Label Content="Valor:"/>
+                    <TextBox x:Name="TextBoxValor" TextChanged="TextBoxValor_TextChanged"/>
+                </DockPanel>
+                <DockPanel Margin="10">
+                    <Label Content="Fecha de inicio:"/>
+                    <DatePicker Name="DatePickerFechaDeInicio" SelectedDateChanged="DatePickerFechaDeInicio_SelectedDateChanged"/>
+                </DockPanel>
+                <Button x:Name="ButtonActualizarIva" Content="Actualizar Iva" Background="LightGreen" HorizontalAlignment="Right" Margin="15" Click="ButtonActualizarIva_Click"/>
+            </StackPanel>
+            <DockPanel Margin="20">
+                <StackPanel Orientation="Vertical" DockPanel.Dock="Top" Margin="10">
+                    <Label Content="IVA Actual" FontWeight="Bold"/>
+                    <Label x:Name="LabelValorIvaActual" Content="Valor"/>
+                    <Label Name="LabelFechaCreacionIvaActual"/>
+                    <Label Name="LabelFechaDeInicioIvaActual"/>
+                    <Label x:Name="LabelCreadorIvaActual"/>
+                </StackPanel>
+                <Label Content="IVAs Anteriores" DockPanel.Dock="Top" FontWeight="Bold"/>
+                <DataGrid Name="DataGridIvasAnteriores" AutoGenerateColumns="False" IsReadOnly="True" CanUserReorderColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Valor" Binding="{Binding Valor}"/>
+                        <DataGridTextColumn Header="Fecha de inicio" Binding="{Binding FechaDeInicio, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}"/>
+                        <DataGridTextColumn Header="Fecha de creación" Binding="{Binding FechaDeCreacion}"/>
+                        <DataGridTextColumn Header="Creador" Binding="{Binding Creador}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </UniformGrid>
+    </DockPanel>
+</Page>

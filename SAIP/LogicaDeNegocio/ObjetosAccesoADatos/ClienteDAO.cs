@@ -12,6 +12,45 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 {
     public class ClienteDAO
     {
+        public void Guardar(Clases.Cliente cliente)
+        {
+            Cliente clienteDb = ConvertirClienteLogicaADatos(cliente);
+            clienteDb.Activo = true;
+            clienteDb.FechaDeCreacion = DateTime.Now;
+            clienteDb.FechaDeModicacion = DateTime.Now;
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                context.Clientes.Add(clienteDb);
+                context.SaveChanges();
+            }
+        }
+
+        public void Actualizar(Clases.Cliente cliente)
+        {
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                Cliente clienteDb = context.Clientes.Find(cliente.Id);
+                clienteDb.FechaDeModicacion = DateTime.Now;
+                clienteDb.Nombre = cliente.Nombre;
+                clienteDb.Telefono = cliente.Telefono;
+                clienteDb.Comentarios = cliente.Comentario;
+
+                List<Direcciones> direcciones = new List<Direcciones>();
+                foreach (string direccion in cliente.Direcciones)
+                {
+                    Direcciones direccionTabla = new Direcciones
+                    {
+                        Direccion = direccion
+                    };
+                    direcciones.Add(direccionTabla);
+                }
+                context.Direcciones.RemoveRange(clienteDb.Direcciones);
+                clienteDb.Direcciones.Clear();
+                clienteDb.Direcciones = direcciones;
+                context.SaveChanges();
+            }
+        }
+
         public void DarDeBaja(Clases.Cliente cliente)
         {
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
@@ -49,8 +88,17 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 Id = cliente.Id,
                 Nombre = cliente.Nombre,
                 Telefono = cliente.Telefono,
-                Comentarios = cliente.Comentario
+                Comentarios = cliente.Comentario,
+                NombreCreador = cliente.Creador
             };
+
+            foreach(string direccion in cliente.Direcciones)
+            {
+                Direcciones direccionTabla = new Direcciones();
+                direccionTabla.Direccion = direccion;
+                clienteDatos.Direcciones.Add(direccionTabla);
+            }
+
             return clienteDatos;
         }
 

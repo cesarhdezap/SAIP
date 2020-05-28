@@ -1,4 +1,4 @@
-﻿using AccesoADatos;
+using AccesoADatos;
 using LogicaDeNegocio.Clases.ClasesAsociativas;
 using LogicaDeNegocio.Enumeradores;
 using System;
@@ -17,6 +17,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
         /// </summary>
         /// <param name="empleado"></param>
         /// <returns></returns>
+        /// Intento de resolucion de conflictos
         public List<Clases.Cuenta> RecuperarCuentasAbiertasPorEmpleado(Clases.Empleado empleado)
         {
             List<AccesoADatos.Cuenta> cuentas = new List<AccesoADatos.Cuenta>();
@@ -56,6 +57,11 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
+                if(cuenta.Id >= 0)
+                {
+                    cuentaDb.Mesa = context.Mesas.Find(cuenta.Mesa.NumeroDeMesa);
+                }
+                cuentaDb.Mesa.Estado = (short)EstadoMesa.Ocupada;
                 if (cuenta.Mesa != null)
                 {
                     cuentaDb.Mesa = context.Mesas.Find(cuenta.Mesa.NumeroDeMesa);

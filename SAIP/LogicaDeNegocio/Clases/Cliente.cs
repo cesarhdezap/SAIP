@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
 
 namespace LogicaDeNegocio.Clases
 {
@@ -19,6 +20,19 @@ namespace LogicaDeNegocio.Clases
         public Cliente()
         {
             Direcciones = new List<string>();
+        }
+
+        public bool Validar()
+        {
+            bool resultado = false;
+            if (ValidarNombre(Nombre)
+                && ValidarTelefono(Telefono)
+                && Direcciones.Count >0
+                && ValidarCadenaVacioPermitido(Comentario))
+            {
+                resultado = true;
+            }
+            return resultado;
         }
     }
 }

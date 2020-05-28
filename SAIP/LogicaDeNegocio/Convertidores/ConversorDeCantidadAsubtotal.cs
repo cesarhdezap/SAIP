@@ -9,7 +9,7 @@ using System.Windows.Data;
 
 namespace LogicaDeNegocio.Convertidores
 {
-	public class ConversorDeCantidadAsubtotal : IValueConverter
+	public class ConversorDeCantidadASubtotal : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{

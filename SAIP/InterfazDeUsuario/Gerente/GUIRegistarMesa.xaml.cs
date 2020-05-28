@@ -28,7 +28,7 @@ namespace InterfazDeUsuario.Gerente
             InitializeComponent();
             Gerente = EmpleadoCargado;
             
-            BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
+            BarraDeEstado.ActualizarEmpleado(Gerente);
         }
 
         
