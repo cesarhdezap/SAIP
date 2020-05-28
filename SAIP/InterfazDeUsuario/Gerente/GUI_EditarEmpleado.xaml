@@ -14,20 +14,17 @@
         <Grid>
             <Label Content="Nombre" HorizontalAlignment="Left" Margin="177,72,0,0" VerticalAlignment="Top" Height="29" Width="120" FontSize="14"/>
             <TextBox x:Name="TextBoxNombre" HorizontalAlignment="Left" Height="23" Margin="177,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" />
-            <Button x:Name="Cambiar" Content="Cambiar" HorizontalAlignment="Left" Margin="359,252,0,0" VerticalAlignment="Top" Width="120" Height="35"/>
+            <Button x:Name="ButtonCambiar" Content="Cambiar" HorizontalAlignment="Left" Margin="359,252,0,0" VerticalAlignment="Top" Width="120" Height="35" Click="ButtonCambiar_Click"/>
             <Label Content="Nombre de Usuario" HorizontalAlignment="Left" Margin="177,124,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="131" RenderTransformOrigin="1.231,0.586"/>
-            <TextBox x:Name="Usuario" HorizontalAlignment="Left" Height="23" Margin="177,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" />
-            <Label Content="Correo Electronico" HorizontalAlignment="Left" Margin="510,81,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="125"/>
-            <TextBox x:Name="correo" HorizontalAlignment="Left" Height="23" Margin="508,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127" />
-            <Label Content="Tipo de Empleado" HorizontalAlignment="Left" Margin="508,153,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="122"/>
+            <TextBox x:Name="TextBoxUsuario" HorizontalAlignment="Left" Height="23" Margin="177,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" />
+            <Label Content="Correo Electronico" HorizontalAlignment="Left" Margin="512,72,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="125"/>
+            <TextBox x:Name="TextBoxCorreo" HorizontalAlignment="Left" Height="23" Margin="508,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127" />
+            <Label Content="Tipo de Empleado" HorizontalAlignment="Left" Margin="508,124,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="122"/>
             <Label Content="Password" HorizontalAlignment="Left" Margin="177,176,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="67"/>
-            <TextBox x:Name="password" HorizontalAlignment="Left" Height="25" Margin="177,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131"/>
-            <ComboBox x:Name="puesto" HorizontalAlignment="Left" Margin="508,187,0,0" VerticalAlignment="Top" Width="127">
-                <ComboBoxItem Content=" "/>
-                <ComboBoxItem Content="Gerente"/>
-                <ComboBoxItem Content="Mesero"/>
-                <ComboBoxItem Content="Chef"/>
+            <PasswordBox x:Name="PasswordBoxContraseña" HorizontalAlignment="Left" Height="25" Margin="177,205,0,0"  VerticalAlignment="Top" Width="131"/>
+            <ComboBox x:Name="ComboBoxPuesto" HorizontalAlignment="Left" Margin="508,153,0,0" VerticalAlignment="Top" Width="127" Height="23">
+              
             </ComboBox>
         </Grid>
-    </DockPanel>    
+    </DockPanel>
 </Page>

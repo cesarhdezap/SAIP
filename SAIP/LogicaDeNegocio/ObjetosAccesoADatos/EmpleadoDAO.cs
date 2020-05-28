@@ -38,6 +38,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				Contraseña = empleadoDb.Contraseña,
 				NombreDeUsuario = empleadoDb.NombreDeUsuario,
 				Nombre = empleadoDb.Nombre,
+				///CorreoElectronico = empleadoDb.c
 				FechaDeCreacion = empleadoDb.FechaDeCreacion,
 				FechaDeModicacion = empleadoDb.FechaDeModicacion,
 				Creador = empleadoDb.NombreCreador,
@@ -170,9 +171,6 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			empleado.FechaDeCreacion = DateTime.Now;
 			empleado.FechaDeModicacion = DateTime.Now;
 			AccesoADatos.Empleado empleadoguardado = ConvertirDeLogicaADatos(empleado);
-
-			
-
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
 					

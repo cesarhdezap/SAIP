@@ -15,7 +15,7 @@
         <Grid>
             <TextBox x:Name="Busqueda" Height="40" TextChanged="Busqueda_TextChanged" Width="353" VerticalAlignment="Top"  Padding="0" Margin="10,77,894.6,0"/>
             <Button Content="Registrar" x:Name="Registro" Height="38" VerticalAlignment="Top"  Click="Registro_Click" Margin="765,77,322.6,0" />
-            <DataGrid x:Name="ListaE" AutoGenerateColumns="False"  Height="469" VerticalAlignment="Bottom"  Width="935" AutomationProperties.IsColumnHeader="True" FontFamily="Tahoma" FontSize="18" Margin="0,0,322.6,9.6">
+            <DataGrid x:Name="ListaE" AutoGenerateColumns="False"  Height="479" VerticalAlignment="Bottom"  Width="935" AutomationProperties.IsColumnHeader="True" FontFamily="Tahoma" FontSize="18" Margin="0,0,322.6,-0.4">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" CanUserResize ="False" />
                     <DataGridTextColumn Header="Usuario" Binding="{Binding NombreDeUsuario}" CanUserResize="False"/>

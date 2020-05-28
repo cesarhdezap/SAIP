@@ -41,6 +41,7 @@ namespace InterfazDeUsuario.Gerente
         public void MostrarEmpleados() {
             EmpleadoDAO empleadoDAO = new EmpleadoDAO();
             Trabajadores = empleadoDAO.CargarTodos();
+            ListaE.ItemsSource = null;
             ListaE.ItemsSource = Trabajadores;
         }
 
