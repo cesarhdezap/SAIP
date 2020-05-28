@@ -18,7 +18,7 @@
 			<TextBox PreviewTextInput="CantidadDeIngrediente_PreviewTextInput" LostFocus="CantidadDeIngrediente_TextChanged" Text="1" Loaded="TextBox_Loaded">
 			</TextBox>
 		</DataTemplate>
-		<l:ConversorDeCantidadAsubtotal x:Key="ConversorDeCantidadAsubtotal"></l:ConversorDeCantidadAsubtotal>
+		<l:ConversorDeCantidadASubtotal x:Key="ConversorDeCantidadAsubtotal"></l:ConversorDeCantidadASubtotal>
 	</Page.Resources>
 	<Grid>
 		<controls:BarraDeEstado x:Name="BarraDeEstado" Margin="0,0,0,445" Width="Auto"/>

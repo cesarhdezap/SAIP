@@ -11,6 +11,7 @@
 
     <UserControl.Resources>
         <l:ConversorDeEnumeradores x:Key="ConversorDeEnumeradores" />
+        <l:ConversorDeCantidadASubtotal x:Key="ConversorDeCantidadAsubtotal"></l:ConversorDeCantidadASubtotal>
     </UserControl.Resources>
 
     <StackPanel Orientation="Vertical">
@@ -50,7 +51,8 @@
                             <DataGridTextColumn Header="Nombre" Binding="{Binding Alimento.Nombre}" FontSize="15"/>
                             <DataGridTextColumn Header="Codigo" Binding="{Binding Alimento.Codigo}" FontSize="15"/>
                             <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" FontSize="15"/>
-                            <DataGridTextColumn Header="Precio" Binding="{Binding Alimento.Precio}" FontSize="15"/>
+                            <DataGridTextColumn Header="Precio/U" Binding="{Binding Alimento.Precio}" FontSize="15"/>
+                            <DataGridTextColumn Header="SubTotal" Binding="{Binding Converter={ StaticResource ConversorDeCantidadAsubtotal}}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </DataTemplate>
@@ -70,10 +72,12 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Name="ButtonNuevoPedido" Content="Nuevo pedido" Margin="2" Click="ButtonNuevoPedido_Click" FontSize="15" Background="LightGreen"/>
-            <Button x:Name="ButtonTerminarCuenta" Content="Terminar cuenta" Margin="2" Click="ButtonTerminarCuenta_Click" FontSize="15" Background="PaleVioletRed"/>
-        </StackPanel>
+        <DockPanel>
+            <Label x:Name="LabelPrecioTotal" DockPanel.Dock="Left"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="ButtonNuevoPedido" Content="Nuevo pedido" Margin="2" Click="ButtonNuevoPedido_Click" FontSize="15" Background="LightGreen"/>
+                <Button x:Name="ButtonTerminarCuenta" Content="Terminar cuenta" Margin="2" Click="ButtonTerminarCuenta_Click" FontSize="15" Background="PaleVioletRed"/>
+            </StackPanel>
+        </DockPanel>
     </StackPanel>
 </UserControl>

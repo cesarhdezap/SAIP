@@ -42,6 +42,7 @@ namespace InterfazDeUsuario.Paginas
 
         private void IniciarSesionButton_Click(object sender, RoutedEventArgs e)
         {
+			Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
 			string nombreDeUsuario = NombreDeUsuarioTextBox.Text.Trim();
 			string contraseña = ContraseñaPasswordbox.Password.Trim();
 
@@ -84,6 +85,7 @@ namespace InterfazDeUsuario.Paginas
 					MessageBox.Show("Contraseña o nombre de usuario invalido", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 				}
 			}
+			Mouse.OverrideCursor = null;
 		}
 
 		private void NombreDeUsuarioTextBox_TextChanged(object sender, TextChangedEventArgs e)
