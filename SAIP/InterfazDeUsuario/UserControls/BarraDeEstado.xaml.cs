@@ -71,6 +71,7 @@ namespace InterfazDeUsuario.UserControls
 					botones.Add((Button)FindResource("ButtonGerenteEditarImpuesto"));
 				break;
 			}
+
 			foreach(Button boton in botones)
 			{
 				UniformGridBotones.Children.Add(boton);
