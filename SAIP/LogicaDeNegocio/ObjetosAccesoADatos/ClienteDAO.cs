@@ -89,7 +89,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 Nombre = cliente.Nombre,
                 Telefono = cliente.Telefono,
                 Comentarios = cliente.Comentario,
-                NombreCreador = cliente.Creador
+                NombreCreador = cliente.NombreDelCreador
             };
 
             foreach(string direccion in cliente.Direcciones)
@@ -112,7 +112,6 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 Telefono = clienteDatos.Telefono,
                 Comentario = clienteDatos.Comentarios,
                 Direcciones = ConvertirListaDeDirecciones(clienteDatos.Direcciones),
-                Cuenta = cuentaDAO.ConvertirListaDeCuentasDatosALogica(clienteDatos.Cuenta)
             };
 
             return clienteLogica;
@@ -139,6 +138,37 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
             return resultado;
         }
+        public Clases.Cliente CargarClientePorNumeroTelefonico(string numeroTelefonico)
+        {
+            Cliente cliente = new Cliente();
+
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                cliente = context.Clientes.Include(c => c.Direcciones).Include(c => c.Cuenta).FirstOrDefault(c => c.Telefono == numeroTelefonico);
+
+            }
+            return ConvertirClienteDatosALogica(cliente);
+
+        }
+
+        public bool ValidarExistenciaDeEmpleadoPorNumeroTelefonico(string numeroTelefonico)
+        {
+            bool resultado = false;
+            Cliente cliente = new Cliente();
+
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                cliente = context.Clientes.FirstOrDefault(c => c.Telefono == numeroTelefonico);
+
+                if (cliente != null)
+                {
+                    resultado = true;
+                }
+            }
+
+            return resultado;
+        }
+
 
         public Clases.Cliente RecuperarClientePorIdCuenta(int idCuenta)
         {

@@ -30,7 +30,7 @@ namespace InterfazDeUsuario.CallCenter
 		public ControladorDeCambioDePantalla Controlador { get; set; }
 		public Empleado EmpleadoDeCallCenter { get; set; } = new Empleado();
 		public Iva Iva { get; set; } = new Iva();
-		public Cliente Cliente { get; set; }
+		public Cliente Cliente { get; set; } = new Cliente();
 		public Pedido Pedido { get; set; } = new Pedido();
 		public List<Platillo> PlatillosCargados { get; set; } 
 		public List<Producto> ProductosCargados { get; set; }
@@ -120,8 +120,18 @@ namespace InterfazDeUsuario.CallCenter
 		private void ButtonAñadir_Click(object sender, RoutedEventArgs e)
 		{
 			Alimento alimentoAAñadir = (Alimento)BusquedaDataGrid.SelectedItem;
-			Pedido.AñadirAlimento(alimentoAAñadir);
-			ActualizarPantalla();
+			if (alimentoAAñadir.ValidarCantidadAlimento(1))
+			{
+				Pedido.AñadirAlimento(alimentoAAñadir);
+				LabelErrorDeCantidad.Visibility = Visibility.Hidden;
+				ActualizarPantalla();
+			}
+			else
+			{
+				LabelErrorDeCantidad.Visibility = Visibility.Visible;
+				LabelErrorDeCantidad.Content = "No hay suficientes ingredientes para añadir un " + alimentoAAñadir.Nombre;	
+			}
+
 		}
 
 		private void ButtonEliminar_Click(object sender, RoutedEventArgs e)
@@ -147,9 +157,36 @@ namespace InterfazDeUsuario.CallCenter
 				TextBox padre = sender as TextBox;
 				if (padre.Text != string.Empty)
 				{
-					cantidad.Cantidad = int.Parse(padre.Text);
+					int cantidadAAñadir = int.Parse(padre.Text);
+					if (cantidad is CantidadPlatillo cantidadPlatillo)
+					{
+						if (cantidadPlatillo.Alimento.ValidarCantidadAlimento(cantidadAAñadir))
+						{
+							cantidad.Cantidad = cantidadAAñadir;
+							LabelErrorDeCantidad.Visibility = Visibility.Hidden;
+						}
+						else
+						{
+							LabelErrorDeCantidad.Visibility = Visibility.Visible;
+							LabelErrorDeCantidad.Content = "No hay suficientes existencias para añadir " + cantidadAAñadir + " de " + cantidadPlatillo.Alimento.Nombre;
+						}
+					}
+					else if(cantidad is CantidadProducto cantidadProducto)
+					{
+						if (cantidadProducto.Alimento.ValidarCantidadAlimento(cantidadAAñadir))
+						{
+							cantidad.Cantidad = cantidadAAñadir;
+							LabelErrorDeCantidad.Visibility = Visibility.Hidden;
+						}
+						else
+						{
+							LabelErrorDeCantidad.Visibility = Visibility.Visible;
+							LabelErrorDeCantidad.Content = "No hay suficientes existencias para añadir " + cantidadAAñadir + " de " + cantidadProducto.Alimento.Nombre;
+						}
+					}
 				}
 				ActualizarPantalla();
+				
 			}
 		}
 
@@ -174,6 +211,32 @@ namespace InterfazDeUsuario.CallCenter
 		private void NumeroTelefonicoTextBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
 			MostrarEstadoDeValidacionTelefono((TextBox)sender);
+			string numeroTelefonico = ((TextBox)sender).Text;
+			if (ValidarTelefono(numeroTelefonico))
+			{
+				ClienteDAO clienteDAO = new ClienteDAO();
+				if (clienteDAO.ValidarExistenciaDeEmpleadoPorNumeroTelefonico(numeroTelefonico))
+				{
+					Cliente = clienteDAO.CargarClientePorNumeroTelefonico(numeroTelefonico);
+				}
+				if (Cliente != null)
+				{
+					AsignarClienteAPantalla();
+					NumeroTelefonicoTextBox.IsEnabled = false;
+					ButtonLimpiarCliente.IsEnabled = true;
+				}
+			}
+		}
+
+		private void AsignarClienteAPantalla()
+		{
+			NombreDeClienteTextBox.Text = Cliente.Nombre;
+			if(Cliente.Direcciones.FirstOrDefault() != null)
+			{
+				DireccionClienteTextBlock.Text = Cliente.Direcciones.FirstOrDefault();
+			}
+
+			ComentariosClienteTextBlock.Text = Cliente.Comentario;
 		}
 
 		private void NombreDeClienteTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -207,8 +270,73 @@ namespace InterfazDeUsuario.CallCenter
 
 		private void FinalizarButton_Click(object sender, RoutedEventArgs e)
 		{
-			PedidoDAO pedidoDAO = new PedidoDAO();
-			pedidoDAO.Guardar(Pedido);
+			if (ValidarCadenaVacioPermitido(ComentariosClienteTextBlock.Text) &&
+				ValidarTelefono(NumeroTelefonicoTextBox.Text) &&
+				ValidarNombre(NombreDeClienteTextBox.Text) &&
+				ValidarNombre(DireccionClienteTextBlock.Text) &&
+				ValidarCadenaVacioPermitido(ComentariosOrdenTextBlock.Text)
+				&& Pedido.CantidadAlimentos.Count > 0)
+			{
+				Pedido.CalcularPrecioTotal();
+				Pedido.Comentario = ComentariosOrdenTextBlock.Text;
+				Pedido.Creador = EmpleadoDeCallCenter.Nombre;
+				Pedido.Iva = Iva.Valor;
+				Pedido.FechaDeCreacion = DateTime.Now;
+				Cliente.Direcciones.Add(DireccionClienteTextBlock.Text);
+				if(Cliente.Id <= 0)
+				{
+					Cliente.Telefono = NumeroTelefonicoTextBox.Text;
+					Cliente.Comentario = ComentariosClienteTextBlock.Text;
+					Cliente.Nombre = NombreDeClienteTextBox.Text;
+					Cliente.Direcciones.Add(DireccionClienteTextBlock.Text);
+					Cliente.NombreDelCreador = EmpleadoDeCallCenter.Nombre;
+				}
+				Cuenta cuenta = new Cuenta()
+				{
+					Direccion = DireccionClienteTextBlock.Text,
+					Clientes = new List<Cliente>()
+				{
+					Cliente
+				},
+					Estado = LogicaDeNegocio.Enumeradores.EstadoCuenta.Abierta,
+					Empleado = EmpleadoDeCallCenter,
+					Pedidos = new List<Pedido>()
+				{
+					Pedido
+				}
+				};
+				Pedido.Cuenta = cuenta;
+				cuenta.PrecioTotal = Pedido.PrecioTotal;
+				cuenta.CalcularPrecioTotal();
+				CuentaDAO cuentaDAO = new CuentaDAO();
+				cuentaDAO.CrearCuentaConPedidos(cuenta);
+				Pedido.DescontarIngredientes();
+			}
+			else
+			{
+				MessageBox.Show("Error, verifique los campos remarcados en rojo y que haya añadido por lo menos un producto al pedido", "Alerta", MessageBoxButton.OK, MessageBoxImage.Error);
+				MostrarEstadoDeValidacionCadenaVacioPermitido(ComentariosClienteTextBlock);
+				MostrarEstadoDeValidacionTelefono(NumeroTelefonicoTextBox);
+				MostrarEstadoDeValidacionNombre(NombreDeClienteTextBox);
+				MostrarEstadoDeValidacionCadena(DireccionClienteTextBlock);
+				MostrarEstadoDeValidacionCadenaVacioPermitido(ComentariosOrdenTextBlock);
+			}
+		}
+
+		private void ButtonLimpiarCliente_Click(object sender, RoutedEventArgs e)
+		{
+			LimpiarCliente();
+		}
+
+		private void LimpiarCliente()
+		{
+			ButtonLimpiarCliente.IsEnabled = false;
+			NumeroTelefonicoTextBox.IsEnabled = true;
+			Cliente = new Cliente();
+			NombreDeClienteTextBox.Text = string.Empty;
+			NumeroTelefonicoTextBox.Text = string.Empty;
+			ComentariosClienteTextBlock.Text = string.Empty;
+			DireccionClienteTextBlock.Text = string.Empty;
 		}
 	}
 }

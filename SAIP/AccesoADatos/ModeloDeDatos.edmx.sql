@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/27/2020 20:59:21
--- Generated from EDMX file: C:\Users\Man_S\source\repos\SAIP\SAIP\AccesoADatos\ModeloDeDatos.edmx
+-- Date Created: 05/27/2020 23:27:26
+-- Generated from EDMX file: C:\Users\marcu\Documents\SAIP\COD\SAIP\AccesoADatos\ModeloDeDatos.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -53,11 +53,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_IngredientePlatilloIngrediente]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PlatilloIngrediente] DROP CONSTRAINT [FK_IngredientePlatilloIngrediente];
 GO
-IF OBJECT_ID(N'[dbo].[FK_IngredienteRelacionIngredienteHijo]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[RelacionIngredientes] DROP CONSTRAINT [FK_IngredienteRelacionIngredienteHijo];
+IF OBJECT_ID(N'[dbo].[FK_IngredienteRelacionIngrediente]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RelacionIngredientes] DROP CONSTRAINT [FK_IngredienteRelacionIngrediente];
 GO
-IF OBJECT_ID(N'[dbo].[FK_RelacionIngredienteIngredientePadre]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[RelacionIngredientes] DROP CONSTRAINT [FK_RelacionIngredienteIngredientePadre];
+IF OBJECT_ID(N'[dbo].[FK_RelacionIngredienteIngredienteCompuesto]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RelacionIngredientes] DROP CONSTRAINT [FK_RelacionIngredienteIngredienteCompuesto];
 GO
 
 -- --------------------------------------------------
@@ -259,7 +259,7 @@ CREATE TABLE [dbo].[Cuentas] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [PrecioTotal] float  NOT NULL,
     [Estado] smallint  NOT NULL,
-    [Mesa_Id] int  NOT NULL,
+    [Mesa_Id] int  NULL,
     [Empleado_Id] int  NOT NULL
 );
 GO

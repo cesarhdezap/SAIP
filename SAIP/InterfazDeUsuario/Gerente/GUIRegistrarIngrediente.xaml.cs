@@ -281,14 +281,17 @@ namespace InterfazDeUsuario.Gerente
             ingredienteNuevo.CodigoDeBarras = TextBoxCodigoBarras.Text;
             ingredienteNuevo.Creador = Empleado.Nombre;
 
-            if (CheckBoxIngredienteCompuesto.IsChecked == true && Componentes.Count > 0)
+            if (CheckBoxIngredienteCompuesto.IsChecked == true)
             {
-                ingredienteNuevo.Componentes = Componentes;
-            }
-            else
-            {
-                MessageBox.Show("Este ingrediente no tiene componentes.", "Alerta");
-                return;
+                if (Componentes.Count <= 0)
+                {
+                    MessageBox.Show("Este ingrediente no tiene componentes.", "Alerta");
+                    return;
+                }
+                else
+                {
+                    ingredienteNuevo.Componentes = Componentes;
+                }
             }
 
             IngredienteDAO ingredienteDAO = new IngredienteDAO();
