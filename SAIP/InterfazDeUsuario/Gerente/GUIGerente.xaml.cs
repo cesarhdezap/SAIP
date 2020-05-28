@@ -54,6 +54,12 @@ namespace InterfazDeUsuario.Gerente
 			Controlador.CambiarANuevaPage(pasarInventario);
 		}
 
+		private void ButtonRegistrarIngrediente_Click(object sender, RoutedEventArgs e)
+		{
+			GUIRegistrarIngrediente registrarIngrediente = new GUIRegistrarIngrediente(Controlador, Gerente);
+			Controlador.CambiarANuevaPage(registrarIngrediente);
+		}
+
 		private void Button_Click_Lista(object sender, RoutedEventArgs e)
 		{
 			GUIVerEmpleados verEmpleados = new GUIVerEmpleados(Controlador, Gerente);
