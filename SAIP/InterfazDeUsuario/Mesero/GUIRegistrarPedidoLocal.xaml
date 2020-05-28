@@ -30,7 +30,7 @@
                 </DataGrid.ColumnHeaderStyle>
                 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nombre del alimento" Binding="{Binding Alimento.Nombre}" FontSize="15"/>
+                    <DataGridTextColumn Header="Nombre del alimento" Binding="{Binding Alimento.Nombre}" FontSize="15" Width="*"/>
                     <DataGridTextColumn Header="Codigo" Binding="{Binding Alimento.Codigo}" FontSize="15"/>
                     <DataGridTemplateColumn Header="Cantidad" Width="Auto">
                         <DataGridTemplateColumn.CellTemplate>
@@ -77,7 +77,7 @@
             <DockPanel>
                 <Label Content="Alimentos" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <UniformGrid Columns="2" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top">
-                    <ComboBox x:Name="ComboBoxCategoria" FontSize="20" Text="Categoria" Width="200"/>
+                    <ComboBox x:Name="ComboBoxCategoria" FontSize="20" Text="Categoria" Width="200" Visibility="Collapsed"/>
                     <TextBox x:Name="TextBoxBusqueda" FontSize="20" TextChanged="TextBoxBusqueda_TextChanged"/>
                 </UniformGrid>
             </DockPanel>

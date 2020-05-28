@@ -44,6 +44,7 @@ namespace InterfazDeUsuario.Mesero
             BarraDeEstado.Controlador = controlador;
             BarraDeEstado.AsignarUsuarioActual(empleado);
             MostrarAlimentos();
+
         }
 
         private void MostrarAlimentos()

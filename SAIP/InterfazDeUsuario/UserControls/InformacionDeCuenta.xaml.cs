@@ -32,11 +32,12 @@ namespace InterfazDeUsuario.UserControls
         public void ActualizarCuenta(Cuenta cuenta)
         {
             Cuenta = cuenta;
+            CargarAlimentosDePedidos();
             LabelCuenta.Content = "Cuenta: " + cuenta.Id + " " + cuenta.Estado.ToString();
             LabelMesa.Content = "Mesa: " + cuenta.Mesa.ToString();
-            CargarAlimentosDePedidos();
+            cuenta.CalcularPrecioTotal();
+            LabelPrecioTotal.Content = "Precio total: " + cuenta.PrecioTotal;
             DataGridPedidos.ItemsSource = cuenta.Pedidos;
-
         }
 
         private void ButtonNuevoPedido_Click(object sender, RoutedEventArgs e)

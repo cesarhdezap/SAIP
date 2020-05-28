@@ -132,8 +132,6 @@ namespace LogicaDeNegocio
                     }
                 }
             }
-
-            
         }
 
         public void DescontarIngredientes()

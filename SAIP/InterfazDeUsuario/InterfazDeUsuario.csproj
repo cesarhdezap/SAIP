@@ -67,6 +67,9 @@
     <Compile Include="CallCenter\GUIVisualizarListaDeClientes.xaml.cs">
       <DependentUpon>GUIVisualizarListaDeClientes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Gerente\GUIEditarImpuesto.xaml.cs">
+      <DependentUpon>GUIEditarImpuesto.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Gerente\GUIPasarInventario.xaml.cs">
       <DependentUpon>GUIPasarInventario.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CallCenter\GUIVisualizarListaDeClientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gerente\GUIEditarImpuesto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
