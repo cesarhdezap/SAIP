@@ -69,6 +69,11 @@ namespace LogicaDeNegocio.Clases
 
             return resultado;
         }
+
+        internal void DescontarDeInventario(double v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

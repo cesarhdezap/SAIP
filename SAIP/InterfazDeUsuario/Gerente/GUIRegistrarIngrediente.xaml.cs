@@ -288,6 +288,7 @@ namespace InterfazDeUsuario.Gerente
             else
             {
                 MessageBox.Show("Este ingrediente no tiene componentes.", "Alerta");
+                return;
             }
 
             IngredienteDAO ingredienteDAO = new IngredienteDAO();
@@ -320,7 +321,7 @@ namespace InterfazDeUsuario.Gerente
                 }
                 catch (ArgumentException ex)
                 {
-                    MessageBox.Show(ex.Message, "Alerta");
+                    MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace.ToString(), "Alerta");
                 }
 
             }

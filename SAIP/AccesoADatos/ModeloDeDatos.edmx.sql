@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/23/2020 14:45:18
--- Generated from EDMX file: C:\Users\CETDT\Desktop\repos\cesarhdezap\SAIP\SAIP\AccesoADatos\ModeloDeDatos.edmx
+-- Date Created: 05/27/2020 20:59:21
+-- Generated from EDMX file: C:\Users\Man_S\source\repos\SAIP\SAIP\AccesoADatos\ModeloDeDatos.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,20 +17,8 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_AlimentoIngredienteIngrediente]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PlatilloIngrediente] DROP CONSTRAINT [FK_AlimentoIngredienteIngrediente];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PedidoAlimentoPedido]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PlatilloPedido] DROP CONSTRAINT [FK_PedidoAlimentoPedido];
-GO
 IF OBJECT_ID(N'[dbo].[FK_DireccionesCliente]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Direcciones] DROP CONSTRAINT [FK_DireccionesCliente];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AlimentoAlimentoPedido]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PlatilloPedido] DROP CONSTRAINT [FK_AlimentoAlimentoPedido];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AlimentoAlimentoIngrediente]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PlatilloIngrediente] DROP CONSTRAINT [FK_AlimentoAlimentoIngrediente];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PedidoProductoPedido]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ProductoPedido] DROP CONSTRAINT [FK_PedidoProductoPedido];
@@ -40,12 +28,6 @@ IF OBJECT_ID(N'[dbo].[FK_ProductoPedidoProducto]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_MesaCuenta]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Cuentas] DROP CONSTRAINT [FK_MesaCuenta];
-GO
-IF OBJECT_ID(N'[dbo].[FK_IngredienteIngredienteIngrediente]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[IngredienteIngrediente] DROP CONSTRAINT [FK_IngredienteIngredienteIngrediente];
-GO
-IF OBJECT_ID(N'[dbo].[FK_IngredienteIngredienteIngrediente1]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[IngredienteIngrediente] DROP CONSTRAINT [FK_IngredienteIngredienteIngrediente1];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CuentaPedido]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Pedidos] DROP CONSTRAINT [FK_CuentaPedido];
@@ -58,6 +40,24 @@ IF OBJECT_ID(N'[dbo].[FK_CuentaCliente_Cliente]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_CuentaEmpleado]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Cuentas] DROP CONSTRAINT [FK_CuentaEmpleado];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PedidoPlatilloPedido]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlatilloPedido] DROP CONSTRAINT [FK_PedidoPlatilloPedido];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlatilloPlatilloPedido]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlatilloPedido] DROP CONSTRAINT [FK_PlatilloPlatilloPedido];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlatilloPlatilloIngrediente]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlatilloIngrediente] DROP CONSTRAINT [FK_PlatilloPlatilloIngrediente];
+GO
+IF OBJECT_ID(N'[dbo].[FK_IngredientePlatilloIngrediente]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlatilloIngrediente] DROP CONSTRAINT [FK_IngredientePlatilloIngrediente];
+GO
+IF OBJECT_ID(N'[dbo].[FK_IngredienteRelacionIngredienteHijo]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RelacionIngredientes] DROP CONSTRAINT [FK_IngredienteRelacionIngredienteHijo];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RelacionIngredienteIngredientePadre]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RelacionIngredientes] DROP CONSTRAINT [FK_RelacionIngredienteIngredientePadre];
 GO
 
 -- --------------------------------------------------
@@ -103,8 +103,8 @@ GO
 IF OBJECT_ID(N'[dbo].[Cuentas]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Cuentas];
 GO
-IF OBJECT_ID(N'[dbo].[IngredienteIngrediente]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[IngredienteIngrediente];
+IF OBJECT_ID(N'[dbo].[RelacionIngredientes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RelacionIngredientes];
 GO
 IF OBJECT_ID(N'[dbo].[Discrepancias]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Discrepancias];
@@ -264,12 +264,12 @@ CREATE TABLE [dbo].[Cuentas] (
 );
 GO
 
--- Creating table 'IngredienteIngrediente'
-CREATE TABLE [dbo].[IngredienteIngrediente] (
+-- Creating table 'RelacionIngredientes'
+CREATE TABLE [dbo].[RelacionIngredientes] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Cantidad] float  NOT NULL,
-    [IngredienteCompuesto_Id] int  NOT NULL,
-    [IngredienteComponente_Id] int  NOT NULL
+    [IngredientePadre_Id] int  NOT NULL,
+    [IngredienteHijo_Id] int  NOT NULL
 );
 GO
 
@@ -371,9 +371,9 @@ ADD CONSTRAINT [PK_Cuentas]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'IngredienteIngrediente'
-ALTER TABLE [dbo].[IngredienteIngrediente]
-ADD CONSTRAINT [PK_IngredienteIngrediente]
+-- Creating primary key on [Id] in table 'RelacionIngredientes'
+ALTER TABLE [dbo].[RelacionIngredientes]
+ADD CONSTRAINT [PK_RelacionIngredientes]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -451,36 +451,6 @@ GO
 CREATE INDEX [IX_FK_MesaCuenta]
 ON [dbo].[Cuentas]
     ([Mesa_Id]);
-GO
-
--- Creating foreign key on [IngredienteCompuesto_Id] in table 'IngredienteIngrediente'
-ALTER TABLE [dbo].[IngredienteIngrediente]
-ADD CONSTRAINT [FK_IngredienteIngredienteIngrediente]
-    FOREIGN KEY ([IngredienteCompuesto_Id])
-    REFERENCES [dbo].[Ingredientes]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_IngredienteIngredienteIngrediente'
-CREATE INDEX [IX_FK_IngredienteIngredienteIngrediente]
-ON [dbo].[IngredienteIngrediente]
-    ([IngredienteCompuesto_Id]);
-GO
-
--- Creating foreign key on [IngredienteComponente_Id] in table 'IngredienteIngrediente'
-ALTER TABLE [dbo].[IngredienteIngrediente]
-ADD CONSTRAINT [FK_IngredienteIngredienteIngrediente1]
-    FOREIGN KEY ([IngredienteComponente_Id])
-    REFERENCES [dbo].[Ingredientes]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_IngredienteIngredienteIngrediente1'
-CREATE INDEX [IX_FK_IngredienteIngredienteIngrediente1]
-ON [dbo].[IngredienteIngrediente]
-    ([IngredienteComponente_Id]);
 GO
 
 -- Creating foreign key on [Cuenta_Id] in table 'Pedidos'
@@ -595,6 +565,36 @@ GO
 CREATE INDEX [IX_FK_IngredientePlatilloIngrediente]
 ON [dbo].[PlatilloIngrediente]
     ([Ingrediente_Id]);
+GO
+
+-- Creating foreign key on [IngredientePadre_Id] in table 'RelacionIngredientes'
+ALTER TABLE [dbo].[RelacionIngredientes]
+ADD CONSTRAINT [FK_IngredienteRelacionIngrediente]
+    FOREIGN KEY ([IngredientePadre_Id])
+    REFERENCES [dbo].[Ingredientes]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_IngredienteRelacionIngrediente'
+CREATE INDEX [IX_FK_IngredienteRelacionIngrediente]
+ON [dbo].[RelacionIngredientes]
+    ([IngredientePadre_Id]);
+GO
+
+-- Creating foreign key on [IngredienteHijo_Id] in table 'RelacionIngredientes'
+ALTER TABLE [dbo].[RelacionIngredientes]
+ADD CONSTRAINT [FK_RelacionIngredienteIngredienteCompuesto]
+    FOREIGN KEY ([IngredienteHijo_Id])
+    REFERENCES [dbo].[Ingredientes]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RelacionIngredienteIngredienteCompuesto'
+CREATE INDEX [IX_FK_RelacionIngredienteIngredienteCompuesto]
+ON [dbo].[RelacionIngredientes]
+    ([IngredienteHijo_Id]);
 GO
 
 -- --------------------------------------------------
