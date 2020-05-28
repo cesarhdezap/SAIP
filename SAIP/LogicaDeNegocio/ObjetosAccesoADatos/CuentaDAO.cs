@@ -16,6 +16,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
         /// </summary>
         /// <param name="empleado"></param>
         /// <returns></returns>
+        /// Intento de resolucion de conflictos
         public List<Clases.Cuenta> RecuperarCuentasAbiertasPorEmpleado(Clases.Empleado empleado)
         {
             List<AccesoADatos.Cuenta> cuentas = new List<AccesoADatos.Cuenta>();
