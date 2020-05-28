@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/27/2020 02:21:59
+-- Date Created: 05/27/2020 14:48:58
 -- Generated from EDMX file: C:\Users\marcu\Documents\SAIP\COD\SAIP\AccesoADatos\ModeloDeDatos.edmx
 -- --------------------------------------------------
 
@@ -38,11 +38,8 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_CuentaPedido]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Pedidos] DROP CONSTRAINT [FK_CuentaPedido];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CuentaCliente_Cuenta]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CuentaCliente] DROP CONSTRAINT [FK_CuentaCliente_Cuenta];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CuentaCliente_Cliente]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CuentaCliente] DROP CONSTRAINT [FK_CuentaCliente_Cliente];
+IF OBJECT_ID(N'[dbo].[FK_CuentaCliente]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Cuentas] DROP CONSTRAINT [FK_CuentaCliente];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CuentaEmpleado]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Cuentas] DROP CONSTRAINT [FK_CuentaEmpleado];
@@ -108,9 +105,6 @@ IF OBJECT_ID(N'[dbo].[IngredienteIngrediente]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Discrepancias]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Discrepancias];
-GO
-IF OBJECT_ID(N'[dbo].[CuentaCliente]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CuentaCliente];
 GO
 
 -- --------------------------------------------------
@@ -262,7 +256,6 @@ CREATE TABLE [dbo].[Cuentas] (
     [PrecioTotal] float  NOT NULL,
     [Estado] smallint  NOT NULL,
     [Mesa_Id] int  NULL,
-    [Clientes_Id] int  NULL,
     [Empleado_Id] int  NOT NULL
 );
 GO
@@ -282,6 +275,13 @@ CREATE TABLE [dbo].[Discrepancias] (
     [Comentario] nvarchar(max)  NOT NULL,
     [Fecha] datetime  NOT NULL,
     [Tipo] int  NOT NULL
+);
+GO
+
+-- Creating table 'CuentaCliente'
+CREATE TABLE [dbo].[CuentaCliente] (
+    [Cuenta_Id] int  NOT NULL,
+    [Clientes_Id] int  NOT NULL
 );
 GO
 
@@ -377,6 +377,12 @@ GO
 ALTER TABLE [dbo].[Discrepancias]
 ADD CONSTRAINT [PK_Discrepancias]
     PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Cuenta_Id], [Clientes_Id] in table 'CuentaCliente'
+ALTER TABLE [dbo].[CuentaCliente]
+ADD CONSTRAINT [PK_CuentaCliente]
+    PRIMARY KEY CLUSTERED ([Cuenta_Id], [Clientes_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -488,18 +494,27 @@ ON [dbo].[Pedidos]
     ([Cuenta_Id]);
 GO
 
--- Creating foreign key on [Clientes_Id] in table 'Cuentas'
-ALTER TABLE [dbo].[Cuentas]
-ADD CONSTRAINT [FK_CuentaCliente]
+-- Creating foreign key on [Cuenta_Id] in table 'CuentaCliente'
+ALTER TABLE [dbo].[CuentaCliente]
+ADD CONSTRAINT [FK_CuentaCliente_Cuenta]
+    FOREIGN KEY ([Cuenta_Id])
+    REFERENCES [dbo].[Cuentas]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Clientes_Id] in table 'CuentaCliente'
+ALTER TABLE [dbo].[CuentaCliente]
+ADD CONSTRAINT [FK_CuentaCliente_Cliente]
     FOREIGN KEY ([Clientes_Id])
     REFERENCES [dbo].[Clientes]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_CuentaCliente'
-CREATE INDEX [IX_FK_CuentaCliente]
-ON [dbo].[Cuentas]
+-- Creating non-clustered index for FOREIGN KEY 'FK_CuentaCliente_Cliente'
+CREATE INDEX [IX_FK_CuentaCliente_Cliente]
+ON [dbo].[CuentaCliente]
     ([Clientes_Id]);
 GO
 

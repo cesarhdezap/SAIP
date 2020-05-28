@@ -64,7 +64,6 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 Telefono = clienteDatos.Telefono,
                 Comentario = clienteDatos.Comentarios,
                 Direcciones = ConvertirListaDeDirecciones(clienteDatos.Direcciones),
-                Cuenta = cuentaDAO.ConvertirListaDeCuentasDatosALogica(clienteDatos.Cuenta)
             };
 
             return clienteLogica;

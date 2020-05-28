@@ -55,7 +55,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
         }
 
-        private bool ValidarCuentaParaGuardado(Pedido pedido)
+        public bool ValidarCuentaParaGuardado(Pedido pedido)
         {
             bool resultado = false;
             if (pedido.CantidadAlimentos.Count > 0)
@@ -111,7 +111,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             return pedidoLogico;
         }
 
-        private AccesoADatos.Pedido ConvertirPedidoLogicaADatos(Pedido pedidoLogica)
+        public AccesoADatos.Pedido ConvertirPedidoLogicaADatos(Pedido pedidoLogica)
         {
             AccesoADatos.Pedido pedidoDatos = new AccesoADatos.Pedido
             {

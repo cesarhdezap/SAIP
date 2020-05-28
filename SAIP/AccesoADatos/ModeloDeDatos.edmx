@@ -21,6 +21,7 @@
     <EntitySet Name="Cuentas" EntityType="ModeloDeDatos.Store.Cuentas" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="IngredienteIngrediente" EntityType="ModeloDeDatos.Store.IngredienteIngrediente" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Discrepancias" EntityType="ModeloDeDatos.Store.Discrepancias" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CuentaCliente" EntityType="ModeloDeDatos.Store.CuentaCliente" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="DireccionesCliente" Association="ModeloDeDatos.Store.DireccionesCliente">
       <End Role="Direcciones" EntitySet="Direcciones" />
       <End Role="Cliente" EntitySet="Clientes" />
@@ -49,9 +50,13 @@
       <End Role="Cuenta" EntitySet="Cuentas" />
       <End Role="Pedido" EntitySet="Pedidos" />
     </AssociationSet>
-    <AssociationSet Name="CuentaCliente" Association="ModeloDeDatos.Store.CuentaCliente">
+    <AssociationSet Name="FK_CuentaCliente_Cuenta" Association="ModeloDeDatos.Store.FK_CuentaCliente_Cuenta">
       <End Role="Cuenta" EntitySet="Cuentas" />
+      <End Role="CuentaCliente" EntitySet="CuentaCliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CuentaCliente_Cliente" Association="ModeloDeDatos.Store.FK_CuentaCliente_Cliente">
       <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="CuentaCliente" EntitySet="CuentaCliente" />
     </AssociationSet>
     <AssociationSet Name="CuentaEmpleado" Association="ModeloDeDatos.Store.CuentaEmpleado">
       <End Role="Cuenta" EntitySet="Cuentas" />
@@ -221,7 +226,6 @@
     <Property Name="PrecioTotal" Type="float" Nullable="false" />
     <Property Name="Estado" Type="smallint" Nullable="false" />
     <Property Name="Mesa_Id" Type="int" Nullable="true" />
-    <Property Name="Clientes_Id" Type="int" Nullable="true" />
     <Property Name="Empleado_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="IngredienteIngrediente">
@@ -241,6 +245,14 @@
     <Property Name="Comentario" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Fecha" Type="datetime" Nullable="false" />
     <Property Name="Tipo" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CuentaCliente">
+    <Key>
+      <PropertyRef Name="Cuenta_Id" />
+      <PropertyRef Name="Clientes_Id" />
+    </Key>
+    <Property Name="Cuenta_Id" Type="int" Nullable="false" />
+    <Property Name="Clientes_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="DireccionesCliente">
     <End Role="Direcciones" Type="ModeloDeDatos.Store.Direcciones" Multiplicity="*" />
@@ -326,18 +338,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="CuentaCliente">
-    <End Role="Cuenta" Type="ModeloDeDatos.Store.Cuentas" Multiplicity="*" />
-    <End Role="Cliente" Type="ModeloDeDatos.Store.Clientes" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Cliente">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Cuenta">
-        <PropertyRef Name="Clientes_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="CuentaEmpleado">
     <End Role="Cuenta" Type="ModeloDeDatos.Store.Cuentas" Multiplicity="*" />
     <End Role="Empleado" Type="ModeloDeDatos.Store.Empleados" Multiplicity="1" />
@@ -395,6 +395,30 @@
       </Principal>
       <Dependent Role="PlatilloIngrediente">
         <PropertyRef Name="Ingrediente_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CuentaCliente_Cuenta">
+    <End Role="Cuenta" Type="ModeloDeDatos.Store.Cuentas" Multiplicity="1" />
+    <End Role="CuentaCliente" Type="ModeloDeDatos.Store.CuentaCliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuenta">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CuentaCliente">
+        <PropertyRef Name="Cuenta_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CuentaCliente_Cliente">
+    <End Role="CuentaCliente" Type="ModeloDeDatos.Store.CuentaCliente" Multiplicity="*" />
+    <End Role="Cliente" Type="ModeloDeDatos.Store.Clientes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CuentaCliente">
+        <PropertyRef Name="Clientes_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -673,7 +697,7 @@
         </Association>
         <Association Name="CuentaCliente">
           <End Type="ModeloDeDatos.Cuenta" Role="Cuenta" Multiplicity="*" />
-          <End Type="ModeloDeDatos.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="ModeloDeDatos.Cliente" Role="Cliente" Multiplicity="*" />
         </Association>
         <Association Name="CuentaEmpleado">
           <End Type="ModeloDeDatos.Cuenta" Role="Cuenta" Multiplicity="*" />
@@ -937,14 +961,13 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="CuentaCliente" TypeName="ModeloDeDatos.CuentaCliente" StoreEntitySet="Cuentas">
+    <AssociationSetMapping Name="CuentaCliente" TypeName="ModeloDeDatos.CuentaCliente" StoreEntitySet="CuentaCliente">
+      <EndProperty Name="Cuenta">
+        <ScalarProperty Name="Id" ColumnName="Cuenta_Id" />
+      </EndProperty>
       <EndProperty Name="Cliente">
         <ScalarProperty Name="Id" ColumnName="Clientes_Id" />
       </EndProperty>
-      <EndProperty Name="Cuenta">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-      <Condition ColumnName="Clientes_Id" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="CuentaEmpleado" TypeName="ModeloDeDatos.CuentaEmpleado" StoreEntitySet="Cuentas">
       <EndProperty Name="Empleado">
