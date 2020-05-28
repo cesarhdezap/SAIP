@@ -48,7 +48,6 @@ namespace InterfazDeUsuario.CallCenter
 			IvaLabel.Content = "IVA(" + Iva.Valor * 10 + "%)";
 			Controlador = controlador;
 			BarraDeEstado.Controlador = controlador;
-			BarraDeEstado.AsignarUsuarioActual(empleadoDeCallCenter);
 			ProductosCargados = productoDAO.CargarProductosActivos();
 			PlatillosCargados = platilloDAO.CargarTodos();
 			AlimentosCargados = AlimentosCargados.Concat(PlatillosCargados).ToList();

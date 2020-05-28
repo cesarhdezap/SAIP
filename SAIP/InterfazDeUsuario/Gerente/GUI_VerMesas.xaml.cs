@@ -30,7 +30,7 @@ namespace InterfazDeUsuario.Gerente
             InitializeComponent();
             Gerente = EmpleadoCargado;
             Empleado = empleado;
-            BarraDeEstado.AsignarUsuarioActual(Gerente);
+            BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
             VerMesas();
         }
 

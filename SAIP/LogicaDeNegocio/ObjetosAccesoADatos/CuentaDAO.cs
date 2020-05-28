@@ -26,7 +26,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 cuentas = context.Cuentas.Where(c => c.Empleado.Id == empleado.Id && c.Estado == (short)EstadoCuenta.Abierta)
                     .Include(c => c.Mesa)
                     .Include(c => c.Empleado)
-                    .Include(c => c.Pedidos)
+                    .Include(c=> c.Pedidos)
                     .Include(c => c.Clientes)
                     .ToList();
             }
@@ -135,9 +135,16 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                     pedidoAGuardar.Cuenta = context.Cuentas.Find(pedido.Cuenta.Id);
                     cuentaDb.Pedidos.Add(pedidoAGuardar);
                 }
+                if (cuenta.Mesa != null)
+                {
+                    cuentaDb.Mesa = context.Mesas.Find(cuenta.Mesa.NumeroDeMesa);
+                    cuentaDb.Mesa.Estado = (short)EstadoMesa.Ocupada;
+                }
+                cuentaDb.Empleado = context.Empleados.Find(cuenta.Empleado.Id);
                 context.Cuentas.Add(cuentaDb);
                 context.SaveChanges();
             }
+
         }
 
         public List<Clases.Cuenta> ConvertirListaDeCuentasDatosALogica(ICollection<Cuenta> cuentas)
@@ -157,7 +164,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             Clases.Cuenta cuentaLogica = new Clases.Cuenta()
             {
                 Id = cuenta.Id,
-                Estado = (EstadoCuenta)cuenta.Estado,
+                Estado = (EstadoCuenta) cuenta.Estado,
                 PrecioTotal = cuenta.PrecioTotal,
                 Mesa = mesa.ConvertirMesaDatosALogica(cuenta.Mesa),
                 Clientes = clienteDAO.ConvertirListaDeDatosALogica(cuenta.Clientes.ToList())
@@ -169,13 +176,13 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             {
                 cuentaLogica.Clientes = clienteDAO.ConvertirListaDeDatosALogica(cuenta.Clientes.ToList());
             }
-            catch (ObjectDisposedException)
+            catch(ObjectDisposedException)
             {
                 cuentaLogica.Clientes = new List<Clases.Cliente>();
             }
 
             PedidoDAO pedidoDAO = new PedidoDAO();
-            foreach (AccesoADatos.Pedido pedido in cuenta.Pedidos)
+            foreach(AccesoADatos.Pedido pedido in cuenta.Pedidos)
             {
                 cuentaLogica.Pedidos.Add(pedidoDAO.ConvertirPedidoDeDatosALogica(pedido));
             }

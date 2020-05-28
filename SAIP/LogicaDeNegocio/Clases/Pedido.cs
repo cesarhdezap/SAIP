@@ -18,8 +18,10 @@ namespace LogicaDeNegocio
         public double Iva { get; set; }
         public string Comentario { get; set; }
         public EstadoPedido Estado { get; set; }
+        public Empleado Empleado { get; set; }
         public Cuenta Cuenta { get; set; }
         public string Creador { get; set; }
+        public List<string> Comentarios { get; set; }
 
         private bool AlimentoYaAñadido(Alimento alimento)
         {
@@ -131,8 +133,6 @@ namespace LogicaDeNegocio
                     }
                 }
             }
-
-            
         }
 
         public void DescontarIngredientes()

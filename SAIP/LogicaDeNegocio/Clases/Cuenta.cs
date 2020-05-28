@@ -22,19 +22,20 @@ namespace LogicaDeNegocio.Clases
         public void AñadirPedido(Pedido pedido)
         {
             Pedidos.Add(pedido);
+
         }
 
         public void TerminarCuenta()
         {
             Estado = EstadoCuenta.Terminada;
-            CalcularPrecioTotal();
+            //Calcular PrecioTotal
         }
 
         public void CalcularPrecioTotal()
         {
             double precioTotal = 0;
 
-            foreach(Pedido pedido in Pedidos)
+            foreach (Pedido pedido in Pedidos)
             {
                 pedido.CalcularPrecioTotal();
                 precioTotal += pedido.PrecioTotal;
