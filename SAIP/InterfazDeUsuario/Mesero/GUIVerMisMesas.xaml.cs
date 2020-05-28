@@ -40,7 +40,7 @@ namespace InterfazDeUsuario.Mesero
             UserControlInformacionDeCuenta.Controlador = controlador;
             UserControlInformacionDeCuenta.Empleado = empleado;
             BarraDeEstado.Controlador = controlador;
-            BarraDeEstado.AsignarUsuarioActual(empleado);
+            BarraDeEstado.ActualizarNombreDeUsuario(empleado.Nombre);
             MostrarMisMesas();
         }
 

@@ -32,37 +32,10 @@ namespace InterfazDeUsuario
 
         public void CambiarANuevaPage(Page page)
         {
-            if (!Pantallas.Any(x => x.GetType() == page.GetType()))
-            {
-                Pantallas.Push(page);
-                Content = page;
-                page.Width = double.NaN;
-                page.Height = double.NaN;
-            }
-            else
-            {
-                Page pageExistente = Pantallas.FirstOrDefault(x => x.GetType() == page.GetType());
-                Remover(pageExistente);
-                Pantallas.Push(pageExistente);
-                Content = pageExistente;
-            }
+            Pantallas.Push(page);
+            Content = page;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            SizeToContent = SizeToContent.WidthAndHeight;
-        }
-
-        private void Remover(Page page)
-        {
-            if (Pantallas.Peek() == page)
-            {
-                Pantallas.Pop();
-            }
-            else
-            {
-                Page almacenamiento = Pantallas.Peek();
-                Pantallas.Pop();
-                Remover(page);
-                Pantallas.Push(almacenamiento);
-            }
+            this.SizeToContent = SizeToContent.WidthAndHeight;
         }
 
         public void Regresar()
@@ -81,18 +54,14 @@ namespace InterfazDeUsuario
                 RegresarAInicioDeSesion();
             }
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            SizeToContent = SizeToContent.WidthAndHeight;
+            this.SizeToContent = SizeToContent.WidthAndHeight;
         }
 
         public void RegresarAInicioDeSesion()
         {
             PageInicioDeSesion inicioDeSesion = new PageInicioDeSesion(this);
             Pantallas.Clear();
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            SizeToContent = SizeToContent.WidthAndHeight;
             Content = inicioDeSesion;
-            inicioDeSesion.Width = double.NaN;
-            inicioDeSesion.Height = double.NaN; 
         }
     }
 }

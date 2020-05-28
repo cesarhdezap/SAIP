@@ -19,8 +19,9 @@
     <EntitySet Name="ProductoPedido" EntityType="ModeloDeDatos.Store.ProductoPedido" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Ivas" EntityType="ModeloDeDatos.Store.Ivas" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Cuentas" EntityType="ModeloDeDatos.Store.Cuentas" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="IngredienteIngrediente" EntityType="ModeloDeDatos.Store.IngredienteIngrediente" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RelacionIngredientes" EntityType="ModeloDeDatos.Store.RelacionIngredientes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Discrepancias" EntityType="ModeloDeDatos.Store.Discrepancias" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CuentaCliente" EntityType="ModeloDeDatos.Store.CuentaCliente" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="DireccionesCliente" Association="ModeloDeDatos.Store.DireccionesCliente">
       <End Role="Direcciones" EntitySet="Direcciones" />
       <End Role="Cliente" EntitySet="Clientes" />
@@ -37,21 +38,17 @@
       <End Role="Mesa" EntitySet="Mesas" />
       <End Role="Cuenta" EntitySet="Cuentas" />
     </AssociationSet>
-    <AssociationSet Name="IngredienteIngredienteIngrediente" Association="ModeloDeDatos.Store.IngredienteIngredienteIngrediente">
-      <End Role="Ingrediente" EntitySet="Ingredientes" />
-      <End Role="IngredienteIngrediente" EntitySet="IngredienteIngrediente" />
-    </AssociationSet>
-    <AssociationSet Name="IngredienteIngredienteIngrediente1" Association="ModeloDeDatos.Store.IngredienteIngredienteIngrediente1">
-      <End Role="Ingrediente" EntitySet="Ingredientes" />
-      <End Role="IngredienteIngrediente" EntitySet="IngredienteIngrediente" />
-    </AssociationSet>
     <AssociationSet Name="CuentaPedido" Association="ModeloDeDatos.Store.CuentaPedido">
       <End Role="Cuenta" EntitySet="Cuentas" />
       <End Role="Pedido" EntitySet="Pedidos" />
     </AssociationSet>
-    <AssociationSet Name="CuentaCliente" Association="ModeloDeDatos.Store.CuentaCliente">
+    <AssociationSet Name="FK_CuentaCliente_Cuenta" Association="ModeloDeDatos.Store.FK_CuentaCliente_Cuenta">
       <End Role="Cuenta" EntitySet="Cuentas" />
+      <End Role="CuentaCliente" EntitySet="CuentaCliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CuentaCliente_Cliente" Association="ModeloDeDatos.Store.FK_CuentaCliente_Cliente">
       <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="CuentaCliente" EntitySet="CuentaCliente" />
     </AssociationSet>
     <AssociationSet Name="CuentaEmpleado" Association="ModeloDeDatos.Store.CuentaEmpleado">
       <End Role="Cuenta" EntitySet="Cuentas" />
@@ -72,6 +69,14 @@
     <AssociationSet Name="IngredientePlatilloIngrediente" Association="ModeloDeDatos.Store.IngredientePlatilloIngrediente">
       <End Role="Ingrediente" EntitySet="Ingredientes" />
       <End Role="PlatilloIngrediente" EntitySet="PlatilloIngrediente" />
+    </AssociationSet>
+    <AssociationSet Name="IngredienteRelacionIngrediente" Association="ModeloDeDatos.Store.IngredienteRelacionIngrediente">
+      <End Role="Ingrediente" EntitySet="Ingredientes" />
+      <End Role="RelacionIngrediente" EntitySet="RelacionIngredientes" />
+    </AssociationSet>
+    <AssociationSet Name="RelacionIngredienteIngredienteCompuesto" Association="ModeloDeDatos.Store.RelacionIngredienteIngredienteCompuesto">
+      <End Role="RelacionIngrediente" EntitySet="RelacionIngredientes" />
+      <End Role="Ingrediente" EntitySet="Ingredientes" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Ingredientes">
@@ -106,8 +111,6 @@
     <Property Name="PrecioTotal" Type="float" Nullable="false" />
     <Property Name="Iva" Type="float" Nullable="false" />
     <Property Name="Estado" Type="smallint" Nullable="false" />
-    <Property Name="Comentario" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Creador" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Cuenta_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Clientes">
@@ -220,18 +223,17 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PrecioTotal" Type="float" Nullable="false" />
     <Property Name="Estado" Type="smallint" Nullable="false" />
-    <Property Name="Mesa_Id" Type="int" Nullable="true" />
-    <Property Name="Clientes_Id" Type="int" Nullable="true" />
+    <Property Name="Mesa_Id" Type="int" Nullable="false" />
     <Property Name="Empleado_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="IngredienteIngrediente">
+  <EntityType Name="RelacionIngredientes">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Cantidad" Type="float" Nullable="false" />
-    <Property Name="IngredienteCompuesto_Id" Type="int" Nullable="false" />
-    <Property Name="IngredienteComponente_Id" Type="int" Nullable="false" />
+    <Property Name="IngredientePadre_Id" Type="int" Nullable="false" />
+    <Property Name="IngredienteHijo_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Discrepancias">
     <Key>
@@ -241,6 +243,14 @@
     <Property Name="Comentario" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Fecha" Type="datetime" Nullable="false" />
     <Property Name="Tipo" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CuentaCliente">
+    <Key>
+      <PropertyRef Name="Cuenta_Id" />
+      <PropertyRef Name="Clientes_Id" />
+    </Key>
+    <Property Name="Cuenta_Id" Type="int" Nullable="false" />
+    <Property Name="Clientes_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="DireccionesCliente">
     <End Role="Direcciones" Type="ModeloDeDatos.Store.Direcciones" Multiplicity="*" />
@@ -279,7 +289,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="MesaCuenta">
-    <End Role="Mesa" Type="ModeloDeDatos.Store.Mesas" Multiplicity="0..1" />
+    <End Role="Mesa" Type="ModeloDeDatos.Store.Mesas" Multiplicity="1" />
     <End Role="Cuenta" Type="ModeloDeDatos.Store.Cuentas" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Mesa">
@@ -287,30 +297,6 @@
       </Principal>
       <Dependent Role="Cuenta">
         <PropertyRef Name="Mesa_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="IngredienteIngredienteIngrediente">
-    <End Role="Ingrediente" Type="ModeloDeDatos.Store.Ingredientes" Multiplicity="1" />
-    <End Role="IngredienteIngrediente" Type="ModeloDeDatos.Store.IngredienteIngrediente" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Ingrediente">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="IngredienteIngrediente">
-        <PropertyRef Name="IngredienteCompuesto_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="IngredienteIngredienteIngrediente1">
-    <End Role="Ingrediente" Type="ModeloDeDatos.Store.Ingredientes" Multiplicity="1" />
-    <End Role="IngredienteIngrediente" Type="ModeloDeDatos.Store.IngredienteIngrediente" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Ingrediente">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="IngredienteIngrediente">
-        <PropertyRef Name="IngredienteComponente_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -323,18 +309,6 @@
       </Principal>
       <Dependent Role="Pedido">
         <PropertyRef Name="Cuenta_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="CuentaCliente">
-    <End Role="Cuenta" Type="ModeloDeDatos.Store.Cuentas" Multiplicity="*" />
-    <End Role="Cliente" Type="ModeloDeDatos.Store.Clientes" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Cliente">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Cuenta">
-        <PropertyRef Name="Clientes_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -398,6 +372,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="IngredienteRelacionIngrediente">
+    <End Role="Ingrediente" Type="ModeloDeDatos.Store.Ingredientes" Multiplicity="1" />
+    <End Role="RelacionIngrediente" Type="ModeloDeDatos.Store.RelacionIngredientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ingrediente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RelacionIngrediente">
+        <PropertyRef Name="IngredientePadre_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RelacionIngredienteIngredienteCompuesto">
+    <End Role="RelacionIngrediente" Type="ModeloDeDatos.Store.RelacionIngredientes" Multiplicity="*" />
+    <End Role="Ingrediente" Type="ModeloDeDatos.Store.Ingredientes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Ingrediente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RelacionIngrediente">
+        <PropertyRef Name="IngredienteHijo_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CuentaCliente_Cuenta">
+    <End Role="Cuenta" Type="ModeloDeDatos.Store.Cuentas" Multiplicity="1" />
+    <End Role="CuentaCliente" Type="ModeloDeDatos.Store.CuentaCliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuenta">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CuentaCliente">
+        <PropertyRef Name="Cuenta_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CuentaCliente_Cliente">
+    <End Role="CuentaCliente" Type="ModeloDeDatos.Store.CuentaCliente" Multiplicity="*" />
+    <End Role="Cliente" Type="ModeloDeDatos.Store.Clientes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CuentaCliente">
+        <PropertyRef Name="Clientes_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -432,15 +454,7 @@
             <End Role="Mesa" EntitySet="Mesas" />
             <End Role="Cuenta" EntitySet="Cuentas" />
           </AssociationSet>
-          <EntitySet Name="IngredienteIngrediente" EntityType="ModeloDeDatos.IngredienteIngrediente" />
-          <AssociationSet Name="IngredienteIngredienteIngrediente" Association="ModeloDeDatos.IngredienteIngredienteIngrediente">
-            <End EntitySet="Ingredientes" Role="Ingrediente" />
-            <End EntitySet="IngredienteIngrediente" Role="IngredienteIngrediente" />
-          </AssociationSet>
-          <AssociationSet Name="IngredienteIngredienteIngrediente1" Association="ModeloDeDatos.IngredienteIngredienteIngrediente1">
-            <End EntitySet="Ingredientes" Role="Ingrediente" />
-            <End EntitySet="IngredienteIngrediente" Role="IngredienteIngrediente" />
-          </AssociationSet>
+          <EntitySet Name="RelacionIngredientes" EntityType="ModeloDeDatos.RelacionIngrediente" />
           <AssociationSet Name="CuentaPedido" Association="ModeloDeDatos.CuentaPedido">
             <End Role="Cuenta" EntitySet="Cuentas" />
             <End Role="Pedido" EntitySet="Pedidos" />
@@ -470,6 +484,14 @@
             <End Role="Ingrediente" EntitySet="Ingredientes" />
             <End Role="PlatilloIngrediente" EntitySet="PlatilloIngrediente" />
           </AssociationSet>
+          <AssociationSet Name="IngredienteRelacionIngrediente" Association="ModeloDeDatos.IngredienteRelacionIngrediente">
+            <End Role="Ingrediente" EntitySet="Ingredientes" />
+            <End Role="RelacionIngrediente" EntitySet="RelacionIngredientes" />
+          </AssociationSet>
+          <AssociationSet Name="RelacionIngredienteIngredienteCompuesto" Association="ModeloDeDatos.RelacionIngredienteIngredienteCompuesto">
+            <End Role="RelacionIngrediente" EntitySet="RelacionIngredientes" />
+            <End Role="Ingrediente" EntitySet="Ingredientes" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Ingrediente">
           <Key>
@@ -485,10 +507,9 @@
           <Property Name="FechaDeModiciacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NombreCreador" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="IngredienteIngredienteCompuesto" Relationship="ModeloDeDatos.IngredienteIngredienteIngrediente" FromRole="Ingrediente" ToRole="IngredienteIngrediente" />
-          <NavigationProperty Name="IngredienteIngredienteComponente" Relationship="ModeloDeDatos.IngredienteIngredienteIngrediente1" FromRole="Ingrediente" ToRole="IngredienteIngrediente" />
           <Property Name="Codigo" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="PlatilloIngredientes" Relationship="ModeloDeDatos.IngredientePlatilloIngrediente" FromRole="Ingrediente" ToRole="PlatilloIngrediente" />
+          <NavigationProperty Name="RelacionIngredientesHijo" Relationship="ModeloDeDatos.IngredienteRelacionIngrediente" FromRole="Ingrediente" ToRole="RelacionIngrediente" />
           </EntityType>
         <EntityType Name="Mesa">
           <Key>
@@ -510,8 +531,6 @@
           <Property Name="Estado" Type="Int16" Nullable="false" />
           <NavigationProperty Name="Cuenta" Relationship="ModeloDeDatos.CuentaPedido" FromRole="Pedido" ToRole="Cuenta" />
           <NavigationProperty Name="PlatilloPedidos" Relationship="ModeloDeDatos.PedidoPlatilloPedido" FromRole="Pedido" ToRole="PlatilloPedido" />
-          <Property Name="Comentario" Type="String" Nullable="false" />
-          <Property Name="Creador" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
@@ -647,33 +666,25 @@
           <NavigationProperty Name="Empleado" Relationship="ModeloDeDatos.CuentaEmpleado" FromRole="Cuenta" ToRole="Empleado" />
         </EntityType>
         <Association Name="MesaCuenta">
-          <End Type="ModeloDeDatos.Mesa" Role="Mesa" Multiplicity="0..1" />
+          <End Type="ModeloDeDatos.Mesa" Role="Mesa" Multiplicity="1" />
           <End Type="ModeloDeDatos.Cuenta" Role="Cuenta" Multiplicity="*" />
         </Association>
-        <EntityType Name="IngredienteIngrediente">
+        <EntityType Name="RelacionIngrediente">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
           <Property Name="Cantidad" Nullable="false" Type="Double" />
-          <NavigationProperty Name="IngredienteCompuesto" Relationship="ModeloDeDatos.IngredienteIngredienteIngrediente" FromRole="IngredienteIngrediente" ToRole="Ingrediente" />
-          <NavigationProperty Name="IngredienteComponente" Relationship="ModeloDeDatos.IngredienteIngredienteIngrediente1" FromRole="IngredienteIngrediente" ToRole="Ingrediente" />
+          <NavigationProperty Name="IngredientePadre" Relationship="ModeloDeDatos.IngredienteRelacionIngrediente" FromRole="RelacionIngrediente" ToRole="Ingrediente" />
+          <NavigationProperty Name="IngredienteHijo" Relationship="ModeloDeDatos.RelacionIngredienteIngredienteCompuesto" FromRole="RelacionIngrediente" ToRole="Ingrediente" />
         </EntityType>
-        <Association Name="IngredienteIngredienteIngrediente">
-          <End Type="ModeloDeDatos.Ingrediente" Multiplicity="1" Role="Ingrediente" />
-          <End Type="ModeloDeDatos.IngredienteIngrediente" Multiplicity="*" Role="IngredienteIngrediente" />
-        </Association>
-        <Association Name="IngredienteIngredienteIngrediente1">
-          <End Type="ModeloDeDatos.Ingrediente" Multiplicity="1" Role="Ingrediente" />
-          <End Type="ModeloDeDatos.IngredienteIngrediente" Multiplicity="*" Role="IngredienteIngrediente" />
-        </Association>
         <Association Name="CuentaPedido">
           <End Type="ModeloDeDatos.Cuenta" Role="Cuenta" Multiplicity="1" />
           <End Type="ModeloDeDatos.Pedido" Role="Pedido" Multiplicity="*" />
         </Association>
         <Association Name="CuentaCliente">
           <End Type="ModeloDeDatos.Cuenta" Role="Cuenta" Multiplicity="*" />
-          <End Type="ModeloDeDatos.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="ModeloDeDatos.Cliente" Role="Cliente" Multiplicity="*" />
         </Association>
         <Association Name="CuentaEmpleado">
           <End Type="ModeloDeDatos.Cuenta" Role="Cuenta" Multiplicity="*" />
@@ -703,6 +714,14 @@
         <Association Name="IngredientePlatilloIngrediente">
           <End Type="ModeloDeDatos.Ingrediente" Role="Ingrediente" Multiplicity="1" />
           <End Type="ModeloDeDatos.PlatilloIngrediente" Role="PlatilloIngrediente" Multiplicity="*" />
+        </Association>
+        <Association Name="IngredienteRelacionIngrediente">
+          <End Type="ModeloDeDatos.Ingrediente" Role="Ingrediente" Multiplicity="1" />
+          <End Type="ModeloDeDatos.RelacionIngrediente" Role="RelacionIngrediente" Multiplicity="*" />
+        </Association>
+        <Association Name="RelacionIngredienteIngredienteCompuesto">
+          <End Type="ModeloDeDatos.RelacionIngrediente" Role="RelacionIngrediente" Multiplicity="0..1" />
+          <End Type="ModeloDeDatos.Ingrediente" Role="Ingrediente" Multiplicity="1" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -743,8 +762,6 @@
           <ScalarProperty Name="PrecioTotal" ColumnName="PrecioTotal" />
           <ScalarProperty Name="Iva" ColumnName="Iva" />
           <ScalarProperty Name="Estado" ColumnName="Estado" />
-          <ScalarProperty Name="Comentario" ColumnName="Comentario" />
-          <ScalarProperty Name="Creador" ColumnName="Creador" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -862,9 +879,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="IngredienteIngrediente">
-      <EntityTypeMapping TypeName="IsTypeOf(ModeloDeDatos.IngredienteIngrediente)">
-        <MappingFragment StoreEntitySet="IngredienteIngrediente">
+    <EntitySetMapping Name="RelacionIngredientes">
+      <EntityTypeMapping TypeName="IsTypeOf(ModeloDeDatos.RelacionIngrediente)">
+        <MappingFragment StoreEntitySet="RelacionIngredientes">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
         </MappingFragment>
@@ -911,23 +928,6 @@
       <EndProperty Name="Cuenta">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
-      <Condition ColumnName="Mesa_Id" IsNull="false" />
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="IngredienteIngredienteIngrediente" TypeName="ModeloDeDatos.IngredienteIngredienteIngrediente" StoreEntitySet="IngredienteIngrediente">
-      <EndProperty Name="Ingrediente">
-        <ScalarProperty Name="Id" ColumnName="IngredienteCompuesto_Id" />
-      </EndProperty>
-      <EndProperty Name="IngredienteIngrediente">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="IngredienteIngredienteIngrediente1" TypeName="ModeloDeDatos.IngredienteIngredienteIngrediente1" StoreEntitySet="IngredienteIngrediente">
-      <EndProperty Name="Ingrediente">
-        <ScalarProperty Name="Id" ColumnName="IngredienteComponente_Id" />
-      </EndProperty>
-      <EndProperty Name="IngredienteIngrediente">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="CuentaPedido" TypeName="ModeloDeDatos.CuentaPedido" StoreEntitySet="Pedidos">
       <EndProperty Name="Cuenta">
@@ -937,14 +937,13 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="CuentaCliente" TypeName="ModeloDeDatos.CuentaCliente" StoreEntitySet="Cuentas">
+    <AssociationSetMapping Name="CuentaCliente" TypeName="ModeloDeDatos.CuentaCliente" StoreEntitySet="CuentaCliente">
+      <EndProperty Name="Cuenta">
+        <ScalarProperty Name="Id" ColumnName="Cuenta_Id" />
+      </EndProperty>
       <EndProperty Name="Cliente">
         <ScalarProperty Name="Id" ColumnName="Clientes_Id" />
       </EndProperty>
-      <EndProperty Name="Cuenta">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-      <Condition ColumnName="Clientes_Id" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="CuentaEmpleado" TypeName="ModeloDeDatos.CuentaEmpleado" StoreEntitySet="Cuentas">
       <EndProperty Name="Empleado">
@@ -983,6 +982,22 @@
         <ScalarProperty Name="Id" ColumnName="Ingrediente_Id" />
       </EndProperty>
       <EndProperty Name="PlatilloIngrediente">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="IngredienteRelacionIngrediente" TypeName="ModeloDeDatos.IngredienteRelacionIngrediente" StoreEntitySet="RelacionIngredientes">
+      <EndProperty Name="Ingrediente">
+        <ScalarProperty Name="Id" ColumnName="IngredientePadre_Id" />
+      </EndProperty>
+      <EndProperty Name="RelacionIngrediente">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RelacionIngredienteIngredienteCompuesto" TypeName="ModeloDeDatos.RelacionIngredienteIngredienteCompuesto" StoreEntitySet="RelacionIngredientes">
+      <EndProperty Name="Ingrediente">
+        <ScalarProperty Name="Id" ColumnName="IngredienteHijo_Id" />
+      </EndProperty>
+      <EndProperty Name="RelacionIngrediente">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
