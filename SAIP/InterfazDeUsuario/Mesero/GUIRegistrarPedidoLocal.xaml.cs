@@ -26,6 +26,7 @@ namespace InterfazDeUsuario.Mesero
     /// </summary>
     public partial class GUIRegistrarPedidoLocal : Page
     {
+        Iva Iva;
         Empleado Empleado;
         Cuenta Cuenta;
         List<CantidadAlimento> AlimentosDelPedido = new List<CantidadAlimento>();
@@ -43,8 +44,9 @@ namespace InterfazDeUsuario.Mesero
             InitializeComponent();
             BarraDeEstado.Controlador = controlador;
             BarraDeEstado.ActualizarEmpleado(empleado);
+            Iva = new IvaDAO().CargarIvaActual();
             MostrarAlimentos();
-
+            LabelNumeroDeMesa.Content = "Mesa: " + cuenta.Mesa.NumeroDeMesa;
         }
 
         private void MostrarAlimentos()
@@ -58,12 +60,31 @@ namespace InterfazDeUsuario.Mesero
             ListBoxAlimentos.ItemsSource = alimentos;
         }
 
+        public void ActualizarPrecios()
+        {
+            LabelCantidadIva.Content = Iva.Valor;
+            double precioDelPedido = 0;
+            foreach(CantidadAlimento cantidadAlimento in AlimentosDelPedido)
+            {
+                if (cantidadAlimento is CantidadPlatillo cantidadPlatillo)
+                {
+                    precioDelPedido += cantidadPlatillo.Cantidad * cantidadPlatillo.Alimento.Precio;
+                }
+                else if(cantidadAlimento is CantidadProducto cantidadProducto)
+                {
+                    precioDelPedido += cantidadProducto.Cantidad * cantidadProducto.Alimento.Precio;
+                }
+            }
+            LabelCantidadTotal.Content = precioDelPedido * 1 + Iva.Valor;
+        }
+
         private void ButtonBorrarAlimento_Click(object sender, RoutedEventArgs e)
         {
             CantidadAlimento alimento = ((FrameworkElement)sender).DataContext as CantidadAlimento;
             AlimentosDelPedido.Remove(alimento);
             DataGridAlimentosEnPedido.ItemsSource = null;
             DataGridAlimentosEnPedido.ItemsSource = AlimentosDelPedido;
+            ActualizarPrecios();
         }
 
         private void ButtonAñadirAlimento_Click(object sender, RoutedEventArgs e)
@@ -113,6 +134,7 @@ namespace InterfazDeUsuario.Mesero
                 MostrarMensajeCantidadInsuficiente(alimento.Nombre);
             }
 
+            ActualizarPrecios();
             DataGridAlimentosEnPedido.ItemsSource = null;
             DataGridAlimentosEnPedido.ItemsSource = AlimentosDelPedido;
         }
@@ -203,6 +225,7 @@ namespace InterfazDeUsuario.Mesero
                 AlimentosDelPedido.Remove(cantidadAlimento);
             }
 
+            ActualizarPrecios();
             DataGridAlimentosEnPedido.ItemsSource = null;
             DataGridAlimentosEnPedido.ItemsSource = AlimentosDelPedido;
         }
@@ -234,6 +257,7 @@ namespace InterfazDeUsuario.Mesero
                     MostrarMensajeCantidadInsuficiente(cantidadProducto.Alimento.Nombre);
                 }
             }
+            ActualizarPrecios();
             DataGridAlimentosEnPedido.ItemsSource = null;
             DataGridAlimentosEnPedido.ItemsSource = AlimentosDelPedido;
         }
@@ -294,6 +318,11 @@ namespace InterfazDeUsuario.Mesero
             }
 
             return nombre.ToLower().Contains(busqueda.ToLower()) || codigo.ToLower().Contains(busqueda.ToLower());
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
