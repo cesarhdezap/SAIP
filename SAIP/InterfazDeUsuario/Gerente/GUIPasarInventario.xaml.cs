@@ -268,8 +268,6 @@ namespace InterfazDeUsuario.Gerente
 			{
 				Controlador.Regresar();
 			}
-			
-			
 		}
 	}
 }

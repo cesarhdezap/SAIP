@@ -138,7 +138,34 @@ namespace InterfazDeUsuario.CallCenter
 		private void ButtonAñadir_Click(object sender, RoutedEventArgs e)
 		{
 			Alimento alimentoAAñadir = (Alimento)BusquedaDataGrid.SelectedItem;
-			if (alimentoAAñadir.ValidarCantidadAlimento(1))
+			int cantidadNueva = 1;
+			foreach(CantidadAlimento cantidadAlimento in Pedido.CantidadAlimentos)
+			{
+				if (cantidadAlimento is CantidadPlatillo cantidadPlatillo)
+				{
+					if(alimentoAAñadir is Platillo platillo)
+					{
+						if(alimentoAAñadir.Id == platillo.Id)
+						{
+							cantidadNueva = cantidadPlatillo.Cantidad + 1;
+							break;
+						}
+					}
+				}
+				else if (cantidadAlimento is CantidadProducto cantidadProducto)
+				{
+					if (alimentoAAñadir is Producto producto)
+					{
+						if (alimentoAAñadir.Id == producto.Id)
+						{
+							cantidadNueva = cantidadProducto.Cantidad + 1;
+							break;
+						}
+					}
+				}
+			}
+
+			if (alimentoAAñadir.ValidarCantidadAlimento(cantidadNueva))
 			{
 				Pedido.AñadirAlimento(alimentoAAñadir);
 				LabelErrorDeCantidad.Visibility = Visibility.Hidden;
@@ -293,7 +320,7 @@ namespace InterfazDeUsuario.CallCenter
 			if (ValidarCadenaVacioPermitido(ComentariosClienteTextBlock.Text) &&
 				ValidarTelefono(NumeroTelefonicoTextBox.Text) &&
 				ValidarNombre(NombreDeClienteTextBox.Text) &&
-				ValidarNombre(DireccionClienteTextBlock.Text) &&
+				ValidarCadena(DireccionClienteTextBlock.Text) &&
 				ValidarCadenaVacioPermitido(ComentariosOrdenTextBlock.Text)
 				&& Pedido.CantidadAlimentos.Count > 0)
 			{
@@ -331,6 +358,9 @@ namespace InterfazDeUsuario.CallCenter
 				CuentaDAO cuentaDAO = new CuentaDAO();
 				cuentaDAO.CrearCuentaConPedidos(cuenta);
 				Pedido.DescontarIngredientes();
+				MessageBox.Show("Pedido realizado con exito", "¡Exito!");
+				LimpiarPantalla();
+				LimpiarCliente();
 			}
 			else
 			{

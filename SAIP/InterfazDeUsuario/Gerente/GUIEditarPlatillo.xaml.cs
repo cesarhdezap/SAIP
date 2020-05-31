@@ -189,6 +189,8 @@ namespace InterfazDeUsuario.Gerente
 					if (ValidarGanancia())
 					{
 						EditarPlatillo();
+						MessageBox.Show("El platillo fue editado exitosamente", "¡Exito");
+						Controlador.Regresar();
 					}
 					else
 					{
@@ -240,7 +242,6 @@ namespace InterfazDeUsuario.Gerente
 				MostrarEstadoDeValidacionCadena(NombreTextBox);
 				MostrarEstadoDeValidacionCadena(DescripcionTextBox);
 				MostrarEstadoDeValidacionCadena(NotasTextBox);
-
 			}
 
 			return resultado;
