@@ -19,6 +19,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				Contraseña = empleadoLogica.Contraseña,
 				NombreDeUsuario = empleadoLogica.NombreDeUsuario,
 				Nombre = empleadoLogica.Nombre,
+				CorreoElectronico = empleadoLogica.CorreoElectronico,
 				FechaDeCreacion = empleadoLogica.FechaDeCreacion,
 				FechaDeModicacion = empleadoLogica.FechaDeModicacion,
 				NombreCreador = empleadoLogica.Creador,
@@ -38,7 +39,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				Contraseña = empleadoDb.Contraseña,
 				NombreDeUsuario = empleadoDb.NombreDeUsuario,
 				Nombre = empleadoDb.Nombre,
-				///CorreoElectronico = empleadoDb.c
+				CorreoElectronico = empleadoDb.CorreoElectronico,
 				FechaDeCreacion = empleadoDb.FechaDeCreacion,
 				FechaDeModicacion = empleadoDb.FechaDeModicacion,
 				Creador = empleadoDb.NombreCreador,
@@ -178,6 +179,24 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				context.Empleados.Add(empleadoguardado);
 				context.SaveChanges();
 				
+			}
+		}
+
+		public void EditarEmpleado(Clases.Empleado empleado)
+		{
+			empleado.FechaDeModicacion = DateTime.Now;
+			empleado.Activo = true;
+
+			Clases.Empleado empleadoDb;
+
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				///empleadoDb = context.Empleados.Include(x => x.EmpleadoE.Select(i => i.Empleado)).FirstOrDefault(e => e.Id == empleado.Id);
+				///empleadoDb.Nombre = empleado.Nombre;
+				///empleadoDb.NombreDeUsuario = empleado.NombreDeUsuario;
+				///empleadoDb.Contraseña = empleado.Contraseña;
+				///empleadoDb.CorreoElectronico = empleado.CorreoElectronico;
+				///empleadoDb.TipoDeEmpleado = empleado.TipoDeEmpleado;
 			}
 		}
 		

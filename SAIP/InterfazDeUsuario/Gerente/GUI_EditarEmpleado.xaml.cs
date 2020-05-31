@@ -49,7 +49,7 @@ namespace InterfazDeUsuario.Gerente
                 MessageBoxResult resultadoDeMesageBox = MessageBox.Show("Esta a punto de guardar un Empleado nuevo dentro del sistema ¿Esta seguro que desea continuar?", "ADVERTENCIA", MessageBoxButton.YesNo, MessageBoxImage.Error);
                 if (resultadoDeMesageBox == MessageBoxResult.Yes)
                 {
-                    CapturarEmpleado();
+                    EditarEmpleado();
 
                 }
             }
@@ -90,7 +90,7 @@ namespace InterfazDeUsuario.Gerente
 
             return resultado;
         }
-        public void CapturarEmpleado()
+        public void EditarEmpleado()
         {
             empleadoaEditar.Nombre = TextBoxNombre.Text;
             empleadoaEditar.NombreDeUsuario = TextBoxUsuario.Text;
@@ -99,7 +99,7 @@ namespace InterfazDeUsuario.Gerente
             empleadoaEditar.TipoDeEmpleado = (TipoDeEmpleado)ComboBoxPuesto.SelectedItem;
             empleadoaEditar.Creador = Gerente.Nombre;
             EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-             
+            empleadoDAO.EditarEmpleado(empleadoaEditar);
         }
 
         private void Usuario_TextChanged(object sender, TextChangedEventArgs e)
@@ -122,6 +122,15 @@ namespace InterfazDeUsuario.Gerente
         private void PasswordBoxContraseña_PasswordChanged(object sender, RoutedEventArgs e)
         {
             MostrarEstadoDeValidacionContraseña((PasswordBox)sender);
+        }
+
+        private void ButtonCancelar_Click(object sender, RoutedEventArgs e)
+        {
+             MessageBoxResult resultadoDeMessageBox = MessageBox.Show("¿Esta seguro que desea cancelar la edicion? Se perderan los cambios sin guardar", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                        if (resultadoDeMessageBox == MessageBoxResult.Yes)
+                        {
+                            Controlador.Regresar();
+                        }
         }
     }
 }

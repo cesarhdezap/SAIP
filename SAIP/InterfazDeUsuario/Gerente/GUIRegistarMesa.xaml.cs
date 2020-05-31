@@ -30,13 +30,13 @@ namespace InterfazDeUsuario.Gerente
             String NMesa = TextBoxNumeroMesa.Text;
             MesaRegistar.NumeroDeMesa = int.Parse(NMesa);
             MesaDAO mesaDAO = new MesaDAO();
-            mesaDAO.Guardar(MesaRegistar);
+            mesaDAO.GuardarMesas(MesaRegistar);
             MessageBox.Show("Mesa Registrada con Exito!", "", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult resultadoDeMesageBox = MessageBox.Show("Esta a punto de guardar un Empleado nuevo dentro del sistema ¿Esta seguro que desea continuar?", "ADVERTENCIA", MessageBoxButton.YesNo, MessageBoxImage.Error);
+            MessageBoxResult resultadoDeMesageBox = MessageBox.Show("Esta a punto de guardar una Mesa nueva dentro del sistema ¿Esta seguro que desea continuar?", "ADVERTENCIA", MessageBoxButton.YesNo, MessageBoxImage.Error);
             CapturarMesa();
         }
     }

@@ -106,5 +106,14 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             }
             return mesasLogica;
         }
+        public void GuardarMesas(Clases.Mesa mesa)
+        {
+            AccesoADatos.Mesa mesaguardada = ConvertirMesaLogicaADatos(mesa);
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                context.Mesas.Add(mesaguardada);
+                context.SaveChanges();
+            }
+        }
     }
 }

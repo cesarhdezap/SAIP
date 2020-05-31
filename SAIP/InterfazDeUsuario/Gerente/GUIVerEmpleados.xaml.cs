@@ -47,7 +47,7 @@ namespace InterfazDeUsuario.Gerente
 
         public void ActualizarPantalla()
         {
-            ListaE.ItemsSource = null;
+            
             ListaE.ItemsSource = Visibles;
         }
 
@@ -80,8 +80,10 @@ namespace InterfazDeUsuario.Gerente
         }
 
         private void Eliminar_Click(object sender, RoutedEventArgs e, EmpleadoDAO empleado)
+
         {
-          ///  empleado.DesactivarEmpleado();
+            EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+          ///empleado.DesactivarEmpleado(empleadoDAO);
         }
 
 

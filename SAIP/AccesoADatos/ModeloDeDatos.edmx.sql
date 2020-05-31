@@ -214,7 +214,8 @@ CREATE TABLE [dbo].[Empleados] (
     [FechaDeModicacion] datetime  NOT NULL,
     [NombreCreador] nvarchar(max)  NOT NULL,
     [Activo] bit  NOT NULL,
-    [TipoDeEmpleado] smallint  NOT NULL
+    [TipoDeEmpleado] smallint  NOT NULL,
+    [CorreoElectronico] nvarcahr(max) NOT NULL
 );
 GO
 

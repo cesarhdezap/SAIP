@@ -134,5 +134,14 @@ namespace InterfazDeUsuario.Gerente
         {
             MostrarEstadoDeValidacionContraseña((PasswordBox)sender);
         }
+
+        private void Cancelar_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult resultadoDeMessageBox = MessageBox.Show("¿Esta seguro que desea cancelar el Registro? Se perderan los cambios sin guardar", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            if (resultadoDeMessageBox == MessageBoxResult.Yes)
+            {
+                Controlador.Regresar();
+            }
+        }
     }
 }
