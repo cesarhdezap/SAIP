@@ -303,9 +303,13 @@ namespace InterfazDeUsuario.Gerente
             DataGridComponentes.ItemsSource = Componentes;
         }
 
+        private void ActualizarPrecio()
+        {
+            TextBoxCosto.Text = ingredienteNuevo.CalcularCosto().ToString();
+        }
+
         private void ButtonAñadir_Click(object sender, RoutedEventArgs e)
         {
-
             Ingrediente ingredienteAAñadir = ((FrameworkElement)sender).DataContext as Ingrediente;
             if (!Componentes.Any(c => c.Ingrediente.Id == ingredienteAAñadir.Id))
             {
@@ -322,22 +326,46 @@ namespace InterfazDeUsuario.Gerente
 
             }
 
+            ActualizarPrecio();
             ActualizarPantalla();
         }
 
         private void ButtonEliminar_Click(object sender, RoutedEventArgs e)
         {
+            Componente ingredienteAEliminar = ((FrameworkElement)sender).DataContext as Componente;
 
+            Componentes.Remove(ingredienteAEliminar);
+            ActualizarPrecio();
+            ActualizarPantalla();
         }
 
         private void ButtonDisminuir_Click(object sender, RoutedEventArgs e)
         {
+            Componente ingredienteADisminuir = ((FrameworkElement)sender).DataContext as Componente;
 
+            if (ingredienteADisminuir.Cantidad -1 > 0 )
+            {
+                ingredienteADisminuir.Cantidad--;
+            }
+            else
+            {
+                Componentes.Remove(ingredienteADisminuir);
+            }
+            ActualizarPrecio();
+            ActualizarPantalla();
         }
 
         private void ButtonAumentar_Click(object sender, RoutedEventArgs e)
         {
+            Componente ingredienteADisminuir = ((FrameworkElement)sender).DataContext as Componente;
 
+            if (ingredienteADisminuir.Cantidad > 0)
+            {
+                ingredienteADisminuir.Cantidad++;
+            }
+
+            ActualizarPrecio();
+            ActualizarPantalla();
         }
     }
 }

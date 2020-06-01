@@ -99,7 +99,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             List<Clases.Componente> componentes = new List<Clases.Componente>();
 
             foreach (RelacionIngrediente componente in ingredienteDb.RelacionIngredientesHijo)
-            {
+            {   
                 componentes.Add(new Clases.Componente
                 {
                     Cantidad = componente.Cantidad,
@@ -107,7 +107,9 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                     Ingrediente = ConvertirDeDatosALogica(componente.IngredienteHijo)
                 });
             }
-            ComponenteDAO componenteDAO = new ComponenteDAO();
+
+            ingredienteConvertido.Componentes = componentes;
+
             return ingredienteConvertido;
         }
 
@@ -196,9 +198,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 ingredientesDb = context.Ingredientes.Include(i => i.RelacionIngredientesHijo).Where(ingredienteCargado => ingredienteCargado.Activo == true).ToList();
             }
 
-            List<Clases.Ingrediente> ingredientesResultado = new List<Clases.Ingrediente>();
-            ingredientesResultado = ConvertirListaDeDbAListaDeLogica(ingredientesDb);
-            return ingredientesResultado;
+            return ConvertirListaDeDbAListaDeLogica(ingredientesDb);
         }
 
         public Clases.Ingrediente CargarIngredientePorId(int Id)
