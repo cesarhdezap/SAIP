@@ -6,7 +6,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InterfazDeUsuario.Gerente"
       mc:Ignorable="d"
-      Title="GUIRegistrarIngrediente" Height="470" Width="1190">
+      Title="GUIRegistrarIngrediente" Height="490" Width="1350">
     <Page.Resources>
         <DataTemplate x:Key="BotonDeAñadir">
             <Button Content="Asignar" Click="ButtonAñadir_Click"></Button>
@@ -30,38 +30,51 @@
             <Label Content="Cantidad" HorizontalAlignment="Left" Margin="40,201,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="TextBoxCosto" DataObject.Pasting="TextBoxCosto_Pasting" HorizontalAlignment="Left" Height="23" Margin="140,161,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20" PreviewTextInput="TextBoxCosto_PreviewTextInput" TextChanged="TextBoxCosto_TextChanged"/>
             <TextBox x:Name="TextBoxCantidad" DataObject.Pasting="TextBoxCantidad_Pasting" HorizontalAlignment="Left" Height="23" Margin="140,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20" PreviewTextInput="TextBoxCantidad_PreviewTextInput" TextChanged="TextBoxCantidad_TextChanged"/>
-            <CheckBox x:Name="CheckBoxIngredienteCompuesto" Content="¿Es un Ingrediente compuesto?" HorizontalAlignment="Left" Margin="320,95,0,0" VerticalAlignment="Top" Checked="CheckBoxIngredienteCompuesto_Checked" Unchecked="CheckBoxIngredienteCompuesto_Unchecked"/>
-            <Grid x:Name="GridCompuestos" HorizontalAlignment="Left" Height="262" Margin="320,124,0,0" VerticalAlignment="Top" Width="580">
-                <Label Content="Código" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <Label Content="Cantidad" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="TextBoxCodigoCompuesto" DataObject.Pasting="TextBoxCodigoCompuesto_Pasting" HorizontalAlignment="Left" Height="23" Margin="80,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBoxCodigoCompuesto_TextChanged" PreviewTextInput="TextBoxCodigoCompuesto_PreviewTextInput"/>
-                <TextBox x:Name="TextBoxCantidadCompuesto" DataObject.Pasting="TextBoxCantidad_Pasting" HorizontalAlignment="Left" Height="23" Margin="80,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBoxCantidadCompuesto_TextChanged" PreviewTextInput="TextBoxCantidadCompuesto_PreviewTextInput"/>
-                <DataGrid x:Name="DataGridComponentes" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="232" Margin="220,10,0,0" VerticalAlignment="Top" Width="340">
+            <CheckBox x:Name="CheckBoxIngredienteCompuesto" Content="¿Es un Ingrediente compuesto?" HorizontalAlignment="Left" Margin="305,189,0,0" VerticalAlignment="Top" Checked="CheckBoxIngredienteCompuesto_Checked" Unchecked="CheckBoxIngredienteCompuesto_Unchecked"/>
+            <Grid x:Name="GridCompuestos" HorizontalAlignment="Left" Height="380" Margin="590,25,0,0" VerticalAlignment="Top" Width="665">
+                <DataGrid x:Name="DataGridComponentes" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="328" VerticalAlignment="Top" Width="315" Margin="0,42,0,0">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Codigo" Binding="{Binding Ingrediente.Codigo}"/>
                         <DataGridTextColumn Header="Nombre" Binding="{Binding Ingrediente.Nombre}"/>
                         <DataGridTextColumn Header="Costo" Binding="{Binding Ingrediente.Costo}"/>
-                        <DataGridTextColumn Header="Cantidad" Binding="{Binding Ingrediente.CantidadEnInventario}"/>
-                        <DataGridTemplateColumn Width="50"  CellEditingTemplate="{StaticResource BotonDeAñadir}" CellTemplate="{StaticResource BotonDeAñadir}"/>
-                        <DataGridTemplateColumn Header="Eliminar" CellTemplate="{StaticResource BotonDeEliminar}"></DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Cantidad" Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <Button Height="30" Click="ButtonDisminuir_Click">
+                                            <Image Source="/img/disminuir.png"/>
+                                        </Button>
+                                        <Label Content="{Binding Cantidad}"/>
+                                        <Button Height="30" Click="ButtonAumentar_Click">
+                                            <Image Source="/img/anadir.png"/>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Cantidad" Binding="{Binding Ingrediente.CodigoDeBarras}"/>
+                        <DataGridTemplateColumn Header="Eliminar" CellTemplate="{StaticResource BotonDeEliminar}">
+                        </DataGridTemplateColumn>
 
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button x:Name="ButtonAgregarComponente" Content="Agregar Componente" HorizontalAlignment="Left" Margin="35,222,0,0" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.538,0.5" Click="ButtonAgregarComponente_Click"/>
+                <TextBlock HorizontalAlignment="Left" Margin="330,10,0,0" TextWrapping="Wrap" Text="Ingredientes" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
+                <DataGrid x:Name="DataGridIngredientes" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="328" Margin="330,42,0,0" VerticalAlignment="Top" Width="325">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Codigo" Binding="{Binding Codigo}"/>
+                        <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}"/>
+                        <DataGridTextColumn Header="Costo" Binding="{Binding Costo}"/>
+                        <DataGridTextColumn Header="Cantidad" Binding="{Binding CantidadEnInventario}"/>
+                        <DataGridTextColumn Header="Codigo de Barras" Binding="{Binding CodigoDeBarras}"/>
+                        <DataGridTemplateColumn Width="50"  CellEditingTemplate="{StaticResource BotonDeAñadir}" CellTemplate="{StaticResource BotonDeAñadir}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Componentes" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
             </Grid>
             <Button x:Name="ButtonGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="40,351,0,0" VerticalAlignment="Top" Width="75" Click="ButtonGuardar_Click"/>
             <Button x:Name="ButtonCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="165,351,0,0" VerticalAlignment="Top" Width="75" IsDefault="True" Click="ButtonCancelar_Click"/>
-            <Label x:Name="LabelCodigoBarra" Content="Código de barras " HorizontalAlignment="Left" Margin="320,54,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="TextBoxCodigoBarras" DataObject.Pasting="TextBoxCodigoBarras_Pasting" HorizontalAlignment="Left" Height="23" Margin="429,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" PreviewTextInput="TextBoxCodigoBarras_PreviewTextInput" TextChanged="TextBoxCodigoBarras_TextChanged"/>
-            <DataGrid x:Name="DataGridIngredientes" HorizontalAlignment="Left" Height="317" Margin="905,54,0,0" VerticalAlignment="Top" Width="275">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Codigo" Binding="{Binding Ingrediente.Codigo}"/>
-                    <DataGridTextColumn Header="Nombre" Binding="{Binding Ingrediente.Nombre}"/>
-                    <DataGridTextColumn Header="Costo" Binding="{Binding Ingrediente.Costo}"/>
-                    <DataGridTextColumn Header="Cantidad" Binding="{Binding Ingrediente.CantidadEnInventario}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-            <TextBlock HorizontalAlignment="Left" Margin="905,22,0,0" TextWrapping="Wrap" Text="Ingredientes" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
+            <Label x:Name="LabelCodigoBarra" Content="Código de barras " HorizontalAlignment="Left" Margin="290,64,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="TextBoxCodigoBarras" DataObject.Pasting="TextBoxCodigoBarras_Pasting" HorizontalAlignment="Left" Height="23" Margin="415,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" PreviewTextInput="TextBoxCodigoBarras_PreviewTextInput" TextChanged="TextBoxCodigoBarras_TextChanged"/>
 
         </Grid>
     </DockPanel>
