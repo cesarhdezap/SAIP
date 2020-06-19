@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LogicaDeNegocio.Clases;
+using LogicaDeNegocio.ObjetosAccesoADatos;
 
 namespace InterfazDeUsuario.Gerente
 {
@@ -20,9 +22,23 @@ namespace InterfazDeUsuario.Gerente
     /// </summary>
     public partial class GUI_DarBajaProductoOPlatillo : Page
     {
-        public GUI_DarBajaProductoOPlatillo()
+        public Empleado Gerente;
+        public Producto Producto;
+        public Platillo Platillo;
+        public ControladorDeCambioDePantalla Controlador { get; set; }
+        public GUI_DarBajaProductoOPlatillo(ControladorDeCambioDePantalla controlador, Empleado empleadoCargado, Producto producto, Platillo platillo)
         {
             InitializeComponent();
+            Gerente = empleadoCargado;
+            BarraDeEstado.Controlador = controlador;
+            Controlador = controlador;
+            BarraDeEstado.ActualizarEmpleado(Gerente);
+            Controlador = controlador;
+            BarraDeEstado.Controlador = controlador;
+            Producto = producto;
+            Platillo = platillo;
         }
+
+
     }
 }
