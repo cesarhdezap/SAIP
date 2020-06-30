@@ -43,7 +43,7 @@ namespace InterfazDeUsuario.empleado
             Trabajadores = empleadoDAO.CargarTodos();
             ListaE.ItemsSource = null;
             ListaE.ItemsSource = Trabajadores;
-            ActualizarPantalla();
+            ActualizarLista();
         }
 
         public void ActualizarPantalla()
@@ -52,6 +52,10 @@ namespace InterfazDeUsuario.empleado
             ListaE.ItemsSource = Visibles;
         }
 
+        public void ActualizarLista()
+        {
+            ListaE.ItemsSource = Trabajadores;
+        }
        
 
         private void Busqueda_TextChanged(object sender, TextChangedEventArgs e)
