@@ -11,7 +11,8 @@
     <DockPanel>
         <controls:BarraDeEstado x:Name="BarraDeEstado"  DockPanel.Dock="Top" Width="Auto"/>
         <Grid>
-        
+            <DataGrid HorizontalAlignment="Left" Height="376" VerticalAlignment="Top" Width="800"/>
+
         </Grid>
-    </DockPanel>    
+    </DockPanel>
 </Page>

@@ -20,11 +20,11 @@ namespace InterfazDeUsuario.Cocinero
     /// <summary>
     /// Lógica de interacción para GUICocinero.xaml
     /// </summary>
-    public partial class GUICocinero : Page
+    public partial class GUIVerPedidosPendientes : Page
     {
         public Empleado Empleado { get; set; }
         private ControladorDeCambioDePantalla Controlador { get; set; }
-        public GUICocinero(ControladorDeCambioDePantalla controlador, Empleado empleadoCargado)
+        public GUIVerPedidosPendientes(ControladorDeCambioDePantalla controlador, Empleado empleadoCargado)
         {
             InitializeComponent();
             Empleado = empleadoCargado;
