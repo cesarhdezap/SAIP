@@ -14,13 +14,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace InterfazDeUsuario.Gerente
+namespace InterfazDeUsuario.empleado
 {
 	/// <summary>
 	/// Interaction logic for GUIGerente.xaml
 	/// </summary>
 	public partial class GUIGerente : Page
 	{
+		private Empleado empleadoADesactivar;
+
 		public Empleado Gerente { get; set; }
 		private ControladorDeCambioDePantalla Controlador { get; set; }
     
@@ -56,7 +58,7 @@ namespace InterfazDeUsuario.Gerente
 
 		private void Button_Click_Lista(object sender, RoutedEventArgs e)
 		{
-			GUIVerEmpleados verEmpleados = new GUIVerEmpleados(Controlador, Gerente);
+			GUIVerEmpleados verEmpleados = new GUIVerEmpleados(Controlador, Gerente, empleadoADesactivar);
 			Controlador.CambiarANuevaPage(verEmpleados);
 		}
 

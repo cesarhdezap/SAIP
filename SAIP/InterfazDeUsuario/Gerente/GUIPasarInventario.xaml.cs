@@ -18,7 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
 
-namespace InterfazDeUsuario.Gerente
+namespace InterfazDeUsuario.empleado
 {
 	/// <summary>
 	/// Interaction logic for GUIPasarInventario.xaml

@@ -20,7 +20,7 @@ using LogicaDeNegocio.Enumeradores;
 using static LogicaDeNegocio.Servicios.ServiciosDeEncriptacion;
 using LogicaDeNegocio.ObjetosAccesoADatos;
 
-namespace InterfazDeUsuario.Gerente
+namespace InterfazDeUsuario.empleado
 {
     /// <summary>
     /// Lógica de interacción para GUI_EditarEmpleado.xaml
@@ -30,7 +30,7 @@ namespace InterfazDeUsuario.Gerente
         ControladorDeCambioDePantalla Controlador;
         public Empleado Gerente { get; set; }
         public Empleado empleadoaEditar { get; set; } = new Empleado();
-        public GUI_EditarEmpleado(ControladorDeCambioDePantalla controlador, Empleado EmpleadoCargado)
+        public GUI_EditarEmpleado(ControladorDeCambioDePantalla controlador, Empleado EmpleadoCargado, Empleado empleadoAEditar)
         {
             InitializeComponent();
             ComboBoxPuesto.ItemsSource = Enum.GetValues(typeof(TipoDeEmpleado));
@@ -46,7 +46,7 @@ namespace InterfazDeUsuario.Gerente
             if (ValidarCampos())
             {
 
-                MessageBoxResult resultadoDeMesageBox = MessageBox.Show("Esta a punto de guardar un Empleado nuevo dentro del sistema ¿Esta seguro que desea continuar?", "ADVERTENCIA", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                MessageBoxResult resultadoDeMesageBox = MessageBox.Show("Esta a punto de Editar la Informacion de un Empleado dentro del sistema ¿Esta seguro que desea continuar?", "ADVERTENCIA", MessageBoxButton.YesNo, MessageBoxImage.Error);
                 if (resultadoDeMesageBox == MessageBoxResult.Yes)
                 {
                     EditarEmpleado();

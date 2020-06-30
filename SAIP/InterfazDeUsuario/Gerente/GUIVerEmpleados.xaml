@@ -1,9 +1,9 @@
-﻿<Page x:Class="InterfazDeUsuario.Gerente.GUIVerEmpleados"
+﻿<Page x:Class="InterfazDeUsuario.empleado.GUIVerEmpleados"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:InterfazDeUsuario.Gerente" 
+      xmlns:local="clr-namespace:InterfazDeUsuario.empleado" 
       xmlns:controls="clr-namespace:InterfazDeUsuario.UserControls"
       mc:Ignorable="d" 
       Title="GUIVerEmpleados" Height="691" Width="1258">
@@ -11,7 +11,7 @@
 
 
     <DockPanel>
-        <controls:BarraDeEstado x:Name="BarraDeEstado"  DockPanel.Dock="Top" Width="Auto"   />
+        <controls:BarraDeEstado x:Name="BarraDeEstado"  DockPanel.Dock="Top" Width="Auto"/>
         <Grid>
             <TextBox x:Name="Busqueda" Height="40" TextChanged="Busqueda_TextChanged" Width="353" VerticalAlignment="Top"  Padding="0" Margin="10,77,894.6,0"/>
             <Button Content="Registrar" x:Name="Registro" Height="38" VerticalAlignment="Top"  Click="Registro_Click" Margin="765,77,322.6,0" />
@@ -25,7 +25,7 @@
                 </DataGrid.Columns>
             </DataGrid>
             <Button x:Name="Editar" Content="Editar" HorizontalAlignment="Left" Margin="982,147,0,0" VerticalAlignment="Top" Click="Editar_Click" Width="104" Height="27"/>
-            <Button x:Name="Eliminar" Content="Dar de Baja" HorizontalAlignment="Left" Margin="1124,147,0,0" VerticalAlignment="Top" Width="103" Height="27"/>
+            <Button x:Name="Eliminar" Content="Dar de Baja" HorizontalAlignment="Left" Margin="1124,147,0,0" VerticalAlignment="Top" Width="103" Height="27" />
 
         </Grid>
     </DockPanel>

@@ -19,7 +19,7 @@ using InterfazDeUsuario.CallCenter;
 using LogicaDeNegocio.ObjetosAccesoADatos;
 using LogicaDeNegocio.Clases;
 using static InterfazDeUsuario.UtileriasGráficas;
-using InterfazDeUsuario.Gerente;
+using InterfazDeUsuario.empleado;
 using InterfazDeUsuario.Mesero;
 using LogicaDeNegocio;
 

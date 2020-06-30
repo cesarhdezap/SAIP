@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
 using static InterfazDeUsuario.UtileriasGráficas;
 
-namespace InterfazDeUsuario.Gerente
+namespace InterfazDeUsuario.empleado
 {
 	/// <summary>
 	/// Interaction logic for GUIEditarPlatillo.xaml

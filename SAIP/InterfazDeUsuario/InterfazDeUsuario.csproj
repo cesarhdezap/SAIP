@@ -58,6 +58,15 @@
     <Compile Include="CallCenter\GUIEditarPedido.xaml.cs">
       <DependentUpon>GUIEditarPedido.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Cocinero\GUICocinero.xaml.cs">
+      <DependentUpon>GUICocinero.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cocinero\GUIVerPedidosPendientes.xaml.cs">
+      <DependentUpon>GUIVerPedidosPendientes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cocinero\GUIVerRecetas.xaml.cs">
+      <DependentUpon>GUIVerRecetas.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Gerente\GUIPasarInventario.xaml.cs">
       <DependentUpon>GUIPasarInventario.xaml</DependentUpon>
     </Compile>
@@ -113,6 +122,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CallCenter\GUIPedidoADomicilio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Cocinero\GUICocinero.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Cocinero\GUIVerPedidosPendientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Cocinero\GUIVerRecetas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

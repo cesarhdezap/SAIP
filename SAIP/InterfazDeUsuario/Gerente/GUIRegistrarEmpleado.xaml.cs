@@ -20,7 +20,7 @@ using static InterfazDeUsuario.UtileriasGráficas;
 using LogicaDeNegocio.Enumeradores;
 using static LogicaDeNegocio.Servicios.ServiciosDeEncriptacion;
 
-namespace InterfazDeUsuario.Gerente
+namespace InterfazDeUsuario.empleado
 {
     /// <summary>
     /// Lógica de interacción para GUIRegistrarEmpleado.xaml

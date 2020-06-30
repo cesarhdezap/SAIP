@@ -155,12 +155,12 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
 		public void DesactivarEmpleado(Clases.Empleado empleado)
 		{
-			AccesoADatos.Empleado empleadodesactivado = ConvertirDeLogicaADatos(empleado);
+			
 			
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				AccesoADatos.Empleado empleado1 = context.Empleados.FirstOrDefault(e => e.Nombre == "gerente");
-				empleado1.Activo = false;
+				AccesoADatos.Empleado empleadodesactivado = context.Empleados.Find(empleado.Id);
+				empleadodesactivado.Activo = false;
 				context.SaveChanges();
 			}
 				
@@ -187,16 +187,25 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			empleado.FechaDeModicacion = DateTime.Now;
 			empleado.Activo = true;
 
-			Clases.Empleado empleadoDb;
-
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				///empleadoDb = context.Empleados.Include(x => x.EmpleadoE.Select(i => i.Empleado)).FirstOrDefault(e => e.Id == empleado.Id);
-				///empleadoDb.Nombre = empleado.Nombre;
-				///empleadoDb.NombreDeUsuario = empleado.NombreDeUsuario;
-				///empleadoDb.Contraseña = empleado.Contraseña;
-				///empleadoDb.CorreoElectronico = empleado.CorreoElectronico;
-				///empleadoDb.TipoDeEmpleado = empleado.TipoDeEmpleado;
+				AccesoADatos.Empleado empleadoDb = ConvertirDeLogicaADatos(empleado);
+				if(empleadoDb != null)
+				{
+					empleadoDb = context.Empleados.Find(empleado.Id);
+					empleadoDb.Nombre = empleado.Nombre;
+					empleadoDb.NombreDeUsuario = empleado.NombreDeUsuario;
+					empleadoDb.Contraseña = empleado.Contraseña;
+					empleadoDb.CorreoElectronico = empleado.CorreoElectronico;
+					empleadoDb.TipoDeEmpleado = (short)empleado.TipoDeEmpleado;
+
+					context.SaveChanges();
+				}
+				else
+				{
+					
+				}
+				
 			}
 		}
 		
