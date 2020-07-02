@@ -1,22 +1,23 @@
-﻿<Window x:Class="InterfazDeUsuario.Gerente.GUI_VerMesas"
+﻿<Page x:Class="InterfazDeUsuario.empleado.GUI_VerMesas"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:InterfazDeUsuario.Gerente"
+      xmlns:local="clr-namespace:InterfazDeUsuario.empleado"
        xmlns:controls="clr-namespace:InterfazDeUsuario.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="450"
       Title="GUI_VerMesas" Width="862.069">
 
     <DockPanel Margin="0,0,0.4,-0.4">
-        <controls:BarraDeEstado x:Name="BarraDeEstado"  VerticalAlignment="Bottom" HorizontalAlignment="Left" DockPanel.Dock="Top" Width="864" Loaded="BarraDeEstado_Loaded" Height="74" Margin="0,0,-98.4,0"  AutomationProperties.IsColumnHeader="True" FontFamily="Tahoma" FontSize="18"/>
-        <DataGrid x:Name="ListaM" Height="302" VerticalAlignment="Top" AutoGenerateColumns="False" Width="669" Margin="0,74.4,0,-0.4">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Numero" Binding="{Binding NumeroDeMesa}" CanUserResize="False"/>
-                <DataGridTextColumn Header=""/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Content="Registrar" x:Name="registro" Height="34" VerticalAlignment="Top" Width="144" Margin="0,0.4,0,0" Click="registro_Click"/>
+        <controls:BarraDeEstado x:Name="BarraDeEstado"  DockPanel.Dock="Top" Width="864"  Height="74"   AutomationProperties.IsColumnHeader="True" FontFamily="Tahoma" FontSize="18"/>
+        <Grid>
+            <DataGrid x:Name="ListaM" Height="312" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="0,64,154.4,0" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Numero" Binding="{Binding NumeroDeMesa}" CanUserResize="False"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Content="Registrar" x:Name="registro" Height="34" VerticalAlignment="Top" Width="144" Margin="525,10,187,0" FontSize="18" Click="Registro_Click"/>
+        </Grid>
     </DockPanel>
-</Window>
+</Page>

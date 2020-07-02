@@ -14,13 +14,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace InterfazDeUsuario.Gerente
+namespace InterfazDeUsuario.empleado
 {
 	/// <summary>
 	/// Interaction logic for GUIGerente.xaml
 	/// </summary>
 	public partial class GUIGerente : Page
 	{
+		private Empleado empleadoADesactivar;
+
 		public Empleado Gerente { get; set; }
 		private ControladorDeCambioDePantalla Controlador { get; set; }
     
@@ -30,7 +32,7 @@ namespace InterfazDeUsuario.Gerente
 			Gerente = empleadoCargado;
 			BarraDeEstado.Controlador = controlador;
 			Controlador = controlador;
-			BarraDeEstado.ActualizarEmpleado(Gerente);
+			BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
 			Controlador = controlador;
 			BarraDeEstado.Controlador = controlador;
 		}
@@ -54,16 +56,16 @@ namespace InterfazDeUsuario.Gerente
 			Controlador.CambiarANuevaPage(pasarInventario);
 		}
 
-		private void ButtonRegistrarIngrediente_Click(object sender, RoutedEventArgs e)
-		{
-			GUIRegistrarIngrediente registrarIngrediente = new GUIRegistrarIngrediente(Controlador, Gerente);
-			Controlador.CambiarANuevaPage(registrarIngrediente);
-		}
-
 		private void Button_Click_Lista(object sender, RoutedEventArgs e)
 		{
-			GUIVerEmpleados verEmpleados = new GUIVerEmpleados(Controlador, Gerente);
+			GUIVerEmpleados verEmpleados = new GUIVerEmpleados(Controlador, Gerente, empleadoADesactivar);
 			Controlador.CambiarANuevaPage(verEmpleados);
+		}
+
+		private void Button_Click_Mesas(Object sender, RoutedEventArgs e)
+		{
+			GUI_VerMesas verMesas = new GUI_VerMesas(Controlador, Gerente);
+			Controlador.CambiarANuevaPage(verMesas);
 		}
 	}
 }

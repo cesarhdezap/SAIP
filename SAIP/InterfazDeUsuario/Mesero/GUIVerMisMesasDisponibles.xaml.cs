@@ -34,7 +34,7 @@ namespace InterfazDeUsuario.Mesero
             Empleado = empleado;
             InitializeComponent();
             BarraDeEstado.Controlador = controlador;
-            BarraDeEstado.ActualizarEmpleado(empleado);
+            BarraDeEstado.ActualizarNombreDeUsuario(empleado.Nombre);
             MostrarMesasDisponibles();
         }
 

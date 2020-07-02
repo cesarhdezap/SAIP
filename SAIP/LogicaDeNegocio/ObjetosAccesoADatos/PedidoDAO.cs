@@ -14,7 +14,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
     {
         public void Guardar(Pedido pedido)
         {
-            if (ValidarCuentaParaGuardado(pedido) && ValidarCantidadDeCantidadAlimentos(pedido.CantidadAlimentos))
+            if (pedido.CantidadAlimentos.Count > 0 && ValidarCantidadDeCantidadAlimentos(pedido.CantidadAlimentos))
             {
                 pedido.FechaDeCreacion = DateTime.Now;
                 IvaDAO ivaDAO = new IvaDAO();
@@ -23,46 +23,16 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             }
             else
             {
-                throw new ArgumentException("Pedido no tiene contenido");
+                throw new ArgumentException("Pedido inválido");
             }
 
             AccesoADatos.Pedido pedidoAGuardar = ConvertirPedidoLogicaADatos(pedido);
-            pedido.DescontarIngredientes();
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
-                foreach(CantidadAlimento cantidadAlimento in pedido.CantidadAlimentos)
-                {
-                    if (cantidadAlimento is CantidadProducto cantidadProducto)
-                    {
-                        ProductoPedido productoPedido = new ProductoPedido();
-                        productoPedido.Cantidad = cantidadProducto.Cantidad;
-                        productoPedido.Productos = context.Productos.Find(cantidadProducto.Alimento.Id);
-                        pedidoAGuardar.ProductoPedido.Add(productoPedido);
-                    }
-                    else if (cantidadAlimento is CantidadPlatillo cantidadPlatillo)
-                    {
-                        PlatilloPedido platilloPedido = new PlatilloPedido();
-                        platilloPedido.Cantidad = cantidadPlatillo.Cantidad;
-                        platilloPedido.Platillo = context.Platillos.Find(cantidadPlatillo.Alimento.Id);
-                        pedidoAGuardar.PlatilloPedidos.Add(platilloPedido);
-                    }
-                }
-
-                pedidoAGuardar.Cuenta = context.Cuentas.Find(pedido.Cuenta.Id);
                 context.Pedidos.Add(pedidoAGuardar);
                 context.SaveChanges();
             }
 
-        }
-
-        public bool ValidarCuentaParaGuardado(Pedido pedido)
-        {
-            bool resultado = false;
-            if (pedido.CantidadAlimentos.Count > 0)
-            {
-                resultado = true;
-            }
-            return resultado;
         }
 
         public bool ValidarCantidadDeCantidadAlimentos(List<CantidadAlimento> cantidadAlimentos)
@@ -93,6 +63,35 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             }
 
             return !discrepanciaEncontrada;
+        }
+
+        public List<Pedido> CargarPendientes1()
+        {
+            List<AccesoADatos.Pedido> Pendiente = new List<AccesoADatos.Pedido>();
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                Pendiente = context.Pedidos.ToList();
+            }
+            List<Pedido> pedidoL = new List<Pedido>();
+            ///pedidoL = ConvertirPedidoDeDatosALogica(Pendiente);
+            return pedidoL;
+        }
+
+        public Pedido CargarPendientes(int estadoPedido)
+        {
+            AccesoADatos.Pedido pedidoP = new AccesoADatos.Pedido();
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                pedidoP = context.Pedidos.Find(estadoPedido);
+            }
+
+            Pedido pedidoLogico = new Pedido();
+            /*if(pedidoP != null)
+            {
+                pedidoLogico = ConvertirPedidoDeDatosALogica(pedidoP);
+            }*/
+            pedidoLogico = ConvertirPedidoDeDatosALogica(pedidoP);
+            return pedidoLogico;
         }
 
         private double CalcularPrecioTotal(Pedido pedido)
@@ -129,7 +128,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             return pedidoLogico;
         }
 
-        public AccesoADatos.Pedido ConvertirPedidoLogicaADatos(Pedido pedidoLogica)
+        private AccesoADatos.Pedido ConvertirPedidoLogicaADatos(Pedido pedidoLogica)
         {
             AccesoADatos.Pedido pedidoDatos = new AccesoADatos.Pedido
             {
@@ -156,30 +155,6 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             return pedidoLogica;
         }
 
-        public void CambiarEstadoPedido(Pedido pedido)
-        {
-            using(ModeloDeDatosContainer context = new ModeloDeDatosContainer())
-            {
-                if (pedido.Estado != EstadoPedido.EnEspera || pedido.Estado != EstadoPedido.Completado || pedido.Estado != EstadoPedido.Realizado || pedido.Estado != EstadoPedido.Entregado) {
-                    AccesoADatos.Pedido pedidoDb = context.Pedidos.Find(pedido.Id);
-                    if (pedidoDb != null)
-                    {
-                        pedidoDb.Estado = 6;
-                        context.SaveChanges();
-                    }
-                    else
-                    {
-                        throw new ArgumentException("Id no encontrada PedidoDAO.DarDeBaja");
-                    }
-                }
-                else
-                {
-                    throw new ArgumentException("El pedido ya se encuentra en un estado imposible de cancelar");
-                }
-            }
-
-            pedido.AumentarIngredientes();
-
-        }
+        
     }
 }

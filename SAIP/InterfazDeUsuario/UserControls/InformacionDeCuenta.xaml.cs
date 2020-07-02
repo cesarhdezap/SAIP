@@ -32,13 +32,11 @@ namespace InterfazDeUsuario.UserControls
         public void ActualizarCuenta(Cuenta cuenta)
         {
             Cuenta = cuenta;
-            CargarAlimentosDePedidos();
             LabelCuenta.Content = "Cuenta: " + cuenta.Id + " " + cuenta.Estado.ToString();
             LabelMesa.Content = "Mesa: " + cuenta.Mesa.ToString();
-            cuenta.CalcularPrecioTotal();
-
-            LabelPrecioTotal.Content = "Precio total: " + cuenta.PrecioTotal;
+            CargarAlimentosDePedidos();
             DataGridPedidos.ItemsSource = cuenta.Pedidos;
+
         }
 
         private void ButtonNuevoPedido_Click(object sender, RoutedEventArgs e)
@@ -69,8 +67,8 @@ namespace InterfazDeUsuario.UserControls
                 CantidadPlatilloDAO cantidadPlatilloDAO = new CantidadPlatilloDAO();
                 CantidadProductoDAO cantidadProductoDAO = new CantidadProductoDAO();
                 pedido.CantidadAlimentos = new List<CantidadAlimento>();
-                pedido.CantidadAlimentos = pedido.CantidadAlimentos.Concat(cantidadPlatilloDAO.RecuperarPorIDPedido(pedido.Id)).ToList();
-                pedido.CantidadAlimentos = pedido.CantidadAlimentos.Concat(cantidadProductoDAO.RecuperarPorIDPedido(pedido.Id)).ToList();
+                pedido.CantidadAlimentos = pedido.CantidadAlimentos.Concat(cantidadPlatilloDAO.RecuperarCantidadPlatilloPorIDPedido(pedido.Id)).ToList();
+                pedido.CantidadAlimentos = pedido.CantidadAlimentos.Concat(cantidadProductoDAO.RecuperarCantidadPlatilloPorIDPedido(pedido.Id)).ToList();
             }
         }
 
@@ -105,7 +103,6 @@ namespace InterfazDeUsuario.UserControls
             CuentaDAO cuentaDAO = new CuentaDAO();
             //Actualizar precio de pedidos
             Cuenta.Estado = EstadoCuenta.Terminada;
-            Cuenta.CalcularPrecioTotal();
             cuentaDAO.ActualizarCuenta(Cuenta);
 
             MesaDAO mesaDAO = new MesaDAO();
