@@ -40,8 +40,9 @@ namespace InterfazDeUsuario.Cocinero
 
         public void MostrarPedidos()
         {
+            
             PedidoDAO pedidoDAO = new PedidoDAO();
-            ///Pedidos = pedidoDAO.CargarPendientes();
+            Pedidos = pedidoDAO.CargarPendientes();
             DataGridPedidos.ItemsSource = null;
             DataGridPedidos.ItemsSource = Pedidos;
             ActualizarPantalla();

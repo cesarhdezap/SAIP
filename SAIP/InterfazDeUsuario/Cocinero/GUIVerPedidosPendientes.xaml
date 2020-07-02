@@ -12,7 +12,9 @@
     <DockPanel>
         <controls:BarraDeEstado x:Name="BarraDeEstado"  DockPanel.Dock="Top" Width="Auto"/>
         <Grid>
-            <DataGrid x:Name="DataGridPedidos" HorizontalAlignment="Left" AutoGenerateColumns="True" FontFamily="Tahoma" FontSize="18" Height="376" VerticalAlignment="Top" Width="570"/>
+            <DataGrid x:Name="DataGridPedidos" HorizontalAlignment="Left" AutoGenerateColumns="True" FontFamily="Tahoma" FontSize="18" Height="376" VerticalAlignment="Top" Width="570">
+                
+            </DataGrid>
             <Button x:Name="BotonCompletar" Content="Completar" HorizontalAlignment="Left" Margin="618,75,0,0" VerticalAlignment="Top" Width="135" Height="46"/>
             <Button x:Name="BotonVerReceta" Content="Ver Receta" HorizontalAlignment="Left" Margin="618,160,0,0" VerticalAlignment="Top" Width="135" Height="43" Click="BotonVerReceta_Click"/>
         </Grid>

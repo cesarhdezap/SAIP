@@ -65,18 +65,34 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             return !discrepanciaEncontrada;
         }
 
-        /*public List<Clases.Pedido> CargarPendientes()
+        public List<Pedido> CargarPendientes1()
         {
-            List<AccesoADatos.Pedido> pedidoP = new List<AccesoADatos.Pedido>();
+            List<AccesoADatos.Pedido> Pendiente = new List<AccesoADatos.Pedido>();
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
-                pedidoP = context.Pedidos.ToList();
+                Pendiente = context.Pedidos.ToList();
+            }
+            List<Pedido> pedidoL = new List<Pedido>();
+            ///pedidoL = ConvertirPedidoDeDatosALogica(Pendiente);
+            return pedidoL;
+        }
+
+        public Pedido CargarPendientes(int estadoPedido)
+        {
+            AccesoADatos.Pedido pedidoP = new AccesoADatos.Pedido();
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                pedidoP = context.Pedidos.Find(estadoPedido);
             }
 
-            List<Pedido> ResultadoPedido = new List<Pedido>();
-            ResultadoPedido = ConvertirPedidoDeDatosALogica(pedidoP);
-            return ResultadoPedido;
-        }*/
+            Pedido pedidoLogico = new Pedido();
+            /*if(pedidoP != null)
+            {
+                pedidoLogico = ConvertirPedidoDeDatosALogica(pedidoP);
+            }*/
+            pedidoLogico = ConvertirPedidoDeDatosALogica(pedidoP);
+            return pedidoLogico;
+        }
 
         private double CalcularPrecioTotal(Pedido pedido)
         {
