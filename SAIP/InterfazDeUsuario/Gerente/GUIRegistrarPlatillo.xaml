@@ -19,50 +19,46 @@
 			</TextBox>
 		</DataTemplate>
 	</Page.Resources>
-    <DockPanel>
-        <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top" Width="Auto"/>
-        <Grid>
+	<Grid>
+		<controls:BarraDeEstado x:Name="BarraDeEstado" Margin="0,0,0,468" Width="Auto"/>
+		<DataGrid x:Name="BusquedaDataGrid" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="false" CanUserDeleteRows="False" SelectionUnit="FullRow" HorizontalAlignment="Left" Height="327" Margin="880,122,0,0" VerticalAlignment="Top" Width="357">
 
-            <DataGrid x:Name="BusquedaDataGrid" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="false" CanUserDeleteRows="False" SelectionUnit="FullRow" HorizontalAlignment="Left" Height="327" Margin="880,122,0,0" VerticalAlignment="Top" Width="357">
+			<DataGrid.Columns>
+				<DataGridTemplateColumn Width="50"  CellEditingTemplate="{StaticResource BotonDeAñadir}" CellTemplate="{StaticResource BotonDeAñadir}"/>
+				<DataGridTextColumn Header="Ingrediente" IsReadOnly="True" Width="75" Binding="{Binding Nombre}"/>
+				<DataGridTextColumn Header="Código" IsReadOnly="True" Width="75" Binding="{Binding CodigoDeBarras}"/>
+				<DataGridTextColumn Header="Costo" IsReadOnly="True" Width="75" Binding="{Binding Costo}"/>
+				<DataGridTextColumn Header="Unidad de medida" IsReadOnly="True" Width="75" Binding="{Binding UnidadDeMedida}"/>
+			</DataGrid.Columns>
+		</DataGrid>
+		<TextBox x:Name="BusquedaTextBox" HorizontalAlignment="Left" Height="23" Margin="880,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="357" TextChanged="BusquedaTextBox_TextChanged"/>
+		<DataGrid x:Name="IngredientesDataGrid" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="false" CanUserDeleteRows="False" SelectionUnit="FullRow" HorizontalAlignment="Left" Height="218" Margin="376,94,0,0" VerticalAlignment="Top" Width="483" RenderTransformOrigin="0.317,0.56">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Ingrediente" IsReadOnly="True" Width="75" Binding="{Binding Ingrediente.Nombre}"/>
+				<DataGridTextColumn Header="Código" IsReadOnly="True" Width="75" Binding="{Binding Ingrediente.CodigoDeBarras}"/>
+				<DataGridTemplateColumn Width="75"  CellEditingTemplate="{StaticResource CampoDeTextoDeCantidadDeIngrediente}" CellTemplate="{StaticResource CampoDeTextoDeCantidadDeIngrediente}"/>
+				<DataGridTemplateColumn Width="75"  CellEditingTemplate="{StaticResource BotonDeEliminar}" CellTemplate="{StaticResource BotonDeEliminar}"/>
+				<DataGridTextColumn Header="Costo" IsReadOnly="True" Width="75" Binding="{Binding Ingrediente.Costo}"/>
+				<DataGridTextColumn Header="Unidad de medida" IsReadOnly="True" Width="75" Binding="{Binding Ingrediente.UnidadDeMedida}"/>
+			</DataGrid.Columns>
+		</DataGrid>
+		<TextBox x:Name="NombreTextBox" HorizontalAlignment="Left" Height="23" Margin="174,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="172" TextChanged="NombreTextBox_TextChanged"/>
+		<Label Content="Nombre" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top"/>
+		<Label Content="Descipción" HorizontalAlignment="Left" Margin="10,162,0,0" VerticalAlignment="Top"/>
+		<Label Content="Forma de preparación" HorizontalAlignment="Left" Margin="47,275,0,0" VerticalAlignment="Top"/>
+		<Label Content="Notas" HorizontalAlignment="Left" Margin="10,321,0,0" VerticalAlignment="Top"/>
+		<Label Content="Costo total de preparación" HorizontalAlignment="Left" Margin="376,312,0,0" VerticalAlignment="Top"/>
+		<Label Content="Precio al publico" HorizontalAlignment="Left" Margin="376,338,0,0" VerticalAlignment="Top"/>
+		<Label Content="Ganancia" HorizontalAlignment="Left" Margin="376,364,0,0" VerticalAlignment="Top"/>
+		<Label x:Name="CostoValorLabel" Content="0.00" HorizontalAlignment="Left" Margin="683,312,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right" Width="176"/>
+		<Label x:Name="GananciaLabel" Content="0.00" HorizontalAlignment="Left" Margin="683,364,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right" Width="176"/>
+		<TextBox x:Name="PrecioAlPublicoTextBox" HorizontalAlignment="Left" Height="23" Margin="739,338,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="PrecioAlPublicoTextBox_TextChanged"/>
+		<Button x:Name="CancelarButton" Content="Cancelar registro" HorizontalAlignment="Left" Margin="376,441,0,0" VerticalAlignment="Top" Width="120" Click="CancelarButton_Click"/>
+		<Button x:Name="GuardarButton" Content="Guardar platillo" HorizontalAlignment="Left" Margin="739,441,0,0" VerticalAlignment="Top" Width="120" Click="GuardarButton_Click"/>
+		<TextBox x:Name="DescripcionTextBox" HorizontalAlignment="Left" Height="116" Margin="10,196,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="336" TextChanged="DescripcionTextBox_TextChanged"/>
+		<TextBox x:Name="NotasTextBox" HorizontalAlignment="Left" Height="116" Margin="10,346,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="336" TextChanged="NotasTextBox_TextChanged"/>
+		<TextBox x:Name="CodigoTextBox" HorizontalAlignment="Left" Height="23" Margin="174,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="172" TextChanged="CodigoTextBox_TextChanged"/>
+		<Label Content="Código" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top"/>
 
-                <DataGrid.Columns>
-                    <DataGridTemplateColumn Width="50"  CellEditingTemplate="{StaticResource BotonDeAñadir}" CellTemplate="{StaticResource BotonDeAñadir}"/>
-                    <DataGridTextColumn Header="Ingrediente" IsReadOnly="True" Width="75" Binding="{Binding Nombre}"/>
-                    <DataGridTextColumn Header="Código" IsReadOnly="True" Width="75" Binding="{Binding CodigoDeBarras}"/>
-                    <DataGridTextColumn Header="Costo" IsReadOnly="True" Width="75" Binding="{Binding Costo}"/>
-                    <DataGridTextColumn Header="Unidad de medida" IsReadOnly="True" Width="75" Binding="{Binding UnidadDeMedida}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-            <TextBox x:Name="BusquedaTextBox" HorizontalAlignment="Left" Height="23" Margin="880,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="357" TextChanged="BusquedaTextBox_TextChanged"/>
-            <DataGrid x:Name="IngredientesDataGrid" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="false" CanUserDeleteRows="False" SelectionUnit="FullRow" HorizontalAlignment="Left" Height="218" Margin="376,94,0,0" VerticalAlignment="Top" Width="483" RenderTransformOrigin="0.317,0.56">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Ingrediente" IsReadOnly="True" Width="75" Binding="{Binding Ingrediente.Nombre}"/>
-                    <DataGridTextColumn Header="Código" IsReadOnly="True" Width="75" Binding="{Binding Ingrediente.CodigoDeBarras}"/>
-                    <DataGridTemplateColumn Width="75"  CellEditingTemplate="{StaticResource CampoDeTextoDeCantidadDeIngrediente}" CellTemplate="{StaticResource CampoDeTextoDeCantidadDeIngrediente}"/>
-                    <DataGridTemplateColumn Width="75"  CellEditingTemplate="{StaticResource BotonDeEliminar}" CellTemplate="{StaticResource BotonDeEliminar}"/>
-                    <DataGridTextColumn Header="Costo" IsReadOnly="True" Width="75" Binding="{Binding Ingrediente.Costo}"/>
-                    <DataGridTextColumn Header="Unidad de medida" IsReadOnly="True" Width="75" Binding="{Binding Ingrediente.UnidadDeMedida}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-            <TextBox x:Name="NombreTextBox" HorizontalAlignment="Left" Height="23" Margin="174,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="172" TextChanged="NombreTextBox_TextChanged"/>
-            <Label Content="Nombre" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top"/>
-            <Label Content="Descipción" HorizontalAlignment="Left" Margin="10,162,0,0" VerticalAlignment="Top"/>
-            <Label Content="Forma de preparación" HorizontalAlignment="Left" Margin="47,275,0,0" VerticalAlignment="Top"/>
-            <Label Content="Notas" HorizontalAlignment="Left" Margin="10,321,0,0" VerticalAlignment="Top"/>
-            <Label Content="Costo total de preparación" HorizontalAlignment="Left" Margin="376,312,0,0" VerticalAlignment="Top"/>
-            <Label Content="Precio al publico" HorizontalAlignment="Left" Margin="376,338,0,0" VerticalAlignment="Top"/>
-            <Label Content="Ganancia" HorizontalAlignment="Left" Margin="376,364,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="CostoValorLabel" Content="0.00" HorizontalAlignment="Left" Margin="683,312,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right" Width="176"/>
-            <Label x:Name="GananciaLabel" Content="0.00" HorizontalAlignment="Left" Margin="683,364,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right" Width="176"/>
-            <TextBox x:Name="PrecioAlPublicoTextBox" HorizontalAlignment="Left" Height="23" Margin="739,338,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="PrecioAlPublicoTextBox_TextChanged"/>
-            <Button x:Name="CancelarButton" Content="Cancelar registro" HorizontalAlignment="Left" Margin="376,441,0,0" VerticalAlignment="Top" Width="120" Click="CancelarButton_Click"/>
-            <Button x:Name="GuardarButton" Content="Guardar platillo" HorizontalAlignment="Left" Margin="739,441,0,0" VerticalAlignment="Top" Width="120" Click="GuardarButton_Click"/>
-            <TextBox x:Name="DescripcionTextBox" HorizontalAlignment="Left" Height="116" Margin="10,196,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="336" TextChanged="DescripcionTextBox_TextChanged"/>
-            <TextBox x:Name="NotasTextBox" HorizontalAlignment="Left" Height="116" Margin="10,346,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="336" TextChanged="NotasTextBox_TextChanged"/>
-            <TextBox x:Name="CodigoTextBox" HorizontalAlignment="Left" Height="23" Margin="174,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="172" TextChanged="CodigoTextBox_TextChanged"/>
-            <Label Content="Código" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top"/>
-
-        </Grid>
-    </DockPanel>
-	
+	</Grid>
 </Page>

@@ -34,8 +34,7 @@ namespace InterfazDeUsuario.empleado
             BarraDeEstado.Controlador = controlador;
             Controlador = controlador;
 
-            BarraDeEstado.ActualizarEmpleado(Gerente);
- 
+            BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
 
             MostrarEmpleados();
 

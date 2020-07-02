@@ -61,7 +61,7 @@ namespace InterfazDeUsuario.empleado
 				}
 			}
 
-			MessageBox.Show("Los cambios fueron realizados con exito","¡Exito¡");
+			MessageBox.Show("¡Exito!");
 			
 		}
 
@@ -72,6 +72,8 @@ namespace InterfazDeUsuario.empleado
 			{
 				try
 				{
+
+
 					ServiciosDeCreacionDePDF.GenerarReporteDeInventario(Discrepancias, ObjetosDeInventario, direccionDeGuardado);
 					MessageBox.Show("¡El archivo fue creado con exito!", "¡Exito!");
 					System.Diagnostics.Process.Start(direccionDeGuardado);

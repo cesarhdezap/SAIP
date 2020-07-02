@@ -23,9 +23,13 @@ using InterfazDeUsuario.empleado;
 using InterfazDeUsuario.Mesero;
 using LogicaDeNegocio;
 
-using InterfazDeUsuario.Cocinero;
+
+
 
 using System.Xml;
+
+using InterfazDeUsuario.Cocinero;
+
 
 
 namespace InterfazDeUsuario.Paginas
@@ -46,7 +50,6 @@ namespace InterfazDeUsuario.Paginas
 
         private void IniciarSesionButton_Click(object sender, RoutedEventArgs e)
         {
-			Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
 			string nombreDeUsuario = NombreDeUsuarioTextBox.Text.Trim();
 			string contraseña = ContraseñaPasswordbox.Password.Trim();
 
@@ -54,18 +57,7 @@ namespace InterfazDeUsuario.Paginas
 			{
 				contraseña = EncriptarCadena(contraseña);
 				EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-				bool resultadoDeValidacion;
-				try
-				{
-					resultadoDeValidacion = empleadoDAO.ValidarExistenciaDeNombreDeUsuarioYContraseña(nombreDeUsuario, contraseña);
-				}
-				catch (InvalidOperationException ex)
-				{
-					Mouse.OverrideCursor = null;
-					MessageBox.Show("No se pudo establecer conexión a la base de datos, consulte a su técnico." + ex.Message, "Error!");
-					resultadoDeValidacion = false;
-					return;
-				}
+				bool resultadoDeValidacion = empleadoDAO.ValidarExistenciaDeNombreDeUsuarioYContraseña(nombreDeUsuario, contraseña);
 
 				if (resultadoDeValidacion)
 				{
@@ -96,7 +88,6 @@ namespace InterfazDeUsuario.Paginas
 					MessageBox.Show("Contraseña o nombre de usuario invalido", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 				}
 			}
-			Mouse.OverrideCursor = null;
 		}
 
 		private void NombreDeUsuarioTextBox_TextChanged(object sender, TextChangedEventArgs e)

@@ -11,13 +11,13 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 {
     public class CantidadProductoDAO
     {
-        public List<CantidadProducto> RecuperarPorIDPedido(int idPedido)
+        public List<CantidadProducto> RecuperarCantidadPlatilloPorIDPedido(int idPedido)
         {
             List<AccesoADatos.ProductoPedido> productoPedido = new List<AccesoADatos.ProductoPedido>();
 
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
-                productoPedido = context.ProductoPedido.Where(p => p.Pedido.Id == idPedido)
+                productoPedido = context.ProductoPedido.Where(p => p.Id == idPedido)
                     .Include(p => p.Productos).ToList();
             }
             return ConvertirListaDatosALogica(productoPedido);

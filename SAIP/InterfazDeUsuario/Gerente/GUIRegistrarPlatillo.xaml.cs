@@ -36,7 +36,7 @@ namespace InterfazDeUsuario.empleado
 			Controlador = controlador;
 			BarraDeEstado.Controlador = controlador;
 			Gerente = empleadoCargado;
-			BarraDeEstado.ActualizarEmpleado(Gerente);
+			BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
 			IngredientesCargados = ingredienteDAO.CargarIngredientesActivos();
 			IngredientesVisibles = IngredientesCargados;

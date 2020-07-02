@@ -31,8 +31,9 @@ namespace InterfazDeUsuario.empleado
             InitializeComponent();
             Gerente = EmpleadoCargado;
 
-            Empleado = empleado;
-            BarraDeEstado.ActualizarEmpleado(Gerente);
+            BarraDeEstado.Controlador = controlador;
+            Controlador = controlador;
+            BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
 
             VerMesas();
         }

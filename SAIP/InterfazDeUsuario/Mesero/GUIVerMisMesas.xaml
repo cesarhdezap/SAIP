@@ -7,8 +7,7 @@
         xmlns:local="clr-namespace:InterfazDeUsuario.Mesero"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Italia Pizza" Height="691" Width="1258"
-        Loaded="Page_Loaded">
+        Title="Italia Pizza" Height="691" Width="1258">
 
     <Page.Resources>
         <Color x:Key="SelectedBackgroundColor">#00000000</Color>

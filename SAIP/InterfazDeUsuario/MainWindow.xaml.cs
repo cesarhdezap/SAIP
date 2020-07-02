@@ -32,36 +32,10 @@ namespace InterfazDeUsuario
 
         public void CambiarANuevaPage(Page page)
         {
-
-            if (!Pantallas.Any(x => x.GetType() == page.GetType()))
-            {
-                Pantallas.Push(page);
-                Content = page;
-            }
-            else
-            {
-                Page pageExistente = Pantallas.FirstOrDefault(x => x.GetType() == page.GetType());
-                Remover(pageExistente);
-                Pantallas.Push(pageExistente);
-                Content = pageExistente;
-            }
+            Pantallas.Push(page);
+            Content = page;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-        }
-
-        private void Remover(Page page)
-        {
-            if (Pantallas.Peek() == page)
-            {
-                Pantallas.Pop();
-            }
-            else
-            {
-                Page almacenamiento = Pantallas.Peek();
-                Pantallas.Pop();
-                Remover(page);
-                Pantallas.Push(almacenamiento);
-            }
-
+            this.SizeToContent = SizeToContent.WidthAndHeight;
         }
 
         public void Regresar()
@@ -80,15 +54,13 @@ namespace InterfazDeUsuario
                 RegresarAInicioDeSesion();
             }
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
+            this.SizeToContent = SizeToContent.WidthAndHeight;
         }
 
         public void RegresarAInicioDeSesion()
         {
             PageInicioDeSesion inicioDeSesion = new PageInicioDeSesion(this);
             Pantallas.Clear();
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
             Content = inicioDeSesion;
         }
     }

@@ -32,7 +32,7 @@ namespace InterfazDeUsuario.empleado
 			Gerente = empleadoCargado;
 			BarraDeEstado.Controlador = controlador;
 			Controlador = controlador;
-			BarraDeEstado.ActualizarEmpleado(Gerente);
+			BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
 			Controlador = controlador;
 			BarraDeEstado.Controlador = controlador;
 		}
@@ -56,16 +56,21 @@ namespace InterfazDeUsuario.empleado
 			Controlador.CambiarANuevaPage(pasarInventario);
 		}
 
-		private void ButtonRegistrarIngrediente_Click(object sender, RoutedEventArgs e)
-		{
-			GUIRegistrarIngrediente registrarIngrediente = new GUIRegistrarIngrediente(Controlador, Gerente);
-			Controlador.CambiarANuevaPage(registrarIngrediente);
-		}
-
 		private void Button_Click_Lista(object sender, RoutedEventArgs e)
 		{
 			GUIVerEmpleados verEmpleados = new GUIVerEmpleados(Controlador, Gerente, empleadoADesactivar);
 			Controlador.CambiarANuevaPage(verEmpleados);
+		}
+
+		private void Button_Click_Mesas(Object sender, RoutedEventArgs e)
+		{
+
+			GUIVerEmpleados verEmpleados = new GUIVerEmpleados(Controlador, Gerente, empleadoADesactivar);
+			Controlador.CambiarANuevaPage(verEmpleados);
+
+			GUI_VerMesas verMesas = new GUI_VerMesas(Controlador, Gerente);
+			Controlador.CambiarANuevaPage(verMesas);
+
 		}
 
 		private void Button_Click_Mesas(Object sender, RoutedEventArgs e)
