@@ -1,0 +1,48 @@
+﻿<Page x:Class="InterfazDeUsuario.Gerente.GUIRegistrarIngrediente"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:controls="clr-namespace:InterfazDeUsuario.UserControls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InterfazDeUsuario.Gerente"
+      mc:Ignorable="d" d:DesignWidth="800"
+      Title="GUIRegistrarIngrediente" Height="470">
+
+    <DockPanel>
+        <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top" Width="Auto"/>
+
+        <Grid>
+            <Label Content="Código" HorizontalAlignment="Left" Margin="40,60,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="TextBoxCodigo" DataObject.Pasting="TextBoxCodigo_Pasting" HorizontalAlignment="Left" Height="23" Margin="140,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20" TextChanged="TextBoxCodigo_TextChanged" PreviewTextInput="TextBoxCodigo_PreviewTextInput"/>
+            <Label Content="Nombre" HorizontalAlignment="Left" Margin="40,107,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="TextBoxNombre" DataObject.Pasting="TextBoxNombre_Pasting" HorizontalAlignment="Left" Height="23" Margin="140,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20" TextChanged="TextBoxNombre_TextChanged" PreviewTextInput="TextBoxNombre_PreviewTextInput"/>
+            <Label Content="Costo" HorizontalAlignment="Left" Margin="40,158,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="ComboBoxUnidadMedida" HorizontalAlignment="Left" Margin="140,249,0,0" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Unidad de medida" HorizontalAlignment="Left" Margin="20,245,0,0" VerticalAlignment="Top"/>
+            <Label Content="Cantidad" HorizontalAlignment="Left" Margin="40,201,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="TextBoxCosto" DataObject.Pasting="TextBoxCosto_Pasting" HorizontalAlignment="Left" Height="23" Margin="140,161,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20" PreviewTextInput="TextBoxCosto_PreviewTextInput" TextChanged="TextBoxCosto_TextChanged"/>
+            <TextBox x:Name="TextBoxCantidad" DataObject.Pasting="TextBoxCantidad_Pasting" HorizontalAlignment="Left" Height="23" Margin="140,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="20" PreviewTextInput="TextBoxCantidad_PreviewTextInput" TextChanged="TextBoxCantidad_TextChanged"/>
+            <CheckBox x:Name="CheckBoxIngredienteCompuesto" Content="¿Es un Ingrediente compuesto?" HorizontalAlignment="Left" Margin="320,95,0,0" VerticalAlignment="Top" Checked="CheckBoxIngredienteCompuesto_Checked" Unchecked="CheckBoxIngredienteCompuesto_Unchecked"/>
+            <Grid x:Name="GridCompuestos" HorizontalAlignment="Left" Height="262" Margin="320,124,0,0" VerticalAlignment="Top" Width="470">
+                <Label Content="Código" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label Content="Cantidad" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="TextBoxCodigoCompuesto" DataObject.Pasting="TextBoxCodigoCompuesto_Pasting" HorizontalAlignment="Left" Height="23" Margin="80,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBoxCodigoCompuesto_TextChanged" PreviewTextInput="TextBoxCodigoCompuesto_PreviewTextInput"/>
+                <TextBox x:Name="TextBoxCantidadCompuesto" DataObject.Pasting="TextBoxCantidad_Pasting" HorizontalAlignment="Left" Height="23" Margin="80,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBoxCantidadCompuesto_TextChanged" PreviewTextInput="TextBoxCantidadCompuesto_PreviewTextInput"/>
+                <DataGrid x:Name="DataGridComponentes" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="232" Margin="220,10,0,0" VerticalAlignment="Top" Width="240">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Codigo" Binding="{Binding Ingrediente.Codigo}"/>
+                        <DataGridTextColumn Header="Nombre" Binding="{Binding Ingrediente.Nombre}"/>
+                        <DataGridTextColumn Header="Costo" Binding="{Binding Ingrediente.Costo}"/>
+                        <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button x:Name="ButtonAgregarComponente" Content="Agregar Componente" HorizontalAlignment="Left" Margin="35,222,0,0" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.538,0.5" Click="ButtonAgregarComponente_Click"/>
+            </Grid>
+            <Button x:Name="ButtonGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="40,351,0,0" VerticalAlignment="Top" Width="75" Click="ButtonGuardar_Click"/>
+            <Button x:Name="ButtonCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="165,351,0,0" VerticalAlignment="Top" Width="75" IsDefault="True" Click="ButtonCancelar_Click"/>
+            <Label x:Name="LabelCodigoBarra" Content="Código de barras " HorizontalAlignment="Left" Margin="320,54,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="TextBoxCodigoBarras" DataObject.Pasting="TextBoxCodigoBarras_Pasting" HorizontalAlignment="Left" Height="23" Margin="429,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" PreviewTextInput="TextBoxCodigoBarras_PreviewTextInput" TextChanged="TextBoxCodigoBarras_TextChanged"/>
+
+        </Grid>
+    </DockPanel>
+</Page>

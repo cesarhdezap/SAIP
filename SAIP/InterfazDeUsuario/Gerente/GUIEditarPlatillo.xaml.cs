@@ -27,7 +27,7 @@ namespace InterfazDeUsuario.empleado
 		public Empleado Gerente { get; set; }
 		public List<Ingrediente> IngredientesCargados { get; set; }
 		public List<Ingrediente> IngredientesVisibles { get; set; }
-		public List<Proporcion> proporcionesOriginales { get; set; }
+		public List<Proporcion> ProporcionesOriginales { get; set; }
 		public Platillo Platillo { get; set; } = new Platillo();
 		public double Ganancia { get; set; }
 		private bool CandadoDeRefrescadoDeCajasDeTexto { get; set; } = true;
@@ -38,12 +38,12 @@ namespace InterfazDeUsuario.empleado
 			BarraDeEstado.Controlador = controlador;
 			Gerente = empleadoCargado;
 			Platillo = platillo;
-			proporcionesOriginales = new List<Proporcion>();
+			ProporcionesOriginales = new List<Proporcion>();
 			foreach(Proporcion proporcion in Platillo.Proporciones)
 			{
-				proporcionesOriginales.Add(proporcion);
+				ProporcionesOriginales.Add(proporcion);
 			}
-			BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
+			BarraDeEstado.ActualizarEmpleado(Gerente);
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
 			IngredientesCargados = ingredienteDAO.CargarIngredientesActivos();
 			IngredientesVisibles = IngredientesCargados;
@@ -56,7 +56,7 @@ namespace InterfazDeUsuario.empleado
 			string busqueda = BusquedaTextBox.Text;
 			if (busqueda != string.Empty)
 			{
-				IngredientesVisibles = IngredientesCargados.TakeWhile(ingrediente => ingrediente.Nombre.ToLower().Contains(busqueda.ToLower())).ToList();
+				IngredientesVisibles = IngredientesCargados.FindAll(ingrediente => ingrediente.Nombre.ToLower().Contains(busqueda.ToLower())).ToList();
 			}
 			else
 			{
@@ -176,7 +176,7 @@ namespace InterfazDeUsuario.empleado
 		{
 			foreach (Proporcion proporcion in Platillo.Proporciones)
 			{
-				proporcionesOriginales.Remove(proporcion);
+				ProporcionesOriginales.Remove(proporcion);
 			}
 		}
 
@@ -189,6 +189,8 @@ namespace InterfazDeUsuario.empleado
 					if (ValidarGanancia())
 					{
 						EditarPlatillo();
+						MessageBox.Show("El platillo fue editado exitosamente", "¡Exito");
+						Controlador.Regresar();
 					}
 					else
 					{
@@ -240,7 +242,6 @@ namespace InterfazDeUsuario.empleado
 				MostrarEstadoDeValidacionCadena(NombreTextBox);
 				MostrarEstadoDeValidacionCadena(DescripcionTextBox);
 				MostrarEstadoDeValidacionCadena(NotasTextBox);
-
 			}
 
 			return resultado;
@@ -287,7 +288,11 @@ namespace InterfazDeUsuario.empleado
 
 		private void BusquedaTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
 		{
-
+			TextBox padre = sender as TextBox;
+			if (!ValidarEntradaDeDatosSoloEntero(e.Text))
+			{
+				e.Handled = true;
+			}
 		}
 	}
 }

@@ -106,7 +106,7 @@ namespace LogicaDeNegocio.Servicios
 			cantidadEsperada.Add(new Paragraph(discrepancia.CantidadEsperada.ToString()));
 			Cell costo = new Cell();
 			costo.SetFont(helvetica);
-			costo.Add(new Paragraph(discrepancia.Codigo));
+			costo.Add(new Paragraph(discrepancia.Costo.ToString()));
 			Cell unidadDeMedida = new Cell();
 			unidadDeMedida.SetFont(helvetica);
 			unidadDeMedida.Add(new Paragraph(discrepancia.UnidadDeMedida.ToString()));

@@ -7,39 +7,41 @@
       xmlns:UserControls="clr-namespace:InterfazDeUsuario.UserControls" x:Class="InterfazDeUsuario.empleado.GUIReporteDeInventario"
       mc:Ignorable="d"
       Title="GUIReporteDeInventario" Height="570.375" Width="944.562">
+	<DockPanel>
+		<UserControls:BarraDeEstado x:Name="BarraDeEstado" Margin="0,0,0,0" Width="Auto" DockPanel.Dock="Top"/>
+		<Grid>
+			<TabControl>
+				<TabItem Header="Discrepancias" Margin="57,96,-61,-98">
+					<DataGrid x:Name="DiscrepanciasDataGrid" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="false" CanUserDeleteRows="False" SelectionUnit="FullRow"  HorizontalAlignment="Left" Height="283" Margin="56,95,0,0" VerticalAlignment="Top" Width="711">
+						<DataGrid.Columns>
+							<DataGridTextColumn Header="Producto" IsReadOnly="True" Width="100" Binding="{Binding Nombre}"/>
+							<DataGridTextColumn Header="Código" IsReadOnly="True" Width="75" Binding="{Binding Codigo}"/>
+							<DataGridTextColumn Header="Cantidad registrada" IsReadOnly="True" Width="120" Binding="{Binding CantidadRegistrada}"/>
+							<DataGridTextColumn Header="Cantidad esperada" IsReadOnly="True" Width="120" Binding="{Binding CantidadEsperada}"/>
+							<DataGridTextColumn Header="Costo" IsReadOnly="True" Width="75" Binding="{Binding Costo}"/>
+							<DataGridTextColumn Header="Unidad de medida" IsReadOnly="True" Width="120" Binding="{Binding UnidadDeMedida}"/>
+						</DataGrid.Columns>
+					</DataGrid>
+				</TabItem>
+				<TabItem Header="Inventario" Margin="61,96,-64,-98">
+					<DataGrid x:Name="InventarioDataGrid" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="false" CanUserDeleteRows="False" SelectionUnit="FullRow"  HorizontalAlignment="Left" Height="283" Margin="56,95,0,0" VerticalAlignment="Top" Width="711">
+						<DataGrid.Columns>
+							<DataGridTextColumn Header="Producto" IsReadOnly="True" Width="100" Binding="{Binding Nombre}"/>
+							<DataGridTextColumn Header="Código" IsReadOnly="True" Width="75" Binding="{Binding CodigoDeBarras}"/>
+							<DataGridTextColumn Header="Cantidad registrada" IsReadOnly="True" Width="120" Binding="{Binding Cantidad}"/>
+							<DataGridTextColumn Header="Costo" IsReadOnly="True" Width="75" Binding="{Binding Costo}"/>
+							<DataGridTextColumn Header="Tipo de producto" IsReadOnly="True" Width="120" Binding="{Binding TipoDeProducto}"/>
+							<DataGridTextColumn Header="Unidad de medida" IsReadOnly="True" Width="120" Binding="{Binding UnidadDeMedida}"/>
+						</DataGrid.Columns>
+					</DataGrid>
+				</TabItem>
+			</TabControl>
 
-	<Grid>
-		<TabControl>
-			<TabItem Header="Discrepancias" Margin="57,96,-61,-98">
-				<DataGrid x:Name="DiscrepanciasDataGrid" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="false" CanUserDeleteRows="False" SelectionUnit="FullRow"  HorizontalAlignment="Left" Height="283" Margin="56,95,0,0" VerticalAlignment="Top" Width="711">
-					<DataGrid.Columns>
-						<DataGridTextColumn Header="Producto" IsReadOnly="True" Width="100" Binding="{Binding Nombre}"/>
-						<DataGridTextColumn Header="Código" IsReadOnly="True" Width="75" Binding="{Binding Codigo}"/>
-						<DataGridTextColumn Header="Cantidad registrada" IsReadOnly="True" Width="120" Binding="{Binding CantidadRegistrada}"/>
-						<DataGridTextColumn Header="Cantidad esperada" IsReadOnly="True" Width="120" Binding="{Binding CantidadEsperada}"/>
-						<DataGridTextColumn Header="Costo" IsReadOnly="True" Width="75" Binding="{Binding Costo}"/>
-						<DataGridTextColumn Header="Unidad de medida" IsReadOnly="True" Width="120" Binding="{Binding UnidadDeMedida}"/>
-					</DataGrid.Columns>
-				</DataGrid>
-			</TabItem>
-			<TabItem Header="Inventario" Margin="61,96,-64,-98">
-				<DataGrid x:Name="InventarioDataGrid" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="false" CanUserDeleteRows="False" SelectionUnit="FullRow"  HorizontalAlignment="Left" Height="283" Margin="56,95,0,0" VerticalAlignment="Top" Width="711">
-					<DataGrid.Columns>
-						<DataGridTextColumn Header="Producto" IsReadOnly="True" Width="100" Binding="{Binding Nombre}"/>
-						<DataGridTextColumn Header="Código" IsReadOnly="True" Width="75" Binding="{Binding CodigoDeBarras}"/>
-						<DataGridTextColumn Header="Cantidad registrada" IsReadOnly="True" Width="120" Binding="{Binding Cantidad}"/>
-						<DataGridTextColumn Header="Costo" IsReadOnly="True" Width="75" Binding="{Binding Costo}"/>
-						<DataGridTextColumn Header="Tipo de producto" IsReadOnly="True" Width="120" Binding="{Binding TipoDeProducto}"/>
-						<DataGridTextColumn Header="Unidad de medida" IsReadOnly="True" Width="120" Binding="{Binding UnidadDeMedida}"/>
-					</DataGrid.Columns>
-				</DataGrid>
-			</TabItem>
-		</TabControl>
 
+			<Button x:Name="GuardarCambiosButton" Content="Guardar cambios al inventario" HorizontalAlignment="Left" Margin="610,470,0,0" VerticalAlignment="Top" Width="192" Click="GuardarCambiosButton_Click"/>
+			<Button x:Name="GenerarReporteDeInventarioButton" Content="Generar reporte de inventario" HorizontalAlignment="Left" Margin="388,470,0,0" VerticalAlignment="Top" Width="192" Click="GenerarReporteDeInventarioButton_Click"/>
 
-		<UserControls:BarraDeEstado x:Name="BarraDeEstado" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="942"/>
-		<Button x:Name="GuardarCambiosButton" Content="Guardar cambios al inventario" HorizontalAlignment="Left" Margin="610,470,0,0" VerticalAlignment="Top" Width="192" Click="GuardarCambiosButton_Click"/>
-		<Button x:Name="GenerarReporteDeInventarioButton" Content="Generar reporte de inventario" HorizontalAlignment="Left" Margin="388,470,0,0" VerticalAlignment="Top" Width="192" Click="GenerarReporteDeInventarioButton_Click"/>
+		</Grid>
+	</DockPanel>
 
-	</Grid>
 </Page>

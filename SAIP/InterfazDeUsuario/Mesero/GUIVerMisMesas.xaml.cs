@@ -1,23 +1,10 @@
-﻿using InterfazDeUsuario.Paginas;
-using InterfazDeUsuario.UserControls;
-using LogicaDeNegocio;
+﻿using InterfazDeUsuario.UserControls;
 using LogicaDeNegocio.Clases;
-using LogicaDeNegocio.Enumeradores;
 using LogicaDeNegocio.ObjetosAccesoADatos;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 
 namespace InterfazDeUsuario.Mesero
@@ -28,6 +15,7 @@ namespace InterfazDeUsuario.Mesero
     public partial class GUIVerMisMesas : Page
     {
         private List<Cuenta> CuentasDelEmpleado = new List<Cuenta>();
+        private Cuenta CuentaSeleccionada;
         ControladorDeCambioDePantalla Controlador;
         Empleado Empleado;
         
@@ -40,8 +28,7 @@ namespace InterfazDeUsuario.Mesero
             UserControlInformacionDeCuenta.Controlador = controlador;
             UserControlInformacionDeCuenta.Empleado = empleado;
             BarraDeEstado.Controlador = controlador;
-            BarraDeEstado.ActualizarNombreDeUsuario(empleado.Nombre);
-            MostrarMisMesas();
+            BarraDeEstado.ActualizarEmpleado(empleado);
         }
 
         public void MostrarMisMesas()
@@ -54,8 +41,23 @@ namespace InterfazDeUsuario.Mesero
         void ButtonMesa_Click(object sender, RoutedEventArgs e)
         {
             Cuenta cuenta = ((FrameworkElement)sender).DataContext as Cuenta;
+            if (CuentaSeleccionada != null)
+            {
+                CuentasDelEmpleado.Add(CuentaSeleccionada);
+            }
+            CuentaSeleccionada = cuenta;
+            CuentasDelEmpleado.Remove(cuenta);
+
+            ActualizarListBoxMesas();
             StackPanelCuenta.Visibility = Visibility.Visible;
             UserControlInformacionDeCuenta.ActualizarCuenta(cuenta);
+        }
+
+        private void ActualizarListBoxMesas()
+        {
+            ListBoxMesas.SelectedItem = null;
+            ListBoxMesas.ItemsSource = null;
+            ListBoxMesas.ItemsSource = CuentasDelEmpleado;
         }
 
         private void VerMesasDiponiblesButton_Click(object sender, RoutedEventArgs e)
@@ -67,11 +69,31 @@ namespace InterfazDeUsuario.Mesero
         private void ButtonOcultarCuenta_Click(object sender, RoutedEventArgs e)
         {
             StackPanelCuenta.Visibility = Visibility.Collapsed;
+            CuentasDelEmpleado.Add(CuentaSeleccionada);
+            CuentaSeleccionada = null;
+            ActualizarListBoxMesas();
         }
 
         private void ButtonActualizar_Click(object sender, RoutedEventArgs e)
         {
             MostrarMisMesas();
+            StackPanelCuenta.Visibility = Visibility.Collapsed;
+            
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            MostrarMisMesas();
+            if(CuentaSeleccionada != null)
+            {
+                Cuenta cuentaActualizada = CuentasDelEmpleado.FirstOrDefault(c => c.Id == CuentaSeleccionada.Id);
+                CuentaSeleccionada = cuentaActualizada;
+                CuentasDelEmpleado.Remove(CuentaSeleccionada);
+
+                UserControlInformacionDeCuenta.ActualizarCuenta(CuentaSeleccionada);
+                ActualizarListBoxMesas();
+            }
+            
         }
     }
 }

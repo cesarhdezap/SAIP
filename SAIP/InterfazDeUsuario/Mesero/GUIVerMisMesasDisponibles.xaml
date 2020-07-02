@@ -10,11 +10,11 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Italia Pizza" Height="691" Width="1258">
 
-    <Grid>
-        <Label x:Name="LabelMesasDisponibles" Content="MESAS DISPONIBLES" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" FontSize="42" FontFamily="Script MT Bold" Foreground="Green" />
-        <controls:BarraDeEstado x:Name="BarraDeEstado" Margin="0,0,0,617" Width="Auto"/>
+    <DockPanel>
+        <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top" Width="Auto"/>
+        <Label x:Name="LabelMesasDisponibles" DockPanel.Dock="Top" Content="MESAS DISPONIBLES" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="42" Foreground="Green" />
 
-        <ScrollViewer HorizontalAlignment="Left" Height="530" VerticalAlignment="Top" Width="1252" Margin="0,132,0,0">
+        <ScrollViewer>
             <ScrollViewer.Resources>
                 <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">100</sys:Double>
             </ScrollViewer.Resources>
@@ -39,5 +39,5 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </ScrollViewer>
-    </Grid>
+    </DockPanel>
 </Page>

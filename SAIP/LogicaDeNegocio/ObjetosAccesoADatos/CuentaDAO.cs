@@ -1,4 +1,5 @@
-﻿using AccesoADatos;
+using AccesoADatos;
+using LogicaDeNegocio.Clases.ClasesAsociativas;
 using LogicaDeNegocio.Enumeradores;
 using System;
 using System.Collections.Generic;
@@ -55,8 +56,95 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
-                cuentaDb.Mesa = context.Mesas.Find(cuenta.Mesa.NumeroDeMesa);
+                if(cuenta.Id >= 0)
+                {
+                    cuentaDb.Mesa = context.Mesas.Find(cuenta.Mesa.NumeroDeMesa);
+                }
                 cuentaDb.Mesa.Estado = (short)EstadoMesa.Ocupada;
+                if (cuenta.Mesa != null)
+                {
+                    cuentaDb.Mesa = context.Mesas.Find(cuenta.Mesa.NumeroDeMesa);
+                    cuentaDb.Mesa.Estado = (short)EstadoMesa.Ocupada;
+                }
+                cuentaDb.Empleado = context.Empleados.Find(cuenta.Empleado.Id);
+                context.Cuentas.Add(cuentaDb);
+                context.SaveChanges();
+            }
+
+        }
+
+        public void CrearCuentaConPedidos(Clases.Cuenta cuenta)
+        {
+            var cuentaDb = new AccesoADatos.Cuenta()
+            {
+                Estado = (short)EstadoCuenta.Abierta
+            };
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                cuentaDb.Empleado = context.Empleados.Find(cuenta.Empleado.Id);
+                foreach (Clases.Cliente cliente in cuenta.Clientes)
+                {
+                    if(cliente.Id > 0)
+                    {
+                        cuentaDb.Clientes.Add(context.Clientes.Find(cliente.Id));
+                    }
+                    else
+                    {
+                        cuentaDb.Clientes.Add(new Cliente
+                        {
+                            Telefono = cliente.Telefono,
+                            Nombre = cliente.Nombre,
+                            FechaDeCreacion = DateTime.Now,
+                            FechaDeModicacion = DateTime.Now,
+                            NombreCreador = cliente.NombreDelCreador,
+                            Comentarios = cliente.Comentario,
+                            Activo = true
+                        });
+                    }
+                }
+                foreach (Pedido pedido in cuenta.Pedidos)
+                {
+
+                    PedidoDAO pedidoDAO = new PedidoDAO();
+                    if (pedidoDAO.ValidarCuentaParaGuardado(pedido) && pedidoDAO.ValidarCantidadDeCantidadAlimentos(pedido.CantidadAlimentos))
+                    {
+                        pedido.FechaDeCreacion = DateTime.Now;
+                        IvaDAO ivaDAO = new IvaDAO();
+                        pedido.Iva = ivaDAO.CargarIvaActual().Valor;
+                        pedido.CalcularPrecioTotal();
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Pedido no tiene contenido o no ");
+                    }
+
+                    AccesoADatos.Pedido pedidoAGuardar = pedidoDAO.ConvertirPedidoLogicaADatos(pedido);
+                    foreach (CantidadAlimento cantidadAlimento in pedido.CantidadAlimentos)
+                    {
+                        if (cantidadAlimento is CantidadProducto cantidadProducto)
+                        {
+                            ProductoPedido productoPedido = new ProductoPedido();
+                            productoPedido.Cantidad = cantidadProducto.Cantidad;
+                            productoPedido.Productos = context.Productos.Find(cantidadProducto.Alimento.Id);
+                            pedidoAGuardar.ProductoPedido.Add(productoPedido);
+                        }
+                        else if (cantidadAlimento is CantidadPlatillo cantidadPlatillo)
+                        {
+                            PlatilloPedido platilloPedido = new PlatilloPedido();
+                            platilloPedido.Cantidad = cantidadPlatillo.Cantidad;
+                            platilloPedido.Platillo = context.Platillos.Find(cantidadPlatillo.Alimento.Id);
+                            pedidoAGuardar.PlatilloPedidos.Add(platilloPedido);
+                        }
+                    }
+
+                    pedidoAGuardar.Cuenta = context.Cuentas.Find(pedido.Cuenta.Id);
+                    cuentaDb.Pedidos.Add(pedidoAGuardar);
+                }
+                if (cuenta.Mesa != null)
+                {
+                    cuentaDb.Mesa = context.Mesas.Find(cuenta.Mesa.NumeroDeMesa);
+                    cuentaDb.Mesa.Estado = (short)EstadoMesa.Ocupada;
+                }
                 cuentaDb.Empleado = context.Empleados.Find(cuenta.Empleado.Id);
                 context.Cuentas.Add(cuentaDb);
                 context.SaveChanges();
@@ -83,9 +171,9 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 Id = cuenta.Id,
                 Estado = (EstadoCuenta) cuenta.Estado,
                 PrecioTotal = cuenta.PrecioTotal,
-                Mesa = mesa.ConvertirMesaDatosALogica(cuenta.Mesa),               
-                Clientes = clienteDAO.ConvertirListaDeDatosALogica(cuenta.Clientes.ToList()) 
-                
+                Mesa = mesa.ConvertirMesaDatosALogica(cuenta.Mesa),
+                Clientes = clienteDAO.ConvertirListaDeDatosALogica(cuenta.Clientes.ToList())
+
                 //Traducir datos de la cuenta
             };
 

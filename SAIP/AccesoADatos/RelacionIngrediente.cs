@@ -12,12 +12,12 @@ namespace AccesoADatos
     using System;
     using System.Collections.Generic;
     
-    public partial class IngredienteIngrediente
+    public partial class RelacionIngrediente
     {
         public int Id { get; set; }
         public double Cantidad { get; set; }
     
-        public virtual Ingrediente IngredienteCompuesto { get; set; }
-        public virtual Ingrediente IngredienteComponente { get; set; }
+        public virtual Ingrediente IngredientePadre { get; set; }
+        public virtual Ingrediente IngredienteHijo { get; set; }
     }
 }

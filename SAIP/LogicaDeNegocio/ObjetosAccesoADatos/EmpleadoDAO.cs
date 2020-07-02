@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -132,6 +133,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			return usuario;
 		}
 
+
 		public bool ValidarExistenciaDeNombreDeUsuarioYContraseña(string NombreDeUsuario, string Contraseña)
 		{
 			bool resultadoDeExistencia = false;
@@ -139,10 +141,15 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
 				//System.IO.FileNotFoundException Unable to resolve assembly NodeloDeDatos.csdl
-				//System.Data.Entity.Core.EntityException
-				//System.Data.Entity.Core.EntityException: 'The underlying provider failed on Open.'
-				//System.Data.Entity.Core.EntityException: 'An exception has been raised that is likely due to a transient failure. If you are connecting to a SQL Azure database consider using SqlAzureExecutionStrategy.'
-				empleadoLocalizado = context.Empleados.FirstOrDefault(empleado => empleado.NombreDeUsuario == NombreDeUsuario && empleado.Contraseña == Contraseña);
+
+				try
+				{
+					empleadoLocalizado = context.Empleados.FirstOrDefault(empleado => empleado.NombreDeUsuario == NombreDeUsuario && empleado.Contraseña == Contraseña);
+				}
+				catch(System.Data.Entity.Core.EntityException e)
+				{
+					throw new InvalidOperationException(e.Message);
+				}
 			}
 			if (empleadoLocalizado != null)
 			{

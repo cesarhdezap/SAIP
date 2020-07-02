@@ -19,9 +19,10 @@ namespace InterfazDeUsuario.empleado
         {
             InitializeComponent();
             Gerente = EmpleadoCargado;
-            BarraDeEstado.Controlador = controlador;
-            Controlador = controlador;
-            BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
+
+            
+            BarraDeEstado.ActualizarEmpleado(Gerente);
+
         }
 
         public void CapturarMesa()

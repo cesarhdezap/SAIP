@@ -49,6 +49,20 @@ namespace InterfazDeUsuario
 			else
 			{
 				textBoxCadena.BorderBrush = Brushes.Red;
+				MostrarToolTip(textBoxCadena, "Debe tener un largo de 0 a 255 caractéres y no puede estar vacio");
+			}
+		}
+
+		public static void MostrarEstadoDeValidacionCadenaVacioPermitido(TextBox textBoxCadena)
+		{
+			if (ValidarCadenaVacioPermitido(textBoxCadena.Text))
+			{
+				textBoxCadena.BorderBrush = Brushes.Green;
+				OcultarToolTip(textBoxCadena);
+			}
+			else
+			{
+				textBoxCadena.BorderBrush = Brushes.Red;
 				MostrarToolTip(textBoxCadena, "Debe tener un largo de 0 a 255 caractéres");
 			}
 		}
