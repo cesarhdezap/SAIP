@@ -11,7 +11,7 @@ namespace LogicaDeNegocio.Clases
     public class Mesa
     {
         public EstadoMesa Estado;
-        public int NumeroDeMesa;
+        public int NumeroDeMesa { get; set; }
 
         public void CambiarEstado(EstadoMesa estado)
         {

@@ -71,6 +71,9 @@
     <Compile Include="Ingrediente.cs">
       <DependentUpon>ModeloDeDatos.tt</DependentUpon>
     </Compile>
+    <Compile Include="IngredienteIngrediente.cs">
+      <DependentUpon>ModeloDeDatos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Iva.cs">
       <DependentUpon>ModeloDeDatos.tt</DependentUpon>
     </Compile>
@@ -111,9 +114,6 @@
       <DependentUpon>ModeloDeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RelacionIngrediente.cs">
-      <DependentUpon>ModeloDeDatos.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

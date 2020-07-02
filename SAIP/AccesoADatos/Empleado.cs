@@ -11,7 +11,7 @@ namespace AccesoADatos
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Empleado
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,11 +19,12 @@ namespace AccesoADatos
         {
             this.Cuenta = new HashSet<Cuenta>();
         }
-    
+
         public int Id { get; set; }
         public string Contraseña { get; set; }
         public string NombreDeUsuario { get; set; }
         public string Nombre { get; set; }
+        public string CorreoElectronico { get; set; }
         public System.DateTime FechaDeCreacion { get; set; }
         public System.DateTime FechaDeModicacion { get; set; }
         public string NombreCreador { get; set; }
