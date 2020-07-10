@@ -18,9 +18,8 @@ using System.Windows.Shapes;
 using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
 using static InterfazDeUsuario.UtileriasGráficas;
 using LogicaDeNegocio.Enumeradores;
-using static LogicaDeNegocio.Servicios.ServiciosDeEncriptacion;
 
-namespace InterfazDeUsuario.empleado
+namespace InterfazDeUsuario.Gerente
 {
     /// <summary>
     /// Lógica de interacción para GUIRegistrarEmpleado.xaml
@@ -31,17 +30,15 @@ namespace InterfazDeUsuario.empleado
         public Empleado Gerente { get; set; }
         public List<Empleado> Trabajadores { get; set; }
         public List<Empleado> Visible { get; set; }
-        public Empleado EmpleadoRegistrar { get; set; } = new Empleado();
+        public Empleado empleado { get; set; } = new Empleado();
         ControladorDeCambioDePantalla Controlador;
         public GUIRegistrarEmpleado(ControladorDeCambioDePantalla controlador, Empleado empleadoCargado)
         {
             InitializeComponent();
-            ComboBoxPuesto.ItemsSource = Enum.GetValues(typeof(TipoDeEmpleado));
-            ComboBoxPuesto.SelectedIndex = 0;
             Gerente = empleadoCargado;
             BarraDeEstado.Controlador = controlador;
             Controlador = controlador;
-            BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
+            BarraDeEstado.ActualizarEmpleado(Gerente);
             EmpleadoDAO empleadoDAO = new EmpleadoDAO();
             Trabajadores = empleadoDAO.CargarTodos();
             Visible = Trabajadores;
@@ -51,21 +48,9 @@ namespace InterfazDeUsuario.empleado
 
         private void Agregar_Click(object sender, RoutedEventArgs e)
         {
-            if (ValidarCampos())
-            {
-                
-                MessageBoxResult resultadoDeMesageBox = MessageBox.Show("Esta a punto de guardar un Empleado nuevo dentro del sistema ¿Esta seguro que desea continuar?", "ADVERTENCIA", MessageBoxButton.YesNo, MessageBoxImage.Error);
-                if (resultadoDeMesageBox == MessageBoxResult.Yes)
-                {
-                    CapturarEmpleado();
-                    
-                }
-            }
-            else
-            {
-                 MessageBox.Show("Verifique los campos remarcados en rojo", "Campos invalidos", MessageBoxButton.OK, MessageBoxImage.Error);
-                
-            }
+            CapturarEmpleado();
+            ValidarCampos();
+            ActualizarPantalla();
         }
 
         public void ActualizarPantalla()
@@ -73,18 +58,18 @@ namespace InterfazDeUsuario.empleado
             TextBoxNombre.Clear();
             Usuario.Clear();
             correo.Clear();
-            PasswordBoxContraseña.Clear();
-            
+            password.Clear();
+            puesto.Clear();
         }
 
         private bool ValidarCampos()
         {
             bool resultado = false;
-            if (ValidarNombre(TextBoxNombre.Text) &&
+            if (ValidarCadena(TextBoxNombre.Text) &&
                 ValidarCadena(Usuario.Text) &&
-                ValidarCorreoElectronico(correo.Text) &&
-                ValidarContraseña(PasswordBoxContraseña.Password)&&
-                ValidarCadena(ComboBoxPuesto.Text))
+                ValidarCadena(correo.Text) &&
+                ValidarCadena(password.Text)&&
+                ValidarCadena(puesto.Text))
             {
                 resultado = true;
             }
@@ -92,25 +77,26 @@ namespace InterfazDeUsuario.empleado
             {
                 MostrarEstadoDeValidacionCadena(TextBoxNombre);
                 MostrarEstadoDeValidacionCadena(Usuario);
-                MostrarEstadoDeValidacionCorreoElectronico(correo);
-                MostrarEstadoDeValidacionContraseña(PasswordBoxContraseña);
+                MostrarEstadoDeValidacionCadena(correo);
+                MostrarEstadoDeValidacionCadena(password);
+                MostrarEstadoDeValidacionCadena(puesto);
 
             }
 
             return resultado;
         }
-            
+            private void Nombre_TextChanged(object sender, TextChangedEventArgs e)
+            {
+            MostrarEstadoDeValidacionCadena((TextBox)sender);
+
+            }
         public void CapturarEmpleado()
         {
-            EmpleadoRegistrar.Nombre = TextBoxNombre.Text;
-            EmpleadoRegistrar.NombreDeUsuario = Usuario.Text;
-            EmpleadoRegistrar.Contraseña = EncriptarCadena(PasswordBoxContraseña.Password);
-            EmpleadoRegistrar.CorreoElectronico = correo.Text;
-            EmpleadoRegistrar.TipoDeEmpleado = (TipoDeEmpleado)ComboBoxPuesto.SelectedItem;
-            EmpleadoRegistrar.Creador = Gerente.Nombre;
-            EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-            empleadoDAO.GuardarEmpleado(EmpleadoRegistrar);
-            MessageBox.Show("Empleado Registrado con Exito!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            empleado.Nombre = TextBoxNombre.Text;
+            empleado.NombreDeUsuario = Usuario.Text;
+            empleado.Contraseña = password.Text;
+            empleado.CorreoElectronico = correo.Text;
+            empleado.TipoDeEmpleado = TipoDeEmpleado.Mesero;
         }
 
         private void Usuario_TextChanged(object sender, TextChangedEventArgs e)
@@ -120,28 +106,19 @@ namespace InterfazDeUsuario.empleado
 
         private void correo_TextChanged(object sender, TextChangedEventArgs e)
         {
-            MostrarEstadoDeValidacionCorreoElectronico((TextBox)sender);
+            MostrarEstadoDeValidacionCadena((TextBox)sender);
         }
 
-
-        private void Nombre_TextChanged(object sender, TextChangedEventArgs e)
+        private void puesto_TextChanged(object sender, TextChangedEventArgs e)
         {
             MostrarEstadoDeValidacionCadena((TextBox)sender);
-
         }
 
-        private void PasswordBoxContraseña_PasswordChanged(object sender, RoutedEventArgs e)
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            MostrarEstadoDeValidacionContraseña((PasswordBox)sender);
+            MostrarEstadoDeValidacionCadena((TextBox)sender);
         }
 
-        private void Cancelar_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult resultadoDeMessageBox = MessageBox.Show("¿Esta seguro que desea cancelar el Registro? Se perderan los cambios sin guardar", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
-            if (resultadoDeMessageBox == MessageBoxResult.Yes)
-            {
-                Controlador.Regresar();
-            }
-        }
+        
     }
 }

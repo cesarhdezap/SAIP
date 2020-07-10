@@ -15,38 +15,37 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InterfazDeUsuario.empleado
+namespace InterfazDeUsuario.Gerente
 {
     /// <summary>
     /// Lógica de interacción para GUI_VerMesas.xaml
     /// </summary>
-    public partial class GUI_VerMesas : Page
+    public partial class GUI_VerMesas : Window
     {
         public Empleado Gerente { get; set; }
-        private List<Mesa> Mesas = new List<Mesa>();
-        
-        ControladorDeCambioDePantalla Controlador;
-        public GUI_VerMesas(ControladorDeCambioDePantalla controlador ,Empleado EmpleadoCargado)
+        private List<Cuenta> Cuentas = new List<Cuenta>();
+        Empleado Empleado;
+        public GUI_VerMesas(Empleado EmpleadoCargado, Empleado empleado)
         {
             InitializeComponent();
             Gerente = EmpleadoCargado;
-            BarraDeEstado.Controlador = controlador;
-            Controlador = controlador;
-            BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
+            Empleado = empleado;
+            BarraDeEstado.ActualizarEmpleado(Gerente);
             VerMesas();
         }
 
         public void VerMesas()
         {
-            MesaDAO mesaDAO = new MesaDAO();
-            Mesas = mesaDAO.RecuperarTodos();
-            ListaM.ItemsSource = Mesas;
+            CuentaDAO cuentaDAO = new CuentaDAO();
+            Cuentas = cuentaDAO.RecuperarCuentasAbiertasPorEmpleado(Empleado);
+            ListaM.ItemsSource = Cuentas;
         }
 
-        private void Registro_Click(object sender, RoutedEventArgs e)
+        private void registro_Click(object sender, RoutedEventArgs e)
         {
-            GUIRegistarMesa registarMesa = new GUIRegistarMesa(Controlador, Gerente);
-            Controlador.CambiarANuevaPage(registarMesa);
+            GUIRegistarMesa registarMesa = new GUIRegistarMesa(Gerente);
+            Hide();
+            registarMesa.ShowDialog();
 
         }
     }

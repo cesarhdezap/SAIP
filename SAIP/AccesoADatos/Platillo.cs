@@ -37,5 +37,3 @@ namespace AccesoADatos
         public virtual ICollection<PlatilloIngrediente> PlatilloIngredientes { get; set; }
     }
 }
-
-/// CU33/CU34Visualizar lista de pedidos pendientes/ver ingredientes de pedido

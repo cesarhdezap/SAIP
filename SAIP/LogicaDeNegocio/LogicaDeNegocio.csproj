@@ -107,6 +107,7 @@
     <Compile Include="Clases\Pedido.cs" />
     <Compile Include="Clases\ClasesAsociativas\Proporcion.cs" />
     <Compile Include="Clases\Producto.cs" />
+    <Compile Include="Convertidores\ConversorDeCantidadASubtotal.cs" />
     <Compile Include="Convertidores\ConversorDeEnumeradores.cs" />
     <Compile Include="Convertidores\ConvertidorDeFlotanteADinero.cs" />
     <Compile Include="Enumeradores\EstadoCuenta.cs" />

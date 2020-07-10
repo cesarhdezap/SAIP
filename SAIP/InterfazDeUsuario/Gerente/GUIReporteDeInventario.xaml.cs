@@ -18,7 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InterfazDeUsuario.empleado
+namespace InterfazDeUsuario.Gerente
 {
 	/// <summary>
 	/// Interaction logic for GUIReporteDeInventario.xaml
@@ -61,7 +61,7 @@ namespace InterfazDeUsuario.empleado
 				}
 			}
 
-			MessageBox.Show("¡Exito!");
+			MessageBox.Show("Los cambios fueron realizados con exito","¡Exito¡");
 			
 		}
 
@@ -72,8 +72,6 @@ namespace InterfazDeUsuario.empleado
 			{
 				try
 				{
-
-
 					ServiciosDeCreacionDePDF.GenerarReporteDeInventario(Discrepancias, ObjetosDeInventario, direccionDeGuardado);
 					MessageBox.Show("¡El archivo fue creado con exito!", "¡Exito!");
 					System.Diagnostics.Process.Start(direccionDeGuardado);

@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
 using static InterfazDeUsuario.UtileriasGráficas;
 
-namespace InterfazDeUsuario.empleado
+namespace InterfazDeUsuario.Gerente
 {
 	/// <summary>
 	/// Interaction logic for GUIRegistrarPlatillo.xaml
@@ -36,7 +36,7 @@ namespace InterfazDeUsuario.empleado
 			Controlador = controlador;
 			BarraDeEstado.Controlador = controlador;
 			Gerente = empleadoCargado;
-			BarraDeEstado.ActualizarNombreDeUsuario(Gerente.Nombre);
+			BarraDeEstado.ActualizarEmpleado(Gerente);
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
 			IngredientesCargados = ingredienteDAO.CargarIngredientesActivos();
 			IngredientesVisibles = IngredientesCargados;

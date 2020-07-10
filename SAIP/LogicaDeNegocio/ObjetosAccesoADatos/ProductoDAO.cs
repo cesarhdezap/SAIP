@@ -93,7 +93,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				Creador = productoDb.NombreCreador,
 				Activo = productoDb.Activo,
 				Costo = productoDb.Costo,
-				Codigo = productoDb.Codigo			};
+				Codigo = productoDb.Codigo			
+			};
 			return productoConvertido;
 		}
 

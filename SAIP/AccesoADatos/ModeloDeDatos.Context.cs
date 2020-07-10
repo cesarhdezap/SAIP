@@ -39,7 +39,7 @@ namespace AccesoADatos
         public virtual DbSet<ProductoPedido> ProductoPedido { get; set; }
         public virtual DbSet<Iva> Ivas { get; set; }
         public virtual DbSet<Cuenta> Cuentas { get; set; }
-        public virtual DbSet<IngredienteIngrediente> IngredienteIngrediente { get; set; }
+        public virtual DbSet<RelacionIngrediente> RelacionIngredientes { get; set; }
         public virtual DbSet<Discrepancia> Discrepancias { get; set; }
     }
 }

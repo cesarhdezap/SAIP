@@ -55,23 +55,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CallCenter\GUIEditarCliente.xaml.cs">
+      <DependentUpon>GUIEditarCliente.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CallCenter\GUIEditarPedido.xaml.cs">
       <DependentUpon>GUIEditarPedido.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Cocinero\GUICocinero.xaml.cs">
-      <DependentUpon>GUICocinero.xaml</DependentUpon>
+    <Compile Include="CallCenter\GUIRegistrarCliente.xaml.cs">
+      <DependentUpon>GUIRegistrarCliente.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Cocinero\GUIVerPedidosPendientes.xaml.cs">
-      <DependentUpon>GUIVerPedidosPendientes.xaml</DependentUpon>
+    <Compile Include="CallCenter\GUIVisualizarListaDeClientes.xaml.cs">
+      <DependentUpon>GUIVisualizarListaDeClientes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Cocinero\GUIVerRecetas.xaml.cs">
-      <DependentUpon>GUIVerRecetas.xaml</DependentUpon>
+    <Compile Include="Gerente\GUIEditarImpuesto.xaml.cs">
+      <DependentUpon>GUIEditarImpuesto.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gerente\GUIListaDeProductos.xaml.cs">
       <DependentUpon>GUIListaDeProductos.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gerente\GUIPasarInventario.xaml.cs">
       <DependentUpon>GUIPasarInventario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gerente\GUIRegistrarIngrediente.xaml.cs">
+      <DependentUpon>GUIRegistrarIngrediente.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gerente\GUIReporteDeInventario.xaml.cs">
       <DependentUpon>GUIReporteDeInventario.xaml</DependentUpon>
@@ -84,12 +90,6 @@
     </Compile>
     <Compile Include="Gerente\GUIVerEmpleados.xaml.cs">
       <DependentUpon>GUIVerEmpleados.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Gerente\GUI_DarBajaProductoOPlatillo.xaml.cs">
-      <DependentUpon>GUI_DarBajaProductoOPlatillo.xaml</DependentUpon>
-      </Compile>
-    <Compile Include="Gerente\GUI_EditarEmpleado.xaml.cs">
-      <DependentUpon>GUI_EditarEmpleado.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gerente\GUI_VerMesas.xaml.cs">
       <DependentUpon>GUI_VerMesas.xaml</DependentUpon>
@@ -123,6 +123,10 @@
       <DependentUpon>InformacionDeCuenta.xaml</DependentUpon>
     </Compile>
     <Compile Include="UtileriasGráficas.cs" />
+    <Page Include="CallCenter\GUIEditarCliente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CallCenter\GUIEditarPedido.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -131,15 +135,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Cocinero\GUICocinero.xaml">
+    <Page Include="CallCenter\GUIRegistrarCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Cocinero\GUIVerPedidosPendientes.xaml">
+    <Page Include="CallCenter\GUIVisualizarListaDeClientes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Cocinero\GUIVerRecetas.xaml">
+    <Page Include="Gerente\GUIEditarImpuesto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -148,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Gerente\GUIPasarInventario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gerente\GUIRegistrarIngrediente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -164,14 +172,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Gerente\GUIVerEmpleados.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Gerente\GUI_DarBajaProductoOPlatillo.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Gerente\GUI_EditarEmpleado.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -285,9 +285,6 @@
     <Resource Include="img\actualizar.png" />
     <Resource Include="img\anadir.png" />
     <Resource Include="img\disminuir.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Gerente\italiapizza.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

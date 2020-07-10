@@ -70,9 +70,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             {
                 mesas = context.Mesas.ToList();
             }
-            List<Clases.Mesa> mesasresultado = new List<Clases.Mesa>();
-            mesasresultado = ConvertirListaDeMesasDatosALogica(mesas);
-            return mesasresultado;
+            
+            return ConvertirListaDeMesasDatosALogica(mesas);
         }
 
 
@@ -105,15 +104,6 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 mesasLogica.Add(ConvertirMesaDatosALogica(mesa));
             }
             return mesasLogica;
-        }
-        public void GuardarMesas(Clases.Mesa mesa)
-        {
-            AccesoADatos.Mesa mesaguardada = ConvertirMesaLogicaADatos(mesa);
-            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
-            {
-                context.Mesas.Add(mesaguardada);
-                context.SaveChanges();
-            }
         }
     }
 }
