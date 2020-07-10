@@ -181,5 +181,17 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             pedido.AumentarIngredientes();
 
         }
+
+        public List<Pedido> CargarPendientes1()
+        {
+            List<AccesoADatos.Pedido> Pendiente = new List<AccesoADatos.Pedido>();
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                Pendiente = context.Pedidos.ToList();
+            }
+            List<Pedido> pedidoL = new List<Pedido>();
+
+            return pedidoL;
+        }
     }
 }

@@ -67,6 +67,15 @@
     <Compile Include="CallCenter\GUIVisualizarListaDeClientes.xaml.cs">
       <DependentUpon>GUIVisualizarListaDeClientes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Cocinero\GUICocinero.xaml.cs">
+      <DependentUpon>GUICocinero.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cocinero\GUIVerPedidosPendientes.xaml.cs">
+      <DependentUpon>GUIVerPedidosPendientes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cocinero\GUIVerRecetas.xaml.cs">
+      <DependentUpon>GUIVerRecetas.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Gerente\GUIEditarImpuesto.xaml.cs">
       <DependentUpon>GUIEditarImpuesto.xaml</DependentUpon>
     </Compile>
@@ -140,6 +149,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CallCenter\GUIVisualizarListaDeClientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Cocinero\GUICocinero.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Cocinero\GUIVerPedidosPendientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Cocinero\GUIVerRecetas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
