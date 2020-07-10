@@ -22,11 +22,10 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				proporcionesDb = context.PlatilloIngrediente.Where(p => p.Platillo.Id == platilloID)
 					.Include(p => p.Platillo)
 					.Include(p => p.Ingrediente)
-					.Include(p => p.Ingrediente.RelacionIngredientesHijo)
 					.ToList();
 			}
 
-			return ConvertirListaDeProporcionesDatosALogica(proporcionesDb);
+			return ConvertirListaDeProporcionesDeAccesoADatosAListaDeProporcionesDeLogica(proporcionesDb);
 		}
 
 		public List<AccesoADatos.PlatilloIngrediente> ConvertirListaLogicaAListaDeDB(List<Clases.Proporcion> Proporciones)
@@ -53,7 +52,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			return proporcionesConvertidas;
 		}
 
-		private List<Clases.Proporcion> ConvertirListaDeProporcionesDatosALogica(List<AccesoADatos.PlatilloIngrediente> ProporcionesDb)
+		private List<Clases.Proporcion> ConvertirListaDeProporcionesDeAccesoADatosAListaDeProporcionesDeLogica(List<AccesoADatos.PlatilloIngrediente> ProporcionesDb)
 		{
 			List<Clases.Proporcion> proporcionesConvertidas = new List<Clases.Proporcion>();
 			foreach (PlatilloIngrediente proporcion in ProporcionesDb)

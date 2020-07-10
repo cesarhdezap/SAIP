@@ -1,4 +1,4 @@
-﻿	using LogicaDeNegocio.Clases;
+﻿using LogicaDeNegocio.Clases;
 using LogicaDeNegocio.Clases.ClasesCompuestas;
 using LogicaDeNegocio.ObjetosAccesoADatos;
 using LogicaDeNegocio.Enumeradores;
@@ -18,7 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
 
-namespace InterfazDeUsuario.Gerente
+namespace InterfazDeUsuario.empleado
 {
 	/// <summary>
 	/// Interaction logic for GUIPasarInventario.xaml
@@ -257,16 +257,6 @@ namespace InterfazDeUsuario.Gerente
 			else
 			{
 				MessageBox.Show("Debe ingresar almenos un ingrediente o producto para pasar al inventario", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-			}
-		}
-
-		private void CancelarButton_Click(object sender, RoutedEventArgs e)
-		{
-			MessageBoxResult messageBoxResultado = MessageBox.Show("¿Esta seguro que desea cancelar el inventariado? La informacion ingresada se perdera", "Alerta", MessageBoxButton.YesNo);
-
-			if(messageBoxResultado == MessageBoxResult.Yes)
-			{
-				Controlador.Regresar();
 			}
 		}
 	}

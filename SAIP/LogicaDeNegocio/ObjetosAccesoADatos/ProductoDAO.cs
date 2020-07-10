@@ -60,7 +60,20 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			List<AccesoADatos.Producto> productosDb = new List<AccesoADatos.Producto>();
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				productosDb = context.Productos.ToList().TakeWhile(p => p.Activo == true).ToList();
+				productosDb = context.Productos.ToList().Where(p => p.Activo == true).ToList();
+			}
+
+			List<Clases.Producto> productosResultado = new List<Clases.Producto>();
+			productosResultado = ConvertirListaDeDbAListaDeLogica(productosDb);
+			return productosResultado;
+		}
+
+		public List<Clases.Producto> CargarTodos()
+		{
+			List<AccesoADatos.Producto> productosDb = new List<AccesoADatos.Producto>();
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				productosDb = context.Productos.ToList();
 			}
 
 			List<Clases.Producto> productosResultado = new List<Clases.Producto>();
@@ -80,8 +93,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				Creador = productoDb.NombreCreador,
 				Activo = productoDb.Activo,
 				Costo = productoDb.Costo,
-				Codigo = productoDb.Codigo			
-			};
+				Codigo = productoDb.Codigo			};
 			return productoConvertido;
 		}
 

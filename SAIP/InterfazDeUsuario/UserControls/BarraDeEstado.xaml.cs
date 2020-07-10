@@ -1,6 +1,4 @@
-﻿using InterfazDeUsuario.CallCenter;
-using InterfazDeUsuario.Gerente;
-using LogicaDeNegocio.Clases;
+﻿using LogicaDeNegocio.Clases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +23,6 @@ namespace InterfazDeUsuario.UserControls
 	public partial class BarraDeEstado : UserControl
 	{
 		public ControladorDeCambioDePantalla Controlador;
-		private Empleado Empleado;
 
 		public BarraDeEstado()
 		{
@@ -38,8 +35,9 @@ namespace InterfazDeUsuario.UserControls
 		}
 		
 
-		public void ActualizarEmpleado(Empleado empleado)
+		public void ActualizarNombreDeUsuario(String nombreDeUsuario)
 		{
+
 			Empleado = empleado;
 			AsignarNombreDeUsuario();
 			MostrarBotones();
@@ -69,6 +67,7 @@ namespace InterfazDeUsuario.UserControls
 					botones.Add((Button)FindResource("ButtonGerenteRegistrarPlatillo"));
 					botones.Add((Button)FindResource("ButtonGerenteRegistrarMesa"));
 					botones.Add((Button)FindResource("ButtonGerenteEditarImpuesto"));
+					botones.Add((Button)FindResource("ButtonGerenteProductos"));
 				break;
 			}
 
@@ -171,6 +170,12 @@ namespace InterfazDeUsuario.UserControls
 		{
 			GUIEditarImpuesto editarImpuesto = new GUIEditarImpuesto(Controlador, Empleado);
 			Controlador.CambiarANuevaPage(editarImpuesto);
+		}
+
+		private void ButtonGerenteProductos_Click(object sender, RoutedEventArgs e)
+		{
+			GUIListaDeProductos listaDeProductos = new GUIListaDeProductos(Controlador, Empleado);
+			Controlador.CambiarANuevaPage(listaDeProductos);
 		}
 	}
 }

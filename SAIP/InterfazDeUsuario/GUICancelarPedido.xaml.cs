@@ -1,7 +1,4 @@
-﻿using LogicaDeNegocio;
-using LogicaDeNegocio.Clases;
-using LogicaDeNegocio.ObjetosAccesoADatos;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,30 +20,9 @@ namespace InterfazDeUsuario
     /// </summary>
     public partial class CancelarPedido : Page
     {
-        ControladorDeCambioDePantalla Controlador;
-        Empleado Empleado;
-        Pedido pedido;
-        public CancelarPedido(ControladorDeCambioDePantalla control, Empleado empleado, Pedido pedido)
+        public CancelarPedido()
         {
-            Controlador = control;
-            Empleado = empleado;
             InitializeComponent();
-            barraEstado.Controlador = control;
-            barraEstado.ActualizarEmpleado(empleado);
-            InitializeComponent();
-        }
-
-        private void CancelarPedidoButton_Click(object sender, RoutedEventArgs e)
-        {
-            PedidoDAO pedidoDAO = new PedidoDAO();
-
-            pedidoDAO.CambiarEstadoPedido(pedido);
-
-        }
-
-        private void RechazarCancelacionButton_Click(object sender, RoutedEventArgs e)
-        {
-            Controlador.Regresar();
         }
     }
 }
