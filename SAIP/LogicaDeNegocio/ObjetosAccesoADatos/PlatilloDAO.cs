@@ -51,7 +51,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			return platilloDb;
 		}
 
-		private List<Clases.Platillo> ConvertirListaDeDatosAListaDeLogica(List<Platillo> AlimentosDb)
+		private List<Clases.Platillo> ConvertirListaDePlatillosDeAccesoADatosAListaDePLatillosDeLogica(List<Platillo> AlimentosDb)
 		{
 			List<Clases.Platillo> alimentosResultado = new List<Clases.Platillo>();
 
@@ -76,8 +76,6 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				{
 					proporcion.Platillo = platilloAGuardar;
 					proporcion.Ingrediente = context.Ingredientes.Find(proporcion.Ingrediente.Id);
-
-					context.SaveChanges();
 				}
 				
 				context.Platillos.Add(platilloAGuardar);
@@ -166,7 +164,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				alimentosDb = context.Platillos.ToList();
 			}
 
-			List<Clases.Platillo> alimentosResultado = ConvertirListaDeDatosAListaDeLogica(alimentosDb);
+			List<Clases.Platillo> alimentosResultado = ConvertirListaDePlatillosDeAccesoADatosAListaDePLatillosDeLogica(alimentosDb);
 			return alimentosResultado;
 		}
 
@@ -185,16 +183,6 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 		public List<Clases.Platillo> CargarListaDeIdsDePlatilloPorIdDePedido(int IdPedido)
 		{
 			throw new NotImplementedException();
-		}
-
-		public void Depuracion_Eliminar(string nombre)
-		{
-			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
-			{
-				Platillo platillo = context.Platillos.FirstOrDefault(p => p.Nombre == nombre);
-				context.Platillos.Remove(platillo);
-				context.SaveChanges();
-			}
 		}
 	}
 }

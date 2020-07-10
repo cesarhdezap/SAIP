@@ -1,7 +1,6 @@
 ﻿using AccesoADatos;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,91 +26,14 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
 		public Clases.Iva CargarIvaActual()
 		{
-			AccesoADatos.Iva ivaEncontrado;
+			List<AccesoADatos.Iva> ivaContext;
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				ivaEncontrado = context.Ivas.FirstOrDefault(iva => iva.Activo == true);
+				ivaContext = context.Ivas.ToList();
 			}
-			Clases.Iva ivaLogico = new Clases.Iva();
-			if (ivaEncontrado != null)
-			{
-				ivaLogico = ConvertirDeDatosALogica(ivaEncontrado);
-			}
-			else
-			{
-				throw new InvalidOperationException("No hay ningun IVA activo.");
-			}
-
+			AccesoADatos.Iva ivaEncontrado = ivaContext.FirstOrDefault(iva => iva.Activo == true);
+			Clases.Iva ivaLogico = ConvertirDeDatosALogica(ivaEncontrado);
 			return ivaLogico;
 		}
-
-        public List<Clases.Iva> CargarTodos()
-        {
-			List<Iva> ivasDb = new List<Iva>();
-			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
-			{
-				ivasDb = context.Ivas.ToList();
-			}
-			return ConvertirListaDatosALogica(ivasDb);
-        }
-
-		public void Guardar(Clases.Iva iva)
-		{
-			Iva ivaDb = new Iva()
-			{
-				FechaDeInicio = iva.FechaDeInicio,
-				FechaDeCreacion = iva.FechaDeCreacion,
-				Activo = iva.Activo,
-				Creador = iva.Creador,
-				Valor = iva.Valor
-			};
-			
-
-			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
-			{
-				if (ivaDb.Activo)
-				{
-					context.Ivas.ToList().ForEach(i => i.Activo = false);
-					context.SaveChanges();
-				}
-				context.Ivas.Add(ivaDb);
-				context.SaveChanges();
-			}
-		}
-
-		public void Depuracion_Eliminar(double valor)
-		{
-			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
-			{
-				Iva iva = context.Ivas.FirstOrDefault(i => i.Valor == valor);
-				context.Ivas.Remove(iva);
-
-				Iva ultimoIva = context.Ivas.First();
-
-				context.Ivas.ToList().ForEach((i) =>
-				{
-					if (ultimoIva.FechaDeInicio > i.FechaDeInicio)
-					{
-						ultimoIva = i;
-					}
-				});
-
-				ultimoIva.Activo = true;
-
-				context.SaveChanges();
-			}
-		}
-
-		public List<Clases.Iva> ConvertirListaDatosALogica(List<Iva> ivasDb)
-		{
-			List<Clases.Iva> ivas = new List<Clases.Iva>();
-
-			foreach(Iva iva in ivasDb)
-			{
-				ivas.Add(ConvertirDeDatosALogica(iva));
-			}
-
-			return ivas;
-		}
-    }
+	}
 }

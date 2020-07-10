@@ -1,5 +1,4 @@
-﻿using AccesoADatos;
-using LogicaDeNegocio.ObjetosAccesoADatos;
+﻿using LogicaDeNegocio.ObjetosAccesoADatos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +43,7 @@ namespace LogicaDeNegocio.Clases
             Ingrediente ingrediente = new Ingrediente();
             IngredienteDAO ingredienteDAO = new IngredienteDAO();
             if (!IngredienteYaAñadido(id))
-            {   
+            {
                 ingrediente = ingredienteDAO.CargarIngredientePorId(id);
                 Proporciones.Add(new Proporcion
                 {
@@ -96,39 +95,12 @@ namespace LogicaDeNegocio.Clases
             Proporciones = proporcionDAO.CargarProporcionesPorIdPlatillo(Id);
 
             bool resultado = false;
-            bool cantidadSuficiente = false;
-            foreach(Proporcion proporcion in Proporciones)
+            foreach(Proporcion propoporcion in Proporciones)
             {
-                if (proporcion.Ingrediente.Componentes.Count > 0)
-                {
-                    //Cantidad IngredienteComponente * Cantidad proporcion >= cantidad en base de ingrediente componente
-                }
-                else if(proporcion.Ingrediente.CantidadEnInventario >= cantidadAValidar * proporcion.Cantidad)
-                {
-                    cantidadSuficiente = true;
-                }
+                throw new NotImplementedException();
             }
-
-            if (cantidadSuficiente)
-                resultado = true;
 
             return resultado;
         }
-
-		internal void DescontarIngredientes(int cantidad)
-		{
-			foreach(Proporcion proporcion in Proporciones)
-            {
-                proporcion.Ingrediente.DescontarDeInventario(proporcion.Cantidad * cantidad);
-            }
-		}
-
-        public void AumentarIngrediente(int cantidad)
-        {
-            foreach (Proporcion proporcion in Proporciones)
-            {
-                proporcion.Ingrediente.AumentarEnInventario(proporcion.Cantidad * cantidad);
-            }
-        }
-	}
+    }
 }
