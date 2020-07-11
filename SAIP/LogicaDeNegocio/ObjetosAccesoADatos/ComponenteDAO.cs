@@ -23,7 +23,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 		{
 			Clases.Componente componenteConvertido = new Clases.Componente()
 			{
-				Cantidad = componenteDb.Cantidad
+				Cantidad = componenteDb.Cantidad,
 			};
 			IngredienteDAO ingredienteDAO = new IngredienteDAO();
 			componenteConvertido.Ingrediente = ingredienteDAO.ConvertirDeDatosALogica(componenteDb.IngredienteHijo);
@@ -58,10 +58,13 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 		{
 			List<RelacionIngrediente> componentes = new List<RelacionIngrediente>();
 			List<Clases.Componente> componentesResultado = new List<Clases.Componente>();
+
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
 				componentes = context.RelacionIngredientes.ToList().TakeWhile(objeto => objeto.IngredienteHijo.Id == id).ToList();
+
 				IngredienteDAO ingredienteDAO = new IngredienteDAO();
+
 				componentesResultado = ConvertirListaDeDatosALogica(componentes);
 			}
 

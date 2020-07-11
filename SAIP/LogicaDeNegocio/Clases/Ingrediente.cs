@@ -62,11 +62,6 @@ namespace LogicaDeNegocio.Clases
                     }
                 }
             }
-            else
-            {
-                throw new InvalidOperationException("Error en datos del Ingrediente: " + Nombre + "\nCódigo repetido: " + ingredienteDAO.ValidarCodigoExistente(Codigo) +"\nCódigo de Barras repetido: " + ingredienteDAO.ValidarCodigoExistente(CodigoDeBarras) + "\nCantidad Inválida: " + ValidarNumeroDecimal(CantidadEnInventario.ToString()) + "\nCosto inválido: " + ValidarNumeroDecimal(Costo.ToString()));
-            }
-
             return resultado;
         }
 
