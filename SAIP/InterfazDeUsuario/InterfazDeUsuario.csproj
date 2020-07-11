@@ -76,6 +76,9 @@
     <Compile Include="Cocinero\GUIVerRecetas.xaml.cs">
       <DependentUpon>GUIVerRecetas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Gerente\GUIEditarEmpleado.xaml.cs">
+      <DependentUpon>GUIEditarEmpleado.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Gerente\GUIEditarImpuesto.xaml.cs">
       <DependentUpon>GUIEditarImpuesto.xaml</DependentUpon>
     </Compile>
@@ -161,6 +164,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Cocinero\GUIVerRecetas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gerente\GUIEditarEmpleado.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

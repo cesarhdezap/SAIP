@@ -155,5 +155,60 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
 			return resultadoDeExistencia;
 		}
+		public void DesactivarEmpleado(Clases.Empleado empleado)
+		{
+
+
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				AccesoADatos.Empleado empleadodesactivado = context.Empleados.Find(empleado.Id);
+				empleadodesactivado.Activo = false;
+				context.SaveChanges();
+			}
+
+		}
+
+		public void GuardarEmpleado(Clases.Empleado empleado)
+		{
+			empleado.Activo = true;
+			empleado.FechaDeCreacion = DateTime.Now;
+			empleado.FechaDeModicacion = DateTime.Now;
+			AccesoADatos.Empleado empleadoguardado = ConvertirDeLogicaADatos(empleado);
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+
+
+				context.Empleados.Add(empleadoguardado);
+				context.SaveChanges();
+
+			}
+		}
+
+		public void EditarEmpleado(Clases.Empleado empleado)
+		{
+			empleado.FechaDeModicacion = DateTime.Now;
+			empleado.Activo = true;
+
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				AccesoADatos.Empleado empleadoDb = ConvertirDeLogicaADatos(empleado);
+				if (empleadoDb != null)
+				{
+					empleadoDb = context.Empleados.Find(empleado.Id);
+					empleadoDb.Nombre = empleado.Nombre;
+					empleadoDb.NombreDeUsuario = empleado.NombreDeUsuario;
+					empleadoDb.Contraseña = empleado.Contraseña;
+					empleadoDb.CorreoElectronico = empleado.CorreoElectronico;
+					empleadoDb.TipoDeEmpleado = (short)empleado.TipoDeEmpleado;
+
+					context.SaveChanges();
+				}
+				else
+				{
+
+				}
+
+			}
+		}
 	}
 }
