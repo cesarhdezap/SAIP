@@ -23,7 +23,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				FechaDeCreacion = DateTime.Now,
 				Nombre = producto.Nombre,
 				NombreCreador = producto.Creador,
-				FechaDeModificacion = DateTime.Now
+				FechaDeModificacion = DateTime.Now,
+				Imagen = producto.Imagen
 			};
 
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
@@ -93,7 +94,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				Creador = productoDb.NombreCreador,
 				Activo = productoDb.Activo,
 				Costo = productoDb.Costo,
-				Codigo = productoDb.Codigo			
+				Codigo = productoDb.Codigo,
+				Imagen = productoDb.Imagen
 			};
 			return productoConvertido;
 		}
@@ -137,6 +139,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				productoDb.Costo = producto.Costo;
 				productoDb.Activo = producto.Activo;
 				productoDb.Precio = producto.Precio;
+				productoDb.Imagen = producto.Imagen;
 				context.SaveChanges();
 			}
 		}

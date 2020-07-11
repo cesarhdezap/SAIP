@@ -107,6 +107,7 @@
     <Compile Include="Clases\Pedido.cs" />
     <Compile Include="Clases\ClasesAsociativas\Proporcion.cs" />
     <Compile Include="Clases\Producto.cs" />
+    <Compile Include="Convertidores\ConversorDeAlimentoAGanancia.cs" />
     <Compile Include="Convertidores\ConversorDeCantidadASubtotal.cs" />
     <Compile Include="Convertidores\ConversorDeEnumeradores.cs" />
     <Compile Include="Convertidores\ConvertidorDeFlotanteADinero.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\ServiciosDeCreacionDePDF.cs" />
     <Compile Include="Servicios\ServiciosDeEncriptacion.cs" />
+    <Compile Include="Servicios\ServiciosDeIO.cs" />
     <Compile Include="Servicios\ServiciosDeValidacion.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -22,7 +22,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				Precio = PlatilloDb.Precio,
 				Codigo = PlatilloDb.Codigo,
 				Notas = PlatilloDb.Notas,
-				Descripcion = PlatilloDb.Descripcion
+				Descripcion = PlatilloDb.Descripcion,
+				Imagen = PlatilloDb.Imagen
 			};
 
 			ProporcionDAO proporcionDAO = new ProporcionDAO();
@@ -43,7 +44,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				Activo = Platillo.Activo,
 				Codigo = Platillo.Codigo,
 				Notas = Platillo.Notas,
-				Descripcion = Platillo.Descripcion
+				Descripcion = Platillo.Descripcion,
+				Imagen = Platillo.Imagen
 			};
 			ProporcionDAO proporcionDAO = new ProporcionDAO();
 			platilloDb.PlatilloIngredientes = (proporcionDAO.ConvertirListaLogicaAListaDeDB(Platillo.Proporciones));
@@ -96,6 +98,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			resultado.Notas = Platillo.Notas;
 			resultado.Descripcion = Platillo.Descripcion;
 			resultado.PlatilloIngredientes = new List<PlatilloIngrediente>();
+			resultado.Imagen = Platillo.Imagen;
 			foreach (PlatilloIngrediente proporcion in Platillo.PlatilloIngredientes)
 			{
 				resultado.PlatilloIngredientes.Add(proporcion);
@@ -119,6 +122,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				platilloDb.Codigo = Platillo.Codigo;
 				platilloDb.Notas = Platillo.Notas;
 				platilloDb.Descripcion = Platillo.Descripcion;
+				platilloDb.Imagen = Platillo.Imagen;
 
 				foreach (Clases.Proporcion proporcion in Platillo.Proporciones)
 				{

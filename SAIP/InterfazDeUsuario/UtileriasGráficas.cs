@@ -142,9 +142,9 @@ namespace InterfazDeUsuario
 
 			string direccionDeArchivoSeleccionado = string.Empty;
 
-			SaveFileDialog ventanaDeSeleccionDeArchivo = new SaveFileDialog
+			OpenFileDialog ventanaDeSeleccionDeArchivo = new OpenFileDialog
 			{
-				Filter = "DocumentosPDF (*.PDF)|*.PDF",
+				Filter = "Jpg (*.Jpg)|*.Jpg",
 				InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
 			};
 

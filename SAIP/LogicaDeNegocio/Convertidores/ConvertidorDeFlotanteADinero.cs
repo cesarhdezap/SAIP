@@ -14,7 +14,15 @@ namespace LogicaDeNegocio.Convertidores
 		{
 			string cadenaResultado = string.Empty;
 
-			string numero = ((double)value).ToString("0.00");
+			string numero;
+			if(value is string valueCadena)
+			{
+				numero = (double.Parse(valueCadena)).ToString("0.00");
+			}
+			else
+			{
+				numero = ((double)value).ToString("0.00");
+			}
 
 			cadenaResultado = "$ " + numero;
 

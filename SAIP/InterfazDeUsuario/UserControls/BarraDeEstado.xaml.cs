@@ -122,13 +122,10 @@ namespace InterfazDeUsuario.UserControls
 
 		private void ButtonGerenteListaDePlatillos_Click(object sender, RoutedEventArgs e)
 		{
-			//GUIVerPlatillos verPlatillos = new GUIVerPlatillos(Controlador, Empleado);
-			//Controlador.CambiarANuevaPage(verPlatillos)
-			//Pantalla aun no implementada
-			MessageBox.Show("Esta pantalla aun no esta implementada");
-			throw new NotImplementedException("Esta pantalla aun no esta implementada");
+			GUIListaDePlatillos listaDePlatillos = new GUIListaDePlatillos(Controlador, Empleado);
+			Controlador.CambiarANuevaPage(listaDePlatillos);
 		}
-
+		
 		private void ButtonGerentePasarInventario_Click(object sender, RoutedEventArgs e)
 		{
 			GUIPasarInventario pasarInventario = new GUIPasarInventario(Controlador, Empleado);

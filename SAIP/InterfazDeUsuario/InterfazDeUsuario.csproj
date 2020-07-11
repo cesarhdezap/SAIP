@@ -70,6 +70,9 @@
     <Compile Include="Gerente\GUIEditarImpuesto.xaml.cs">
       <DependentUpon>GUIEditarImpuesto.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Gerente\GUIListaDePlatillos.xaml.cs">
+      <DependentUpon>GUIListaDePlatillos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Gerente\GUIListaDeProductos.xaml.cs">
       <DependentUpon>GUIListaDeProductos.xaml</DependentUpon>
     </Compile>
@@ -144,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Gerente\GUIEditarImpuesto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gerente\GUIListaDePlatillos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
