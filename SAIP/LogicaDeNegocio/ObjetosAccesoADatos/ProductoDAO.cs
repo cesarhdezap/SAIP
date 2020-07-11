@@ -23,7 +23,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				FechaDeCreacion = DateTime.Now,
 				Nombre = producto.Nombre,
 				NombreCreador = producto.Creador,
-				FechaDeModificacion = DateTime.Now
+				FechaDeModificacion = DateTime.Now,
+				Imagen = producto.Imagen
 			};
 
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
@@ -60,7 +61,20 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			List<AccesoADatos.Producto> productosDb = new List<AccesoADatos.Producto>();
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-				productosDb = context.Productos.ToList().TakeWhile(p => p.Activo == true).ToList();
+				productosDb = context.Productos.ToList().Where(p => p.Activo == true).ToList();
+			}
+
+			List<Clases.Producto> productosResultado = new List<Clases.Producto>();
+			productosResultado = ConvertirListaDeDbAListaDeLogica(productosDb);
+			return productosResultado;
+		}
+
+		public List<Clases.Producto> CargarTodos()
+		{
+			List<AccesoADatos.Producto> productosDb = new List<AccesoADatos.Producto>();
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				productosDb = context.Productos.ToList();
 			}
 
 			List<Clases.Producto> productosResultado = new List<Clases.Producto>();
@@ -80,7 +94,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				Creador = productoDb.NombreCreador,
 				Activo = productoDb.Activo,
 				Costo = productoDb.Costo,
-				Codigo = productoDb.Codigo			
+				Codigo = productoDb.Codigo,
+				Imagen = productoDb.Imagen
 			};
 			return productoConvertido;
 		}
@@ -124,6 +139,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				productoDb.Costo = producto.Costo;
 				productoDb.Activo = producto.Activo;
 				productoDb.Precio = producto.Precio;
+				productoDb.Imagen = producto.Imagen;
 				context.SaveChanges();
 			}
 		}

@@ -84,7 +84,10 @@ namespace LogicaDeNegocio.Clases
 
             if (Proporciones.Count > 0)
             {
-                resultado = true;
+                if (Imagen != null)
+                {
+                    resultado = true;
+                }
             }
 
             return resultado;

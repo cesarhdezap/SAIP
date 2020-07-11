@@ -69,6 +69,7 @@ namespace InterfazDeUsuario.UserControls
 					botones.Add((Button)FindResource("ButtonGerenteRegistrarPlatillo"));
 					botones.Add((Button)FindResource("ButtonGerenteRegistrarMesa"));
 					botones.Add((Button)FindResource("ButtonGerenteEditarImpuesto"));
+					botones.Add((Button)FindResource("ButtonGerenteProductos"));
 				break;
 			}
 
@@ -121,13 +122,10 @@ namespace InterfazDeUsuario.UserControls
 
 		private void ButtonGerenteListaDePlatillos_Click(object sender, RoutedEventArgs e)
 		{
-			//GUIVerPlatillos verPlatillos = new GUIVerPlatillos(Controlador, Empleado);
-			//Controlador.CambiarANuevaPage(verPlatillos)
-			//Pantalla aun no implementada
-			MessageBox.Show("Esta pantalla aun no esta implementada");
-			throw new NotImplementedException("Esta pantalla aun no esta implementada");
+			GUIListaDePlatillos listaDePlatillos = new GUIListaDePlatillos(Controlador, Empleado);
+			Controlador.CambiarANuevaPage(listaDePlatillos);
 		}
-
+		
 		private void ButtonGerentePasarInventario_Click(object sender, RoutedEventArgs e)
 		{
 			GUIPasarInventario pasarInventario = new GUIPasarInventario(Controlador, Empleado);
@@ -171,6 +169,12 @@ namespace InterfazDeUsuario.UserControls
 		{
 			GUIEditarImpuesto editarImpuesto = new GUIEditarImpuesto(Controlador, Empleado);
 			Controlador.CambiarANuevaPage(editarImpuesto);
+		}
+
+		private void ButtonGerenteProductos_Click(object sender, RoutedEventArgs e)
+		{
+			GUIListaDeProductos listaDeProductos = new GUIListaDeProductos(Controlador, Empleado);
+			Controlador.CambiarANuevaPage(listaDeProductos);
 		}
 	}
 }

@@ -19,11 +19,11 @@ namespace LogicaDeNegocio.Clases
         public override string ToString()
         {
             string resultado = string.Empty;
-            resultado = "Nombre: " + Nombre;
+            resultado += "Nombre: " + Nombre;
             resultado += Environment.NewLine;
-            resultado = "Codigo: " + Codigo;
+            resultado += "Codigo: " + Codigo;
             resultado += Environment.NewLine;
-            resultado = "Precio: " + Precio;
+            resultado += "Precio: " + Precio;
 
             return resultado;
         }

@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
 using static InterfazDeUsuario.UtileriasGráficas;
+using LogicaDeNegocio.Servicios;
 
 namespace InterfazDeUsuario.Gerente
 {
@@ -29,6 +30,7 @@ namespace InterfazDeUsuario.Gerente
 		public List<Ingrediente> IngredientesVisibles { get; set; }
 		public Platillo Platillo { get; set; } = new Platillo();
 		public double Ganancia { get; set; }
+		private string DireccionDeArchivo { get; set; }
 		private bool CandadoDeRefrescadoDeCajasDeTexto = true;
 		public GUIRegistrarPlatillo(ControladorDeCambioDePantalla controlador, Empleado empleadoCargado)
 		{
@@ -155,6 +157,7 @@ namespace InterfazDeUsuario.Gerente
 		{
 			if (ValidarCampos())
 			{
+				Platillo.Imagen = ServiciosDeIO.CargarBytesDeArchivo(DireccionDeArchivo);
 				if (Platillo.Validar())
 				{
 					if (ValidarGanancia())
@@ -199,7 +202,8 @@ namespace InterfazDeUsuario.Gerente
 			if( ValidarCadena(NombreTextBox.Text) &&
 				ValidarCadena(CodigoTextBox.Text) &&
 				ValidarCadena(DescripcionTextBox.Text) &&
-				ValidarCadena(NotasTextBox.Text))
+				ValidarCadena(NotasTextBox.Text) &&
+				!string.IsNullOrEmpty(DireccionDeArchivo))
 			{
 				resultado = true;
 			}
@@ -209,7 +213,6 @@ namespace InterfazDeUsuario.Gerente
 				MostrarEstadoDeValidacionCadena(NombreTextBox);
 				MostrarEstadoDeValidacionCadena(DescripcionTextBox);
 				MostrarEstadoDeValidacionCadena(NotasTextBox);
-
 			}
 
 			return resultado;
@@ -251,6 +254,23 @@ namespace InterfazDeUsuario.Gerente
 			if(resultadoDeMessageBox == MessageBoxResult.Yes)
 			{
 				Controlador.Regresar();
+			}
+		}
+
+		private void ButtonElegirArchivo_Click(object sender, RoutedEventArgs e)
+		{
+			DireccionDeArchivo = MostrarVentanaDeSeleccionDeArchivos();
+
+			if (!string.IsNullOrEmpty(DireccionDeArchivo))
+			{
+				LabelDireccionDeImagenSeleccionada.Content = DireccionDeArchivo;
+				ImageImagenDePlatillo.Source = new BitmapImage(new Uri(DireccionDeArchivo));
+				ImageImagenDePlatillo.Visibility = Visibility.Visible;
+			}
+			else
+			{
+				LabelDireccionDeImagenSeleccionada.Content = "Ningun archivo seleccionado";
+				ImageImagenDePlatillo.Visibility = Visibility.Hidden;
 			}
 		}
 	}
