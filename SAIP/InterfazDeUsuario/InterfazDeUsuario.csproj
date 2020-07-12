@@ -82,6 +82,9 @@
     <Compile Include="Gerente\GUIRegistrarIngrediente.xaml.cs">
       <DependentUpon>GUIRegistrarIngrediente.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Gerente\GUIRegistrarProducto.xaml.cs">
+      <DependentUpon>GUIRegistrarProducto.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Gerente\GUIReporteDeInventario.xaml.cs">
       <DependentUpon>GUIReporteDeInventario.xaml</DependentUpon>
     </Compile>
@@ -163,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Gerente\GUIRegistrarIngrediente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gerente\GUIRegistrarProducto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
