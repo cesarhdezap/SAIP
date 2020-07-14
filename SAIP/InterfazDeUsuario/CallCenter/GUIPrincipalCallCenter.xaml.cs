@@ -62,9 +62,13 @@ namespace InterfazDeUsuario.CallCenter
                 pedido = null;
             }
 
-            if(pedido == null)
+            if(pedido != null)
             {
-                throw new NotImplementedException();
+                GUICambiarEstadoPedidoCallCenter cambiarEstadoPedidoCallCenter = new GUICambiarEstadoPedidoCallCenter(pedido);
+
+                cambiarEstadoPedidoCallCenter.Show();
+                
+                
             }
             else
             {
