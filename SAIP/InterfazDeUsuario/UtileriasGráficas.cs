@@ -1,13 +1,19 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Media;
 using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
+using Control = System.Windows.Controls.Control;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
+using TextBox = System.Windows.Controls.TextBox;
+using ToolTip = System.Windows.Controls.ToolTip;
 
 namespace InterfazDeUsuario
 {
@@ -17,7 +23,7 @@ namespace InterfazDeUsuario
 		{
 			if (controlGrafico.ToolTip == null)
 			{
-				controlGrafico.ToolTip = new ToolTip()
+				controlGrafico.ToolTip = new System.Windows.Controls.ToolTip()
 				{
 					Content = mensaje,
 					Placement = System.Windows.Controls.Primitives.PlacementMode.Right,
@@ -151,6 +157,25 @@ namespace InterfazDeUsuario
 			if (ventanaDeSeleccionDeArchivo.ShowDialog() == true)
 			{
 				direccionDeArchivoSeleccionado = ventanaDeSeleccionDeArchivo.FileName;
+			}
+
+			return direccionDeArchivoSeleccionado;
+		}
+
+		public static string MostrarVentanaDeSeleccionDeArchivosParaCarpetas()
+		{
+
+			string direccionDeArchivoSeleccionado = string.Empty;
+
+
+			using (var fbd = new FolderBrowserDialog())
+			{
+				DialogResult result = fbd.ShowDialog();
+
+				if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+				{
+					direccionDeArchivoSeleccionado = fbd.SelectedPath;
+				}
 			}
 
 			return direccionDeArchivoSeleccionado;

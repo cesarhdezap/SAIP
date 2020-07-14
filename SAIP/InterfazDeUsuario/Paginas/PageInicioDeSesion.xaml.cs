@@ -23,6 +23,7 @@ using InterfazDeUsuario.Gerente;
 using InterfazDeUsuario.Mesero;
 using LogicaDeNegocio;
 using System.Xml;
+using InterfazDeUsuario.Tecnico;
 using InterfazDeUsuario.Cocinero;
 
 namespace InterfazDeUsuario.Paginas
@@ -82,6 +83,11 @@ namespace InterfazDeUsuario.Paginas
 						GUIVerMisMesas editarPedido = new GUIVerMisMesas(Controlador, empleadoCargado);
 						Controlador.CambiarANuevaPage(editarPedido);
 					}
+					else if(empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.Tecnico)
+          {
+					  GUITecnico tecnico = new GUITecnico(Controlador, empleadoCargado);
+						Controlador.CambiarANuevaPage(tecnico);
+          }
 					else if (empleadoCargado.TipoDeEmpleado == TipoDeEmpleado.Cocinero)
 					{
 						GUIVerPedidosPendientes cocinero = new GUIVerPedidosPendientes(Controlador, empleadoCargado);
