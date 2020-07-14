@@ -25,12 +25,13 @@ namespace InterfazDeUsuario
     {
         ControladorDeCambioDePantalla Controlador;
         Empleado Empleado;
-        Pedido pedido;
+        Pedido Pedido;
         public CancelarPedido(ControladorDeCambioDePantalla control, Empleado empleado, Pedido pedido)
         {
+            InitializeComponent();
             Controlador = control;
             Empleado = empleado;
-            InitializeComponent();
+            Pedido = pedido;
             barraEstado.Controlador = control;
             barraEstado.ActualizarEmpleado(empleado);
             InitializeComponent();
@@ -40,7 +41,7 @@ namespace InterfazDeUsuario
         {
             PedidoDAO pedidoDAO = new PedidoDAO();
 
-            pedidoDAO.CambiarEstadoPedido(pedido);
+            pedidoDAO.CambiarEstadoPedidoCancelar(Pedido);
 
         }
 

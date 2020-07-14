@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaDeNegocio
+namespace LogicaDeNegocio.Clases
 {
     public class Pedido
     {

@@ -36,6 +36,8 @@ namespace InterfazDeUsuario.Gerente
 		{
 			InitializeComponent();
 			Controlador = controlador;
+			BarraDeEstado.Controlador = Controlador;
+			BarraDeEstado.ActualizarEmpleado(gerente);
 			Gerente = gerente;
 		}
 

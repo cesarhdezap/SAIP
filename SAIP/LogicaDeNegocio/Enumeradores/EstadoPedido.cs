@@ -13,6 +13,7 @@ namespace LogicaDeNegocio.Enumeradores
         Realizado = 3,
         Entregado = 4,
         Completado = 5,
-        Cancelar = 6
+        Cancelado = 6,
+        Enviado = 7
     }
 }
