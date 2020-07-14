@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/10/2020 21:34:51
+-- Date Created: 07/14/2020 00:48:50
 -- Generated from EDMX file: C:\Users\marcu\source\repos\SAIP\SAIP\AccesoADatos\ModeloDeDatos.edmx
 -- --------------------------------------------------
 
@@ -215,7 +215,8 @@ CREATE TABLE [dbo].[Empleados] (
     [FechaDeModicacion] datetime  NOT NULL,
     [NombreCreador] nvarchar(max)  NOT NULL,
     [Activo] bit  NOT NULL,
-    [TipoDeEmpleado] smallint  NOT NULL
+    [TipoDeEmpleado] smallint  NOT NULL,
+    [CorreoElectronico] nvarchar(max)  NOT NULL
 );
 GO
 

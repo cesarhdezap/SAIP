@@ -41,6 +41,7 @@ namespace InterfazDeUsuario.CallCenter
         public GUIEditarPedido(ControladorDeCambioDePantalla controlador, Empleado empleadoDeCallCenter, Pedido pedido)
         {
             InitializeComponent();
+			Pedido = pedido;
             this.EmpleadoDeCallCenter = empleadoDeCallCenter;
             IvaDAO ivaDAO = new IvaDAO();
             PlatilloDAO platilloDAO = new PlatilloDAO();
