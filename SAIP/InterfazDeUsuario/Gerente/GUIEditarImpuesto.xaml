@@ -6,8 +6,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InterfazDeUsuario.Gerente"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Height="691" Width="1258"
+      Width="1280" Height="720"
       FontSize="20"
       Title="GUIEditarImpuesto">
 

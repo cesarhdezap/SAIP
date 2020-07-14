@@ -80,6 +80,7 @@
     <Compile Include="Cocinero\GUIVerRecetas.xaml.cs">
       <DependentUpon>GUIVerRecetas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Convertidores\ConvertidorDeBytesABitMapImage.cs" />
     <Compile Include="Gerente\GUIEditarEmpleado.xaml.cs">
       <DependentUpon>GUIEditarEmpleado.xaml</DependentUpon>
     </Compile>

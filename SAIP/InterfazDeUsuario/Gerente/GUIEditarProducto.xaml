@@ -5,7 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InterfazDeUsuario.Gerente"
       mc:Ignorable="d"
-      Title="GUIEditarProducto" Height="385.312" Width="691.25">
+      Width="1280" Height="720"
+      Title="GUIEditarProducto">
 
 	<Grid>
 		<Label Content="Nombre" HorizontalAlignment="Left" Margin="19,23,0,0" VerticalAlignment="Top"/>

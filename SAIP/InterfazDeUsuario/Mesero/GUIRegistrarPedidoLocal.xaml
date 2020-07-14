@@ -5,10 +5,14 @@
       xmlns:controls="clr-namespace:InterfazDeUsuario.UserControls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InterfazDeUsuario.Mesero"
+      xmlns:convertidores="clr-namespace:InterfazDeUsuario.Convertidores"
       mc:Ignorable="d" 
       Height="691" Width="1258"
       Title="GUIRegistrarPedidoLocal"
       Loaded="Page_Loaded">
+    <Page.Resources>
+        <convertidores:ConvertidorDeBytesABitMapImage x:Key="ConvertidorDeBytesABitMapImage"/>
+    </Page.Resources>
     <DockPanel>
         <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top" Width="Auto"/>
 		<UniformGrid Columns="2">
@@ -64,12 +68,12 @@
 
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
 					<Label Content="IVA(16%):" x:Name="LabelIva"/>
-					<Label Content="PlaceHolderIVA" x:Name="LabelCantidadIva"/>
+					<Label Content="" x:Name="LabelCantidadIva"/>
 				</StackPanel>
 
 				<StackPanel Orientation="Horizontal">
 					<Label Content="Total:" x:Name="LabelTotal"/>
-					<Label Content="PlaceHolderTotal" x:Name="LabelCantidadTotal"/>
+					<Label Content="" x:Name="LabelCantidadTotal"/>
 				</StackPanel>
 			</StackPanel>
 
@@ -78,7 +82,7 @@
 					<Label Content="Alimentos" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 					<UniformGrid Columns="2" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top">
 						<ComboBox x:Name="ComboBoxCategoria" FontSize="20" Text="Categoria" Width="200" Visibility="Collapsed"/>
-						<TextBox x:Name="TextBoxBusqueda" FontSize="20" TextChanged="TextBoxBusqueda_TextChanged"/>
+						<TextBox x:Name="TextBoxBusqueda" FontSize="20" Width="250" TextChanged="TextBoxBusqueda_TextChanged"/>
 					</UniformGrid>
 				</DockPanel>
 
@@ -94,9 +98,9 @@
 
 						<ListBox.ItemTemplate>
 							<DataTemplate>
-								<StackPanel Orientation="Vertical" Margin="5">
+								<StackPanel Orientation="Vertical">
 									<Button Click="ButtonAñadirAlimento_Click">
-										<Image Source="/img/pizza_pepperoni.jpg" Stretch="UniformToFill" Height="150" Width="150"/>
+										<Image Source="{Binding Imagen, Converter={StaticResource ConvertidorDeBytesABitMapImage}}" Stretch="UniformToFill" Height="150" Width="150"/>
 									</Button>
 									<Label Content="{Binding Nombre}" FontSize="20"/>
 								</StackPanel>
