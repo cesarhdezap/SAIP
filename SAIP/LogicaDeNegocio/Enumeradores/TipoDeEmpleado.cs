@@ -11,6 +11,7 @@ namespace LogicaDeNegocio.Enumeradores
 		CallCenter,
 		Mesero, 
 		Gerente,
+		Tecnico,
 		Cocinero
 	}
 }

@@ -38,9 +38,10 @@ namespace InterfazDeUsuario.CallCenter
         public List<Alimento> AlimentosVisibles { get; set; }
         private bool CandadoDeRefrescadoDeCajasDeTexto { get; set; } = true;
 
-        public GUIEditarPedido(ControladorDeCambioDePantalla controlador, Empleado empleadoDeCallCenter)
+        public GUIEditarPedido(ControladorDeCambioDePantalla controlador, Empleado empleadoDeCallCenter, Pedido pedido)
         {
             InitializeComponent();
+			Pedido = pedido;
             this.EmpleadoDeCallCenter = empleadoDeCallCenter;
             IvaDAO ivaDAO = new IvaDAO();
             PlatilloDAO platilloDAO = new PlatilloDAO();

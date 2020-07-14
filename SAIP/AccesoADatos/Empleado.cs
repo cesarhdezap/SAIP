@@ -29,6 +29,7 @@ namespace AccesoADatos
         public string NombreCreador { get; set; }
         public bool Activo { get; set; }
         public short TipoDeEmpleado { get; set; }
+        public string CorreoElectronico { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cuenta> Cuenta { get; set; }

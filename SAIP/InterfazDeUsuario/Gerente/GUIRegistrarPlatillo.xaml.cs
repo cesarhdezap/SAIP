@@ -157,7 +157,6 @@ namespace InterfazDeUsuario.Gerente
 		{
 			if (ValidarCampos())
 			{
-				Platillo.Imagen = ServiciosDeIO.CargarBytesDeArchivo(DireccionDeArchivo);
 				if (Platillo.Validar())
 				{
 					if (ValidarGanancia())
@@ -186,11 +185,11 @@ namespace InterfazDeUsuario.Gerente
 
 		private void GuardarPlatillo()
 		{
+			Platillo.Imagen = ServiciosDeIO.CargarBytesDeArchivo(DireccionDeArchivo);
 			Platillo.Nombre = NombreTextBox.Text;
 			Platillo.Codigo = CodigoTextBox.Text;
 			Platillo.Descripcion = DescripcionTextBox.Text;
 			Platillo.Notas = NotasTextBox.Text;
-			Platillo.Codigo = CodigoTextBox.Text;
 			PlatilloDAO platilloDAO = new PlatilloDAO();
 			platilloDAO.GuardarPlatillo(Platillo);
 			MessageBox.Show("¡El platillo fue registrado exitosamente!", "¡Exito!", MessageBoxButton.OK, MessageBoxImage.Information);
