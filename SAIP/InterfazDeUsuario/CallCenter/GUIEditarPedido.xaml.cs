@@ -1,80 +1,70 @@
-﻿using System;
+﻿using LogicaDeNegocio.Clases;
+using LogicaDeNegocio.Clases.ClasesAsociativas;
+using LogicaDeNegocio.ObjetosAccesoADatos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Windows.Threading;
-using LogicaDeNegocio;
-using LogicaDeNegocio.Clases;
-using LogicaDeNegocio.Clases.ClasesAsociativas;
-using LogicaDeNegocio.Clases.ClasesCompuestas;
-using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
 using static InterfazDeUsuario.UtileriasGráficas;
-using LogicaDeNegocio.ObjetosAccesoADatos;
+using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
 
 namespace InterfazDeUsuario.CallCenter
 {
-    /// <summary>
-    /// Lógica de interacción para GUIEditarPedido.xaml
-    /// </summary>
-    public partial class GUIEditarPedido : Page
-    {
-        public ControladorDeCambioDePantalla Controlador { get; set; }
-        public Empleado EmpleadoDeCallCenter { get; set; } = new Empleado();
-        public Iva Iva { get; set; } = new Iva();
-        public Cliente Cliente { get; set; } = new Cliente();
-        public Pedido Pedido { get; set; } = new Pedido();
-        public List<Platillo> PlatillosCargados { get; set; }
-        public List<Producto> ProductosCargados { get; set; }
-        public List<Alimento> AlimentosCargados { get; set; } = new List<Alimento>();
-        public List<Alimento> AlimentosVisibles { get; set; }
-        private bool CandadoDeRefrescadoDeCajasDeTexto { get; set; } = true;
+	/// <summary>
+	/// Lógica de interacción para GUIEditarPedido.xaml
+	/// </summary>
+	public partial class GUIEditarPedido : Page
+	{
+		public ControladorDeCambioDePantalla Controlador { get; set; }
+		public Empleado EmpleadoDeCallCenter { get; set; } = new Empleado();
+		public Iva Iva { get; set; } = new Iva();
+		public Cliente Cliente { get; set; } = new Cliente();
+		public Pedido Pedido { get; set; } = new Pedido();
+		public List<Platillo> PlatillosCargados { get; set; }
+		public List<Producto> ProductosCargados { get; set; }
+		public List<Alimento> AlimentosCargados { get; set; } = new List<Alimento>();
+		public List<Alimento> AlimentosVisibles { get; set; }
+		private bool CandadoDeRefrescadoDeCajasDeTexto { get; set; } = true;
 
 		public GUIEditarPedido(ControladorDeCambioDePantalla controlador, Empleado empleadoDeCallCenter, Pedido pedido)
-        {
-            InitializeComponent();
-            this.EmpleadoDeCallCenter = empleadoDeCallCenter;
+		{
+			InitializeComponent();
+			this.EmpleadoDeCallCenter = empleadoDeCallCenter;
 			this.Pedido = pedido;
-            IvaDAO ivaDAO = new IvaDAO();
-            PlatilloDAO platilloDAO = new PlatilloDAO();
-            ProductoDAO productoDAO = new ProductoDAO();
-            try
-            {
-                Iva = ivaDAO.CargarIvaActual();
-            }
-            catch (InvalidOperationException e)
-            {
-                MessageBox.Show(e.Message + "Porfavor contacte a su administrador", "Error! ", MessageBoxButton.OK);
-                controlador.Regresar();
-            }
+			IvaDAO ivaDAO = new IvaDAO();
+			PlatilloDAO platilloDAO = new PlatilloDAO();
+			ProductoDAO productoDAO = new ProductoDAO();
+			try
+			{
+				Iva = ivaDAO.CargarIvaActual();
+			}
+			catch (InvalidOperationException e)
+			{
+				MessageBox.Show(e.Message + "Porfavor contacte a su administrador", "Error! ", MessageBoxButton.OK);
+				controlador.Regresar();
+			}
 
-            IvaLabel.Content = "IVA(" + Iva.Valor * 10 + "%)";
-            Controlador = controlador;
-            BarraDeEstado.Controlador = controlador;
-            try
-            {
-                ProductosCargados = productoDAO.CargarProductosActivos();
-                PlatillosCargados = platilloDAO.CargarTodos();
-            }
-            catch (InvalidOperationException e)
-            {
-                MessageBox.Show(e.Message + "Porfavor contacte a su administrador", "Error! ", MessageBoxButton.OK);
-                controlador.Regresar();
-            }
-            AlimentosCargados = AlimentosCargados.Concat(PlatillosCargados).ToList();
-            AlimentosCargados = AlimentosCargados.Concat(ProductosCargados).ToList();
-            AlimentosVisibles = AlimentosCargados;
-            ActualizarPantalla();
-            BarraDeEstado.ActualizarEmpleado(empleadoDeCallCenter);
-        }
+			IvaLabel.Content = "IVA(" + Iva.Valor * 10 + "%)";
+			Controlador = controlador;
+			BarraDeEstado.Controlador = controlador;
+			try
+			{
+				ProductosCargados = productoDAO.CargarProductosActivos();
+				PlatillosCargados = platilloDAO.CargarTodos();
+			}
+			catch (InvalidOperationException e)
+			{
+				MessageBox.Show(e.Message + "Porfavor contacte a su administrador", "Error! ", MessageBoxButton.OK);
+				controlador.Regresar();
+			}
+			AlimentosCargados = AlimentosCargados.Concat(PlatillosCargados).ToList();
+			AlimentosCargados = AlimentosCargados.Concat(ProductosCargados).ToList();
+			AlimentosVisibles = AlimentosCargados;
+			ActualizarPantalla();
+			BarraDeEstado.ActualizarEmpleado(empleadoDeCallCenter);
+		}
 
 		private void BusquedaTextBox_TextChanged(object sender, TextChangedEventArgs e)
 		{

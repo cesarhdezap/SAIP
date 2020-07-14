@@ -111,8 +111,14 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 Nombre = clienteDatos.Nombre,
                 Telefono = clienteDatos.Telefono,
                 Comentario = clienteDatos.Comentarios,
-                Direcciones = ConvertirListaDeDirecciones(clienteDatos.Direcciones),
             };
+            try
+            {
+                clienteLogica.Direcciones = ConvertirListaDeDirecciones(clienteDatos.Direcciones);
+            }
+            catch (Exception)
+            {
+            }
 
             return clienteLogica;
         }

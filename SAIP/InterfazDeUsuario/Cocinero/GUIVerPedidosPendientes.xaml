@@ -8,31 +8,30 @@
       Height="720" Width="1280"
       Title="GUI_VerPedidosPendientes">
 
-    <Page.Resources>
-        <DataTemplate x:Key="BotonDeEnProceso">
-            <Button Content="En Proceso" Click="ButtonEnProceso_Click"></Button>
-        </DataTemplate>
-        <DataTemplate x:Key="BotonRealizado">
-            <Button Content="Realizado" Click="Button_Click" ></Button>
-        </DataTemplate>
-        <DataTemplate x:Key="BotonReceta">
-            <Button Content="Ver Receta" Click="Button_Click_1"></Button>
-        </DataTemplate>
-    </Page.Resources>
-    <DockPanel>
-        <controls:BarraDeEstado x:Name="BarraDeEstado"  DockPanel.Dock="Top" Width="Auto"/>
-        <Label Content="Pedidos Pendientes" DockPanel.Dock="Top" FontSize="45"/>
-        <DataGrid x:Name="DataGridPedidosEnProceso" AutoGenerateColumns="False"  FontFamily="Tahoma" FontSize="30" >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
-                <DataGridTextColumn Header="Estado" Binding="{Binding Estado}"/>
-                <DataGridTextColumn Header="comentarios" Binding="{Binding Comentarios}"/>
-                <DataGridTemplateColumn CellTemplate="{StaticResource BotonDeEnProceso}" CellEditingTemplate="{StaticResource BotonDeEnProceso}"></DataGridTemplateColumn>
-                <DataGridTemplateColumn CellTemplate="{StaticResource BotonRealizado}" CellEditingTemplate="{StaticResource BotonRealizado}"></DataGridTemplateColumn>
-                <DataGridTemplateColumn CellTemplate="{StaticResource BotonReceta}" CellEditingTemplate="{StaticResource BotonReceta}"></DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-    </DockPanel>
+	<Page.Resources>
+		<DataTemplate x:Key="BotonDeEnProceso">
+			<Button x:Name="ButtonEnProceso" Content="En Proceso" Click="ButtonEnProceso_Click"></Button>
+		</DataTemplate>
+		<DataTemplate x:Key="BotonRealizado">
+			<Button x:Name="ButtonRealizado" Content="Realizado" Click="Button_Click" ></Button>
+		</DataTemplate>
+		<DataTemplate x:Key="BotonReceta">
+			<Button x:Name="ButtonReceta" Content="Ver Receta" Click="Button_Click_1"></Button>
+		</DataTemplate>
+	</Page.Resources>
+	<DockPanel>
+		<controls:BarraDeEstado x:Name="BarraDeEstado"  DockPanel.Dock="Top" Width="Auto"/>
+		<Label Content="Pedidos Pendientes" DockPanel.Dock="Top" FontSize="45"/>
+		<DataGrid x:Name="DataGridPedidosEnProceso" AutoGenerateColumns="False"  FontFamily="Tahoma" FontSize="30" SelectionMode="Single" CanUserAddRows="false" CanUserDeleteRows="False" SelectionUnit="FullRow" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+				<DataGridTextColumn Header="Estado" Binding="{Binding Estado}"/>
+				<DataGridTextColumn Header="comentarios" Binding="{Binding Comentarios}"/>
+				<DataGridTemplateColumn CellTemplate="{StaticResource BotonDeEnProceso}" CellEditingTemplate="{StaticResource BotonDeEnProceso}"></DataGridTemplateColumn>
+				<DataGridTemplateColumn CellTemplate="{StaticResource BotonRealizado}" CellEditingTemplate="{StaticResource BotonRealizado}"></DataGridTemplateColumn>
+				<DataGridTemplateColumn CellTemplate="{StaticResource BotonReceta}" CellEditingTemplate="{StaticResource BotonReceta}"></DataGridTemplateColumn>
+			</DataGrid.Columns>
+		</DataGrid>
+	</DockPanel>
 
 </Page>
-

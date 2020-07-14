@@ -107,7 +107,6 @@ namespace InterfazDeUsuario.Mesero
                 UserControlInformacionDeCuenta.ActualizarCuenta(CuentaSeleccionada);
                 ActualizarListBoxMesas();
             }
-            
         }
     }
 }

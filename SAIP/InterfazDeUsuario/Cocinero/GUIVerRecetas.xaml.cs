@@ -1,5 +1,6 @@
 ﻿using InterfazDeUsuario.UserControls;
 using LogicaDeNegocio.Clases;
+using LogicaDeNegocio.Clases.ClasesAsociativas;
 using LogicaDeNegocio.ObjetosAccesoADatos;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,8 @@ namespace InterfazDeUsuario.Cocinero
         public Empleado Empleado { get; set; }
         ControladorDeCambioDePantalla Controlador;
         private List<Pedido> ListaAlimentos {get; set;}
-        public GUIVerRecetas(ControladorDeCambioDePantalla controlador, Empleado empleado)
+        private Pedido Pedido { get; set; }
+        public GUIVerRecetas(ControladorDeCambioDePantalla controlador, Empleado empleado, Pedido pedido)
         {
             Controlador = controlador;
             Empleado = empleado;
@@ -35,14 +37,21 @@ namespace InterfazDeUsuario.Cocinero
             BarraDeEstado.Controlador = controlador;
             Controlador = controlador;
             BarraDeEstado.ActualizarEmpleado(empleado);
-            MostarRecetas();
+            Pedido = pedido;
+            CargarAlimentosDePedidos();
+            DataGridAlimentos.ItemsSource = Pedido.CantidadAlimentos;
         }
 
-        public void MostarRecetas()
+
+        private void CargarAlimentosDePedidos()
         {
-            PedidoDAO pedidoDAO = new PedidoDAO();
-            ListaAlimentos = pedidoDAO.CargarAlimentos();
-            DataGridAlimentos.ItemsSource = ListaAlimentos;
+
+            CantidadPlatilloDAO cantidadPlatilloDAO = new CantidadPlatilloDAO();
+            CantidadProductoDAO cantidadProductoDAO = new CantidadProductoDAO();
+            Pedido.CantidadAlimentos = new List<CantidadAlimento>();
+            Pedido.CantidadAlimentos = Pedido.CantidadAlimentos.Concat(cantidadPlatilloDAO.RecuperarPorIDPedido(Pedido.Id)).ToList();
+            Pedido.CantidadAlimentos = Pedido.CantidadAlimentos.Concat(cantidadProductoDAO.RecuperarPorIDPedido(Pedido.Id)).ToList();
+            
         }
     }
 }

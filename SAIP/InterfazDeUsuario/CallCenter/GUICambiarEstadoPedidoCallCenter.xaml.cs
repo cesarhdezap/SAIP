@@ -33,9 +33,9 @@ namespace InterfazDeUsuario.CallCenter
 
         private void CargarEstados()
         {
+            ComboBoxEstadoPedido.Items.Add(EstadoPedido.EnEspera.ToString());
             ComboBoxEstadoPedido.Items.Add(EstadoPedido.Enviado.ToString());
             ComboBoxEstadoPedido.Items.Add(EstadoPedido.Entregado.ToString());
-            ComboBoxEstadoPedido.Items.Add(EstadoPedido.Completado.ToString());
             ComboBoxEstadoPedido.Items.Add(EstadoPedido.Cancelado.ToString());
         }
 

@@ -14,6 +14,7 @@
 
     <Page.Resources>
         <l:ConversorDeCuentaClientes x:Key="ConversorDeCuentaClientes" ></l:ConversorDeCuentaClientes>
+		<l:ConversorDeCuentaANombreDeCliente x:Key="ConversorDeCuentaANombreDeCliente"></l:ConversorDeCuentaANombreDeCliente>
     </Page.Resources>
     
     <DockPanel>
@@ -27,8 +28,7 @@
             <DataGrid Name="DataGridPedidos" AutoGenerateColumns="False" FontSize="20" ColumnWidth="*" RowHeaderWidth="0" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                    <DataGridTextColumn Header="Nombre del Cliente" Binding="{Binding Cuenta.Clientes, Converter={StaticResource ConversorDeCuentaClientes}}"/>
-                    <DataGridTextColumn Header="Direccion" Binding="{Binding Cuenta.Direccion }"/>
+						<DataGridTextColumn Header="Nombre del Cliente" Binding="{Binding Cuenta, Converter={StaticResource ConversorDeCuentaANombreDeCliente}}"/>
                     <DataGridTextColumn Header="Estado" Binding="{Binding Estado}"/>
                     <DataGridTextColumn Header="Precio" Binding="{Binding PrecioTotal}"/>
                     <DataGridTextColumn Header="Fecha" Binding="{Binding FechaDeCreacion}"/>

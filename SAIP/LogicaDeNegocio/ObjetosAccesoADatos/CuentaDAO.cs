@@ -112,6 +112,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                         IvaDAO ivaDAO = new IvaDAO();
                         pedido.Iva = ivaDAO.CargarIvaActual().Valor;
                         pedido.CalcularPrecioTotal();
+                        pedido.Estado = EstadoPedido.EnEspera;
                     }
                     else
                     {

@@ -204,7 +204,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             List<Clases.Pedido> resultado = new List<Clases.Pedido>();
             foreach (AccesoADatos.Pedido pedido in pedidos)
             {
-                resultado.Add(ConvertirPedidoDeDatosALogica(pedido));
+                resultado.Add(ConvertirPedidoDeDatosALogicaConCuenta(pedido));
             }
 
             return resultado;
@@ -268,35 +268,35 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             List<AccesoADatos.Pedido> Pendiente = new List<AccesoADatos.Pedido>();
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
-                Pendiente = context.Pedidos.ToList();
+                Pendiente = context.Pedidos.Where(p => p.Estado == (short)EstadoPedido.EnEspera || p.Estado == (short)EstadoPedido.EnPreparacion || p.Estado == (short)EstadoPedido.Enviado || p.Estado == (short)EstadoPedido.Realizado).Include(p => p.Cuenta).Include(p =>p.Cuenta.Clientes).ToList();
             }
             List<Clases.Pedido> pedidoL = ConvertirListaDeDatosALogica(Pendiente);
 
             return pedidoL;
         }
 
-        public List<Clases.Pedido> CargarAlimentos()
+        public List<Clases.Pedido> CargarPedidosEnEspera()
         {
             List<AccesoADatos.Pedido> EnProceso = new List<AccesoADatos.Pedido>();
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
-                EnProceso = context.Pedidos.ToList();
+                EnProceso = context.Pedidos.Where(p => p.Estado == (short)EstadoPedido.EnEspera).Include(p => p.Cuenta).ToList();
             }
             List<Clases.Pedido> Proceso = ConvertirListaDeDatosALogica(EnProceso);
             return Proceso;
         }
 
-       /* public List<Clases.Pedido> AlimentosDePedido(List<CantidadAlimento> cantidadAlimentos)
-        {
-            List<AccesoADatos.Pedido> alimentos = new List<AccesoADatos.Pedido>();
+        //public List<Clases.Pedido> AlimentosDePedido(List<CantidadAlimento> cantidadAlimentos)
+        //{
+        //    List<AccesoADatos.Pedido> alimentos = new List<AccesoADatos.Pedido>();
             
-            using(ModeloDeDatosContainer context = new ModeloDeDatosContainer())
-            {
-                alimentos = context.Pedidos.Find(ConvertirListaDeDatosALogica(alimentos));
-            }
-            List<Clases.Pedido> Ali = ConvertirListaDeDatosALogica(alimentos);
-            return Ali;
-        }*/
+        //    using(ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+        //    {
+        //        alimentos = context.Pedidos.Find(ConvertirListaDeDatosALogica(alimentos));
+        //    }
+        //    List<Clases.Pedido> Ali = ConvertirListaDeDatosALogica(alimentos);
+        //    return Ali;
+        //}
 
         public void PedidoenEspera(Clases.Pedido pedido)
         {
@@ -307,7 +307,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                     AccesoADatos.Pedido pedidoDb = context.Pedidos.Find(pedido.Id);
                     if (pedidoDb != null)
                     {
-                        pedidoDb.Estado = 2;
+                        pedidoDb.Estado = 8;
                         context.SaveChanges();
                     }
                     else

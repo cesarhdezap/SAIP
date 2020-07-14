@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,6 +29,8 @@ namespace InterfazDeUsuario.Cocinero
         private List<Pedido> PedidosEnProceso { get; set; }
         public Empleado Empleado { get; set; }
         ControladorDeCambioDePantalla Controlador;
+        private bool Candado { get; set; }
+        private Timer Timer { get; set; }
         public GUI_VerPedidosPendientes(ControladorDeCambioDePantalla controlador, Empleado empleado)
         {
             Controlador = controlador;
@@ -37,6 +40,23 @@ namespace InterfazDeUsuario.Cocinero
             Controlador = controlador;
             BarraDeEstado.ActualizarEmpleado(empleado);
             MostrarPedidosEnProceso();
+            var startTimeSpan = TimeSpan.Zero;
+            var periodTimeSpan = TimeSpan.FromSeconds(3);
+            Candado = true;
+            Timer = new Timer((e) =>
+            {
+
+                Dispatcher.Invoke(() =>
+                {
+                    if (Candado)
+                    {
+                        Candado = false;
+                        MostrarPedidosEnProceso();
+                        Candado = true;
+                    }
+                });
+
+            }, null, startTimeSpan, periodTimeSpan);
         }
 
         
@@ -44,14 +64,18 @@ namespace InterfazDeUsuario.Cocinero
         public void MostrarPedidosEnProceso()
         {
             PedidoDAO pedidoDAO = new PedidoDAO();
-            PedidosEnProceso = pedidoDAO.CargarAlimentos();
-            DataGridPedidosEnProceso.ItemsSource = null;
+            try
+            {
+                PedidosEnProceso = pedidoDAO.CargarRecientes();
+            }catch(Exception e)
+            {
+                MessageBox.Show("Hubo un problema al conectarse con la base de datos", "Error");
+            }
             ActualizarPantalla();
         }
 
         public void ActualizarPantalla()
         {
-            PedidoDAO pedidoDAO = new PedidoDAO();
             DataGridPedidosEnProceso.ItemsSource = null;
             DataGridPedidosEnProceso.ItemsSource = PedidosEnProceso;
         }
@@ -70,6 +94,7 @@ namespace InterfazDeUsuario.Cocinero
             {
                 MessageBox.Show("No se a seleccionado un Pedido para Completar", "Seleccionar Pedido", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            MostrarPedidosEnProceso();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -85,6 +110,7 @@ namespace InterfazDeUsuario.Cocinero
             {
                 MessageBox.Show("No se a seleccionado un Pedido para Completar", "Seleccionar Pedido", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            MostrarPedidosEnProceso();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -92,7 +118,7 @@ namespace InterfazDeUsuario.Cocinero
             Pedido PedidoACargar = ((FrameworkElement)sender).DataContext as Pedido;
             if (PedidoACargar != null)
             {
-                GUIVerRecetas verRecetas = new GUIVerRecetas(Controlador, Empleado);
+                GUIVerRecetas verRecetas = new GUIVerRecetas(Controlador, Empleado, PedidoACargar);
                 Controlador.CambiarANuevaPage(verRecetas);
             }
             else

@@ -11,12 +11,13 @@
     <DockPanel>
         <controls:BarraDeEstado x:Name="BarraDeEstado"  DockPanel.Dock="Top" Width="Auto"/>
         <Label Content="Alimentos de Pedido" FontSize=" 45" DockPanel.Dock="Top"/>
-        <DataGrid x:Name="DataGridAlimentos" FontFamily="Tahoma" Margin="30"  CanUserAddRows="True" AutoGenerateColumns="True" FontSize="18" >
+        <DataGrid x:Name="DataGridAlimentos" FontFamily="Tahoma" Margin="30"  CanUserAddRows="True" AutoGenerateColumns="False" FontSize="18" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Alimentos" Binding="{Binding CantidadAlimentos}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Alimentos" Binding="{Binding Alimento.Nombre}"></DataGridTextColumn>
 
+				<DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}"></DataGridTextColumn>
 
-            </DataGrid.Columns>
+			</DataGrid.Columns>
         </DataGrid>
     </DockPanel>
 </Page>

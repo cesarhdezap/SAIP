@@ -14,6 +14,7 @@ namespace LogicaDeNegocio.Enumeradores
         Entregado = 4,
         Completado = 5,
         Cancelado = 6,
-        Enviado = 7
+        Enviado = 7,
+        EnPreparacion = 8
     }
 }
