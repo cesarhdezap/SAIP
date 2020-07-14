@@ -226,6 +226,8 @@ namespace InterfazDeUsuario.Gerente
                     try
                     {
                         ingredienteDAO.GuardarIngrediente(ingredienteNuevo);
+                        MessageBox.Show("¡Registro Exitoso!");
+                        Controlador.Regresar();
                     }
                     catch (ArgumentException ex)
                     {

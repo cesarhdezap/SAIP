@@ -6,7 +6,7 @@
 		xmlns:controls="clr-namespace:InterfazDeUsuario.UserControls"
         xmlns:local="clr-namespace:InterfazDeUsuario.Gerente"
         mc:Ignorable="d"
-        Title="GUIGerente" Height="720" Width="1280">
+        Title="GUIGerente" Width="1280" Height="720">
 	<DockPanel>
 		<controls:BarraDeEstado x:Name="BarraDeEstado" Width="Auto" DockPanel.Dock="Top"/>
         <Grid/>
