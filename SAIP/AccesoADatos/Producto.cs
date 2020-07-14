@@ -31,6 +31,7 @@ namespace AccesoADatos
         public System.DateTime FechaDeModificacion { get; set; }
         public string NombreCreador { get; set; }
         public bool Activo { get; set; }
+        public byte[] Imagen { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductoPedido> ProductoPedido { get; set; }

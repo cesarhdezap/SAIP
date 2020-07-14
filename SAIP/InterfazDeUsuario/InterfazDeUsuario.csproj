@@ -82,6 +82,9 @@
     <Compile Include="Gerente\GUIEditarImpuesto.xaml.cs">
       <DependentUpon>GUIEditarImpuesto.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Gerente\GUIListaDePlatillos.xaml.cs">
+      <DependentUpon>GUIListaDePlatillos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Gerente\GUIListaDeProductos.xaml.cs">
       <DependentUpon>GUIListaDeProductos.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,9 @@
     </Compile>
     <Compile Include="Gerente\GUIVerEmpleados.xaml.cs">
       <DependentUpon>GUIVerEmpleados.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gerente\GUI_VerListaIngredientes.xaml.cs">
+      <DependentUpon>GUI_VerListaIngredientes.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gerente\GUI_VerMesas.xaml.cs">
       <DependentUpon>GUI_VerMesas.xaml</DependentUpon>
@@ -175,6 +181,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Gerente\GUIListaDePlatillos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Gerente\GUIListaDeProductos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -200,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Gerente\GUIVerEmpleados.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gerente\GUI_VerListaIngredientes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

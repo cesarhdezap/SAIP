@@ -98,17 +98,18 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
             List<Clases.Componente> componentes = new List<Clases.Componente>();
 
-            foreach (RelacionIngrediente ingredienteIngrediente in ingredienteDb.RelacionIngredientesHijo)
-            {
+            foreach (RelacionIngrediente componente in ingredienteDb.RelacionIngredientesHijo)
+            {   
                 componentes.Add(new Clases.Componente
                 {
-                    Cantidad = ingredienteIngrediente.Cantidad,
+                    Cantidad = componente.Cantidad,
                     Compuesto = ingredienteConvertido,
-                    Ingrediente = ConvertirDeDatosALogica(ingredienteIngrediente.IngredienteHijo)
+                    Ingrediente = ConvertirDeDatosALogica(componente.IngredienteHijo)
                 });
             }
-            ComponenteDAO componenteDAO = new ComponenteDAO();
-            ingredienteConvertido.Componentes = componenteDAO.ObtenerComponentesPorIdDeIngredienteCompuesto(ingredienteDb.Id);
+
+            ingredienteConvertido.Componentes = componentes;
+
             return ingredienteConvertido;
         }
 
@@ -181,7 +182,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             List<Ingrediente> ingredientesDb = new List<Ingrediente>();
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
-                ingredientesDb = context.Ingredientes.Include(i => i.RelacionIngredientesHijo).ToList();
+                ingredientesDb = context.Ingredientes.ToList();
             }
 
             List<Clases.Ingrediente> ingredientesResultado = new List<Clases.Ingrediente>();
@@ -197,9 +198,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                 ingredientesDb = context.Ingredientes.Include(i => i.RelacionIngredientesHijo).Where(ingredienteCargado => ingredienteCargado.Activo == true).ToList();
             }
 
-            List<Clases.Ingrediente> ingredientesResultado = new List<Clases.Ingrediente>();
-            ingredientesResultado = ConvertirListaDeDbAListaDeLogica(ingredientesDb);
-            return ingredientesResultado;
+            return ConvertirListaDeDbAListaDeLogica(ingredientesDb);
         }
 
         public Clases.Ingrediente CargarIngredientePorId(int Id)

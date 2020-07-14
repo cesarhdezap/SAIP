@@ -147,6 +147,7 @@
     <Property Name="Codigo" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Notas" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Imagen" Type="varbinary(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="PlatilloPedido">
     <Key>
@@ -195,6 +196,7 @@
     <Property Name="FechaDeModificacion" Type="datetime" Nullable="false" />
     <Property Name="NombreCreador" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Activo" Type="bit" Nullable="false" />
+    <Property Name="Imagen" Type="varbinary(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="ProductoPedido">
     <Key>
@@ -570,6 +572,7 @@
 					<Property Name="Descripcion" Type="String" Nullable="false" />
 					<NavigationProperty Name="PlatilloPedidos" Relationship="ModeloDeDatos.PlatilloPlatilloPedido" FromRole="Platillo" ToRole="PlatilloPedido" />
 					<NavigationProperty Name="PlatilloIngredientes" Relationship="ModeloDeDatos.PlatilloPlatilloIngrediente" FromRole="Platillo" ToRole="PlatilloIngrediente" />
+          <Property Name="Imagen" Type="Binary" Nullable="false" />
 				</EntityType>
 				<EntityType Name="PlatilloPedido">
 					<Key>
@@ -596,6 +599,7 @@
 					<Property Name="FechaDeModificacion" Type="DateTime" Nullable="false" Precision="3" />
 					<Property Name="NombreCreador" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
 					<Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="Imagen" Type="Binary" Nullable="false" />
 				</EntityType>
 				<EntityType Name="PlatilloIngrediente">
 					<Key>
@@ -799,6 +803,7 @@
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
           <ScalarProperty Name="Notas" ColumnName="Notas" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -847,6 +852,7 @@
           <ScalarProperty Name="FechaDeModificacion" ColumnName="FechaDeModificacion" />
           <ScalarProperty Name="NombreCreador" ColumnName="NombreCreador" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

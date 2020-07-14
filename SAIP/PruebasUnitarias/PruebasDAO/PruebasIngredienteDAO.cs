@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LogicaDeNegocio.ObjetosAccesoADatos;
+using LogicaDeNegocio.Clases;
 
 namespace PruebasUnitarias.PruebasDAO
 {
@@ -88,7 +89,7 @@ namespace PruebasUnitarias.PruebasDAO
 			Assert.AreEqual("Tomate", ingredienteCargado.Nombre);
 		}
     
-     [TestMethod]
+		[TestMethod]
         public void GuardarIngrediente_Exitoso() {
             IngredienteDAO ingredienteDAO = new IngredienteDAO();
             Ingrediente ingrediente = new Ingrediente()
@@ -112,7 +113,9 @@ namespace PruebasUnitarias.PruebasDAO
             Assert.IsTrue(resultado);
 
         }
-        public void GuardarIngrediente_Fallido()
+
+		[TestMethod]
+		public void GuardarIngrediente_Fallido()
         {
             IngredienteDAO ingredienteDAO = new IngredienteDAO();
             Ingrediente ingrediente = new Ingrediente()
@@ -135,5 +138,16 @@ namespace PruebasUnitarias.PruebasDAO
             bool resultado = ingredienteDAO.CargarTodos().Exists(i => i.Id == ingrediente.Id);
             Assert.IsFalse(resultado);
         }
+
+		[TestMethod]
+		public void CargarIngredientesActivos_Exitoso_RegresaListaIngredientes()
+		{
+			IngredienteDAO ingredienteDAO = new IngredienteDAO();
+			List<Ingrediente> ingredientes = ingredienteDAO.CargarIngredientesActivos();
+
+			int INGREDIENTES_EN_BASEDEDATOS = 7;
+
+			Assert.AreEqual(INGREDIENTES_EN_BASEDEDATOS, ingredientes.Count);
+		}
 	}
 }
