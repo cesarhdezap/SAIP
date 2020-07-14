@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -121,6 +122,12 @@
     </Compile>
     <Compile Include="Paginas\PageInicioDeSesion.xaml.cs">
       <DependentUpon>PageInicioDeSesion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tecnico\GUIGenerarRespaldo.xaml.cs">
+      <DependentUpon>GUIGenerarRespaldo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tecnico\GUITecnico.xaml.cs">
+      <DependentUpon>GUITecnico.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\BarraDeEstado.xaml.cs">
       <DependentUpon>BarraDeEstado.xaml</DependentUpon>
@@ -236,6 +243,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Tecnico\GUIGenerarRespaldo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tecnico\GUITecnico.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\BarraDeEstado.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -299,6 +314,11 @@
     <Resource Include="img\actualizar.png" />
     <Resource Include="img\anadir.png" />
     <Resource Include="img\disminuir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\salvar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
