@@ -102,7 +102,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
                         });
                     }
                 }
-                foreach (Pedido pedido in cuenta.Pedidos)
+                foreach (Clases.Pedido pedido in cuenta.Pedidos)
                 {
 
                     PedidoDAO pedidoDAO = new PedidoDAO();
@@ -190,6 +190,31 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             foreach(AccesoADatos.Pedido pedido in cuenta.Pedidos)
             {
                 cuentaLogica.Pedidos.Add(pedidoDAO.ConvertirPedidoDeDatosALogica(pedido));
+            }
+
+            return cuentaLogica;
+        }
+
+        public Clases.Cuenta ConvertirCuentaSinMesaDatosALogica(Cuenta cuenta)
+        {
+            ClienteDAO clienteDAO = new ClienteDAO();
+            Clases.Cuenta cuentaLogica = new Clases.Cuenta()
+            {
+                Id = cuenta.Id,
+                Estado = (EstadoCuenta)cuenta.Estado,
+                PrecioTotal = cuenta.PrecioTotal,
+                Clientes = clienteDAO.ConvertirListaDeDatosALogica(cuenta.Clientes.ToList())
+
+                //Traducir datos de la cuenta
+            };
+
+            try
+            {
+                cuentaLogica.Clientes = clienteDAO.ConvertirListaDeDatosALogica(cuenta.Clientes.ToList());
+            }
+            catch (ObjectDisposedException)
+            {
+                cuentaLogica.Clientes = new List<Clases.Cliente>();
             }
 
             return cuentaLogica;
