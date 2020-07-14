@@ -2,12 +2,13 @@
 using LogicaDeNegocio.Clases;
 using LogicaDeNegocio.Enumeradores;
 using LogicaDeNegocio.ObjetosAccesoADatos;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using static InterfazDeUsuario.UtileriasGráficas;
-using LogicaDeNegocio.Enumeradores;
 using static LogicaDeNegocio.Servicios.ServiciosDeEncriptacion;
+using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
 
 namespace InterfazDeUsuario.empleado
 {
