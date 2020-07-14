@@ -6,7 +6,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InterfazDeUsuario.Gerente"
       mc:Ignorable="d"
-      Title="GUIRegistrarIngrediente" Height="560" Width="1160">
+      Width="1280" Height="720"
+      Title="GUIRegistrarIngrediente">
     <Page.Resources>
         <DataTemplate x:Key="BotonDeAñadir">
             <Button Content="Asignar" Click="ButtonAñadir_Click"></Button>

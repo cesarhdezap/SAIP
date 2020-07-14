@@ -1,6 +1,7 @@
 ﻿using InterfazDeUsuario.UserControls;
 using LogicaDeNegocio.Clases;
 using LogicaDeNegocio.ObjetosAccesoADatos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -29,6 +30,19 @@ namespace InterfazDeUsuario.Mesero
             UserControlInformacionDeCuenta.Empleado = empleado;
             BarraDeEstado.Controlador = controlador;
             BarraDeEstado.ActualizarEmpleado(empleado);
+
+            var startTimeSpan = TimeSpan.Zero;
+            var periodTimeSpan = TimeSpan.FromMinutes(1);
+
+            var timer = new System.Threading.Timer((e) =>
+            {
+                Dispatcher.Invoke(() => 
+                {
+                    MostrarMisMesas();
+                    ActualizarListBoxMesas();
+                });
+                
+            }, null, startTimeSpan, periodTimeSpan);
         }
 
         public void MostrarMisMesas()

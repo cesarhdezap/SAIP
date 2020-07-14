@@ -6,7 +6,7 @@
 	  xmlns:l ="clr-namespace:LogicaDeNegocio.Convertidores;assembly=LogicaDeNegocio"
       xmlns:local="clr-namespace:InterfazDeUsuario.Gerente" xmlns:controls="clr-namespace:InterfazDeUsuario.UserControls"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      Width="1280" Height="720"
       Title="GUI_VerListaIngredientes">
     
     <Page.Resources>
