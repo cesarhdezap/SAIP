@@ -1,4 +1,6 @@
 ﻿using InterfazDeUsuario.CallCenter;
+using InterfazDeUsuario.Cocinero;
+using InterfazDeUsuario.empleado;
 using InterfazDeUsuario.Gerente;
 using LogicaDeNegocio.Clases;
 using System;
@@ -26,6 +28,8 @@ namespace InterfazDeUsuario.UserControls
 	{
 		public ControladorDeCambioDePantalla Controlador;
 		private Empleado Empleado;
+
+		public Empleado empleadoADesactivar { get; private set; }
 
 		public BarraDeEstado()
 		{
@@ -72,6 +76,7 @@ namespace InterfazDeUsuario.UserControls
 					botones.Add((Button)FindResource("ButtonGerenteProductos"));
 					botones.Add((Button)FindResource("ButtonGerenteRegistrarProducto"));
 				break;
+				
 			}
 
 			foreach(Button boton in botones)
@@ -114,11 +119,9 @@ namespace InterfazDeUsuario.UserControls
 
 		private void ButtonGerenteVerMesas_Click(object sender, RoutedEventArgs e)
 		{
-			//GUI_VerMesas verMesas = new GUI_VerMesas(Controlador, Empleado);
-			//Controlador.CambiarANuevaPage(visualizarListaDeClientes);
-			//Falta ponerle controlador a la pantalla
-			MessageBox.Show("Falta ponerle controlador a la pantalla");
-			throw new NotImplementedException("Falta ponerle controlador a la pantalla");
+			GUI_VerMesas verMesas = new GUI_VerMesas(Controlador, Empleado);
+			Controlador.CambiarANuevaPage(verMesas);
+			
 		}
 
 		private void ButtonGerenteListaDePlatillos_Click(object sender, RoutedEventArgs e)
@@ -147,17 +150,14 @@ namespace InterfazDeUsuario.UserControls
 
 		private void ButtonGerenteVerEmpleados_Click(object sender, RoutedEventArgs e)
 		{
-			GUIVerEmpleados verEmpleados = new GUIVerEmpleados(Controlador, Empleado);
+			GUIVerEmpleados verEmpleados = new GUIVerEmpleados(Controlador, Empleado, empleadoADesactivar);
 			Controlador.CambiarANuevaPage(verEmpleados);
 		}
 
 		private void ButtonGerenteRegistrarMesa_Click(object sender, RoutedEventArgs e)
 		{
-			//GUIRegistarMesa registrarMesa = new GUIRegistarMesa(Controlador, Empleado);
-			//Controlador.CambiarANuevaPage(registrarMesa);
-			//Falta ponerle controlador a la pantalla
-			MessageBox.Show("Falta ponerle controlador a la pantalla");
-			throw new NotImplementedException("Falta ponerle controlador a la pantalla");
+			GUIRegistarMesa registrarMesa = new GUIRegistarMesa(Controlador, Empleado);
+			Controlador.CambiarANuevaPage(registrarMesa);
 		}
 
 		private void ButtonCallCenterRegistrarCliente_Click(object sender, RoutedEventArgs e)

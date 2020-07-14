@@ -21,7 +21,6 @@
 		<Button x:Name="ButtonGerenteProductos" x:Key="ButtonGerenteProductos" Content="Productos" Click="ButtonGerenteProductos_Click"/>
 		<Button x:Name="ButtonGerenteRegistrarProducto" x:Key="ButtonGerenteRegistrarProducto" Content="Nuevo producto" Click="ButtonGerenteRegistrarProducto_Click"/>
 	</UserControl.Resources>
-
     <DockPanel>
         <UniformGrid x:Name="UniformGridBotones" DockPanel.Dock="Top" Rows="1"/>
         <UniformGrid Columns="3" Background="#FF008050">
