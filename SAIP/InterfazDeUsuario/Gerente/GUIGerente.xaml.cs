@@ -37,31 +37,6 @@ namespace InterfazDeUsuario.Gerente
 			BarraDeEstado.Controlador = controlador;
 		}
 
-		private void RegistrarPlatilloButton_Click(object sender, RoutedEventArgs e)
-		{
-			GUIRegistrarPlatillo registrarPlatillo = new GUIRegistrarPlatillo(Controlador, Gerente);
-			Controlador.CambiarANuevaPage(registrarPlatillo);
-		}
-
-		private void Button_Click(object sender, RoutedEventArgs e)
-		{
-			PlatilloDAO platilloDAO = new PlatilloDAO();
-			GUIEditarPlatillo editarPlatillo = new GUIEditarPlatillo(Controlador, Gerente, platilloDAO.CargarPlatilloPorId(1));
-			Controlador.CambiarANuevaPage(editarPlatillo);
-		}
-
-		private void PasarInventarioButton_Click(object sender, RoutedEventArgs e)
-		{
-			GUIPasarInventario pasarInventario = new GUIPasarInventario(Controlador, Gerente);
-			Controlador.CambiarANuevaPage(pasarInventario);
-		}
-
-		private void ButtonRegistrarIngrediente_Click(object sender, RoutedEventArgs e)
-		{
-			GUIRegistrarIngrediente registrarIngrediente = new GUIRegistrarIngrediente(Controlador, Gerente);
-			Controlador.CambiarANuevaPage(registrarIngrediente);
-		}
-
 		private void Button_Click_Lista(object sender, RoutedEventArgs e)
 		{
 			GUIVerEmpleados verEmpleados = new GUIVerEmpleados(Controlador, Gerente, empleadoADesactivar);

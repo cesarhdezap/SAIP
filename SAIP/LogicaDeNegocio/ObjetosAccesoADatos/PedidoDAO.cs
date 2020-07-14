@@ -268,7 +268,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             {
                 Pendiente = context.Pedidos.ToList();
             }
-            List<Clases.Pedido> pedidoL = new List<Clases.Pedido>();
+            List<Clases.Pedido> pedidoL = ConvertirListaDeDatosALogica(Pendiente);
 
             return pedidoL;
         }
@@ -280,7 +280,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             {
                 EnProceso = context.Pedidos.ToList();
             }
-            List<Clases.Pedido> Proceso = new List<Clases.Pedido>();
+            List<Clases.Pedido> Proceso = ConvertirListaDeDatosALogica(EnProceso);
             return Proceso;
         }
 

@@ -7,8 +7,9 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using static InterfazDeUsuario.UtileriasGráficas;
-using static LogicaDeNegocio.Servicios.ServiciosDeEncriptacion;
 using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
+using LogicaDeNegocio.Enumeradores;
+using static LogicaDeNegocio.Servicios.ServiciosDeEncriptacion;
 
 namespace InterfazDeUsuario.empleado
 {
@@ -53,7 +54,6 @@ namespace InterfazDeUsuario.empleado
             else
             {
                 MessageBox.Show("Verifique los campos remarcados en rojo", "Campos invalidos", MessageBoxButton.OK, MessageBoxImage.Error);
- 
             }
         }
 
