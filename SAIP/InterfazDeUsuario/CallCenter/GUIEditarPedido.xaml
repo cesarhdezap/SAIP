@@ -9,6 +9,7 @@
       x:Class="InterfazDeUsuario.CallCenter.GUIEditarPedido"
       mc:Ignorable="d"
       Title="SAIP" Height="576" Width="1184">
+    
     <Page.Resources>
         <DataTemplate x:Key="BotonDeAñadir">
             <Button Content="Asignar" Click="ButtonAñadir_Click"></Button>

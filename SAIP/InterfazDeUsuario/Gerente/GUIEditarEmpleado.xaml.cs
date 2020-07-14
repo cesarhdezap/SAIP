@@ -16,7 +16,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
 using static InterfazDeUsuario.UtileriasGráficas;
-using LogicaDeNegocio.Enumeradores;
 using static LogicaDeNegocio.Servicios.ServiciosDeEncriptacion;
 using LogicaDeNegocio.ObjetosAccesoADatos;
 using InterfazDeUsuario.UserControls;

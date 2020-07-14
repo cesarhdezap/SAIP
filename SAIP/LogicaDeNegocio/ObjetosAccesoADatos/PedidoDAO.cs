@@ -261,30 +261,30 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
         }
 
-        public List<Pedido> CargarRecientes()
+        public List<Clases.Pedido> CargarRecientes()
         {
             List<AccesoADatos.Pedido> Pendiente = new List<AccesoADatos.Pedido>();
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
                 Pendiente = context.Pedidos.ToList();
             }
-            List<Pedido> pedidoL = new List<Pedido>();
+            List<Clases.Pedido> pedidoL = new List<Clases.Pedido>();
 
             return pedidoL;
         }
 
-        public List<Pedido> CargarEnProceso()
+        public List<Clases.Pedido> CargarEnProceso()
         {
             List<AccesoADatos.Pedido> EnProceso = new List<AccesoADatos.Pedido>();
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
                 EnProceso = context.Pedidos.ToList();
             }
-            List<Pedido> Proceso = new List<Pedido>();
+            List<Clases.Pedido> Proceso = new List<Clases.Pedido>();
             return Proceso;
         }
 
-        public void PedidoenEspera(Pedido pedido)
+        public void PedidoenEspera(Clases.Pedido pedido)
         {
             using(ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
@@ -308,7 +308,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             }
         }
 
-        public void PedidoRealizado(Pedido pedido)
+        public void PedidoRealizado(Clases.Pedido pedido)
         {
             using(ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
