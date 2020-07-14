@@ -5,14 +5,18 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InterfazDeUsuario.Cocinero" xmlns:controls="clr-namespace:InterfazDeUsuario.UserControls"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+     Height="720" Width="1280"
       Title="GUIVerRecetas">
 
     <DockPanel>
         <controls:BarraDeEstado x:Name="BarraDeEstado"  DockPanel.Dock="Top" Width="Auto"/>
-        <Grid>
-            <DataGrid HorizontalAlignment="Left" Height="376" VerticalAlignment="Top" Width="800"/>
+        <Label Content="Alimentos de Pedido" FontSize=" 45" DockPanel.Dock="Top"/>
+        <DataGrid x:Name="DataGridAlimentos" FontFamily="Tahoma" Margin="30"  CanUserAddRows="True" AutoGenerateColumns="True" FontSize="18" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Alimentos" Binding="{Binding CantidadAlimentos}"></DataGridTextColumn>
 
-        </Grid>
+
+            </DataGrid.Columns>
+        </DataGrid>
     </DockPanel>
 </Page>

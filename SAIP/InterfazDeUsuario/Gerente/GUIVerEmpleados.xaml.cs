@@ -84,22 +84,22 @@ namespace InterfazDeUsuario.empleado
 
         }
 
-        private void ButtonEliminar_Click(object sender, RoutedEventArgs e, EmpleadoDAO empleado)
+        
 
+        private void ButtonEliminar_Click(object sender, RoutedEventArgs e)
         {
-            Empleado empleadoADesactivar = (Empleado)ListaE.SelectedItem;
+            EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+            Empleado empleadoADesactivar = ((FrameworkElement)sender).DataContext as Empleado;
             if (empleadoADesactivar != null)
             {
                 GUIVerEmpleados desactivarempleado = new GUIVerEmpleados(Controlador, Gerente, empleadoADesactivar);
-                empleado.DesactivarEmpleado(empleadoADesactivar);
+                empleadoDAO.DesactivarEmpleado(empleadoADesactivar);
             }
             else
             {
                 MessageBox.Show("No se a seleccionado un Empleado para su Desactivación", "Seleccionar Empleado", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
-
     }
 }
 

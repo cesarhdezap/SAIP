@@ -24,7 +24,7 @@ namespace InterfazDeUsuario.Cocinero
     /// </summary>
     public partial class GUI_VerPedidosPendientes : Page
     {
-        private List<Pedido> PedidosRegistrados { get; set; }
+        
         private List<Pedido> PedidosEnProceso { get; set; }
         public Empleado Empleado { get; set; }
         ControladorDeCambioDePantalla Controlador;
@@ -36,55 +36,69 @@ namespace InterfazDeUsuario.Cocinero
             BarraDeEstado.Controlador = controlador;
             Controlador = controlador;
             BarraDeEstado.ActualizarEmpleado(empleado);
-            MostrarPedidosRegistrados();
             MostrarPedidosEnProceso();
         }
 
-        public void MostrarPedidosRegistrados()
-        {
-
-            PedidoDAO pedidoDAO = new PedidoDAO();
-            PedidosRegistrados = pedidoDAO.CargarRecientes();
-            DataGridPedidosRegistrados.ItemsSource = null;
-            DataGridPedidosRegistrados.ItemsSource = PedidosRegistrados;
-            ActualizarPantalla();
-        }
+        
 
         public void MostrarPedidosEnProceso()
         {
             PedidoDAO pedidoDAO = new PedidoDAO();
-            PedidosEnProceso = pedidoDAO.CargarEnProceso();
+            PedidosEnProceso = pedidoDAO.CargarAlimentos();
             DataGridPedidosEnProceso.ItemsSource = null;
-            DataGridPedidosRegistrados.ItemsSource = PedidosEnProceso;
             ActualizarPantalla();
         }
 
         public void ActualizarPantalla()
         {
+            PedidoDAO pedidoDAO = new PedidoDAO();
             DataGridPedidosEnProceso.ItemsSource = null;
             DataGridPedidosEnProceso.ItemsSource = PedidosEnProceso;
-            DataGridPedidosRegistrados.ItemsSource = null;
-            DataGridPedidosRegistrados.ItemsSource = PedidosRegistrados;
         }
 
-        private void BotonVerReceta_Click(object sender, RoutedEventArgs e)
-        {
-            Pedido pedido = ((FrameworkElement)sender).DataContext as Pedido;
-            GUIVerRecetas gUIVerRecetas = new GUIVerRecetas(Controlador, Empleado);
-                Controlador.CambiarANuevaPage(gUIVerRecetas);
-            
-        }
-
-        private void BotonRealizado_Click(object sender, RoutedEventArgs e, PedidoDAO pedido)
-        {
-           
-                MessageBox.Show("No se a seleccionado un Pedido para Completar", "Seleccionar Pedido", MessageBoxButton.OK, MessageBoxImage.Error);
-            
-        }
 
         private void ButtonEnProceso_Click(object sender, RoutedEventArgs e)
         {
+            Pedido enproceso = ((FrameworkElement)sender).DataContext as Pedido;
+            if (enproceso != null)
+            {
+                PedidoDAO pedidoDAO = new PedidoDAO();
+                pedidoDAO.PedidoenEspera(enproceso);
+                ActualizarPantalla();
+            }
+            else 
+            {
+                MessageBox.Show("No se a seleccionado un Pedido para Completar", "Seleccionar Pedido", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Pedido realizado = ((FrameworkElement)sender).DataContext as Pedido;
+            if (realizado != null)
+            {
+                PedidoDAO pedidoDAO = new PedidoDAO();
+                pedidoDAO.PedidoRealizado(realizado);
+                ActualizarPantalla();
+            }
+            else
+            {
+                MessageBox.Show("No se a seleccionado un Pedido para Completar", "Seleccionar Pedido", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Pedido PedidoACargar = ((FrameworkElement)sender).DataContext as Pedido;
+            if (PedidoACargar != null)
+            {
+                GUIVerRecetas verRecetas = new GUIVerRecetas(Controlador, Empleado);
+                Controlador.CambiarANuevaPage(verRecetas);
+            }
+            else
+            {
+                MessageBox.Show("No se a seleccionado un Pedido", "Seleccionar Pedido", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
