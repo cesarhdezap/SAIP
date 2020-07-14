@@ -6,7 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InterfazDeUsuario.Gerente"
         mc:Ignorable="d"
-        Title="GUIRegistrarPlatillo" Height="573.333" Width="1268.393">
+		Width="1280" Height="720"
+        Title="GUIRegistrarPlatillo">
 	<Page.Resources>
 		<DataTemplate x:Key="BotonDeAñadir">
 			<Button Content="Asignar" Click="ButtonAñadir_Click"></Button>

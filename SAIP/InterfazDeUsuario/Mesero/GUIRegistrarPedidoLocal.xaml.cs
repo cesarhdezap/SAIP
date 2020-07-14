@@ -47,7 +47,12 @@ namespace InterfazDeUsuario.Mesero
             Iva = new IvaDAO().CargarIvaActual();
             MostrarAlimentos();
             LabelNumeroDeMesa.Content = "Mesa: " + cuenta.Mesa.NumeroDeMesa;
+
+            
         }
+
+
+
 
         private void MostrarAlimentos()
         {

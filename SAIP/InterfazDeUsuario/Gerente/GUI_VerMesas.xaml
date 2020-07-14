@@ -6,8 +6,8 @@
       xmlns:local="clr-namespace:InterfazDeUsuario.empleado"
        xmlns:controls="clr-namespace:InterfazDeUsuario.UserControls"
       mc:Ignorable="d" 
-      d:DesignHeight="450"
-      Title="GUI_VerMesas" Width="862.069">
+      Width="1280" Height="720"
+      Title="GUI_VerMesas">
 
     <DockPanel Margin="0,0,0.4,-0.4">
         <controls:BarraDeEstado x:Name="BarraDeEstado"  DockPanel.Dock="Top" Width="864"  Height="74"   AutomationProperties.IsColumnHeader="True" FontFamily="Tahoma" FontSize="18"/>

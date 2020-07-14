@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:InterfazDeUsuario.Gerente"
       xmlns:UserControls="clr-namespace:InterfazDeUsuario.UserControls" x:Class="InterfazDeUsuario.Gerente.GUIReporteDeInventario"
       mc:Ignorable="d"
-      Title="GUIReporteDeInventario" Height="570.375" Width="944.562">
+		Width="1280" Height="720"
+      Title="GUIReporteDeInventario">
 	<DockPanel>
 		<UserControls:BarraDeEstado x:Name="BarraDeEstado" Margin="0,0,0,0" Width="Auto" DockPanel.Dock="Top"/>
 		<Grid>

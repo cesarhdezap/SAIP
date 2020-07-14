@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InterfazDeUsuario.empleado" xmlns:controls="clr-namespace:InterfazDeUsuario.UserControls"
         mc:Ignorable="d" 
-      Height="351.667"
-      Title="GUIRegistrarEmpleado" Width="816.667">
+      Width="1280" Height="720"
+      Title="GUIRegistrarEmpleado">
 
     <DockPanel>
         <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top"  Width="Auto" />
@@ -16,13 +16,13 @@
             <Button x:Name="Agregar" Content="Agregar" HorizontalAlignment="Left" Margin="600,332,0,0" VerticalAlignment="Top" Width="120" Height="35" Click="Agregar_Click"/>
             <Label Content="Nombre de Usuario" HorizontalAlignment="Left" Margin="373,154,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="131" RenderTransformOrigin="1.231,0.586"/>
             <TextBox x:Name="Usuario" HorizontalAlignment="Left" Height="23" Margin="373,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" TextChanged="Usuario_TextChanged"/>
-            <Label Content="Correo Electronico" HorizontalAlignment="Left" Margin="861,92,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="125"/>
-            <TextBox x:Name="correo" HorizontalAlignment="Left" Height="23" Margin="866,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127" TextChanged="correo_TextChanged"/>
-            <Label Content="Tipo de Empleado" HorizontalAlignment="Left" Margin="866,154,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="122"/>
+            <Label Content="Correo Electronico" HorizontalAlignment="Left" Margin="851,92,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="125"/>
+            <TextBox x:Name="correo" HorizontalAlignment="Left" Height="23" Margin="856,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127" TextChanged="correo_TextChanged"/>
+            <Label Content="Tipo de Empleado" HorizontalAlignment="Left" Margin="856,154,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="122"/>
             <Label Content="Password" HorizontalAlignment="Left" Margin="373,221,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="67"/>
             <PasswordBox x:Name="PasswordBoxContraseña" HorizontalAlignment="Left" Height="25" Margin="373,250,0,0"  VerticalAlignment="Top" Width="131" PasswordChanged="PasswordBoxContraseña_PasswordChanged"/>
-            <Button x:Name="Cancelar" Content="Cancelar" Width="120" Height="35" Margin="600,407,560,204.4" Click="Cancelar_Click"/>
-            <ComboBox x:Name="ComboBoxPuesto" HorizontalAlignment="Left" Margin="866,193,0,0" VerticalAlignment="Top" Width="127"/>
+            <Button x:Name="Cancelar" Content="Cancelar" Width="120" Height="35" Margin="600,387,560,123" Click="Cancelar_Click"/>
+            <ComboBox x:Name="ComboBoxPuesto" HorizontalAlignment="Left" Margin="856,193,0,0" VerticalAlignment="Top" Width="127"/>
         </Grid>
     </DockPanel>
 </Page>
