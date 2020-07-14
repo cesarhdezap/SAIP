@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InterfazDeUsuario.Gerente
+namespace InterfazDeUsuario.empleado
 {
     /// <summary>
     /// Lógica de interacción para GUIVerEmpleados.xaml
@@ -26,39 +26,47 @@ namespace InterfazDeUsuario.Gerente
         private List<Empleado> Trabajadores { get; set; }
         private List<Empleado> Visibles { get; set; }
         public Empleado Gerente { get; set; }
+        public Empleado empleadoAEditar { get; private set; }
+
         ControladorDeCambioDePantalla Controlador;
-        public GUIVerEmpleados(ControladorDeCambioDePantalla controlador, Empleado EmpleadoCargado)
+        public GUIVerEmpleados(ControladorDeCambioDePantalla controlador, Empleado EmpleadoCargado, Empleado empleadoADesactivar)
         {
             InitializeComponent();
             Gerente = EmpleadoCargado;
             BarraDeEstado.Controlador = controlador;
             Controlador = controlador;
             BarraDeEstado.ActualizarEmpleado(Gerente);
- 
             MostrarEmpleados();
 
-        } 
+        }
 
-        public void MostrarEmpleados() {
+        public void MostrarEmpleados()
+        {
             EmpleadoDAO empleadoDAO = new EmpleadoDAO();
             Trabajadores = empleadoDAO.CargarTodos();
+            ListaE.ItemsSource = null;
             ListaE.ItemsSource = Trabajadores;
+            ActualizarLista();
         }
 
         public void ActualizarPantalla()
         {
-            ListaE.ItemsSource = null;
+
             ListaE.ItemsSource = Visibles;
         }
 
-       
+        public void ActualizarLista()
+        {
+            ListaE.ItemsSource = Trabajadores;
+        }
+
 
         private void Busqueda_TextChanged(object sender, TextChangedEventArgs e)
         {
             string busqueda = Busqueda.Text;
             if (busqueda != string.Empty)
             {
-                Trabajadores = Visibles.TakeWhile(Empleado => Empleado.Nombre.ToLower().Contains(busqueda.ToLower())).ToList();
+                Trabajadores = Visibles.TakeWhile(empleado => empleado.Nombre.ToLower().Contains(busqueda.ToLower())).ToList();
             }
             else
             {
@@ -67,13 +75,31 @@ namespace InterfazDeUsuario.Gerente
             ActualizarPantalla();
         }
 
-        private void Registro_Click(object sender, RoutedEventArgs e)
+
+        public void ButtonEditar_Click(object sender, RoutedEventArgs e)
         {
-            GUIRegistrarEmpleado registrarEmpleado = new GUIRegistrarEmpleado(Controlador, Gerente);
-            Controlador.CambiarANuevaPage(registrarEmpleado);
+            Empleado empleado = ((FrameworkElement)sender).DataContext as Empleado;
+            GUI_EditarEmpleado editar = new GUI_EditarEmpleado(Controlador, empleado, empleadoAEditar);
+            Controlador.CambiarANuevaPage(editar);
+
         }
 
-        
-        
+        private void ButtonEliminar_Click(object sender, RoutedEventArgs e, EmpleadoDAO empleado)
+
+        {
+            Empleado empleadoADesactivar = (Empleado)ListaE.SelectedItem;
+            if (empleadoADesactivar != null)
+            {
+                GUIVerEmpleados desactivarempleado = new GUIVerEmpleados(Controlador, Gerente, empleadoADesactivar);
+                empleado.DesactivarEmpleado(empleadoADesactivar);
+            }
+            else
+            {
+                MessageBox.Show("No se a seleccionado un Empleado para su Desactivación", "Seleccionar Empleado", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+
     }
 }
+

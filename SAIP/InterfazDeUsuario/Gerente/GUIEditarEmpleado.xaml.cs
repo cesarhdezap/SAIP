@@ -1,6 +1,5 @@
-﻿using InterfazDeUsuario.UserControls;
-using LogicaDeNegocio.Clases;
-using LogicaDeNegocio.ObjetosAccesoADatos;
+﻿using LogicaDeNegocio.Clases;
+using LogicaDeNegocio.Enumeradores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,45 +18,39 @@ using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
 using static InterfazDeUsuario.UtileriasGráficas;
 using LogicaDeNegocio.Enumeradores;
 using static LogicaDeNegocio.Servicios.ServiciosDeEncriptacion;
+using LogicaDeNegocio.ObjetosAccesoADatos;
+using InterfazDeUsuario.UserControls;
 
 namespace InterfazDeUsuario.empleado
 {
     /// <summary>
-    /// Lógica de interacción para GUIRegistrarEmpleado.xaml
+    /// Lógica de interacción para GUI_EditarEmpleado.xaml
     /// </summary>
-
-    public partial class GUIRegistrarEmpleado : Page
+    public partial class GUI_EditarEmpleado : Page
     {
-        public Empleado Gerente { get; set; }
-        public List<Empleado> Trabajadores { get; set; }
-        public List<Empleado> Visible { get; set; }
-        public Empleado EmpleadoRegistrar { get; set; } = new Empleado();
         ControladorDeCambioDePantalla Controlador;
-        public GUIRegistrarEmpleado(ControladorDeCambioDePantalla controlador, Empleado empleadoCargado)
+        public Empleado Gerente { get; set; }
+        public Empleado empleadoaEditar { get; set; } = new Empleado();
+        public GUI_EditarEmpleado(ControladorDeCambioDePantalla controlador, Empleado EmpleadoCargado, Empleado empleadoAEditar)
         {
             InitializeComponent();
             ComboBoxPuesto.ItemsSource = Enum.GetValues(typeof(TipoDeEmpleado));
             ComboBoxPuesto.SelectedIndex = 0;
-            Gerente = empleadoCargado;
+            Gerente = EmpleadoCargado;
             BarraDeEstado.Controlador = controlador;
             Controlador = controlador;
             BarraDeEstado.ActualizarEmpleado(Gerente);
-            EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-            Trabajadores = empleadoDAO.CargarTodos();
-            Visible = Trabajadores;
-
         }
 
-
-        private void Agregar_Click(object sender, RoutedEventArgs e)
+        private void ButtonCambiar_Click(object sender, RoutedEventArgs e)
         {
             if (ValidarCampos())
             {
 
-                MessageBoxResult resultadoDeMesageBox = MessageBox.Show("Esta a punto de guardar un Empleado nuevo dentro del sistema ¿Esta seguro que desea continuar?", "ADVERTENCIA", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                MessageBoxResult resultadoDeMesageBox = MessageBox.Show("Esta a punto de Editar la Informacion de un Empleado dentro del sistema ¿Esta seguro que desea continuar?", "ADVERTENCIA", MessageBoxButton.YesNo, MessageBoxImage.Error);
                 if (resultadoDeMesageBox == MessageBoxResult.Yes)
                 {
-                    CapturarEmpleado();
+                    EditarEmpleado();
 
                 }
             }
@@ -67,12 +60,11 @@ namespace InterfazDeUsuario.empleado
 
             }
         }
-
         public void ActualizarPantalla()
         {
             TextBoxNombre.Clear();
-            Usuario.Clear();
-            correo.Clear();
+            TextBoxUsuario.Clear();
+            TextBoxCorreo.Clear();
             PasswordBoxContraseña.Clear();
 
         }
@@ -81,8 +73,8 @@ namespace InterfazDeUsuario.empleado
         {
             bool resultado = false;
             if (ValidarNombre(TextBoxNombre.Text) &&
-                ValidarCadena(Usuario.Text) &&
-                ValidarCorreoElectronico(correo.Text) &&
+                ValidarCadena(TextBoxUsuario.Text) &&
+                ValidarCorreoElectronico(TextBoxCorreo.Text) &&
                 ValidarContraseña(PasswordBoxContraseña.Password) &&
                 ValidarCadena(ComboBoxPuesto.Text))
             {
@@ -91,26 +83,24 @@ namespace InterfazDeUsuario.empleado
             else
             {
                 MostrarEstadoDeValidacionCadena(TextBoxNombre);
-                MostrarEstadoDeValidacionCadena(Usuario);
-                MostrarEstadoDeValidacionCorreoElectronico(correo);
+                MostrarEstadoDeValidacionCadena(TextBoxUsuario);
+                MostrarEstadoDeValidacionCorreoElectronico(TextBoxCorreo);
                 MostrarEstadoDeValidacionContraseña(PasswordBoxContraseña);
 
             }
 
             return resultado;
         }
-
-        public void CapturarEmpleado()
+        public void EditarEmpleado()
         {
-            EmpleadoRegistrar.Nombre = TextBoxNombre.Text;
-            EmpleadoRegistrar.NombreDeUsuario = Usuario.Text;
-            EmpleadoRegistrar.Contraseña = EncriptarCadena(PasswordBoxContraseña.Password);
-            EmpleadoRegistrar.CorreoElectronico = correo.Text;
-            EmpleadoRegistrar.TipoDeEmpleado = (TipoDeEmpleado)ComboBoxPuesto.SelectedItem;
-            EmpleadoRegistrar.Creador = Gerente.Nombre;
+            empleadoaEditar.Nombre = TextBoxNombre.Text;
+            empleadoaEditar.NombreDeUsuario = TextBoxUsuario.Text;
+            empleadoaEditar.Contraseña = PasswordBoxContraseña.Password;
+            empleadoaEditar.CorreoElectronico = TextBoxCorreo.Text;
+            empleadoaEditar.TipoDeEmpleado = (TipoDeEmpleado)ComboBoxPuesto.SelectedItem;
+            empleadoaEditar.Creador = Gerente.Nombre;
             EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-            empleadoDAO.GuardarEmpleado(EmpleadoRegistrar);
-            MessageBox.Show("Empleado Registrado con Exito!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            empleadoDAO.EditarEmpleado(empleadoaEditar);
         }
 
         private void Usuario_TextChanged(object sender, TextChangedEventArgs e)
@@ -135,9 +125,9 @@ namespace InterfazDeUsuario.empleado
             MostrarEstadoDeValidacionContraseña((PasswordBox)sender);
         }
 
-        private void Cancelar_Click(object sender, RoutedEventArgs e)
+        private void ButtonCancelar_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult resultadoDeMessageBox = MessageBox.Show("¿Esta seguro que desea cancelar el Registro? Se perderan los cambios sin guardar", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            MessageBoxResult resultadoDeMessageBox = MessageBox.Show("¿Esta seguro que desea cancelar la edicion? Se perderan los cambios sin guardar", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
             if (resultadoDeMessageBox == MessageBoxResult.Yes)
             {
                 Controlador.Regresar();
