@@ -24,7 +24,7 @@ namespace InterfazDeUsuario.Cocinero
     /// </summary>
     public partial class GUI_VerPedidosPendientes : Page
     {
-        private List<Pedido> PedidosRegistrados { get; set; }
+        
         private List<Pedido> PedidosEnProceso { get; set; }
         public Empleado Empleado { get; set; }
         ControladorDeCambioDePantalla Controlador;
@@ -51,6 +51,7 @@ namespace InterfazDeUsuario.Cocinero
 
         public void ActualizarPantalla()
         {
+            PedidoDAO pedidoDAO = new PedidoDAO();
             DataGridPedidosEnProceso.ItemsSource = null;
             DataGridPedidosEnProceso.ItemsSource = PedidosEnProceso;
         }

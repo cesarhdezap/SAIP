@@ -26,6 +26,7 @@ namespace InterfazDeUsuario.Cocinero
     {
         public Empleado Empleado { get; set; }
         ControladorDeCambioDePantalla Controlador;
+        private List<Pedido> ListaAlimentos {get; set;}
         public GUIVerRecetas(ControladorDeCambioDePantalla controlador, Empleado empleado)
         {
             Controlador = controlador;
@@ -40,6 +41,8 @@ namespace InterfazDeUsuario.Cocinero
         public void MostarRecetas()
         {
             PedidoDAO pedidoDAO = new PedidoDAO();
+            ListaAlimentos = pedidoDAO.CargarAlimentos();
+            DataGridAlimentos.ItemsSource = ListaAlimentos;
         }
     }
 }

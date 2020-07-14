@@ -284,12 +284,13 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             return Proceso;
         }
 
-        /*public List<Clases.Pedido> AlimentosDePedido()
+       /* public List<Clases.Pedido> AlimentosDePedido(List<CantidadAlimento> cantidadAlimentos)
         {
             List<AccesoADatos.Pedido> alimentos = new List<AccesoADatos.Pedido>();
+            
             using(ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
-                alimentos = context.Pedidos.ToList(CantidadAlimentos);
+                alimentos = context.Pedidos.Find(ConvertirListaDeDatosALogica(alimentos));
             }
             List<Clases.Pedido> Ali = ConvertirListaDeDatosALogica(alimentos);
             return Ali;

@@ -43,7 +43,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				FechaDeModicacion = empleadoDb.FechaDeModicacion,
 				Creador = empleadoDb.NombreCreador,
 				Activo = empleadoDb.Activo,
-				TipoDeEmpleado = (TipoDeEmpleado)empleadoDb.TipoDeEmpleado
+				TipoDeEmpleado = (TipoDeEmpleado)empleadoDb.TipoDeEmpleado,
+				CorreoElectronico = empleadoDb.CorreoElectronico
 			};
 
 			return empleadoConvertido;
@@ -158,13 +159,19 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 		}
 		public void DesactivarEmpleado(Clases.Empleado empleado)
 		{
-
-
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
 				AccesoADatos.Empleado empleadodesactivado = context.Empleados.Find(empleado.Id);
-				empleadodesactivado.Activo = false;
-				context.SaveChanges();
+				if(empleadodesactivado != null)
+				{
+					empleadodesactivado.Activo = false;
+					context.SaveChanges();
+				}
+				else
+				{
+					throw new ArgumentException("La id del Empleado no encontrada");
+				}
+
 			}
 
 		}

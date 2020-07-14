@@ -15,7 +15,7 @@
             <Button Content="Editar" Click="ButtonEditar_Click"></Button>
         </DataTemplate>
         <DataTemplate x:Key="BotonEliminar">
-            <Button Content="Eliminar" ></Button>
+            <Button Content="Eliminar" x:Name="ButtonEliminar" Click="ButtonEliminar_Click"></Button>
         </DataTemplate>
     </Page.Resources>
     <DockPanel>
