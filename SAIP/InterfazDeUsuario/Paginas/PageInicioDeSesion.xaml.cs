@@ -38,7 +38,7 @@ namespace InterfazDeUsuario.Paginas
             InitializeComponent();
 			NombreDeUsuarioTextBox.Focus();
             BarraDeEstado.OcultarNombreDeUsuarioYBotones();
-        }
+		}
 
         private void IniciarSesionButton_Click(object sender, RoutedEventArgs e)
         {
@@ -98,6 +98,23 @@ namespace InterfazDeUsuario.Paginas
 		private void ContraseñaPasswordbox_PasswordChanged(object sender, RoutedEventArgs e)
 		{
 			MostrarEstadoDeValidacionContraseña((PasswordBox)sender);
+		}
+
+		private void Page_Initialized(object sender, EventArgs e)
+		{
+
+		}
+
+		private void Page_Loaded(object sender, RoutedEventArgs e)
+		{
+			EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+			List<Empleado> empleados = empleadoDAO.CargarTodos();
+			if (!empleados.Any(em => em.TipoDeEmpleado == TipoDeEmpleado.Gerente))
+			{
+				MessageBox.Show("No existe un gerente en la base de datos, a continuación sera llevado a una pantalla para que pueda registrar tanto un gerente como un técnico nuevo. Si esta no es la primera ves que se corre el SAIP es posible que necesite contactar a su técnico para restaurar un respaldo.", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
+				GUIRegistroDeGerenteYTécnico registroDeGerenteYTécnico = new GUIRegistroDeGerenteYTécnico(Controlador);
+				Controlador.CambiarANuevaPage(registroDeGerenteYTécnico);
+			}
 		}
 	}
 }

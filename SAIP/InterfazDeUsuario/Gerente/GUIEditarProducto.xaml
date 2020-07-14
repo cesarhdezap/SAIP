@@ -1,11 +1,11 @@
-﻿<Page x:Class="InterfazDeUsuario.Gerente.GUIRegistrarProducto"
+﻿<Page x:Class="InterfazDeUsuario.Gerente.GUIEditarProducto"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InterfazDeUsuario.Gerente"
       mc:Ignorable="d"
-      Title="GUIRegistrarProducto" Height="367.333" Width="696.667">
+      Title="GUIEditarProducto" Height="385.312" Width="691.25">
 
 	<Grid>
 		<Label Content="Nombre" HorizontalAlignment="Left" Margin="19,23,0,0" VerticalAlignment="Top"/>

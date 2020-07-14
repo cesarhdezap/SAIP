@@ -3,11 +3,11 @@ using LogicaDeNegocio.ObjetosAccesoADatos;
 using LogicaDeNegocio.Servicios;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -22,21 +22,30 @@ using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
 namespace InterfazDeUsuario.Gerente
 {
 	/// <summary>
-	/// Interaction logic for GUIRegistrarProducto.xaml
+	/// Interaction logic for GUIEditarProducto.xaml
 	/// </summary>
-	public partial class GUIRegistrarProducto : Page
+	public partial class GUIEditarProducto : Page
 	{
 		private string DireccionDeArchivo { get; set; }
 		private ControladorDeCambioDePantalla Controlador { get; set; }
 		private Empleado Gerente { get; set; }
-		public Producto Producto { get; set; } = new Producto();
+		private Producto Producto { get; set; } = new Producto();
 		private double Ganancia { get; set; }
+		private bool ImagenFueModificada { get; set; }
 
-		public GUIRegistrarProducto(ControladorDeCambioDePantalla controlador, Empleado gerente)
+		public GUIEditarProducto(ControladorDeCambioDePantalla controlador, Empleado gerente, Producto producto)
 		{
 			InitializeComponent();
 			Controlador = controlador;
 			Gerente = gerente;
+			Producto = producto;
+			TextBoxNombre.Text = producto.Nombre;
+			TextBoxCodigo.Text = producto.Codigo;
+			TextBoxCodigoDeBarras.Text = producto.CodigoDeBarras;
+			TextBoxCantidadEnInventario.Text = producto.CantidadEnInventario.ToString();
+			TextBoxCosto.Text = producto.Costo.ToString();
+			TextBoxPrecioAlPublico.Text = producto.Precio.ToString();
+			ImageImagenDeProducto.Source = CargarImagen(producto.Imagen);
 		}
 
 		private void TextBoxNombre_TextChanged(object sender, TextChangedEventArgs e)
@@ -120,17 +129,19 @@ namespace InterfazDeUsuario.Gerente
 				LabelDireccionDeArchivo.Content = DireccionDeArchivo;
 				ImageImagenDeProducto.Source = new BitmapImage(new Uri(DireccionDeArchivo));
 				ImageImagenDeProducto.Visibility = Visibility.Visible;
+				ImagenFueModificada = true;
 			}
 			else
 			{
 				LabelDireccionDeArchivo.Content = "Ningun archivo seleccionado";
 				ImageImagenDeProducto.Visibility = Visibility.Hidden;
+				ImagenFueModificada = false;
 			}
 		}
 
 		private void ButtonCancelarRegistro_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBoxResult resultadoDeMessageBox = MessageBox.Show("¿Esta seguro que desea cancelar el registro? Se perderan los cambios sin guardar", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+			MessageBoxResult resultadoDeMessageBox = MessageBox.Show("¿Esta seguro que desea cancelar la edición? Se perderan los cambios sin guardar", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
 			if (resultadoDeMessageBox == MessageBoxResult.Yes)
 			{
 				Controlador.Regresar();
@@ -141,17 +152,16 @@ namespace InterfazDeUsuario.Gerente
 		{
 			if (ValidarCampos())
 			{
-				Producto.Imagen = ServiciosDeIO.CargarBytesDeArchivo(DireccionDeArchivo);
 				if (ValidarGanancia())
 				{
-					GuardarProducto();
+					ActualizarProducto();
 				}
 				else
 				{
 					MessageBoxResult resultadoDeMesageBox = MessageBox.Show("Esta a punto de guardar un producto con GANANCIA NEGATIVA por lo que se venderia este platillo con PERDIDA. ¿Esta seguro que desea continuar?", "ADVERTENCIA", MessageBoxButton.YesNo, MessageBoxImage.Error);
 					if (resultadoDeMesageBox == MessageBoxResult.Yes)
 					{
-						GuardarProducto();
+						ActualizarProducto();
 					}
 				}
 			}
@@ -161,9 +171,12 @@ namespace InterfazDeUsuario.Gerente
 			}
 		}
 
-		private void GuardarProducto()
+		private void ActualizarProducto()
 		{
-			Producto.Imagen = ServiciosDeIO.CargarBytesDeArchivo(DireccionDeArchivo);
+			if (ImagenFueModificada)
+			{
+				Producto.Imagen = ServiciosDeIO.CargarBytesDeArchivo(DireccionDeArchivo);
+			}
 			Producto.Nombre = TextBoxNombre.Text;
 			Producto.Codigo = TextBoxCodigo.Text;
 			Producto.CodigoDeBarras = TextBoxCodigoDeBarras.Text;
@@ -172,13 +185,15 @@ namespace InterfazDeUsuario.Gerente
 			ProductoDAO productoDAO = new ProductoDAO();
 			try
 			{
-				productoDAO.Guardar(Producto);
+				productoDAO.ActualizarProducto(Producto);
 			}
-			catch(Exception e)
+			catch (Exception e)
 			{
 				MessageBox.Show("Hubo un problema conectandose a la base de datos. Contacte a su administrador.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+				return;
 			}
-			MessageBox.Show("¡El producto fue registrado exitosamente!", "¡Exito!", MessageBoxButton.OK, MessageBoxImage.Information);
+			MessageBox.Show("¡El producto fue actualizado exitosamente!", "¡Exito!", MessageBoxButton.OK, MessageBoxImage.Information);
+			Controlador.Regresar();
 		}
 
 		private bool ValidarGanancia()
@@ -197,7 +212,7 @@ namespace InterfazDeUsuario.Gerente
 			if (ValidarCadena(TextBoxNombre.Text) &&
 				ValidarCadena(TextBoxCodigo.Text) &&
 				ValidarCadena(TextBoxCodigoDeBarras.Text) &&
-				!string.IsNullOrEmpty(DireccionDeArchivo))
+				(!string.IsNullOrEmpty(DireccionDeArchivo)|| !ImagenFueModificada))
 			{
 				resultado = true;
 			}
@@ -227,6 +242,24 @@ namespace InterfazDeUsuario.Gerente
 			{
 				e.Handled = true;
 			}
+		}
+
+		private static BitmapImage CargarImagen(byte[] imagen)
+		{
+			if (imagen == null || imagen.Length == 0) return null;
+			var bitmapImage = new BitmapImage();
+			using (var stream = new MemoryStream(imagen))
+			{
+				stream.Position = 0;
+				bitmapImage.BeginInit();
+				bitmapImage.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+				bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+				bitmapImage.UriSource = null;
+				bitmapImage.StreamSource = stream;
+				bitmapImage.EndInit();
+			}
+			bitmapImage.Freeze();
+			return bitmapImage;
 		}
 	}
 }

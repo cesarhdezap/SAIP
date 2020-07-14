@@ -24,7 +24,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				FechaDeModicacion = empleadoLogica.FechaDeModicacion,
 				NombreCreador = empleadoLogica.Creador,
 				Activo = empleadoLogica.Activo,
-				TipoDeEmpleado = (short)empleadoLogica.TipoDeEmpleado
+				TipoDeEmpleado = (short)empleadoLogica.TipoDeEmpleado,
+				CorreoElectronico = empleadoLogica.CorreoElectronico
 			};
 
 			return empleadoConvertido;
@@ -51,7 +52,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 		private List<Clases.Empleado> ConvertirListaDeDatosALogica(List<AccesoADatos.Empleado> empleadosDb)
 		{
 			List<Clases.Empleado> empleadosResultado = new List<Clases.Empleado>();
-			foreach(AccesoADatos.Empleado empleadoDb in empleadosDb)
+			foreach (AccesoADatos.Empleado empleadoDb in empleadosDb)
 			{
 				Clases.Empleado empleadoLogico = ConvertirDeDatosALogica(empleadoDb);
 				empleadosResultado.Add(empleadoLogico);
@@ -63,7 +64,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 		public Clases.Empleado CargarEmpleadoPorId(int Id)
 		{
 			AccesoADatos.Empleado empleadoDb;
-			using(ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
 				empleadoDb = context.Empleados.Find(Id);
 			}
@@ -143,7 +144,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				{
 					empleadoLocalizado = context.Empleados.FirstOrDefault(empleado => empleado.NombreDeUsuario == NombreDeUsuario && empleado.Contraseña == Contraseña);
 				}
-				catch(System.Data.Entity.Core.EntityException e)
+				catch (System.Data.Entity.Core.EntityException e)
 				{
 					throw new InvalidOperationException(e.Message);
 				}
@@ -154,6 +155,58 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			}
 
 			return resultadoDeExistencia;
+		}
+		public void DesactivarEmpleado(Clases.Empleado empleado)
+		{
+
+
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				AccesoADatos.Empleado empleadodesactivado = context.Empleados.Find(empleado.Id);
+				empleadodesactivado.Activo = false;
+				context.SaveChanges();
+			}
+
+		}
+
+		public void GuardarEmpleado(Clases.Empleado empleado)
+		{
+			empleado.Activo = true;
+			empleado.FechaDeCreacion = DateTime.Now;
+			empleado.FechaDeModicacion = DateTime.Now;
+			AccesoADatos.Empleado empleadoguardado = ConvertirDeLogicaADatos(empleado);
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				context.Empleados.Add(empleadoguardado);
+				context.SaveChanges();
+			}
+		}
+
+		public void EditarEmpleado(Clases.Empleado empleado)
+		{
+			empleado.FechaDeModicacion = DateTime.Now;
+			empleado.Activo = true;
+
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			{
+				AccesoADatos.Empleado empleadoDb = ConvertirDeLogicaADatos(empleado);
+				if (empleadoDb != null)
+				{
+					empleadoDb = context.Empleados.Find(empleado.Id);
+					empleadoDb.Nombre = empleado.Nombre;
+					empleadoDb.NombreDeUsuario = empleado.NombreDeUsuario;
+					empleadoDb.Contraseña = empleado.Contraseña;
+					empleadoDb.CorreoElectronico = empleado.CorreoElectronico;
+					empleadoDb.TipoDeEmpleado = (short)empleado.TipoDeEmpleado;
+
+					context.SaveChanges();
+				}
+				else
+				{
+
+				}
+
+			}
 		}
 	}
 }
