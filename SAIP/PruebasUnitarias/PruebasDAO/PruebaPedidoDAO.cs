@@ -15,10 +15,10 @@ namespace PruebasUnitarias.PruebasDAO
         };
 
         [TestMethod]
-        public void ProbarCambiarEstadoPedido()
+        public void ProbarCambiarEstadoPedidoACancelar()
         {
             PedidoDAO pedidoDAO = new PedidoDAO();
-            pedidoDAO.CambiarEstadoPedido(pedido);
+            pedidoDAO.CambiarEstadoPedidoCancelar(pedido);
             Assert.AreEqual(pedido.Estado = LogicaDeNegocio.Enumeradores.EstadoPedido.Cancelado, pedido);
 
         }

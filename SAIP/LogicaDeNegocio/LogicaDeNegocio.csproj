@@ -76,6 +76,7 @@
     <Reference Include="itext.svg, Version=7.1.11.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\itext7.7.1.11\lib\net40\itext.svg.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -109,6 +110,7 @@
     <Compile Include="Clases\Producto.cs" />
     <Compile Include="Convertidores\ConversorDeAlimentoAGanancia.cs" />
     <Compile Include="Convertidores\ConversorDeCantidadASubtotal.cs" />
+    <Compile Include="Convertidores\ConversorDeCuentaClientes.cs" />
     <Compile Include="Convertidores\ConversorDeEnumeradores.cs" />
     <Compile Include="Convertidores\ConvertidorDeFlotanteADinero.cs" />
     <Compile Include="Enumeradores\EstadoCuenta.cs" />

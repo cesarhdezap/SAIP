@@ -56,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CallCenter\GUICambiarEstadoPedidoCallCenter.xaml.cs">
+      <DependentUpon>GUICambiarEstadoPedidoCallCenter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CallCenter\GUIEditarCliente.xaml.cs">
       <DependentUpon>GUIEditarCliente.xaml</DependentUpon>
     </Compile>
@@ -80,6 +83,7 @@
     <Compile Include="Cocinero\GUIVerRecetas.xaml.cs">
       <DependentUpon>GUIVerRecetas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Convertidores\ConvertidorDeBytesABitMapImage.cs" />
     <Compile Include="Gerente\GUIEditarEmpleado.xaml.cs">
       <DependentUpon>GUIEditarEmpleado.xaml</DependentUpon>
     </Compile>
@@ -160,6 +164,10 @@
       <DependentUpon>InformacionDeCuenta.xaml</DependentUpon>
     </Compile>
     <Compile Include="UtileriasGráficas.cs" />
+    <Page Include="CallCenter\GUICambiarEstadoPedidoCallCenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CallCenter\GUIEditarCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

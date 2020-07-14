@@ -45,10 +45,6 @@ namespace InterfazDeUsuario.CallCenter
             DataGridPedidos.ItemsSource = Pedidos;
         }
 
-        private void DataGridPedidos_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
         private void ButtonCambiarEstado_Click(object sender, RoutedEventArgs e)
         {
             Pedido pedido;
@@ -62,9 +58,13 @@ namespace InterfazDeUsuario.CallCenter
                 pedido = null;
             }
 
-            if(pedido == null)
+            if(pedido != null)
             {
-                throw new NotImplementedException();
+                GUICambiarEstadoPedidoCallCenter cambiarEstadoPedidoCallCenter = new GUICambiarEstadoPedidoCallCenter(pedido);
+
+                cambiarEstadoPedidoCallCenter.ShowDialog();
+
+                MostrarPedidos();
             }
             else
             {
@@ -93,6 +93,12 @@ namespace InterfazDeUsuario.CallCenter
             {
                 MessageBox.Show("Porfavor seleccione un pedido", "Aviso");
             }
+        }
+
+        private void ButtonRegistrarPedido_Click(object sender, RoutedEventArgs e)
+        {
+            GUIPedidoADomicilio pedidoADomicilio = new GUIPedidoADomicilio(Controlador, EmpleadoCallCenter);
+            Controlador.CambiarANuevaPage(pedidoADomicilio);
         }
     }
 }

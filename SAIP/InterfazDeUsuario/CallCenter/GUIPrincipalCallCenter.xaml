@@ -4,6 +4,7 @@
       xmlns:controls="clr-namespace:InterfazDeUsuario.UserControls"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:l ="clr-namespace:LogicaDeNegocio.Convertidores;assembly=LogicaDeNegocio"
       xmlns:local="clr-namespace:InterfazDeUsuario.CallCenter"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -11,40 +12,50 @@
       Height="680"
       Title="GUIPrincipalCallCenter">
 
+    <Page.Resources>
+        <l:ConversorDeCuentaClientes x:Key="ConversorDeCuentaClientes" ></l:ConversorDeCuentaClientes>
+    </Page.Resources>
+    
     <DockPanel>
         <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top" Width="Auto"/>
-        <Label Content="Lista de pedidos" DockPanel.Dock="Top" FontWeight="Bold" FontSize="45"/>
-
-        <DataGrid Name="DataGridPedidos" SelectionChanged="DataGridPedidos_SelectionChanged" AutoGenerateColumns="False" FontSize="20" ColumnWidth="*" RowHeaderWidth="0" IsReadOnly="True" >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                <DataGridTextColumn Header="Nombre" Binding="{Binding Cuenta.Clientes.Nombre}"/>
-                <DataGridTextColumn Header="Direccion" Binding="{Binding Cuenta.Clientes.Direcciones}"/>
-                <DataGridTextColumn Header="Estado" Binding="{Binding Estado}"/>
-                <DataGridTextColumn Header="Precio" Binding="{Binding PrecioTotal}"/>
-                <DataGridTextColumn Header="Fecha" Binding="{Binding FechaDeCreacion}"/>
-                <DataGridTemplateColumn Width="Auto">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" >
-                                <Button x:Name="ButtonCambiarEstado" Height="30" Click="ButtonCambiarEstado_Click" Content="Cambiar Estado">
-                                </Button>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="Auto">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" >
-                                <Button x:Name="ButtonEditar" Height="30" Click="ButtonEditar_Click" Content="Editar">
-                                </Button>
-                            </StackPanel> 
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <StackPanel Margin="10">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Label Content="Lista de pedidos" HorizontalAlignment="Left" FontWeight="Bold" FontSize="45"/>
+                <Button x:Name="ButtonRegistrarPedido" Content="Registrar Pedido" Margin="25" FontSize="16" Click="ButtonRegistrarPedido_Click"></Button>
+        </StackPanel>
+        <StackPanel Orientation="Vertical">
+            <DataGrid Name="DataGridPedidos" AutoGenerateColumns="False" FontSize="20" ColumnWidth="*" RowHeaderWidth="0" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Header="Nombre del Cliente" Binding="{Binding Cuenta.Clientes, Converter={StaticResource ConversorDeCuentaClientes}}"/>
+                    <DataGridTextColumn Header="Direccion" Binding="{Binding Cuenta.Direccion }"/>
+                    <DataGridTextColumn Header="Estado" Binding="{Binding Estado}"/>
+                    <DataGridTextColumn Header="Precio" Binding="{Binding PrecioTotal}"/>
+                    <DataGridTextColumn Header="Fecha" Binding="{Binding FechaDeCreacion}"/>
+                    <DataGridTemplateColumn Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" >
+                                    <Button x:Name="ButtonCambiarEstado" Height="30" Click="ButtonCambiarEstado_Click" Content="Cambiar Estado">
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" >
+                                    <Button x:Name="ButtonEditar" Height="30" Click="ButtonEditar_Click" Content="Editar">
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        </StackPanel>
         
     </DockPanel>
 </Page>

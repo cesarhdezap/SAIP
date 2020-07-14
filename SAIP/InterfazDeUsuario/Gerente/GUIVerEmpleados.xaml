@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:InterfazDeUsuario.empleado" 
       xmlns:controls="clr-namespace:InterfazDeUsuario.UserControls"
       mc:Ignorable="d" 
-      Title="GUIVerEmpleados" Height="691" Width="1258">
+      Width="1280" Height="720"
+      Title="GUIVerEmpleados">
 
 
 
