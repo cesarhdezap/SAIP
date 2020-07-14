@@ -9,30 +9,30 @@
       Width="1280" Height="720"
       Title="GUIEditarProducto">
 
-    <DockPanel>
-        <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top" Width="Auto"/>
+	<DockPanel>
+		<controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top" Width="Auto"/>
 
-        <Grid>
+		<Grid>
 
-            <Label Content="Nombre" HorizontalAlignment="Left" Margin="230,91,0,0" VerticalAlignment="Top" Height="35" Width="67"/>
-            <Label Content="Código de barras" HorizontalAlignment="Left" Margin="230,132,0,0" VerticalAlignment="Top" Height="36" Width="126"/>
-            <Label Content="Código" HorizontalAlignment="Left" Margin="230,175,0,0" VerticalAlignment="Top" Height="34" Width="61"/>
-            <Label Content="Precio al publico" HorizontalAlignment="Left" Margin="688,91,0,0" VerticalAlignment="Top" Height="35" Width="122"/>
-            <Label Content="Costo" HorizontalAlignment="Left" Margin="759,132,0,0" VerticalAlignment="Top" Height="36" Width="51"/>
-            <Label Content="Ganancia" HorizontalAlignment="Left" Margin="737,175,0,0" VerticalAlignment="Top" Height="34" Width="73"/>
-            <Label Content="Cantidad en inventario" HorizontalAlignment="Left" Margin="648,216,0,0" VerticalAlignment="Top" Height="35" Width="162"/>
-            <Label x:Name="LabelDireccionDeArchivo" Content="ArchivoNoSeleccionado" HorizontalAlignment="Left" Margin="382,414,0,0" VerticalAlignment="Top" Height="35" Width="169"/>
-            <TextBox x:Name="TextBoxNombre" HorizontalAlignment="Left" Height="31" Margin="392,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" TextChanged="TextBoxNombre_TextChanged"/>
-            <TextBox x:Name="TextBoxCodigoDeBarras" HorizontalAlignment="Left" Height="31" Margin="392,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" TextChanged="TextBoxCodigoDeBarras_TextChanged"/>
-            <TextBox x:Name="TextBoxCodigo" HorizontalAlignment="Left" Height="31" Margin="392,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" TextChanged="TextBoxCodigo_TextChanged"/>
-            <TextBox x:Name="TextBoxPrecioAlPublico" HorizontalAlignment="Left" Height="31" Margin="816,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" TextChanged="TextBoxPrecioAlPublico_TextChanged" PreviewTextInput="TextBoxPrecioAlPublico_PreviewTextInput"/>
-            <TextBox x:Name="TextBoxCosto" HorizontalAlignment="Left" Height="31" Margin="816,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" TextChanged="TextBoxCosto_TextChanged" PreviewTextInput="TextBoxCosto_PreviewTextInput"/>
-            <Label x:Name="LabelGanancia" Content="0.00" HorizontalAlignment="Left" Height="31" Margin="816,178,0,0" VerticalAlignment="Top" Width="223"/>
-            <TextBox x:Name="TextBoxCantidadEnInventario" HorizontalAlignment="Left" Height="31" Margin="816,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" TextChanged="TextBoxCantidadEnInventario_TextChanged"/>
-            <Image x:Name="ImageImagenDeProducto" HorizontalAlignment="Left" Height="135" Margin="236,314,0,0" VerticalAlignment="Top" Width="125"/>
-            <Button x:Name="ButtonSeleccionarArchivo" Content="Seleccionar archivo" HorizontalAlignment="Left" Margin="382,374,0,0" VerticalAlignment="Top" Width="154" Click="ButtonSeleccionarArchivo_Click" Height="27"/>
-            <Button x:Name="ButtonCancelarRegistro" Content="Cancelar registro" HorizontalAlignment="Left" Margin="230,492,0,0" VerticalAlignment="Top" Width="126" Click="ButtonCancelarRegistro_Click" Height="27"/>
-            <Button x:Name="ButtonRegistrarProducto" Content="Registrar producto" HorizontalAlignment="Left" Margin="855,492,0,0" VerticalAlignment="Top" Width="126" Click="ButtonRegistrarProducto_Click" Height="27"/>
-        </Grid>
-    </DockPanel>
+			<Label Content="Nombre" HorizontalAlignment="Left" Margin="230,91,0,0" VerticalAlignment="Top" Height="35" Width="67"/>
+			<Label Content="Código de barras" HorizontalAlignment="Left" Margin="230,132,0,0" VerticalAlignment="Top" Height="36" Width="126"/>
+			<Label Content="Código" HorizontalAlignment="Left" Margin="230,175,0,0" VerticalAlignment="Top" Height="34" Width="61"/>
+			<Label Content="Precio al publico" HorizontalAlignment="Left" Margin="688,91,0,0" VerticalAlignment="Top" Height="35" Width="122"/>
+			<Label Content="Costo" HorizontalAlignment="Left" Margin="759,132,0,0" VerticalAlignment="Top" Height="36" Width="51"/>
+			<Label Content="Ganancia" HorizontalAlignment="Left" Margin="737,175,0,0" VerticalAlignment="Top" Height="34" Width="73"/>
+			<Label Content="Cantidad en inventario" HorizontalAlignment="Left" Margin="648,216,0,0" VerticalAlignment="Top" Height="35" Width="162"/>
+			<Label x:Name="LabelDireccionDeArchivo" Content="ArchivoNoSeleccionado" HorizontalAlignment="Left" Margin="382,414,0,0" VerticalAlignment="Top" Height="35" Width="169"/>
+			<TextBox x:Name="TextBoxNombre" HorizontalAlignment="Left" Height="31" Margin="392,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" TextChanged="TextBoxNombre_TextChanged"/>
+			<TextBox x:Name="TextBoxCodigoDeBarras" HorizontalAlignment="Left" Height="31" Margin="392,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" TextChanged="TextBoxCodigoDeBarras_TextChanged"/>
+			<TextBox x:Name="TextBoxCodigo" HorizontalAlignment="Left" Height="31" Margin="392,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" TextChanged="TextBoxCodigo_TextChanged"/>
+			<TextBox x:Name="TextBoxPrecioAlPublico" HorizontalAlignment="Left" Height="31" Margin="816,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" TextChanged="TextBoxPrecioAlPublico_TextChanged" PreviewTextInput="TextBoxPrecioAlPublico_PreviewTextInput"/>
+			<TextBox x:Name="TextBoxCosto" HorizontalAlignment="Left" Height="31" Margin="816,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" TextChanged="TextBoxCosto_TextChanged" PreviewTextInput="TextBoxCosto_PreviewTextInput"/>
+			<Label x:Name="LabelGanancia" Content="0.00" HorizontalAlignment="Left" Height="31" Margin="816,178,0,0" VerticalAlignment="Top" Width="223"/>
+			<TextBox x:Name="TextBoxCantidadEnInventario" HorizontalAlignment="Left" Height="31" Margin="816,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" TextChanged="TextBoxCantidadEnInventario_TextChanged"/>
+			<Image x:Name="ImageImagenDeProducto" HorizontalAlignment="Left" Height="135" Margin="236,314,0,0" VerticalAlignment="Top" Width="125"/>
+			<Button x:Name="ButtonSeleccionarArchivo" Content="Seleccionar archivo" HorizontalAlignment="Left" Margin="382,374,0,0" VerticalAlignment="Top" Width="154" Click="ButtonSeleccionarArchivo_Click" Height="27"/>
+			<Button x:Name="ButtonCancelarRegistro" Content="Cancelar registro" HorizontalAlignment="Left" Margin="230,492,0,0" VerticalAlignment="Top" Width="126" Click="ButtonCancelarRegistro_Click" Height="27"/>
+			<Button x:Name="ButtonRegistrarProducto" Content="Registrar producto" HorizontalAlignment="Left" Margin="855,492,0,0" VerticalAlignment="Top" Width="126" Click="ButtonRegistrarProducto_Click" Height="27"/>
+		</Grid>
+	</DockPanel>
 </Page>

@@ -371,7 +371,7 @@ namespace InterfazDeUsuario.Gerente
         {
             Componente ingredienteADisminuir = ((FrameworkElement)sender).DataContext as Componente;
 
-            if (ingredienteADisminuir.Cantidad -1 > 0 )
+            if (ingredienteADisminuir.Cantidad - 1 > 0)
             {
                 ingredienteADisminuir.Cantidad--;
             }

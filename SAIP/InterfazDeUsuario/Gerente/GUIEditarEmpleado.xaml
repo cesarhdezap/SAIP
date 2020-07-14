@@ -9,21 +9,21 @@
       Title="GUI_EditarEmpleado">
 
 
-    <DockPanel>
-        <controls:BarraDeEstado x:Name="BarraDeEstado"  DockPanel.Dock="Top" Width="Auto"/>
-        <Grid>
-            <Label Content="Nombre" HorizontalAlignment="Left" Margin="277,130,0,0" VerticalAlignment="Top" Height="44" Width="188" FontSize="14"/>
-            <TextBox x:Name="TextBoxNombre" HorizontalAlignment="Left" Height="34" Margin="277,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" />
-            <Button x:Name="ButtonCambiar" Content="Cambiar" HorizontalAlignment="Left" Margin="562,401,0,0" VerticalAlignment="Top" Width="188" Height="52" Click="ButtonCambiar_Click"/>
-            <Label Content="Nombre de Usuario" HorizontalAlignment="Left" Margin="277,208,0,0" VerticalAlignment="Top" FontSize="14" Height="44" Width="205" RenderTransformOrigin="1.231,0.586"/>
-            <TextBox x:Name="TextBoxUsuario" HorizontalAlignment="Left" Height="34" Margin="277,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" />
-            <Label Content="Correo Electronico" HorizontalAlignment="Left" Margin="801,130,0,0" VerticalAlignment="Top" FontSize="14" Height="44" Width="196"/>
-            <TextBox x:Name="TextBoxCorreo" HorizontalAlignment="Left" Height="34" Margin="795,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199" />
-            <Label Content="Tipo de Empleado" HorizontalAlignment="Left" Margin="795,208,0,0" VerticalAlignment="Top" FontSize="14" Height="44" Width="191"/>
-            <Label Content="Password" HorizontalAlignment="Left" Margin="277,286,0,0" VerticalAlignment="Top" FontSize="14" Height="44" Width="105"/>
-            <PasswordBox x:Name="PasswordBoxContraseña" HorizontalAlignment="Left" Height="38" Margin="277,330,0,0"  VerticalAlignment="Top" Width="205"/>
-            <ComboBox x:Name="ComboBoxPuesto" HorizontalAlignment="Left" Margin="795,252,0,0" VerticalAlignment="Top" Width="199" Height="34"/>
-            <Button x:Name="ButtonCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="562,480,0,0" VerticalAlignment="Top" Width="188" Height="53" Click="ButtonCancelar_Click" />
-        </Grid>
-    </DockPanel>
+	<DockPanel>
+		<controls:BarraDeEstado x:Name="BarraDeEstado"  DockPanel.Dock="Top" Width="Auto"/>
+		<Grid>
+			<Label Content="Nombre" HorizontalAlignment="Left" Margin="277,130,0,0" VerticalAlignment="Top" Height="44" Width="188" FontSize="14"/>
+			<TextBox x:Name="TextBoxNombre" HorizontalAlignment="Left" Height="34" Margin="277,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" />
+			<Button x:Name="ButtonCambiar" Content="Cambiar" HorizontalAlignment="Left" Margin="562,401,0,0" VerticalAlignment="Top" Width="188" Height="52" Click="ButtonCambiar_Click"/>
+			<Label Content="Nombre de Usuario" HorizontalAlignment="Left" Margin="277,208,0,0" VerticalAlignment="Top" FontSize="14" Height="44" Width="205" RenderTransformOrigin="1.231,0.586"/>
+			<TextBox x:Name="TextBoxUsuario" HorizontalAlignment="Left" Height="34" Margin="277,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" />
+			<Label Content="Correo Electronico" HorizontalAlignment="Left" Margin="801,130,0,0" VerticalAlignment="Top" FontSize="14" Height="44" Width="196"/>
+			<TextBox x:Name="TextBoxCorreo" HorizontalAlignment="Left" Height="34" Margin="795,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199" />
+			<Label Content="Tipo de Empleado" HorizontalAlignment="Left" Margin="795,208,0,0" VerticalAlignment="Top" FontSize="14" Height="44" Width="191"/>
+			<Label Content="Password" HorizontalAlignment="Left" Margin="277,286,0,0" VerticalAlignment="Top" FontSize="14" Height="44" Width="105"/>
+			<PasswordBox x:Name="PasswordBoxContraseña" HorizontalAlignment="Left" Height="38" Margin="277,330,0,0"  VerticalAlignment="Top" Width="205"/>
+			<ComboBox x:Name="ComboBoxPuesto" HorizontalAlignment="Left" Margin="795,252,0,0" VerticalAlignment="Top" Width="199" Height="34"/>
+			<Button x:Name="ButtonCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="562,480,0,0" VerticalAlignment="Top" Width="188" Height="53" Click="ButtonCancelar_Click" />
+		</Grid>
+	</DockPanel>
 </Page>

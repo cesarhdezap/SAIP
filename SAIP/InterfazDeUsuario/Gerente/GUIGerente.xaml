@@ -9,6 +9,6 @@
         Title="GUIGerente" Width="1280" Height="720">
 	<DockPanel>
 		<controls:BarraDeEstado x:Name="BarraDeEstado" Width="Auto" DockPanel.Dock="Top"/>
-        <Grid/>
-    </DockPanel>
+		<Grid/>
+	</DockPanel>
 </Page>
