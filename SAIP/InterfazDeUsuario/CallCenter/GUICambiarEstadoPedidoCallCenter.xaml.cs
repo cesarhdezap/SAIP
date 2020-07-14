@@ -28,8 +28,15 @@ namespace InterfazDeUsuario.CallCenter
             InitializeComponent();
             Pedido = pedido;
 
-            ComboBoxEstadoPedido.ItemsSource = Enum.GetValues(typeof(EstadoPedido));
+            CargarEstados();
+        }
 
+        private void CargarEstados()
+        {
+            ComboBoxEstadoPedido.Items.Add(EstadoPedido.Enviado.ToString());
+            ComboBoxEstadoPedido.Items.Add(EstadoPedido.Entregado.ToString());
+            ComboBoxEstadoPedido.Items.Add(EstadoPedido.Completado.ToString());
+            ComboBoxEstadoPedido.Items.Add(EstadoPedido.Cancelado.ToString());
         }
 
 

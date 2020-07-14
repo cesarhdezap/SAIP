@@ -102,7 +102,9 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
-                pedidos = context.Pedidos.Where(p => p.Estado == 1 || p.Estado == 2 || p.Estado == 3 || p.Estado == 7)
+                pedidos = context.Pedidos.Where(p => p.Estado == (short)EstadoPedido.Registrado || p.Estado == (short)EstadoPedido.EnEspera || p.Estado == (short)EstadoPedido.Realizado || p.Estado == (short)EstadoPedido.Enviado)
+                    .Include(p => p.Cuenta)
+                    .Include(p => p.Cuenta.Clientes)
                     .ToList();
             }
 
