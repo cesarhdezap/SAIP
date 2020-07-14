@@ -1,5 +1,6 @@
 ﻿using InterfazDeUsuario.UserControls;
 using LogicaDeNegocio.Clases;
+using LogicaDeNegocio.ObjetosAccesoADatos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace InterfazDeUsuario.Cocinero
 
         public void MostarRecetas()
         {
-
+            PedidoDAO pedidoDAO = new PedidoDAO();
         }
     }
 }
