@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InterfazDeUsuario.empleado" xmlns:controls="clr-namespace:InterfazDeUsuario.UserControls"
         mc:Ignorable="d" 
-      Height="720"
-      Title="GUIRegistrarEmpleado" Width="1280">
+      Height="351.667"
+      Title="GUIRegistrarEmpleado" Width="816.667">
 
     <DockPanel>
         <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top"  Width="Auto" />

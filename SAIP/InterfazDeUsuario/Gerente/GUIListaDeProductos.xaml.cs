@@ -42,7 +42,9 @@ namespace InterfazDeUsuario.Gerente
 
 		private void ButtonEditar_Click(object sender, RoutedEventArgs e)
 		{
-			throw new NotImplementedException();
+			Producto productoSeleccionado = ((FrameworkElement)sender).DataContext as Producto;
+			GUIEditarProducto editarProducto = new GUIEditarProducto(Controlador, Empleado, productoSeleccionado);
+			Controlador.CambiarANuevaPage(editarProducto);
 		}
 
 		private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

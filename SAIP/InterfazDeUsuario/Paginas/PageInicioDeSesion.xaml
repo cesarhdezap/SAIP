@@ -6,7 +6,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InterfazDeUsuario"
       mc:Ignorable="d"
-      Title="PageInicioDeSesion" Height="464" Width="828">
+      Title="PageInicioDeSesion" Height="464" Width="828" Initialized="Page_Initialized" Loaded="Page_Loaded">
 
     <Grid>
 

@@ -82,6 +82,9 @@
     <Compile Include="Gerente\GUIEditarImpuesto.xaml.cs">
       <DependentUpon>GUIEditarImpuesto.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Gerente\GUIEditarProducto.xaml.cs">
+      <DependentUpon>GUIEditarProducto.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Gerente\GUIListaDePlatillos.xaml.cs">
       <DependentUpon>GUIListaDePlatillos.xaml</DependentUpon>
     </Compile>
@@ -93,6 +96,9 @@
     </Compile>
     <Compile Include="Gerente\GUIRegistrarIngrediente.xaml.cs">
       <DependentUpon>GUIRegistrarIngrediente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gerente\GUIRegistrarProducto.xaml.cs">
+      <DependentUpon>GUIRegistrarProducto.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gerente\GUIReporteDeInventario.xaml.cs">
       <DependentUpon>GUIReporteDeInventario.xaml</DependentUpon>
@@ -130,6 +136,9 @@
     </Compile>
     <Compile Include="Mesero\GUIVerMisMesasDisponibles.xaml.cs">
       <DependentUpon>GUIVerMisMesasDisponibles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\GUIRegistroDeGerenteYTécnico.xaml.cs">
+      <DependentUpon>GUIRegistroDeGerenteYTécnico.xaml</DependentUpon>
     </Compile>
     <Compile Include="Paginas\PageInicioDeSesion.xaml.cs">
       <DependentUpon>PageInicioDeSesion.xaml</DependentUpon>
@@ -181,6 +190,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Gerente\GUIEditarProducto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Gerente\GUIListaDePlatillos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -194,6 +207,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Gerente\GUIRegistrarIngrediente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gerente\GUIRegistrarProducto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -257,6 +274,10 @@
     </Page>
     <Page Include="Mesero\GUIVerMisMesas.xaml" />
     <Page Include="Mesero\GUIVerMisMesasDisponibles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Paginas\GUIRegistroDeGerenteYTécnico.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

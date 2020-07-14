@@ -1,21 +1,10 @@
 ﻿using InterfazDeUsuario.UserControls;
 using LogicaDeNegocio.Clases;
+using LogicaDeNegocio.Enumeradores;
 using LogicaDeNegocio.ObjetosAccesoADatos;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using static LogicaDeNegocio.Servicios.ServiciosDeValidacion;
 using static InterfazDeUsuario.UtileriasGráficas;
 using LogicaDeNegocio.Enumeradores;
 using static LogicaDeNegocio.Servicios.ServiciosDeEncriptacion;
@@ -45,7 +34,6 @@ namespace InterfazDeUsuario.empleado
             EmpleadoDAO empleadoDAO = new EmpleadoDAO();
             Trabajadores = empleadoDAO.CargarTodos();
             Visible = Trabajadores;
-
         }
 
 
@@ -64,7 +52,7 @@ namespace InterfazDeUsuario.empleado
             else
             {
                 MessageBox.Show("Verifique los campos remarcados en rojo", "Campos invalidos", MessageBoxButton.OK, MessageBoxImage.Error);
-
+ 
             }
         }
 
@@ -94,7 +82,6 @@ namespace InterfazDeUsuario.empleado
                 MostrarEstadoDeValidacionCadena(Usuario);
                 MostrarEstadoDeValidacionCorreoElectronico(correo);
                 MostrarEstadoDeValidacionContraseña(PasswordBoxContraseña);
-
             }
 
             return resultado;

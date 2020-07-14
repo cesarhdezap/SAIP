@@ -1,0 +1,37 @@
+﻿<Page x:Class="InterfazDeUsuario.Paginas.GUIRegistroDeGerenteYTécnico"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InterfazDeUsuario.Paginas" xmlns:controls="clr-namespace:InterfazDeUsuario.UserControls"
+	  mc:Ignorable="d"
+      Title="GUIRegistroDeGerenteYTécnico" Height="378" Width="904">
+
+	<DockPanel>
+		<controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top"  Width="Auto" />
+		<Grid>
+			<Label Content="Gerente" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" Margin="161,23,0,0"/>
+			<Label Content="Técnico" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" Margin="560,23,0,0"/>
+			<Label Content="Nombre" HorizontalAlignment="Left" Margin="85,89,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="0.889,0.483"/>
+			<TextBox x:Name="TextBoxNombreGerente" HorizontalAlignment="Left" Height="24" Margin="161,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" TextChanged="Nombre_TextChanged"/>
+			<Label Content="Nombre de Usuario" HorizontalAlignment="Left" Margin="15,123,0,0" VerticalAlignment="Top" FontSize="14"/>
+			<TextBox x:Name="TextboxNombreDeUsuarioGerente" HorizontalAlignment="Left" Height="24" Margin="161,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" TextChanged="Usuario_TextChanged"/>
+			<Label Content="Correo Electronico" HorizontalAlignment="Left" Margin="22,159,0,0" VerticalAlignment="Top" FontSize="14" />
+			<TextBox x:Name="TextboxCorreoGerente" HorizontalAlignment="Left" Height="24" Margin="161,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" TextChanged="correo_TextChanged"/>
+			<Label Content="Contraseña" HorizontalAlignment="Left" Margin="66,194,0,0" VerticalAlignment="Top" FontSize="14" />
+			<PasswordBox x:Name="PasswordboxContraseñaGerente" HorizontalAlignment="Left" Height="26" Margin="161,197,0,0" VerticalAlignment="Top" Width="230" PasswordChanged="PasswordboxContraseña_PasswordChanged"/>
+
+			<Label Content="Nombre" HorizontalAlignment="Left" Margin="484,91,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="0.889,0.483"/>
+			<TextBox x:Name="TextBoxNombreTecnico" HorizontalAlignment="Left" Height="24" Margin="560,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" TextChanged="Nombre_TextChanged"/>
+			<Label Content="Nombre de Usuario" HorizontalAlignment="Left" Margin="414,125,0,0" VerticalAlignment="Top" FontSize="14"/>
+			<TextBox x:Name="TextboxNombreDeUsuarioTecnico" HorizontalAlignment="Left" Height="24" Margin="560,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" TextChanged="Usuario_TextChanged"/>
+			<Label Content="Correo Electronico" HorizontalAlignment="Left" Margin="421,163,0,0" VerticalAlignment="Top" FontSize="14" />
+			<TextBox x:Name="TextboxCorreoTecnico" HorizontalAlignment="Left" Height="24" Margin="560,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" TextChanged="correo_TextChanged"/>
+			<Label Content="Contraseña" HorizontalAlignment="Left" Margin="465,194,0,0" VerticalAlignment="Top" FontSize="14" />
+			<PasswordBox x:Name="PasswordboxContraseñaTecnico" HorizontalAlignment="Left" Height="26" Margin="560,197,0,0" VerticalAlignment="Top" Width="230" PasswordChanged="PasswordboxContraseña_PasswordChanged"/>
+
+			<Button x:Name="ButtonRegistrar" Content="Registrar" HorizontalAlignment="Left" Margin="359,257,0,0" VerticalAlignment="Top"  Click="Agregar_Click" Width="120"/>
+		</Grid>
+	</DockPanel>
+</Page>
+

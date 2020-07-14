@@ -52,7 +52,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 		private List<Clases.Empleado> ConvertirListaDeDatosALogica(List<AccesoADatos.Empleado> empleadosDb)
 		{
 			List<Clases.Empleado> empleadosResultado = new List<Clases.Empleado>();
-			foreach(AccesoADatos.Empleado empleadoDb in empleadosDb)
+			foreach (AccesoADatos.Empleado empleadoDb in empleadosDb)
 			{
 				Clases.Empleado empleadoLogico = ConvertirDeDatosALogica(empleadoDb);
 				empleadosResultado.Add(empleadoLogico);
@@ -64,7 +64,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 		public Clases.Empleado CargarEmpleadoPorId(int Id)
 		{
 			AccesoADatos.Empleado empleadoDb;
-			using(ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
 				empleadoDb = context.Empleados.Find(Id);
 			}
@@ -144,7 +144,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				{
 					empleadoLocalizado = context.Empleados.FirstOrDefault(empleado => empleado.NombreDeUsuario == NombreDeUsuario && empleado.Contraseña == Contraseña);
 				}
-				catch(System.Data.Entity.Core.EntityException e)
+				catch (System.Data.Entity.Core.EntityException e)
 				{
 					throw new InvalidOperationException(e.Message);
 				}
@@ -177,11 +177,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 			AccesoADatos.Empleado empleadoguardado = ConvertirDeLogicaADatos(empleado);
 			using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
 			{
-
-
 				context.Empleados.Add(empleadoguardado);
 				context.SaveChanges();
-
 			}
 		}
 
