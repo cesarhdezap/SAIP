@@ -28,6 +28,7 @@ namespace InterfazDeUsuario.UserControls
 	{
 		public ControladorDeCambioDePantalla Controlador;
 		private Empleado Empleado;
+		
 
 		public Empleado empleadoADesactivar { get; private set; }
 
