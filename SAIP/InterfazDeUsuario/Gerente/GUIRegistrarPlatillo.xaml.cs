@@ -157,11 +157,13 @@ namespace InterfazDeUsuario.Gerente
 		{
 			if (ValidarCampos())
 			{
+			Platillo.Imagen = ServiciosDeIO.CargarBytesDeArchivo(DireccionDeArchivo);
 				if (Platillo.Validar())
 				{
 					if (ValidarGanancia())
 					{
 						GuardarPlatillo();
+						Controlador.Regresar();
 					}
 					else
 					{
@@ -169,6 +171,7 @@ namespace InterfazDeUsuario.Gerente
 						if (resultadoDeMesageBox == MessageBoxResult.Yes)
 						{
 							GuardarPlatillo();
+						Controlador.Regresar();
 						}
 					}
 				}
@@ -185,7 +188,6 @@ namespace InterfazDeUsuario.Gerente
 
 		private void GuardarPlatillo()
 		{
-			Platillo.Imagen = ServiciosDeIO.CargarBytesDeArchivo(DireccionDeArchivo);
 			Platillo.Nombre = NombreTextBox.Text;
 			Platillo.Codigo = CodigoTextBox.Text;
 			Platillo.Descripcion = DescripcionTextBox.Text;
