@@ -221,13 +221,21 @@ namespace InterfazDeUsuario.Gerente
             {
                 AsignarValoresAIngrediente();
 
-                try
+                if (!ValidarIngredienteExistente(ingredienteNuevo))
                 {
-                    ingredienteDAO.GuardarIngrediente(ingredienteNuevo);
+                    try
+                    {
+                        ingredienteDAO.GuardarIngrediente(ingredienteNuevo);
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace.ToString(), "Alerta");
+                    }
+
                 }
-                catch (ArgumentException ex)
+                else
                 {
-                    MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace.ToString(), "Alerta");
+                    MessageBox.Show("Este ingrediente ya se encuentra registrado, si desea aumentar su cantidad porfavor dirigase al apartado Editar Ingrediente");
                 }
 
             }
@@ -235,6 +243,24 @@ namespace InterfazDeUsuario.Gerente
             {
                 MostrarEstadoDeValidacion();
             }
+        }
+
+        private bool ValidarIngredienteExistente(Ingrediente ingrediente)
+        {
+            bool resultado = false;
+
+            List<Ingrediente> ingredientes = new List<Ingrediente>();
+
+            IngredienteDAO ingredienteDAO = new IngredienteDAO();
+
+            ingredientes = ingredienteDAO.CargarTodos();
+
+            if (ingredientes.Contains(ingrediente))
+            {
+                resultado = true;
+            }
+
+            return resultado;
         }
 
         private bool ValidarEntradas()

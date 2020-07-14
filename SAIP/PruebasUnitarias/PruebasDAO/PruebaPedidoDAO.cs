@@ -1,5 +1,5 @@
 ﻿using System;
-using LogicaDeNegocio;
+using LogicaDeNegocio.Clases;
 using LogicaDeNegocio.ObjetosAccesoADatos;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -19,7 +19,7 @@ namespace PruebasUnitarias.PruebasDAO
         {
             PedidoDAO pedidoDAO = new PedidoDAO();
             pedidoDAO.CambiarEstadoPedido(pedido);
-            Assert.AreEqual(pedido.Estado = LogicaDeNegocio.Enumeradores.EstadoPedido.Cancelar, pedido);
+            Assert.AreEqual(pedido.Estado = LogicaDeNegocio.Enumeradores.EstadoPedido.Cancelado, pedido);
 
         }
     }

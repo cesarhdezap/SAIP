@@ -4,6 +4,7 @@ using LogicaDeNegocio.Clases.ClasesAsociativas;
 using LogicaDeNegocio.Enumeradores;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 {
     public class PedidoDAO
     {
-        public void Guardar(Pedido pedido)
+        public void Guardar(Clases.Pedido pedido)
         {
             if (ValidarCuentaParaGuardado(pedido) && ValidarCantidadDeCantidadAlimentos(pedido.CantidadAlimentos))
             {
@@ -55,7 +56,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
         }
 
-        public bool ValidarCuentaParaGuardado(Pedido pedido)
+        public bool ValidarCuentaParaGuardado(Clases.Pedido pedido)
         {
             bool resultado = false;
             if (pedido.CantidadAlimentos.Count > 0)
@@ -95,7 +96,20 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             return !discrepanciaEncontrada;
         }
 
-        private double CalcularPrecioTotal(Pedido pedido)
+        public List<Clases.Pedido> CargarTodosRealizados()
+        {
+            List<AccesoADatos.Pedido> pedidos = new List<AccesoADatos.Pedido>();
+
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                pedidos = context.Pedidos.Where(p => p.Estado == 1 || p.Estado == 2 || p.Estado == 3 || p.Estado == 7)
+                    .ToList();
+            }
+
+            return ConvertirListaDeDatosALogicaConCuenta(pedidos);
+        }
+
+        private double CalcularPrecioTotal(Clases.Pedido pedido)
         {
             double precioTotal = 0;
             foreach(CantidadAlimento cantidadAlimento in pedido.CantidadAlimentos)
@@ -113,14 +127,14 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             return precioTotal;
         }
 
-        public Pedido RecuperarPedidoPorId(int idPedido) 
+        public Clases.Pedido RecuperarPedidoPorId(int idPedido) 
         {
             AccesoADatos.Pedido pedido;
             using(ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
                pedido = context.Pedidos.Find(idPedido);
             }
-            Pedido pedidoLogico = new Pedido();
+            Clases.Pedido pedidoLogico = new Clases.Pedido();
             if(pedido != null)
             {
                 pedidoLogico = ConvertirPedidoDeDatosALogica(pedido);
@@ -129,7 +143,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             return pedidoLogico;
         }
 
-        public AccesoADatos.Pedido ConvertirPedidoLogicaADatos(Pedido pedidoLogica)
+        public AccesoADatos.Pedido ConvertirPedidoLogicaADatos(Clases.Pedido pedidoLogica)
         {
             AccesoADatos.Pedido pedidoDatos = new AccesoADatos.Pedido
             {
@@ -142,21 +156,86 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             return pedidoDatos;
         }
 
-        public Pedido ConvertirPedidoDeDatosALogica(AccesoADatos.Pedido pedidoDatos)
+        public Clases.Pedido ConvertirPedidoDeDatosALogica(AccesoADatos.Pedido pedidoDatos)
         {
-            Pedido pedidoLogica = new Pedido()
+            Clases.Pedido pedidoLogica = new Clases.Pedido()
+            {
+                Id = pedidoDatos.Id,
+                FechaDeCreacion = pedidoDatos.FechaDeCreacion,
+                PrecioTotal = pedidoDatos.PrecioTotal,
+                Iva = pedidoDatos.Iva,
+                Estado = (EstadoPedido)pedidoDatos.Estado
+            };
+
+            return pedidoLogica;
+        }
+
+        public Clases.Pedido ConvertirPedidoDeDatosALogicaConCuenta(AccesoADatos.Pedido pedidoDatos)
+        {
+            CuentaDAO cuentaDAO = new CuentaDAO();
+
+            Clases.Pedido pedidoLogica = new Clases.Pedido()
             {
                 Id = pedidoDatos.Id,
                 FechaDeCreacion = pedidoDatos.FechaDeCreacion,
                 PrecioTotal = pedidoDatos.PrecioTotal,
                 Iva = pedidoDatos.Iva,
                 Estado = (EstadoPedido)pedidoDatos.Estado,
+                Cuenta = cuentaDAO.ConvertirCuentaSinMesaDatosALogica(pedidoDatos.Cuenta)
             };
 
             return pedidoLogica;
         }
+        public List<Clases.Pedido> ConvertirListaDeDatosALogicaConCuenta(List<AccesoADatos.Pedido> pedidos)
+        {
+            List<Clases.Pedido> resultado = new List<Clases.Pedido>();
+            foreach (AccesoADatos.Pedido pedido in pedidos)
+            {
+                resultado.Add(ConvertirPedidoDeDatosALogicaConCuenta(pedido));
+            }
 
-        public void CambiarEstadoPedido(Pedido pedido)
+            return resultado;
+        }
+
+        public List<Clases.Pedido> ConvertirListaDeDatosALogica(List<AccesoADatos.Pedido> pedidos)
+        {
+            List<Clases.Pedido> resultado = new List<Clases.Pedido>();
+            foreach (AccesoADatos.Pedido pedido in pedidos)
+            {
+                resultado.Add(ConvertirPedidoDeDatosALogica(pedido));
+            }
+
+            return resultado;
+        }
+
+        public void CambiarEstadoPedido(Clases.Pedido pedido, EstadoPedido estado)
+        {
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                if (pedido.Estado != EstadoPedido.Cancelado)
+                {
+                    AccesoADatos.Pedido pedidoDb = context.Pedidos.Find(pedido.Id);
+                    if (pedidoDb != null)
+                    {
+                        pedidoDb.Estado = (short)estado;
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Id no encontrada PedidoDAO.DarDeBaja");
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("El pedido ya se encuentra en un estado imposible de cambiar");
+                }
+            }
+
+            pedido.AumentarIngredientes();
+
+        }
+
+        public void CambiarEstadoPedidoCancelar(Clases.Pedido pedido)
         {
             using(ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
