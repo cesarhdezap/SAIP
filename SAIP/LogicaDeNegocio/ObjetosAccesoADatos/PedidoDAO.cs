@@ -182,7 +182,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 
         }
 
-        public List<Pedido> CargarPendientes1()
+        public List<Pedido> CargarRecientes()
         {
             List<AccesoADatos.Pedido> Pendiente = new List<AccesoADatos.Pedido>();
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
@@ -192,6 +192,65 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             List<Pedido> pedidoL = new List<Pedido>();
 
             return pedidoL;
+        }
+
+        public List<Pedido> CargarEnProceso()
+        {
+            List<AccesoADatos.Pedido> EnProceso = new List<AccesoADatos.Pedido>();
+            using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                EnProceso = context.Pedidos.ToList();
+            }
+            List<Pedido> Proceso = new List<Pedido>();
+            return Proceso;
+        }
+
+        public void PedidoenEspera(Pedido pedido)
+        {
+            using(ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                if (pedido.Estado != EstadoPedido.EnEspera || pedido.Estado != EstadoPedido.Completado || pedido.Estado != EstadoPedido.Realizado || pedido.Estado != EstadoPedido.Entregado)
+                {
+                    AccesoADatos.Pedido pedidoDb = context.Pedidos.Find(pedido.Id);
+                    if (pedidoDb != null)
+                    {
+                        pedidoDb.Estado = 2;
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Id no encontrada PedidoDAO.DarDeBaja");
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("El pedido ya se encuentra en un estado imposible de cancelar");
+                }
+            }
+        }
+
+        public void PedidoRealizado(Pedido pedido)
+        {
+            using(ModeloDeDatosContainer context = new ModeloDeDatosContainer())
+            {
+                if (pedido.Estado != EstadoPedido.EnEspera || pedido.Estado != EstadoPedido.Completado || pedido.Estado != EstadoPedido.Realizado || pedido.Estado != EstadoPedido.Entregado)
+                {
+                    AccesoADatos.Pedido pedidoDb = context.Pedidos.Find(pedido.Id);
+                    if (pedidoDb != null)
+                    {
+                        pedidoDb.Estado = 4;
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Id no encontrada PedidoDAO.DarDeBaja");
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("El pedido ya se encuentra en un estado imposible de cancelar");
+                }
+            }
         }
     }
 }

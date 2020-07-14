@@ -24,7 +24,8 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
 				FechaDeModicacion = empleadoLogica.FechaDeModicacion,
 				NombreCreador = empleadoLogica.Creador,
 				Activo = empleadoLogica.Activo,
-				TipoDeEmpleado = (short)empleadoLogica.TipoDeEmpleado
+				TipoDeEmpleado = (short)empleadoLogica.TipoDeEmpleado,
+				CorreoElectronico = empleadoLogica.CorreoElectronico
 			};
 
 			return empleadoConvertido;

@@ -26,6 +26,8 @@ namespace InterfazDeUsuario.empleado
         private List<Empleado> Trabajadores { get; set; }
         private List<Empleado> Visibles { get; set; }
         public Empleado Gerente { get; set; }
+        public Empleado empleadoAEditar { get; private set; }
+
         ControladorDeCambioDePantalla Controlador;
         public GUIVerEmpleados(ControladorDeCambioDePantalla controlador, Empleado EmpleadoCargado, Empleado empleadoADesactivar)
         {
@@ -73,28 +75,16 @@ namespace InterfazDeUsuario.empleado
             ActualizarPantalla();
         }
 
-        private void Registro_Click(object sender, RoutedEventArgs e)
-        {
-            GUIRegistrarEmpleado registrarEmpleado = new GUIRegistrarEmpleado(Controlador, Gerente);
-            Controlador.CambiarANuevaPage(registrarEmpleado);
-        }
 
-        public void Editar_Click(object sender, RoutedEventArgs e)
+        public void ButtonEditar_Click(object sender, RoutedEventArgs e)
         {
-            Empleado empleadoACargar = (Empleado)ListaE.SelectedItem;
-            if (empleadoACargar != null)
-            {
-                GUI_EditarEmpleado editarEmpleado1 = new GUI_EditarEmpleado(Controlador, Gerente, empleadoACargar);
-                Controlador.CambiarANuevaPage(editarEmpleado1);
-            }
-            else
-            {
-                MessageBox.Show("No se a seleccionado un Empleado para su Edicion", "Seleccionar Empleado", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            Empleado empleado = ((FrameworkElement)sender).DataContext as Empleado;
+            GUI_EditarEmpleado editar = new GUI_EditarEmpleado(Controlador, empleado, empleadoAEditar);
+            Controlador.CambiarANuevaPage(editar);
 
         }
 
-        private void Eliminar_Click(object sender, RoutedEventArgs e, EmpleadoDAO empleado)
+        private void ButtonEliminar_Click(object sender, RoutedEventArgs e, EmpleadoDAO empleado)
 
         {
             Empleado empleadoADesactivar = (Empleado)ListaE.SelectedItem;
@@ -103,9 +93,12 @@ namespace InterfazDeUsuario.empleado
                 GUIVerEmpleados desactivarempleado = new GUIVerEmpleados(Controlador, Gerente, empleadoADesactivar);
                 empleado.DesactivarEmpleado(empleadoADesactivar);
             }
+            else
+            {
+                MessageBox.Show("No se a seleccionado un Empleado para su Desactivación", "Seleccionar Empleado", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
-
 
     }
 }

@@ -10,23 +10,29 @@
 
 
 
+    <Page.Resources>
+        <DataTemplate x:Key="BotonDeEditar">
+            <Button Content="Editar" Click="ButtonEditar_Click"></Button>
+        </DataTemplate>
+        <DataTemplate x:Key="BotonEliminar">
+            <Button Content="Eliminar" ></Button>
+        </DataTemplate>
+    </Page.Resources>
     <DockPanel>
         <controls:BarraDeEstado x:Name="BarraDeEstado"  DockPanel.Dock="Top" Width="Auto"/>
         <Grid>
             <TextBox x:Name="Busqueda" Height="40" TextChanged="Busqueda_TextChanged" Width="353" VerticalAlignment="Top"  Padding="0" Margin="10,77,894.6,0"/>
-            <Button Content="Registrar" x:Name="Registro" Height="38" VerticalAlignment="Top"  Click="Registro_Click" Margin="765,77,322.6,0" />
-            <DataGrid x:Name="ListaE" AutoGenerateColumns="False"  Height="479" VerticalAlignment="Bottom"  Width="935" AutomationProperties.IsColumnHeader="True" FontFamily="Tahoma" FontSize="18" Margin="0,0,322.6,-0.4">
+            <DataGrid x:Name="ListaE" AutoGenerateColumns="False"  Height="479" VerticalAlignment="Bottom" AutomationProperties.IsColumnHeader="True" FontFamily="Tahoma" FontSize="18" Margin="0,0,-0.4,0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" CanUserResize ="False" />
                     <DataGridTextColumn Header="Usuario" Binding="{Binding NombreDeUsuario}" CanUserResize="False"/>
                     <DataGridTextColumn Header="Correo" Binding="{Binding CorreoElectronico}" CanUserResize="False"/>
                     <DataGridTextColumn Header="Tipo de Empleado" Binding="{Binding TipoDeEmpleado}" CanUserResize="False"/>
                     <DataGridCheckBoxColumn Header="Activo" Binding="{Binding Activo}" CanUserResize="False"/>
+                    <DataGridTemplateColumn CellTemplate="{StaticResource BotonDeEditar}" CellEditingTemplate="{StaticResource BotonDeEditar}"></DataGridTemplateColumn>
+                    <DataGridTemplateColumn CellTemplate="{StaticResource BotonEliminar}" CellEditingTemplate="{StaticResource BotonEliminar}"></DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button x:Name="Editar" Content="Editar" HorizontalAlignment="Left" Margin="982,147,0,0" VerticalAlignment="Top" Click="Editar_Click" Width="104" Height="27"/>
-            <Button x:Name="Eliminar" Content="Dar de Baja" HorizontalAlignment="Left" Margin="1124,147,0,0" VerticalAlignment="Top" Width="103" Height="27" />
-
         </Grid>
     </DockPanel>
 

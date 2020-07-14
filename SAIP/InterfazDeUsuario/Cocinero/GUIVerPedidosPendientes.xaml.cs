@@ -24,7 +24,8 @@ namespace InterfazDeUsuario.Cocinero
     /// </summary>
     public partial class GUI_VerPedidosPendientes : Page
     {
-        private List<Pedido> Pedidos { get; set; }
+        private List<Pedido> PedidosRegistrados { get; set; }
+        private List<Pedido> PedidosEnProceso { get; set; }
         public Empleado Empleado { get; set; }
         ControladorDeCambioDePantalla Controlador;
         public GUI_VerPedidosPendientes(ControladorDeCambioDePantalla controlador, Empleado empleado)
@@ -35,29 +36,55 @@ namespace InterfazDeUsuario.Cocinero
             BarraDeEstado.Controlador = controlador;
             Controlador = controlador;
             BarraDeEstado.ActualizarEmpleado(empleado);
-            MostrarPedidos();
+            MostrarPedidosRegistrados();
+            MostrarPedidosEnProceso();
         }
 
-        public void MostrarPedidos()
+        public void MostrarPedidosRegistrados()
         {
 
             PedidoDAO pedidoDAO = new PedidoDAO();
-            Pedidos = pedidoDAO.CargarPendientes1();
-            DataGridPedidos.ItemsSource = null;
-            DataGridPedidos.ItemsSource = Pedidos;
+            PedidosRegistrados = pedidoDAO.CargarRecientes();
+            DataGridPedidosRegistrados.ItemsSource = null;
+            DataGridPedidosRegistrados.ItemsSource = PedidosRegistrados;
+            ActualizarPantalla();
+        }
+
+        public void MostrarPedidosEnProceso()
+        {
+            PedidoDAO pedidoDAO = new PedidoDAO();
+            PedidosEnProceso = pedidoDAO.CargarEnProceso();
+            DataGridPedidosEnProceso.ItemsSource = null;
+            DataGridPedidosRegistrados.ItemsSource = PedidosEnProceso;
             ActualizarPantalla();
         }
 
         public void ActualizarPantalla()
         {
-            DataGridPedidos.ItemsSource = null;
-            DataGridPedidos.ItemsSource = Pedidos;
+            DataGridPedidosEnProceso.ItemsSource = null;
+            DataGridPedidosEnProceso.ItemsSource = PedidosEnProceso;
+            DataGridPedidosRegistrados.ItemsSource = null;
+            DataGridPedidosRegistrados.ItemsSource = PedidosRegistrados;
         }
 
         private void BotonVerReceta_Click(object sender, RoutedEventArgs e)
         {
+            Pedido pedido = ((FrameworkElement)sender).DataContext as Pedido;
             GUIVerRecetas gUIVerRecetas = new GUIVerRecetas(Controlador, Empleado);
-            Controlador.CambiarANuevaPage(gUIVerRecetas);
+                Controlador.CambiarANuevaPage(gUIVerRecetas);
+            
+        }
+
+        private void BotonRealizado_Click(object sender, RoutedEventArgs e, PedidoDAO pedido)
+        {
+           
+                MessageBox.Show("No se a seleccionado un Pedido para Completar", "Seleccionar Pedido", MessageBoxButton.OK, MessageBoxImage.Error);
+            
+        }
+
+        private void ButtonEnProceso_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

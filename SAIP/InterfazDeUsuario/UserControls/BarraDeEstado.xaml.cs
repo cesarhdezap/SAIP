@@ -1,4 +1,5 @@
 ﻿using InterfazDeUsuario.CallCenter;
+using InterfazDeUsuario.Cocinero;
 using InterfazDeUsuario.empleado;
 using InterfazDeUsuario.Gerente;
 using LogicaDeNegocio.Clases;
@@ -74,6 +75,7 @@ namespace InterfazDeUsuario.UserControls
 					botones.Add((Button)FindResource("ButtonGerenteEditarImpuesto"));
 					botones.Add((Button)FindResource("ButtonGerenteProductos"));
 				break;
+				
 			}
 
 			foreach(Button boton in botones)
@@ -177,5 +179,8 @@ namespace InterfazDeUsuario.UserControls
 			GUIListaDeProductos listaDeProductos = new GUIListaDeProductos(Controlador, Empleado);
 			Controlador.CambiarANuevaPage(listaDeProductos);
 		}
+
+		
+
 	}
 }
