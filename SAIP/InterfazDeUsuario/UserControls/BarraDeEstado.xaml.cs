@@ -75,6 +75,7 @@ namespace InterfazDeUsuario.UserControls
 					botones.Add((Button)FindResource("ButtonGerenteEditarImpuesto"));
 					botones.Add((Button)FindResource("ButtonGerenteProductos"));
 					botones.Add((Button)FindResource("ButtonGerenteRegistrarProducto"));
+					botones.Add((Button)FindResource("ButtonGerenteRegistrarIngrediente"));
 				break;
 				
 			}
@@ -183,5 +184,11 @@ namespace InterfazDeUsuario.UserControls
 			GUIRegistrarProducto registrarProducto = new GUIRegistrarProducto(Controlador, Empleado);
 			Controlador.CambiarANuevaPage(registrarProducto);
 		}
-	}
+
+        private void ButtonGerenteRegistrarIngrediente_Click(object sender, RoutedEventArgs e)
+        {
+			GUIRegistrarIngrediente registrarIngrediente = new GUIRegistrarIngrediente(Controlador, Empleado);
+			Controlador.CambiarANuevaPage(registrarIngrediente);
+		}
+    }
 }
