@@ -114,6 +114,7 @@
     <Compile Include="Enumeradores\EstadoCuenta.cs" />
     <Compile Include="Enumeradores\EstadoMesa.cs" />
     <Compile Include="Enumeradores\EstadoPedido.cs" />
+    <Compile Include="Interfaces\IActualizarBarraDeProgreso.cs" />
     <Compile Include="ObjetosAccesoADatos\CantidadPlatilloDAO.cs" />
     <Compile Include="ObjetosAccesoADatos\CantidadProductoDAO.cs" />
     <Compile Include="ObjetosAccesoADatos\CuentaDAO.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Servicios\ServiciosDeCreacionDePDF.cs" />
     <Compile Include="Servicios\ServiciosDeEncriptacion.cs" />
     <Compile Include="Servicios\ServiciosDeIO.cs" />
+    <Compile Include="Servicios\ServiciosDeRespaldos.cs" />
     <Compile Include="Servicios\ServiciosDeValidacion.cs" />
   </ItemGroup>
   <ItemGroup>

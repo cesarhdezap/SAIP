@@ -180,6 +180,7 @@
     <Property Name="NombreCreador" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Activo" Type="bit" Nullable="false" />
     <Property Name="TipoDeEmpleado" Type="smallint" Nullable="false" />
+    <Property Name="CorreoElectronico" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Productos">
     <Key>
@@ -624,6 +625,7 @@
 					<Property Name="Activo" Type="Boolean" Nullable="false" />
 					<Property Name="TipoDeEmpleado" Type="Int16" Nullable="false" />
 					<NavigationProperty Name="Cuenta" Relationship="ModeloDeDatos.CuentaEmpleado" FromRole="Empleado" ToRole="Cuenta" />
+          <Property Name="CorreoElectronico" Type="String" Nullable="false" />
 				</EntityType>
 				<Association Name="DireccionesCliente">
 					<End Type="ModeloDeDatos.Direcciones" Role="Direcciones" Multiplicity="*" />
@@ -835,6 +837,7 @@
           <ScalarProperty Name="NombreCreador" ColumnName="NombreCreador" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="TipoDeEmpleado" ColumnName="TipoDeEmpleado" />
+          <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

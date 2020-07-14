@@ -1,0 +1,21 @@
+﻿<Page x:Class="InterfazDeUsuario.Tecnico.GUITecnico"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:controls="clr-namespace:InterfazDeUsuario.UserControls"
+      xmlns:local="clr-namespace:InterfazDeUsuario.Tecnico"
+      mc:Ignorable="d" 
+      Height="720"
+      Width="1280"
+      Title="GUITecnico">
+
+    <DockPanel>
+        <controls:BarraDeEstado x:Name="BarraDeEstado" DockPanel.Dock="Top" Width="Auto"/>
+        <UniformGrid Columns="2">
+            <Button x:Name="ButtonGenerarRespaldo" Content="Generar respaldo" FontSize="24" FontWeight="Bold" Margin="50" Click="ButtonGenerarRespaldo_Click"/>
+            <Button x:Name="ButtonCargarRespaldo" Content="Cargar respaldo" FontSize="24" FontWeight="Bold" Margin="50"/>
+        </UniformGrid>
+        
+    </DockPanel>
+</Page>

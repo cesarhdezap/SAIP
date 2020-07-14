@@ -35,7 +35,7 @@ namespace LogicaDeNegocio.Clases
 
             foreach (Proporcion proporcion in Proporciones)
             {
-                CostoDeIngredientes += proporcion.Ingrediente.Costo * proporcion.Ingrediente.Costo;
+                CostoDeIngredientes += proporcion.Ingrediente.Costo * proporcion.Cantidad;
             }
 
         }

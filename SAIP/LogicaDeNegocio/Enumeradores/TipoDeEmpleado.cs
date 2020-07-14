@@ -10,6 +10,8 @@ namespace LogicaDeNegocio.Enumeradores
 	{
 		CallCenter,
 		Mesero, 
-		Gerente
+		Gerente,
+		Tecnico,
+		Cocinero
 	}
 }

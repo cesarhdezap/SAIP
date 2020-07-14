@@ -1,4 +1,5 @@
-﻿using LogicaDeNegocio.Clases;
+﻿using InterfazDeUsuario.empleado;
+using LogicaDeNegocio.Clases;
 using LogicaDeNegocio.ObjetosAccesoADatos;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,8 @@ namespace InterfazDeUsuario.Gerente
 	{
 		public Empleado Gerente { get; set; }
 		private ControladorDeCambioDePantalla Controlador { get; set; }
-    
+		public Empleado empleadoADesactivar { get; private set; }
+
 		public GUIGerente(ControladorDeCambioDePantalla controlador, Empleado empleadoCargado)
 		{
 			InitializeComponent();
@@ -62,7 +64,7 @@ namespace InterfazDeUsuario.Gerente
 
 		private void Button_Click_Lista(object sender, RoutedEventArgs e)
 		{
-			GUIVerEmpleados verEmpleados = new GUIVerEmpleados(Controlador, Gerente);
+			GUIVerEmpleados verEmpleados = new GUIVerEmpleados(Controlador, Gerente, empleadoADesactivar);
 			Controlador.CambiarANuevaPage(verEmpleados);
 		}
 	}

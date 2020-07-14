@@ -70,21 +70,33 @@ namespace InterfazDeUsuario.Gerente
             {
                 ivaAGuardar.Valor = valor;
                 ivaAGuardar.FechaDeInicio = DatePickerFechaDeInicio.SelectedDate.GetValueOrDefault();
+                if (valor <= 0 && valor > 100)
+                {
+                    validacion = false;
+                }
                 validacion = true;
             }
 
             if (validacion && ValidarNumeroDecimal(TextBoxValor.Text))
             {
-                IvaDAO ivaDAO = new IvaDAO();
-                ivaAGuardar.Activo = false;
-                if(DatePickerFechaDeInicio.SelectedDate.GetValueOrDefault().Date == DateTime.Now.Date)
+                if (ivaAGuardar.Valor <= 0 && ivaAGuardar.Valor > 100)
                 {
-                    ivaAGuardar.Activo = true;
+                    MessageBox.Show("Debe insertar un valor mayor a 0 y menor o igual a 100.");   
                 }
-                
-                ivaDAO.Guardar(ivaAGuardar);
-                MessageBox.Show("Iva registrado correctamente!", "NOTIFICACION", MessageBoxButton.OK);
-                Controlador.Regresar();
+                else
+                {
+                    ivaAGuardar.Valor = ivaAGuardar.Valor / 100;
+                    IvaDAO ivaDAO = new IvaDAO();
+                    ivaAGuardar.Activo = false;
+                    if (DatePickerFechaDeInicio.SelectedDate.GetValueOrDefault().Date == DateTime.Now.Date)
+                    {
+                        ivaAGuardar.Activo = true;
+                    }
+
+                    ivaDAO.Guardar(ivaAGuardar);
+                    MessageBox.Show("Iva registrado correctamente!", "NOTIFICACION", MessageBoxButton.OK);
+                    Controlador.Regresar();
+                }
             }
             else
             {

@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -70,8 +71,23 @@
     <Compile Include="CallCenter\GUIVisualizarListaDeClientes.xaml.cs">
       <DependentUpon>GUIVisualizarListaDeClientes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Cocinero\GUICocinero.xaml.cs">
+      <DependentUpon>GUICocinero.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cocinero\GUIVerPedidosPendientes.xaml.cs">
+      <DependentUpon>GUIVerPedidosPendientes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cocinero\GUIVerRecetas.xaml.cs">
+      <DependentUpon>GUIVerRecetas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gerente\GUIEditarEmpleado.xaml.cs">
+      <DependentUpon>GUIEditarEmpleado.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Gerente\GUIEditarImpuesto.xaml.cs">
       <DependentUpon>GUIEditarImpuesto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gerente\GUIEditarProducto.xaml.cs">
+      <DependentUpon>GUIEditarProducto.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gerente\GUIListaDePlatillos.xaml.cs">
       <DependentUpon>GUIListaDePlatillos.xaml</DependentUpon>
@@ -84,6 +100,9 @@
     </Compile>
     <Compile Include="Gerente\GUIRegistrarIngrediente.xaml.cs">
       <DependentUpon>GUIRegistrarIngrediente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gerente\GUIRegistrarProducto.xaml.cs">
+      <DependentUpon>GUIRegistrarProducto.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gerente\GUIReporteDeInventario.xaml.cs">
       <DependentUpon>GUIReporteDeInventario.xaml</DependentUpon>
@@ -122,8 +141,17 @@
     <Compile Include="Mesero\GUIVerMisMesasDisponibles.xaml.cs">
       <DependentUpon>GUIVerMisMesasDisponibles.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Paginas\GUIRegistroDeGerenteYTécnico.xaml.cs">
+      <DependentUpon>GUIRegistroDeGerenteYTécnico.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Paginas\PageInicioDeSesion.xaml.cs">
       <DependentUpon>PageInicioDeSesion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tecnico\GUIGenerarRespaldo.xaml.cs">
+      <DependentUpon>GUIGenerarRespaldo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tecnico\GUITecnico.xaml.cs">
+      <DependentUpon>GUITecnico.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\BarraDeEstado.xaml.cs">
       <DependentUpon>BarraDeEstado.xaml</DependentUpon>
@@ -156,7 +184,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Cocinero\GUICocinero.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Cocinero\GUIVerPedidosPendientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Cocinero\GUIVerRecetas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gerente\GUIEditarEmpleado.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Gerente\GUIEditarImpuesto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gerente\GUIEditarProducto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -173,6 +221,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Gerente\GUIRegistrarIngrediente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gerente\GUIRegistrarProducto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -239,7 +291,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Paginas\GUIRegistroDeGerenteYTécnico.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Paginas\PageInicioDeSesion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tecnico\GUIGenerarRespaldo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tecnico\GUITecnico.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -306,6 +370,11 @@
     <Resource Include="img\actualizar.png" />
     <Resource Include="img\anadir.png" />
     <Resource Include="img\disminuir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\salvar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
