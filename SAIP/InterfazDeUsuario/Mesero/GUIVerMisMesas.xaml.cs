@@ -1,5 +1,6 @@
 ﻿using InterfazDeUsuario.UserControls;
 using LogicaDeNegocio.Clases;
+using LogicaDeNegocio.Interfaces;
 using LogicaDeNegocio.ObjetosAccesoADatos;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace InterfazDeUsuario.Mesero
     /// <summary>
     /// Interaction logic for GUIVerMisMesas.xaml
     /// </summary>
-    public partial class GUIVerMisMesas : Page
+    public partial class GUIVerMisMesas : Page, IControladorInformacionDeCuenta
     {
         private List<Cuenta> CuentasDelEmpleado = new List<Cuenta>();
         private Cuenta CuentaSeleccionada;
@@ -27,6 +28,7 @@ namespace InterfazDeUsuario.Mesero
             Empleado = empleado;
             InitializeComponent();
             UserControlInformacionDeCuenta.Controlador = controlador;
+            UserControlInformacionDeCuenta.ControladorInformacionDeCuenta = this;
             UserControlInformacionDeCuenta.Empleado = empleado;
             BarraDeEstado.Controlador = controlador;
             BarraDeEstado.ActualizarEmpleado(empleado);
@@ -49,6 +51,7 @@ namespace InterfazDeUsuario.Mesero
         {
             CuentaDAO cuentaDAO = new CuentaDAO();
             CuentasDelEmpleado = cuentaDAO.RecuperarCuentasAbiertasPorEmpleado(Empleado);
+            ListBoxMesas.ItemsSource = null;
             ListBoxMesas.ItemsSource = CuentasDelEmpleado;
         }
 
@@ -107,6 +110,11 @@ namespace InterfazDeUsuario.Mesero
                 UserControlInformacionDeCuenta.ActualizarCuenta(CuentaSeleccionada);
                 ActualizarListBoxMesas();
             }
+        }
+
+        public void OcultarCuenta()
+        {
+            ButtonActualizar_Click(null, null);
         }
     }
 }
