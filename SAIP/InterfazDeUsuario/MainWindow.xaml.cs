@@ -45,6 +45,11 @@ namespace InterfazDeUsuario
                 Pantallas.Push(pageExistente);
                 Content = pageExistente;
             }
+            if (Pantallas.Count > 0)
+            {
+                Pantallas.Peek().Height = this.Height;
+                Pantallas.Peek().Width = this.Width;
+            }
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
@@ -80,7 +85,11 @@ namespace InterfazDeUsuario
                 RegresarAInicioDeSesion();
             }
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
+            if (Pantallas.Count > 0)
+            {
+                Pantallas.Peek().Height = this.Height;
+                Pantallas.Peek().Width = this.Width;
+            }
         }
 
         public void RegresarAInicioDeSesion()
@@ -90,6 +99,26 @@ namespace InterfazDeUsuario
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             Content = inicioDeSesion;
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (Pantallas.Count > 0)
+            {
+                Pantallas.Peek().Height = this.Height;
+                Pantallas.Peek().Width = this.Width;
+            }
+        }
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+
+                if (Pantallas.Count > 0)
+                {
+                    Pantallas.Peek().Height = this.Height;
+                    Pantallas.Peek().Width = this.Width;
+                }
+            
         }
     }
 }

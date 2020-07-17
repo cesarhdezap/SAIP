@@ -7,4 +7,4 @@
         mc:Ignorable="d"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="450" Width="800"/>
+        Title="MainWindow" Height="450" Width="800" SizeChanged="Window_SizeChanged" StateChanged="Window_StateChanged"/>
