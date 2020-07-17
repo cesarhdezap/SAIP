@@ -36,5 +36,11 @@ namespace LogicaDeNegocio.Clases
             }
             PrecioTotal = precioTotal;
         }
+
+        public override string ToString()
+        {
+
+            return Mesa.ToString();
+        }
     }
 }

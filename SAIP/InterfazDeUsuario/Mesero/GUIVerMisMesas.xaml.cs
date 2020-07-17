@@ -72,7 +72,6 @@ namespace InterfazDeUsuario.Mesero
 
         private void ActualizarListBoxMesas()
         {
-            ListBoxMesas.SelectedItem = null;
             ListBoxMesas.ItemsSource = null;
             ListBoxMesas.ItemsSource = CuentasDelEmpleado;
         }

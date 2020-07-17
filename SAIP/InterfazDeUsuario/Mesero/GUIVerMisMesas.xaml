@@ -81,30 +81,32 @@
                 <controls:InformacionDeCuenta x:Name="UserControlInformacionDeCuenta"/>
             </StackPanel>
 
-            <ListBox x:Name="ListBoxMesas" BorderThickness="0"
-                     ScrollViewer.VerticalScrollBarVisibility="Auto"
-                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                     DockPanel.Dock="Bottom"
-                     ItemContainerStyle="{StaticResource myListBoxStyle}">
-
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="4"/>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-
-
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Vertical" Margin="20">
-                            <Button Click="ButtonMesa_Click" Height="200" Width="200">
-                                <Image Source="/img/restaurant-table.png"/>
-                            </Button>
-                            <Label Content="{Binding Mesa}" FontSize="20"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </DockPanel>
+			<ScrollViewer x:Name="ScrollViewerMesas" Grid.Column="1" Grid.Row="1" Background="#FFF1F1F1">
+				<ScrollViewer.Resources>
+					<sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">100</sys:Double>
+				</ScrollViewer.Resources>
+				<StackPanel >
+					<ItemsControl x:Name="ListBoxMesas" ItemsSource="{Binding Mesa}">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<Border Margin="10" Width="210" Height="280">
+									<StackPanel Orientation="Vertical">
+										<Button Click="ButtonMesa_Click">
+											<Image Source="/img/restaurant-table.png" Stretch="Fill" Height="200" Width="200"/>
+										</Button>
+										<Label Content="{Binding}" FontSize="20"/>
+									</StackPanel>
+								</Border>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+						<ItemsControl.ItemsPanel>
+							<ItemsPanelTemplate>
+								<WrapPanel/>
+							</ItemsPanelTemplate>
+						</ItemsControl.ItemsPanel>
+					</ItemsControl>
+				</StackPanel>
+			</ScrollViewer>
+		</DockPanel>
     </DockPanel>
 </Page>

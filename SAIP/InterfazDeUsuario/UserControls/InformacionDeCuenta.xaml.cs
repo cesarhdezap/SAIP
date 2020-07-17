@@ -116,6 +116,9 @@ namespace InterfazDeUsuario.UserControls
                 mesaDAO.CambiarEstadoPorID(Cuenta.Mesa.NumeroDeMesa, EstadoMesa.Disponible);
                 ControladorInformacionDeCuenta.OcultarCuenta();
             }
+
+            GUIReciboDeCuenta reciboDeCuenta = new GUIReciboDeCuenta(Cuenta);
+            reciboDeCuenta.ShowDialog();
         }
     }
 }

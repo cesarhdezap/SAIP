@@ -139,6 +139,9 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Mesero\GUIReciboDeCuenta.xaml.cs">
+      <DependentUpon>GUIReciboDeCuenta.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Mesero\GUIRegistrarPedidoLocal.xaml.cs">
       <DependentUpon>GUIRegistrarPedidoLocal.xaml</DependentUpon>
     </Compile>
@@ -287,6 +290,10 @@
       <DependentUpon>GUIGerente.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Mesero\GUIReciboDeCuenta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
