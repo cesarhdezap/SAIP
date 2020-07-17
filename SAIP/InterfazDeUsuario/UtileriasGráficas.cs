@@ -180,5 +180,24 @@ namespace InterfazDeUsuario
 
 			return direccionDeArchivoSeleccionado;
 		}
+
+		public static string MostrarVentanaDeGuardadoDeArchivos()
+		{
+
+			string direccionDeArchivoSeleccionado = string.Empty;
+
+			Microsoft.Win32.SaveFileDialog ventanaDeSeleccionDeArchivo = new Microsoft.Win32.SaveFileDialog
+			{
+				Filter = "PDF (.PDF)|.PDF",
+				InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+			};
+
+			if (ventanaDeSeleccionDeArchivo.ShowDialog() == true)
+			{
+				direccionDeArchivoSeleccionado = ventanaDeSeleccionDeArchivo.FileName;
+			}
+
+			return direccionDeArchivoSeleccionado;
+		}
 	}
 }

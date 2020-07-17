@@ -79,7 +79,7 @@ namespace InterfazDeUsuario.Paginas
 				Tecnico.CorreoElectronico = TextboxCorreoTecnico.Text;
 				Tecnico.Contraseña = EncriptarCadena(PasswordboxContraseñaTecnico.Password);
 				Tecnico.Creador = Gerente.Nombre;
-				Tecnico.TipoDeEmpleado = LogicaDeNegocio.Enumeradores.TipoDeEmpleado.Gerente;
+				Tecnico.TipoDeEmpleado = LogicaDeNegocio.Enumeradores.TipoDeEmpleado.Tecnico;
 				//Tecnico.TipoDeEmpleado = LogicaDeNegocio.Enumeradores.TipoDeEmpleado.Tecnico;
 				try
 				{

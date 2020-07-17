@@ -35,6 +35,7 @@ namespace InterfazDeUsuario.Mesero
         const int TIEMPO_DE_ESPERA_CANTIDAD_INSUFICIENTE = 3000;
         const int TIEMPO_DE_ESPERA_NOTIFICACION_PEDIDO_REALIZADO = 2000;
         const int CANTIDAD_ALIMENTOS_POR_CLIC = 1;
+        const int CANTIDAD_DE_DIGITOS_EN_PRECIOS = 6;
 
         public GUIRegistrarPedidoLocal(ControladorDeCambioDePantalla controlador, Empleado empleado, Cuenta cuenta)
         {
@@ -47,12 +48,7 @@ namespace InterfazDeUsuario.Mesero
             Iva = new IvaDAO().CargarIvaActual();
             MostrarAlimentos();
             LabelNumeroDeMesa.Content = "Mesa: " + cuenta.Mesa.NumeroDeMesa;
-
-            
         }
-
-
-
 
         private void MostrarAlimentos()
         {
@@ -67,7 +63,6 @@ namespace InterfazDeUsuario.Mesero
 
         public void ActualizarPrecios()
         {
-            LabelCantidadIva.Content = Iva.Valor;
             double precioDelPedido = 0;
             foreach(CantidadAlimento cantidadAlimento in AlimentosDelPedido)
             {
@@ -80,7 +75,8 @@ namespace InterfazDeUsuario.Mesero
                     precioDelPedido += cantidadProducto.Cantidad * cantidadProducto.Alimento.Precio;
                 }
             }
-            LabelCantidadTotal.Content = precioDelPedido * 1 + Iva.Valor;
+            LabelCantidadIva.Content = Math.Round(precioDelPedido * Iva.Valor, CANTIDAD_DE_DIGITOS_EN_PRECIOS);
+            LabelCantidadTotal.Content = Math.Round(precioDelPedido * (1 + Iva.Valor), CANTIDAD_DE_DIGITOS_EN_PRECIOS);
         }
 
         private void ButtonBorrarAlimento_Click(object sender, RoutedEventArgs e)

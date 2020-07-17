@@ -29,6 +29,7 @@ namespace InterfazDeUsuario.Tecnico
         private ControladorDeCambioDePantalla Controlador;
         private Empleado Empleado;
         private string Ruta;
+        bool Generado = false;
 
         public GUIGenerarRespaldo(ControladorDeCambioDePantalla controlador, Empleado empleado)
         {
@@ -45,9 +46,10 @@ namespace InterfazDeUsuario.Tecnico
         public void ActualizarBarraDeProgreso(int cantidad)
         {
             ProgressBarEstado.Value += cantidad;
-            if(ProgressBarEstado.Value >= ProgressBarEstado.Maximum)
+            if(ProgressBarEstado.Value >= ProgressBarEstado.Maximum && !Generado)
             {
                 RespaldoGenerado();
+                Generado = true;
             }
         }
 

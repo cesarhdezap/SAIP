@@ -182,7 +182,7 @@ namespace LogicaDeNegocio.ObjetosAccesoADatos
             List<Ingrediente> ingredientesDb = new List<Ingrediente>();
             using (ModeloDeDatosContainer context = new ModeloDeDatosContainer())
             {
-                ingredientesDb = context.Ingredientes.ToList();
+                ingredientesDb = context.Ingredientes.Include(i => i.RelacionIngredientesHijo).ToList();
             }
 
             List<Clases.Ingrediente> ingredientesResultado = new List<Clases.Ingrediente>();

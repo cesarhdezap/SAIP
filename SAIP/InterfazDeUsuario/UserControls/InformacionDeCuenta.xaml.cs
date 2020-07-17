@@ -4,6 +4,7 @@ using LogicaDeNegocio;
 using LogicaDeNegocio.Clases;
 using LogicaDeNegocio.Clases.ClasesAsociativas;
 using LogicaDeNegocio.Enumeradores;
+using LogicaDeNegocio.Interfaces;
 using LogicaDeNegocio.ObjetosAccesoADatos;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace InterfazDeUsuario.UserControls
         Cuenta Cuenta;
         public Empleado Empleado;
         public ControladorDeCambioDePantalla Controlador;
+        public IControladorInformacionDeCuenta ControladorInformacionDeCuenta;
 
         public InformacionDeCuenta()
         {
@@ -102,14 +104,18 @@ namespace InterfazDeUsuario.UserControls
 
         private void ButtonTerminarCuenta_Click(object sender, RoutedEventArgs e)
         {
-            CuentaDAO cuentaDAO = new CuentaDAO();
-            //Actualizar precio de pedidos
-            Cuenta.Estado = EstadoCuenta.Terminada;
-            Cuenta.CalcularPrecioTotal();
-            cuentaDAO.ActualizarCuenta(Cuenta);
+            var resultado = MessageBox.Show("¿Desea cobrar esta cuenta?", "AVISO", MessageBoxButton.YesNo);
+            if(resultado == MessageBoxResult.Yes)
+            {
+                CuentaDAO cuentaDAO = new CuentaDAO();
+                Cuenta.Estado = EstadoCuenta.Terminada;
+                Cuenta.CalcularPrecioTotal();
+                cuentaDAO.ActualizarCuenta(Cuenta);
 
-            MesaDAO mesaDAO = new MesaDAO();
-            mesaDAO.CambiarEstadoPorID(Cuenta.Mesa.NumeroDeMesa, EstadoMesa.Disponible);
+                MesaDAO mesaDAO = new MesaDAO();
+                mesaDAO.CambiarEstadoPorID(Cuenta.Mesa.NumeroDeMesa, EstadoMesa.Disponible);
+                ControladorInformacionDeCuenta.OcultarCuenta();
+            }
         }
     }
 }

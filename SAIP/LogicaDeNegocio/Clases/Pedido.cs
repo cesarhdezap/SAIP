@@ -179,7 +179,7 @@ namespace LogicaDeNegocio.Clases
                 }
             }
 
-            PrecioTotal = precioTotal * Iva;
+            PrecioTotal = precioTotal * (1 + Iva);
         }
     }
 }

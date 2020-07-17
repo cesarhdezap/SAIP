@@ -67,7 +67,7 @@ namespace InterfazDeUsuario.Gerente
 
 		private void GenerarReporteDeInventarioButton_Click(object sender, RoutedEventArgs e)
 		{
-			string direccionDeGuardado = UtileriasGráficas.MostrarVentanaDeSeleccionDeArchivos();
+			string direccionDeGuardado = UtileriasGráficas.MostrarVentanaDeGuardadoDeArchivos();
 			if (!string.IsNullOrWhiteSpace(direccionDeGuardado))
 			{
 				try

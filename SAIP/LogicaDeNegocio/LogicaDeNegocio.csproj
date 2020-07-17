@@ -119,6 +119,7 @@
     <Compile Include="Enumeradores\EstadoMesa.cs" />
     <Compile Include="Enumeradores\EstadoPedido.cs" />
     <Compile Include="Interfaces\IActualizarBarraDeProgreso.cs" />
+    <Compile Include="Interfaces\IControladorInformacionDeCuenta.cs" />
     <Compile Include="ObjetosAccesoADatos\CantidadPlatilloDAO.cs" />
     <Compile Include="ObjetosAccesoADatos\CantidadProductoDAO.cs" />
     <Compile Include="ObjetosAccesoADatos\CuentaDAO.cs" />
